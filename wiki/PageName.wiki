@@ -1,0 +1,21 @@
+#summary Development Notes for PHPfr 1.0
+
+= Introduction =
+
+This page is for tracking the progress of development of PHPfr 1.0.
+
+= Outstanding Issues =
+
+The following is a list of the remaining (known) work to be done before declaring a release candidate for PHPfr 1.0:
+
+ * Change download link to point to Amazon S3
+ * Fix visual glitch in view frame scrollbar
+ * Fix method to select language radio button on back of widget
+ * Rewrite help to be more helpful
+ * Format static HTML pages
+ * ~~Format manual pages (H1s that wrap)~~
+ * Localize strings
+ * Fix bugs on Tiger (is this possible? with how much effort?)
+ * Fix bug where browsing PHP manual, history may use wrong filename type for path
+ * Automate language installation (is this possible? with how much effort?)
+ * Change donation currency to Euros?
