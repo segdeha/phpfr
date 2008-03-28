@@ -1,0 +1,1301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>PHP Cheat Sheet</title>
+</head>
+<body>
+
+<div class="phpfr-content">
+	<h1>
+		PHP Cheat Sheet
+	</h1>
+	
+	<ul class="phpfr-nav">
+		<li><span onclick="PHPFR.ui.showTab('regular-expressions');" class="link">Regular Expressions</span></li>
+		<li><span onclick="PHPFR.ui.showTab('server');" class="link">$_SERVER</span></li>
+		<li><span onclick="PHPFR.ui.showTab('constants');" class="link">Constants</span></li>
+		<li><span onclick="PHPFR.ui.showTab('fopen-modes');" class="link">fopen() Modes</span></li>
+		<li><span onclick="PHPFR.ui.showTab('comparisons');" class="link">Comparisons</span></li>
+	</ul>
+
+	<!-- BEGIN: REGULAR EXPRESSIONS -->
+	<div class="phpfr-section" id="regular-expressions">
+		<table>
+			<caption>Regular Expression Examples</caption>
+			<thead>
+				<tr>
+					<th>Example</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>[a-g]</td>
+					<td>match any lowercase letter from a through g</td>
+				</tr>
+				<tr>
+					<td>[0-9]</td>
+					<td>match any digit (0 through 9), equivalent to \d</td>
+				</tr>
+				<tr>
+					<td>[^A-Z]</td>
+					<td>match no letters from A through Z</td>
+				</tr>
+				<tr>
+					<td>(foo|bar)</td>
+					<td>match either "foo" or "bar"</td>
+				</tr>
+				<tr>
+					<td>
+						(?(condition)yes-pattern)<br>
+						(?(condition)yes-pattern|no-pattern)
+					</td>
+					<td>If the condition is satisfied, the yes-pattern is used; otherwise the no-pattern (if present) is used.</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>Find practical examples of regular expressions at <span class="link" onclick="PHPFR.util.gotoURL('http://www.regular-expressions.info/examples.html');">Regular-Expressions.info</span></p>
+		<table>
+			<caption>Basic Syntax</caption>
+			<thead>
+				<tr>
+					<th>Character</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>\</td>
+					<td>general escape cahracter with serveral uses</td>
+				</tr>
+				<tr>
+					<td>^</td>
+					<td>assert start of subject (or line, in multiline mode) or negate the class if the first character in a character class</td>
+				</tr>
+				<tr>
+					<td>$</td>
+					<td>assert end of subject (or line, in multiline mode)</td>
+				</tr>
+				<tr>
+					<td>.</td>
+					<td>match any character except newline (by default)</td>
+				</tr>
+				<tr>
+					<td>[</td>
+					<td>start character class definition</td>
+				</tr>
+				<tr>
+					<td>]</td>
+					<td>end character class definition</td>
+				</tr>
+				<tr>
+					<td>|</td>
+					<td>start of alternative branch</td>
+				</tr>
+				<tr>
+					<td>(</td>
+					<td>start subpatter</td>
+				</tr>
+				<tr>
+					<td>)</td>
+					<td>end subpattern</td>
+				</tr>
+				<tr>
+					<td>?</td>
+					<td>extends the meaning of (also 0 or 1 quantifier, equivalent to {0,1}, also quantifier minimizer)</td>
+				</tr>
+				<tr>
+					<td>*</td>
+					<td>0 or more quantifier, equivalent to {0,}</td>
+				</tr>
+				<tr>
+					<td>+</td>
+					<td>1 or more quantifier, equivalent to {1,}</td>
+				</tr>
+				<tr>
+					<td>{</td>
+					<td>start min/max quantifier</td>
+				</tr>
+				<tr>
+					<td>}</td>
+					<td>end min/max quantifier</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>indicates character range in a character class</td>
+				</tr>
+				<tr>
+					<td>\a</td>
+					<td>alarm, that is, the BEL character (hex 07)</td>
+				</tr>
+				<tr>
+					<td>\cx</td>
+					<td>"control-x", where x is any character</td>
+				</tr>
+				<tr>
+					<td>\e</td>
+					<td>escape (hex 1B)</td>
+				</tr>
+				<tr>
+					<td>\f</td>
+					<td>formfeed (hex 0C)</td>
+				</tr>
+				<tr>
+					<td>\n</td>
+					<td>newline (hex 0A)</td>
+				</tr>
+				<tr>
+					<td>\r</td>
+					<td>carriage return (hex 0D)</td>
+				</tr>
+				<tr>
+					<td>\t</td>
+					<td>tab (hex 09)</td>
+				</tr>
+				<tr>
+					<td>\xhh</td>
+					<td>character with hex code hh</td>
+				</tr>
+				<tr>
+					<td>\ddd</td>
+					<td>character with octal code ddd, or backreference</td>
+				</tr>
+				<tr>
+					<td>\040</td>
+					<td>is another way of writing a space</td>
+				</tr>
+				<tr>
+					<td>\40</td>
+					<td>is the same, provided there are fewer than 40 previous capturing subpatterns</td>
+				</tr>
+				<tr>
+					<td>\7</td>
+					<td>is always a back reference</td>
+				</tr>
+				<tr>
+					<td>\11</td>
+					<td>might be a back reference, or another way of writing a tab</td>
+				</tr>
+				<tr>
+					<td>\011</td>
+					<td>is always a tab</td>
+				</tr>
+				<tr>
+					<td>\0113</td>
+					<td>is a tab followed by the character "3"</td>
+				</tr>
+				<tr>
+					<td>\113</td>
+					<td>is the character with octal code 113 (since there can be no more than 99 back references)</td>
+				</tr>
+				<tr>
+					<td>\377</td>
+					<td>is a byte consisting entirely of 1 bits</td>
+				</tr>
+				<tr>
+					<td>\81</td>
+					<td>is either a back reference, or a binary zero followed by the two characters "8" and "1"</td>
+				</tr>
+				<tr>
+					<td>\d</td>
+					<td>any decimal digit</td>
+				</tr>
+				<tr>
+					<td>\D</td>
+					<td>any character that is not a decimal digit</td>
+				</tr>
+				<tr>
+					<td>\h</td>
+					<td>any horizontal whitespace character (since PHP 5.2.4)</td>
+				</tr>
+				<tr>
+					<td>\H</td>
+					<td>any character that is not a horizontal whitespace character (since PHP 5.2.4)</td>
+				</tr>
+				<tr>
+					<td>\s</td>
+					<td>any whitespace character</td>
+				</tr>
+				<tr>
+					<td>\S</td>
+					<td>any character that is not a whitespace character</td>
+				</tr>
+				<tr>
+					<td>\v</td>
+					<td>any vertical whitespace character (since PHP 5.2.4)</td>
+				</tr>
+				<tr>
+					<td>\V</td>
+					<td>any character that is not a vertical whitespace character (since PHP 5.2.4)</td>
+				</tr>
+				<tr>
+					<td>\w</td>
+					<td>any "word" character</td>
+				</tr>
+				<tr>
+					<td>\W</td>
+					<td>any "non-word" character</td>
+				</tr>
+				<tr>
+					<td>\b</td>
+					<td>word boundary</td>
+				</tr>
+				<tr>
+					<td>\B</td>
+					<td>not a word boundary</td>
+				</tr>
+				<tr>
+					<td>\A</td>
+					<td>start of a subject (independent of multiline mode)</td>
+				</tr>
+				<tr>
+					<td>\Z</td>
+					<td>end of subject or newline at end (independent of multiline mode)</td>
+				</tr>
+				<tr>
+					<td>\z</td>
+					<td>end of subject (independent of multiline mode)</td>
+				</tr>
+				<tr>
+					<td>\G</td>
+					<td>first matching position in subject</td>
+				</tr>
+				<tr>
+					<td>\p{xx}</td>
+					<td>a character with xx property</td>
+				</tr>
+				<tr>
+					<td>\P{xx}</td>
+					<td>a character without the xx property</td>
+				</tr>
+				<tr>
+					<td>\X</td>
+					<td>an extended Unicode sequence</td>
+				</tr>
+				<tr>
+					<td>(?i)</td>
+					<td>for PCRE_CASELESS</td>
+				</tr>
+				<tr>
+					<td>(?m)</td>
+					<td>for PCRE_MULTILINE</td>
+				</tr>
+				<tr>
+					<td>(?s)</td>
+					<td>for PCRE_DOTALL</td>
+				</tr>
+				<tr>
+					<td>(?x)</td>
+					<td>for PCRE_EXTENDED</td>
+				</tr>
+				<tr>
+					<td>(?U)</td>
+					<td>for PCRE_UNGREEDY</td>
+				</tr>
+				<tr>
+					<td>(?X)</td>
+					<td>for PCRE_EXTRA</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<caption>PCRE Modifiers</caption>
+			<thead>
+				<tr>
+					<th>Modifier</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>i (PCRE_CASELESS)</td>
+					<td>If this modifier is set, letters in the pattern match both upper and lower case letters.</td>
+				</tr>
+				<tr>
+					<td>m (PCRE_MULTILINE)</td>
+					<td>By default, PCRE treats the subject string as consisting of a single "line" of characters (even if it actually contains several newlines). The "start of line" metacharacter (^) matches only at the start of the string, while the "end of line" metacharacter ($) matches only at the end of the string, or before a terminating newline (unless D modifier is set). This is the same as Perl.   When this modifier is set, the "start of line" and "end of line" constructs match immediately following or immediately before any newline in the subject string, respectively, as well as at the very start and end. This is equivalent to Perl's /m modifier. If there are no "\n" characters in a subject string, or no occurrences of ^ or $ in a pattern, setting this modifier has no effect.</td>
+				</tr>
+				<tr>
+					<td>s (PCRE_DOTALL)</td>
+					<td>If this modifier is set, a dot metacharacter in the pattern matches all characters, including newlines. Without it, newlines are excluded. This modifier is equivalent to Perl's /s modifier. A negative class such as [^a] always matches a newline character, independent of the setting of this modifier.</td>
+				</tr>
+				<tr>
+					<td>x (PCRE_EXTENDED)</td>
+					<td>If this modifier is set, whitespace data characters in the pattern are totally ignored except when escaped or inside a character class, and characters between an unescaped # outside a character class and the next newline character, inclusive, are also ignored. This is equivalent to Perl's /x modifier, and makes it possible to include comments inside complicated patterns. Note, however, that this applies only to data characters. Whitespace characters may never appear within special character sequences in a pattern, for example within the sequence (?( which introduces a conditional subpattern.</td>
+				</tr>
+				<tr>
+					<td>e (PREG_REPLACE_EVAL)</td>
+					<td>If this modifier is set, preg_replace() does normal substitution of backreferences in the replacement string, evaluates it as PHP code, and uses the result for replacing the search string. Single quotes, double quotes, backslashes and NULL chars will be escaped by backslashes in substituted backreferences. Only preg_replace() uses this modifier; it is ignored by other PCRE functions. Note: This modifier was not available in PHP 3.</td>
+				</tr>
+				<tr>
+					<td>A (PCRE_ANCHORED)</td>
+					<td>If this modifier is set, the pattern is forced to be "anchored", that is, it is constrained to match only at the start of the string which is being searched (the "subject string"). This effect can also be achieved by appropriate constructs in the pattern itself, which is the only way to do it in Perl.</td>
+				</tr>
+				<tr>
+					<td>D&nbsp;(PCRE_DOLLAR_ENDONLY)</td>
+					<td>If this modifier is set, a dollar metacharacter in the pattern matches only at the end of the subject string. Without this modifier, a dollar also matches immediately before the final character if it is a newline (but not before any other newlines). This modifier is ignored if m modifier is set. There is no equivalent to this modifier in Perl.</td>
+				</tr>
+				<tr>
+					<td>S</td>
+					<td>When a pattern is going to be used several times, it is worth spending more time analyzing it in order to speed up the time taken for matching. If this modifier is set, then this extra analysis is performed. At present, studying a pattern is useful only for non-anchored patterns that do not have a single fixed starting character.</td>
+				</tr>
+				<tr>
+					<td>U (PCRE_UNGREEDY)</td>
+					<td>This modifier inverts the "greediness" of the quantifiers so that they are not greedy by default, but become greedy if followed by "?". It is not compatible with Perl. It can also be set by a (?U) modifier setting within the pattern or by a question mark behind a quantifier (e.g. .*?).</td>
+				</tr>
+				<tr>
+					<td>X (PCRE_EXTRA)</td>
+					<td>This modifier turns on additional functionality of PCRE that is incompatible with Perl. Any backslash in a pattern that is followed by a letter that has no special meaning causes an error, thus reserving these combinations for future expansion. By default, as in Perl, a backslash followed by a letter with no special meaning is treated as a literal. There are at present no other features controlled by this modifier.</td>
+				</tr>
+				<tr>
+					<td>u (PCRE_UTF8)</td>
+					<td>This modifier turns on additional functionality of PCRE that is incompatible with Perl. Pattern strings are treated as UTF-8. This modifier is available from PHP 4.1.0 or greater on Unix and from PHP 4.2.3 on win32. UTF-8 validity of the pattern is checked since PHP 4.3.5.</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<caption>PREG Constants</caption>
+			<thead>
+				<tr>
+					<th>Constant</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>PREG_PATTERN_ORDER</td>
+					<td>Orders results so that $matches[0] is an array of full pattern matches, $matches[1] is an array of strings matched by the first parenthesized subpattern, and so on. This flag is only used with preg_match_all().</td>
+				</tr>
+				<tr>
+					<td>PREG_SET_ORDER</td>
+					<td>Orders results so that $matches[0] is an array of first set of matches, $matches[1] is an array of second set of matches, and so on. This flag is only used with preg_match_all().</td>
+				</tr>
+				<tr>
+					<td>PREG_OFFSET_CAPTURE</td>
+					<td>See the description of PREG_SPLIT_OFFSET_CAPTURE. This flag is available since PHP 4.3.0.</td>
+				</tr>
+				<tr>
+					<td>PREG_SPLIT_NO_EMPTY</td>
+					<td>This flag tells preg_split() to return only non-empty pieces.</td>
+				</tr>
+				<tr>
+					<td>PREG_SPLIT_DELIM_CAPTURE</td>
+					<td>This flag tells preg_split() to capture parenthesized expression in the delimiter pattern as well. This flag is available since PHP 4.0.5.</td>
+				</tr>
+				<tr>
+					<td>PREG_SPLIT_OFFSET_CAPTURE</td>
+					<td>If this flag is set, for every occurring match the appendant string offset will also be returned. Note that this changes the return values in an array where every element is an array consisting of the matched string at offset 0 and its string offset within subject at offset 1. This flag is available since PHP 4.3.0 and is only used for preg_split().</td>
+				</tr>
+				<tr>
+					<td>PREG_NO_ERROR</td>
+					<td>Returned by preg_last_error() if there were no errors. Available since PHP 5.2.0.</td>
+				</tr>
+				<tr>
+					<td>PREG_INTERNAL_ERROR</td>
+					<td>Returned by preg_last_error() if there was an internal PCRE error. Available since PHP 5.2.0.</td>
+				</tr>
+				<tr>
+					<td>PREG_BACKTRACK_LIMIT_ERROR</td>
+					<td>Returned by preg_last_error() if backtrack limit was exhausted. Available since PHP 5.2.0.</td>
+				</tr>
+				<tr>
+					<td>PREG_RECURSION_LIMIT_ERROR</td>
+					<td>Returned by preg_last_error() if recursion limit was exhausted. Available since PHP 5.2.0.</td>
+				</tr>
+				<tr>
+					<td>PREG_BAD_UTF8_ERROR</td>
+					<td>Returned by preg_last_error() if the last error was caused by malformed UTF-8 data (only when running a regex in UTF-8 mode). Available since PHP 5.2.0.</td>
+				</tr>
+				<tr>
+					<td>PCRE_VERSION</td>
+					<td>PCRE version and release date (e.g. "7.0 18-Dec-2006"). Available since PHP 5.2.4.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- END: REGULAR EXPRESSIONS -->
+	
+	<!-- BEGIN: $_SERVER VARIABLES -->
+	<div class="phpfr-section" id="server">
+		<table>
+			<caption>$_SERVER Variables</caption>
+			<thead>
+				<tr>
+					<th>Variable</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>'PHP_SELF'</td>
+					<td>The filename of the currently executing script, relative to the document root. For instance, $_SERVER['PHP_SELF'] in a script at the address http://example.com/test.php/foo.bar would be /test.php/foo.bar. The __FILE__ constant contains the full path and filename of the current (i.e. included) file. If PHP is running as a command-line processor this variable contains the script name since PHP 4.3.0. Previously it was not available.</td>
+				</tr>
+				<tr>
+					<td>'argv'</td>
+					<td>Array of arguments passed to the script. When the script is run on the command line, this gives C-style access to the command line parameters. When called via the GET method, this will contain the query string.</td>
+				</tr>
+				<tr>
+					<td>'argc'</td>
+					<td>Contains the number of command line parameters passed to the script (if run on the command line).</td>
+				</tr>
+				<tr>
+					<td>'GATEWAY_INTERFACE'</td>
+					<td>What revision of the CGI specification the server is using; i.e. 'CGI/1.1'.</td>
+				</tr>
+				<tr>
+					<td>'SERVER_ADDR'</td>
+					<td>The IP address of the server under which the current script is executing.</td>
+				</tr>
+				<tr>
+					<td>'SERVER_NAME'</td>
+					<td>The name of the server host under which the current script is executing. If the script is running on a virtual host, this will be the value defined for that virtual host.</td>
+				</tr>
+				<tr>
+					<td>'SERVER_SOFTWARE'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'SERVER_PROTOCOL'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'REQUEST_METHOD'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'REQUEST_TIME'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'QUERY_STRING'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'DOCUMENT_ROOT'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'HTTP_ACCEPT'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'HTTP_ACCEPT_CHARSET'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'HTTP_ACCEPT_ENCODING'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'HTTP_ACCEPT_LANGUAGE'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'HTTP_CONNECTION'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'HTTP_HOST'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'HTTP_REFERER'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'HTTP_USER_AGENT'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'HTTPS'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'REMOTE_ADDR'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'REMOTE_HOST'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'REMOTE_PORT'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'SCRIPT_FILENAME'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'SERVER_ADMIN'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'SERVER_PORT'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'SERVER_SIGNATURE'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'PATH_TRANSLATED'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'SCRIPT_NAME'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'REQUEST_URI'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'PHP_AUTH_DIGEST'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'PHP_AUTH_USER'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'PHP_AUTH_PW'</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>'AUTH_TYPE'</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- END: $_SERVER VARIABLES -->
+		
+		<!-- FOPEN() MODES -->
+		<div class="codes" id="fopen_codes">
+			<table cellpadding="3" cellspacing="0" border="0" class="dataTable">
+				<tr>
+					<th>Mode</th>
+					<th>Description</th>
+				</tr>
+				<tr class="odd">
+					<td>r</td>
+					<td>Open for reading only; place the file pointer at the beginning of the file.</td>
+				</tr>
+				<tr class="even">
+					<td>r+</td>
+					<td>Open for reading and writing; place the file pointer at the beginning of the file.</td>
+				</tr>
+				<tr class="odd">
+					<td>w</td>
+					<td>Open for writing only; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it.</td>
+				</tr>
+				<tr class="even">
+					<td>w+</td>
+					<td>Open for reading and writing; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it.</td>
+				</tr>
+				<tr class="odd">
+					<td>a</td>
+					<td>Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to create it.</td>
+				</tr>
+				<tr class="even">
+					<td>a+</td>
+					<td>Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, attempt to create it.</td>
+				</tr>
+				<tr class="odd">
+					<td>x</td>
+					<td>Create and open for writing only; place the file pointer at the beginning of the file. If the file already exists, the <span class="link" onclick="showFunction('fopen');">fopen()</span> call will fail by returning FALSE and generating an error of level E_WARNING. If the file does not exist, attempt to create it. This is equivalent to specifying O_EXCL|O_CREAT flags for the underlying open(2) system call. This option is supported in PHP 4.3.2 and later, and only works for local files.</td>
+				</tr>
+				<tr class="even">
+					<td>x+</td>
+					<td>Create and open for reading and writing; place the file pointer at the beginning of the file. If the file already exists, the <span class="link" onclick="showFunction('fopen');">fopen()</span> call will fail by returning FALSE and generating an error of level E_WARNING. If the file does not exist, attempt to create it. This is equivalent to specifying O_EXCL|O_CREAT flags for the underlying open(2) system call. This option is supported in PHP 4.3.2 and later, and only works for local files.</td>
+				</tr>
+			</table>
+		</div>
+		
+		<!-- MAGIC CONSTANTS -->
+		<div class="codes" id="constants_codes">
+			<table cellpadding="3" cellspacing="0" border="0" class="dataTable">
+				<tr>
+					<th>Constant</th>
+					<th>Description</th>
+				</tr>
+				<tr class="odd">
+					<td>__LINE__</td>
+					<td>The current line number of the file.</td>
+				</tr>
+				<tr class="even">
+					<td>__FILE__</td>
+					<td>The full path and filename of the file. If used inside an include, the name of the included file is returned. Since PHP 4.0.2, __FILE__ always contains an absolute path whereas in older versions it contained relative path under some circumstances.</td>
+				</tr>
+				<tr class="odd">
+					<td>__FUNCTION__</td>
+					<td>The function name. (Added in PHP 4.3.0) As of PHP 5 this constant returns the function name as it was declared (case-sensitive). In PHP 4 its value is always lowercased.</td>
+				</tr>
+				<tr class="even">
+					<td>__CLASS__</td>
+					<td>The class name. (Added in PHP 4.3.0) As of PHP 5 this constant returns the class name as it was declared (case-sensitive). In PHP 4 its value is always lowercased.</td>
+				</tr>
+				<tr class="odd">
+					<td>__METHOD__</td>
+					<td>The class method name. (Added in PHP 5.0.0) The method name is returned as it was declared (case-sensitive).</td>
+				</tr>
+			</table>
+		</div>
+		
+		<!-- TYPE COMPARISONS -->
+		<div class="codes" id="comparisons_codes">
+			<table cellpadding="3" cellspacing="0" border="0" class="dataTable" style="border-bottom: none;">
+				<!-- Comparison Operators -->
+				<tr class="section_head">
+					<th colspan="3">Comparison Operators</th>
+				</tr>
+				<tr>
+					<th>Example</th>
+					<th>Name</th>
+					<th>Result</th>
+				</tr>
+				<tr class="odd">
+					<th>$a == $b</th>
+					
+					<td class="false">Equal</td>
+					<td class="false">TRUE if $a is equal to $b.</td>
+				</tr>
+				<tr class="even">
+					<th>$a === $b</th>
+					
+					<td class="false">Identical</td>
+					<td class="false">TRUE if $a is equal to $b, and they are of the same type. (introduced in PHP 4)</td>
+				</tr>
+				<tr class="odd">
+					<th>$a != $b</th>
+					
+					<td class="false">Not equal</td>
+					<td class="false">TRUE if $a is not equal to $b.</td>
+				</tr>
+				<tr class="even">
+					<th>$a <> $b</th>
+					
+					<td class="false">Not equal</td>
+					<td class="false">TRUE if $a is not equal to $b.</td>
+				</tr>
+				<tr class="odd">
+					<th>$a !== $b</th>
+					
+					<td class="false">Not identical</td>
+					<td class="false">TRUE if $a is not equal to $b, or they are not of the same type. (introduced in PHP 4)</td>
+				</tr>
+				<tr class="even">
+					<th>$a < $b</th>
+					
+					<td class="false">Less than</td>
+					<td class="false">TRUE if $a is strictly less than $b.</td>
+				</tr>
+				<tr class="odd">
+					<th>$a > $b</th>
+					
+					<td class="false">Greater than</td>
+					<td class="false">TRUE if $a is strictly greater than $b.</td>
+				</tr>
+				<tr class="even">
+					<th>$a <= $b</th>
+					
+					<td class="false">Less than or equal to</td>
+					<td class="false">TRUE if $a is less than or equal to $b.</td>
+				</tr>
+				<tr class="odd">
+					<th>$a >= $b</th>
+					
+					<td class="false">Greater than or equal to</td>
+					<td class="false">TRUE if $a is greater than or equal to $b.</td>
+				</tr>
+			</table>
+			<table cellpadding="3" cellspacing="0" border="0" class="dataTable" style="border-top: none;border-bottom: none;">
+				<!-- Comparison with Various Types -->
+				<tr class="section_head">
+					<th colspan="3">Comparison with Various Types</th>
+				</tr>
+				<tr>
+					<th>Type of Operand 1</th>
+					<th>Type of Operand 2</th>
+					<th>Result</th>
+				</tr>
+				<tr class="odd">
+					<td class="false">null or string</td>
+					<td class="false">string</td>
+					<td class="false">Convert NULL to "", numerical or lexical comparison</td>
+				</tr>
+				<tr class="even">
+					<td class="false">bool or null</td>
+					<td class="false">anything</td>
+					<td class="false">Convert to bool, FALSE < TRUE</td>
+				</tr>
+				<tr class="odd">
+					<td class="false">object</td>
+					<td class="false">object</td>
+					<td class="false">Built-in classes can define its own comparison, different classes are uncomparable, same class - compare properties the same way as arrays (PHP 4), PHP 5 has its own explanation</td>
+				</tr>
+				<tr class="even">
+					<td class="false">string, resource or<br/>number</td>
+					<td class="false">string, resource or<br/>number</td>
+					<td class="false">Translate strings and resources to numbers, usual math</td>
+				</tr>
+				<tr class="odd">
+					<td class="false">array</td>
+					<td class="false">array</td>
+					<td class="false">Array with fewer members is smaller, if key from operand 1 is not found in operand 2 then arrays are uncomparable, otherwise - compare value by value</td>
+				</tr>
+				<tr class="even">
+					<td class="false">array</td>
+					<td class="false">anything</td>
+					<td class="false">array is always greater</td>
+				</tr>
+				<tr class="odd">
+					<td class="false">object</td>
+					<td class="false">anything</td>
+					<td class="false">object is always greater</td>
+				</tr>
+			</table>
+			<table cellpadding="3" cellspacing="0" border="0" class="dataTable" style="border-top: none;border-bottom: none;">
+				<!-- Comparisons of $x with PHP Functions -->
+				<tr class="section_head">
+					<th colspan="6">Comparisons of $x with PHP Functions</th>
+				</tr>
+				<tr>
+					<th>Expression</th>
+					<th style="text-align: center;"><span class="link" onclick="showFunction('gettype');">gettype()</span></th>
+					<th style="text-align: center;"><span class="link" onclick="showFunction('empty');">empty()</span></th>
+					<th style="text-align: center;"><span class="link" onclick="showFunction('is_null');">is_null()</span></th>
+					<th style="text-align: center;"><span class="link" onclick="showFunction('isset');">isset()</span></th>
+					<th style="text-align: center;">boolean : if($x)</th>
+				</tr>
+				<tr class="odd">
+					<th>$x == "";</th>
+					
+					<td class="false">string</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>$x == NULL;</th>
+					
+					<td class="false">NULL</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>var $x;</th>
+					
+					<td class="false">NULL</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>$x is undefined</th>
+					
+					<td class="false">NULL</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>$x = <span class="link" onclick="showFunction('array');">array()</span>;</th>
+					
+					<td class="false">array</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>$x = false;</th>
+					
+					<td class="false">boolean</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>$x = true;</th>
+					
+					<td class="false">boolean</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="even">
+					<th>$x = 1;</th>
+					
+					<td class="false">integer</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="odd">
+					<th>$x = 42;</th>
+					
+					<td class="false">integer</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="even">
+					<th>$x = 0;</th>
+					
+					<td class="false">integer</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>$x = -1;</th>
+					
+					<td class="false">integer</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="even">
+					<th>$x = "1"</th>
+					
+					<td class="false">string</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="odd">
+					<th>$x = "0"</th>
+					
+					<td class="false">string</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>$x = "-1"</th>
+					
+					<td class="false">string</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="odd">
+					<th>$x = "php"</th>
+					
+					<td class="false">string</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="even">
+					<th>$x = "true"</th>
+					
+					<td class="false">string</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="odd">
+					<th>$x = "false"</th>
+					
+					<td class="false">string</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+				</tr>
+			</table>
+			<table cellpadding="3" cellspacing="0" border="0" class="dataTable" style="border-top: none;">
+				<!-- Loose comparisons with == -->
+				<tr class="section_head">
+					<th colspan="12">Loose comparisons with ==</th>
+				</tr>
+				<tr>
+					<th style="text-align: center;"><br/></th>
+					<th style="text-align: center;">TRUE</th>
+					<th style="text-align: center;">FALSE</th>
+					<th style="text-align: center;">1</th>
+					<th style="text-align: center;">0</th>
+					<th style="text-align: center;">-1</th>
+					<th style="text-align: center;">"1"</th>
+					<th style="text-align: center;">"0"</th>
+					<th style="text-align: center;">"-1"</th>
+					<th style="text-align: center;">NULL</th>
+					<th style="text-align: center;"><span class="link" onclick="showFunction('array');">array()</span></th>
+					<th style="text-align: center;">"PHP"</th>
+				</tr>
+				<tr class="odd">
+					<th>TRUE</th>
+					
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="even">
+					<th>FALSE</th>
+					
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>1</th>
+					
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>0</th>
+					
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				<tr class="odd">
+					<th>-1</th>
+					
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>"1"</th>
+					
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>"0"</th>
+					
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>"-1"</th>
+					
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>NULL</th>
+					
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th><span class="link" onclick="showFunction('array');">array()</span></th>
+					
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>"PHP"</th>
+					
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+				</tr>
+				
+				<!-- Strict comparisons with === -->
+				<tr class="section_head">
+					<th colspan="12">Strict comparisons with ===</th>
+				</tr>
+				<tr>
+					<th style="text-align: center;"><br/></th>
+					<th style="text-align: center;">TRUE</th>
+					<th style="text-align: center;">FALSE</th>
+					<th style="text-align: center;">1</th>
+					<th style="text-align: center;">0</th>
+					<th style="text-align: center;">-1</th>
+					<th style="text-align: center;">"1"</th>
+					<th style="text-align: center;">"0"</th>
+					<th style="text-align: center;">"-1"</th>
+					<th style="text-align: center;">NULL</th>
+					<th style="text-align: center;"><span class="link" onclick="showFunction('array');">array()</span></th>
+					<th style="text-align: center;">"PHP"</th>
+				</tr>
+				<tr class="odd">
+					<th>TRUE</th>
+					
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>FALSE</th>
+					
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>1</th>
+					
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>0</th>
+					
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>-1</th>
+					
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>"1"</th>
+					
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>"0"</th>
+					
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th>"-1"</th>
+					
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>NULL</th>
+					
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="even">
+					<th><span class="link" onclick="showFunction('array');">array()</span></th>
+					
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr class="odd">
+					<th>"PHP"</th>
+					
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
