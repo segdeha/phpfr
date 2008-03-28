@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>PHP Function Reference</title>
+</head>
+<body>
+
+<div class="phpfr-content">
+	<h1>
+		PHP Function Reference
+	</h1>
+
+	<ul class="phpfr-nav">
+		<li><span class="link" onclick="PHPFR.ui.showTab('welcome');">Welcome</span></li>
+		<li><span class="link" onclick="PHPFR.ui.showTab('overview');">Overview</span></li>
+		<li><span class="link" onclick="PHPFR.ui.showTab('version-history');">Version History</span></li>
+		<li><span class="link" onclick="PHPFR.ui.showTab('license');">License</span></li>
+	</ul>
+	
+	<!-- BEGIN: WELCOME -->
+	<div class="phpfr-section" id="welcome">
+		<h2>Welcome to PHPfr!</h2>
+		<p>PHP Function Reference (PHPfr) lets you quickly look up function definitions using a downloaded copy of the documentation from <span onclick="PHPFR.ui.followLink('http://www.php.net/');" class="link">PHP.net</span></p>
+		<p>PHPfr also includes an extensive &#8220;cheat sheet&#8221; of common PHP syntax as well as an interactive date formatter.</p>
+		<p>PHPfr is free software, but <span class="link" onclick="PHPFR.ui.followLink('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=andrew%40hedges%2ename&item_name=PHP%20Function%20Reference&amount=5%2e00&no_shipping=1&cn=Comments&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8');">donations</span> are welcome.</p>
+		<p><strong>If you are new to PHPfr,</strong> I encourage you to <span class="link" onclick="PHPFR.ui.showTab('faqs');">read the FAQs</span> section for an overview of how to use the widget&#8217;s features.</p>
+		<p>Please file bug reports at the project home on <span class="link" onclick="PHPFR.ui.followLink('http://code.google.com/p/phpfr/');">Google Code</span>.</p>
+		<p>
+			I hope you enjoy PHPfr as much as I&#8217;ve enjoyed building it!<br>
+			&#8211;<span class="link" onclick="PHPFR.ui.followLink('http://andrew.hedges.name/');">Andrew Hedges</span>, developer of PHPfr
+		</p>
+	</div>
+	<!-- END: WELCOME -->
+	
+	<!-- BEGIN: OVERVIEW -->
+	<div class="phpfr-section" id="overview">
+		<h2>Overview</h2>
+		<p>PHPfr has dozens of features to help you, the busy PHP developer, find the information you need <em>fast.</em></p>
+		<h3>Offline Documentation</h3>
+		<p>PHPfr uses a downloaded copy of <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/');">PHP.net</span>&#8217;s online documentation to enable faster access than is possible over a network connection. Also, by using downloaded documentation, you can access it when you are not online.</p>
+		<h3></h3>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<h3></h3>
+		<p></p>
+		<h3></h3>
+		<p></p>
+	</div>
+	<!-- END: OVERVIEW -->
+	
+	<!-- BEGIN: VERSION HISTORY -->
+	<div class="phpfr-section" id="version-history">
+		<h2>Inspiration for PHPfr</h2>
+		<p>PHPfr is inspired by the venerable shareware app, <span class="link" onclick="PHPFR.ui.followLink('http://www.artissoftware.com/phpfi/');">PHP Function Index</span>, written by Wolfgang Ante of ARTIS Software. I paid for my copy of PHPfi long ago, but thought it would be even more convenient to have similar functionality in widget form.</p>
+		<h2>Version History</h2>
+		<dl>
+			<dt>1.0 &#8211; ???</dt>
+				<dd>First full release. Hooray! Has it really been 2 years???</dd>
+			<dt>0.9.6.2b &#8211; February 24, 2007</dt>
+				<dd>Updated default (English) documentation to the most recent version on PHP.net (20 Feb, 2007).</dd>
+			<dt>0.9.6.1b &#8211; July 2, 2006</dt>
+				<dd>Fixed a minor bug that would prevent the widget from loading for the first-time user (because the language preference was not set).</dd>
+			<dt>0.9.6b &#8211; June 29, 2006</dt>
+				<dd>Mac OS X 10.4.7 changed the behavior of widget.system calls. Synchronous calls now break widgets, whereas before they were tolerated (though discouraged). In this version, I fixed my widget.system calls to be asynchronous.</dd>
+			<dt>0.9.5b &#8211; March 23, 2006</dt>
+				<dd>Added integrated version checking.</dd>
+			<dt>0.9.4b &#8211; March 20, 2006</dt>
+				<dd>With help from the <span class="link" onclick="PHPFR.ui.followLink('http://lists.apple.com/archives/dashboard-dev/2006/Mar/msg00023.html');">dashboard-dev</span> mailing list, I got the Chinese Cantonese, Chinese Traditional, and Romanian versions of the documentation working.</dd>
+			<dt>0.9.3b &#8211; March 20, 2006</dt>
+				<dd><span class="link" onclick="PHPFR.ui.followLink('http://lists.apple.com/archives/dashboard-dev/2006/Mar/msg00018.html');">Dashboard expects all input to be UTF-8.</span> Some versions of the PHP documentation (Chinese Cantonese, Chinese Traditional, and Romanian) are encoded in other charsets. The fact these languages will not work is now documented in the FAQ.</dd>
+				<dd>Fixed language installation instructions in the FAQ.</dd>
+			<dt>0.9.2b &#8211; March 19, 2006</dt>
+				<dd>Actually fixed bug where English was not set as default language on first run.</dd>
+			<dt>0.9.1b &#8211; March 18, 2006</dt>
+				<dd>Fixed bug where English was not set as default language on first run.</dd>
+			<dt>0.9b &#8211; March 17, 2006</dt>
+				<dd>Initial preview release</dd>
+		</dl>
+	</div>
+	<!-- END: VERSION HISTORY -->
+	
+	<!-- BEGIN: LICENSE -->
+	<div class="phpfr-section" id="license">
+		<h2>License &amp; Terms of Use</h2>
+		<p>PHPfr is free software, but <span class="link" onclick="PHPFR.ui.followLink('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=andrew%40hedges%2ename&item_name=PHP%20Function%20Reference&amount=5%2e00&no_shipping=1&cn=Comments&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8');">donations</span> are welcome.</p>
+		<h3>PHP Documentation Copyright Notice</h3>
+		<p>Copyright &copy; 1997 - 2007 by the PHP Documentation Group. This material may be distributed only subject to the terms and conditions set forth in the Open Publication License, v1.0 or later. A copy of the <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/manual/opl.license.php');">Open Publication License</span> is distributed with this manual, the latest version is presently available at <span class="link" onclick="PHPFR.ui.followLink('http://www.opencontent.org/openpub/');">http://www.opencontent.org/openpub/</span>.</p>
+	</div>
+	<!-- END: LICENSE -->
+
+
+<div id="codes_container">
+	
+	<!-- FAQ -->
+	<div class="codes" id="faq_codes">
+		<h2>
+			How do I use PHPfr?
+		</h2>
+		
+		<p>
+			Just enter part of a function name to narrow the list and click on the function whose definition you wish to view. The widget will automatically expand and display the defniition page. You can also double-click on a function name to visit the online version of the documentation.
+		</p>
+		
+		<p class="tip">
+			<strong>Tip:</strong> The search field accepts regular expressions as input, allowing you to home in on groups of functions not otherwise easily searchable. For example, entering the expression <code>^.*[0-9]$</code> into the search field will return all functions that end with a number.
+		</p>
+		
+		<p>
+			Click on the plus sign in the upper left of any function page to add it to your favorites. View your favorites by clicking the &#8220;favorites&#8221; link below the function list.
+		</p>
+		
+		<p>
+			Two great features of PHPfr are the cheat sheet and interactive date formatter. Click on &#8220;cheat sheet&#8221; below the function list to view the extensive list of commonly used syntax and variables. Click on &#8220;dates&#8221; to enter the interactive date formatter. Enter a format string to view a preview of how the date will appear when processed by the PHP <span class="link" onclick="showFunction('date');">date()</span> function.
+		</p>
+		
+		<h2 id="how_do_i_install">
+			How do I install new languages?
+		</h2>
+		
+		<p>
+			PHPfr ships with the English version of the PHP documentation, which is enabled by default. To install other languages, follow the steps below:
+		</p>
+		
+		<ol>
+			<li>Flip to the back the widget</li>
+			<li>Click the name of the language you wish to install</li>
+			<li>You will be sent to the PHP.net site to choose a mirror from which to download the documentation</li>
+			<li>When it is finished downloading, uncompress the documentation by double-clicking on the file</li>
+			<li>The manual will uncompress into a folder with a name like &#8220;php_manual_en&#8221; or &#8220;html&#8221;</li>
+			<li>Rename the folder to the country code of the language (Note: the country code for Brazilian Portuguese is &#8220;pt_BR&#8221;)</li>
+			<li>Control-click (or right-click) on the PHP Function Reference.wdgt bundle located in either ~/Library/Widgets or /Library/Widgets and choose &#8220;Show Package Contents&#8221;</li>
+			<li>Open the &#8220;php_manual&#8221; folder and drag the folder for the new language into it</li>
+			<li>Enter Dashboard</li>
+			<li>The new language should be available for selection on the backside in the language list</li>
+			<li>Select the language you would like to use by clicking its radio button in the language list on the back of the widget</li>
+		</ol>
+		
+		<h2>
+			Why doesn&#8217;t my new language preference work perfectly?
+		</h2>
+		
+		<p>
+			If you notice the function pages not displaying exactly right after you select a new language, you may have to reload the widget (cmd-r).
+		</p>
+		
+		<h2>
+			Why can&#8217;t I use Arabic or Hebrew?
+		</h2>
+		
+		<p>
+			Full documentation is not available for Arabic and Hebrew (despite being listed in the documentation list at <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/download-docs.php');">PHP.net</span>).
+		</p>
+		
+		<p>
+			As compatible versions of the documentation becomes available, I will update PHPfr to work with them.
+		</p>
+		
+		<h2>
+			Why download the documentation?
+		</h2>
+		
+		<p>
+			In a word: <em>speed.</em> PHPfr uses a downloaded copy of PHP.net&#8217;s online documentation to enable faster access than is possible over a network connection. Also, by using downloaded documentation, you can access it when you are not online.
+		</p>
+	</div>
+	
+	<!-- LICENSE -->
+	<div class="codes" id="license_codes">
+		<p style="padding-top: 10px;">
+			The following are the terms under which PHPfr is released.
+		</p>
+		
+		<h2>
+			Wow, this is great? How much does it cost?
+		</h2>
+		
+		<p>
+			I decided not to charge for PHPfr. But you&#8217;re right, it is great, so I am asking that if you find it useful that you head on over to PayPal and deposit $5 US (or whatever you think PHPfr is worth) in my account. To make this as painless as possible, <span class="link" onclick="PHPFR.ui.followLink('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=andrew%40hedges%2ename&item_name=PHP%20Function%20Reference&amount=5%2e00&no_shipping=1&cn=Comments&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8')">here&#8217;s a link</span>.
+		</p>
+		
+		<h2 id="legal">
+			This is so great, are you sure it&#8217;s legal?
+		</h2>
+		
+		<p>
+			Gosh, I hope so. I know the part about redistributing the PHP documentation is kosher, because the copyright notice says so. It&#8217;s very possible that it&#8217;s more fun than the government wants you to have. I am in no way liable if you suffer any losses due to having too much fun. Actually, I am in no way liable for any losses you may suffer for any reason, related to this widget or not.
+		</p>
+		
+		<h2 id="php_copyright">
+			PHP Documentation Copyright Notice
+		</h2>
+		
+		<p>
+			Copyright &copy; 1997 &#8211; 2006 by the PHP Documentation Group. This material may be distributed only subject to the terms and conditions set forth in the Open Publication License, v1.0 or later (the latest version is presently available at <span class="link" onclick="PHPFR.ui.followLink('http://www.opencontent.org/openpub/')">http://www.opencontent.org/openpub/</span>).
+		</p>
+	</div>
+</div>
+
+</body>
+</html>
