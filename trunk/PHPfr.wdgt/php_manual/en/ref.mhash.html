@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Mhash Functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.Memcache-setServerParams.html">Memcache::setServerParams</a></div>
+ <div class="next" style="float: right;"><a href="function.mhash-count.html">mhash_count</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">Mhash Functions</h1>
+  
+  
+  <div class="partintro">
+   <div id="mhash.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+     These functions are intended to work with <a href="http://mhash.sourceforge.net/" class="link external">&raquo; mhash</a>. Mhash can be used to create checksums,
+     message digests, message authentication codes, and more.
+    </p>
+    <p class="para">
+     This is an interface to the mhash library. mhash supports a wide
+     variety of hash algorithms such as MD5, SHA1, GOST, and many
+     others. For a complete list of supported hashes, refer to the
+     documentation of mhash. The general rule is that you can access
+     the hash algorithm from PHP with MHASH_HASHNAME. For example, to
+     access TIGER you use the PHP constant MHASH_TIGER.
+    </p>
+    <blockquote><p><b class="note">Note</b>: 
+     
+      This extension has been moved to the 
+<a href="http://pecl.php.net/" class="link external">&raquo; PECL</a> repository and is no longer bundled with 
+PHP as of PHP 5.3.0.
+      This extension is obsoleted by <a href="ref.hash.html" class="link">Hash</a>.
+     <br />
+    </p></blockquote>
+   </div>
+
+   <div id="mhash.requirements" class="section">
+    <h2 class="title">Requirements</h2>
+    <p class="para">
+     To use it, download the mhash distribution from <a href="http://mhash.sourceforge.net/" class="link external">&raquo; its web site</a> and follow the included
+     installation instructions.
+    </p>
+   </div>
+
+   
+
+<div id="mhash.installation" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="para">
+  You need to compile PHP with the
+  <span class="option">--with-mhash[=DIR]</span> parameter to enable
+  this extension. DIR is the mhash install directory.
+ </p>
+</div>
+
+
+
+
+   <div id="mhash.configuration" class="section">
+    <h2 class="title">Runtime Configuration</h2>
+    <p class="para">This extension has no configuration directives defined in <var class="filename">php.ini</var>.</p>
+   </div>
+
+   <div id="mhash.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+    <p class="para">This extension has no resource types defined.</p>
+   </div>
+
+   
+
+<div id="mhash.constants" class="section">
+ <h2 class="title">Predefined Constants</h2>
+ <p class="simpara">
+The constants below are defined by this extension, and
+will only be available when the extension has either
+been compiled into PHP or dynamically loaded at runtime.
+</p>
+ <p class="para">
+  Here is a list of hashes which are currently supported by mhash. If a
+  hash is not listed here, but is listed by mhash as supported, you can
+  safely assume that this documentation is outdated.
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_ADLER32</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_CRC32</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_CRC32B</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_GOST</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_HAVAL128</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_HAVAL160</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_HAVAL192</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_HAVAL256</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_MD4</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_MD5</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_RIPEMD160</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_SHA1</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_SHA256</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_TIGER</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_TIGER128</tt></b>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <b><tt>MHASH_TIGER160</tt></b>
+    </span>
+   </li>
+  </ul>
+ </p>
+</div>
+
+
+
+
+   <div id="mhash.examples" class="section">
+    <h2 class="title">Examples</h2>
+    <p class="para">
+     <div class="example">
+      <p><b>Example#1 Compute the MD5 digest and hmac and print it out as hex</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$input&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"what&nbsp;do&nbsp;ya&nbsp;want&nbsp;for&nbsp;nothing?"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$hash&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">mhash</span><span style="color: #007700">(</span><span style="color: #0000BB">MHASH_MD5</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$input</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"The&nbsp;hash&nbsp;is&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">bin2hex</span><span style="color: #007700">(</span><span style="color: #0000BB">$hash</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$hash&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">mhash</span><span style="color: #007700">(</span><span style="color: #0000BB">MHASH_MD5</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"Jefe"</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"The&nbsp;hmac&nbsp;is&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">bin2hex</span><span style="color: #007700">(</span><span style="color: #0000BB">$hash</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"&lt;br&nbsp;/&gt;\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+      <div class="example-contents"><p>
+       This will produce:
+       <div class="example-contents"><pre>
+<div class="cdata"><pre>
+The hash is d03cb659cbf9192dcd066272249f8412 
+The hmac is 750c783e6ab0b503eaa86e310a5db738 
+</pre></div>
+       </pre></div>
+      </p></div>
+     </div>
+    </p>
+   </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.mhash-count.html">mhash_count</a> — Get the highest available hash id</li><li><a href="function.mhash-get-block-size.html">mhash_get_block_size</a> — Get the block size of the specified hash</li><li><a href="function.mhash-get-hash-name.html">mhash_get_hash_name</a> — Get the name of the specified hash</li><li><a href="function.mhash-keygen-s2k.html">mhash_keygen_s2k</a> — Generates a key</li><li><a href="function.mhash.html">mhash</a> — Compute hash</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.Memcache-setServerParams.html">Memcache::setServerParams</a></div>
+ <div class="next" style="float: right;"><a href="function.mhash-count.html">mhash_count</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

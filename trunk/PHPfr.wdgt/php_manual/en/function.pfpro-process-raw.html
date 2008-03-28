@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Process a raw transaction with Payflow Pro</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.pfpro-init.html">pfpro_init</a></div>
+ <div class="next" style="float: right;"><a href="function.pfpro-process.html">pfpro_process</a></div>
+ <div class="up"><a href="ref.pfpro.html">Verisign Payflow Pro</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.pfpro-process-raw" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pfpro_process_raw</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.2, PHP 5 &lt;= 5.0.5)</p><p class="refpurpose">pfpro_process_raw — Process a raw transaction with Payflow Pro</p>
+
+ </div>
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">string</span> <span class="methodname"><b><b>pfpro_process_raw</b></b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$parameters</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$address</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$port</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$timeout</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$proxy_address</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$proxy_port</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$proxy_logon</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$proxy_password</tt></span>
+  ]]]]]]] )</div>
+
+  <p class="para">
+   <b>pfpro_process_raw()</b> processes a raw transaction string
+   with Payflow Pro. You should really use <a href="function.pfpro-process.html" class="function">pfpro_process()</a>
+   instead, as the encoding rules of these transactions are non-standard.
+  </p>
+  <blockquote><p><b class="note">Note</b>: 
+   
+    Be sure to read the Payflow Pro Developers Guide for full details
+    of the required parameters and encoding rules. You would be
+    well advised to use <a href="function.pfpro-process.html" class="function">pfpro_process()</a> instead.
+   <br />
+  </p></blockquote>
+ </div>
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">parameters</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       A string containing the raw transaction request.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">address</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       Specifies the host to connect to. By default this is 
+       <i class="literal">test.signio.com</i>, that you will certainly want to
+       change this to <i class="literal">connect.signio.com</i> in order to
+       process live transactions.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">port</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       Specifies the port to connect on. It defaults to 443, the standard SSL
+       port number.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">timeout</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       Specifies the timeout to be used, in seconds. This defaults to 30
+       seconds. 
+       Note that this timeout appears to only begin once a link to the
+       processor has been established and so your script could potentially
+       continue for a very long time in case of DNS or network problems.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">proxy_address</tt></i>
+</span>
+     <dd>
+
+      <p class="para">   
+       If required, specifies the hostname of your SSL proxy.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">proxy_port</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       If required, specifies the port of your SSL proxy.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">proxy_logon</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       If required, specifies the logon identity to use on the SSL proxy.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">proxy_password</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       If required, specifies the password to use on the SSL proxy.
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns a string containing the raw response.
+  </p>
+ </div>
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#1 Payflow Pro raw example</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />pfpro_init</span><span style="color: #007700">();<br /><br /></span><span style="color: #0000BB">$response&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">pfpro_process_raw</span><span style="color: #007700">(<br /></span><span style="color: #DD0000">"USER=mylogin&amp;PWD[5]=m&amp;ndy&amp;PARTNER=VeriSign&amp;TRXTYPE=S"&nbsp;</span><span style="color: #007700">.<br /></span><span style="color: #DD0000">"&amp;TENDER=C&amp;AMT=1.50&amp;ACCT=4111111111111111&amp;EXPDATE=0904"</span><span style="color: #007700">);<br /><br />if&nbsp;(!</span><span style="color: #0000BB">$response</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;die(</span><span style="color: #DD0000">"Couldn't&nbsp;establish&nbsp;link&nbsp;to&nbsp;Verisign.\n"</span><span style="color: #007700">);<br />}<br /><br />echo&nbsp;</span><span style="color: #DD0000">"Verisign&nbsp;raw&nbsp;response&nbsp;was&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$response</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">pfpro_cleanup</span><span style="color: #007700">();<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.pfpro-process.html" class="function">pfpro_process()</a></li>
+   </ul>
+  </p>
+ </div>
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.pfpro-init.html">pfpro_init</a></div>
+ <div class="next" style="float: right;"><a href="function.pfpro-process.html">pfpro_process</a></div>
+ <div class="up"><a href="ref.pfpro.html">Verisign Payflow Pro</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

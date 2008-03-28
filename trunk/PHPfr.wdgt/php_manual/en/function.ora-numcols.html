@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Returns the number of columns</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ora-logon.html">ora_logon</a></div>
+ <div class="next" style="float: right;"><a href="function.ora-numrows.html">ora_numrows</a></div>
+ <div class="up"><a href="ref.oracle.html">Oracle</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.ora-numcols" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ora_numcols</h1>
+  <p class="verinfo">(PHP 4, PHP 5 &lt;= 5.0.5)</p><p class="refpurpose">ora_numcols — Returns the number of columns</p>
+
+ </div>
+ 
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">int</span> <span class="methodname"><b><b>ora_numcols</b></b></span>
+    ( <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$cursor</tt></span>
+   )</div>
+
+  <p class="para">
+   Returns the number of columns in a result. It only returns meaningful
+   values after a parse/exec/fetch sequence.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">cursor</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       An Oracle cursor, opened with <a href="function.ora-open.html" class="function">ora_open()</a>.
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns the number of columns as an integer, or <b><tt>FALSE</tt></b> on error.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog">
+  <h3 class="title">ChangeLog</h3>
+  <p class="para">
+   <table class="informaltable">
+    <colgroup>
+
+     <thead valign="middle">
+      <tr valign="middle">
+       <th colspan="1">Version</th>
+       <th colspan="1">Description</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle">
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">5.1.0</td>
+       <td colspan="1" rowspan="1" align="left">
+        <p class="para">The <a href="ref.oracle.html" class="link">oracle</a> 
+extension is deprecated in favor of <a href="ref.oci8.html" class="link">oci8</a>.
+</p>
+       </td>
+      </tr>
+
+     </tbody>
+    </colgroup>
+
+   </table>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes">
+  <h3 class="title">Notes</h3>
+   <p class="para">
+    When using <a href="ref.oci8.html" class="link">oci8</a> 
+as a replacement for the deprecated <a href="ref.oracle.html" class="link">oracle</a> 
+extension, consider using: 
+    <ul class="simplelist">
+     <li class="member"><a href="function.oci-num-fields.html" class="function">oci_num_fields()</a></li>
+    </ul>
+   </p>
+ </div>
+
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.ora-parse.html" class="function">ora_parse()</a></li>
+    <li class="member"><a href="function.ora-exec.html" class="function">ora_exec()</a></li>
+    <li class="member"><a href="function.ora-fetch.html" class="function">ora_fetch()</a></li>
+    <li class="member"><a href="function.ora-do.html" class="function">ora_do()</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ora-logon.html">ora_logon</a></div>
+ <div class="next" style="float: right;"><a href="function.ora-numrows.html">ora_numrows</a></div>
+ <div class="up"><a href="ref.oracle.html">Oracle</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

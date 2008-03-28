@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>empty("0")</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="migration4.initializers.html">Initializers</a></div>
+ <div class="next" style="float: right;"><a href="migration4.missing.html">Missing functions</a></div>
+ <div class="up"><a href="migration4.html">Migrating from PHP 3 to PHP 4</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="migration4.empty" class="section">
+   <h2 class="title"><i class="literal">empty(&quot;0&quot;)</i></h2>
+   <p class="para">
+    Perhaps the most controversial change in behavior has happened to
+    <a href="function.empty.html" class="function">empty()</a>. A String containing
+    only the character &#039;0&#039; (zero) is now considered empty while it
+    wasn&#039;t in PHP 3.
+   </p>
+   <p class="para"> 
+    This new behavior makes sense in web applications, with all input
+    fields returning strings even if numeric input is requested, and
+    with PHP&#039;s capabilities of automatic type conversion.  But on the
+    other hand it might break your code in a rather subtle way,
+    leading to misbehavior that is hard to track down if you do not
+    know about what to look for.
+   </p>
+  </div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="migration4.initializers.html">Initializers</a></div>
+ <div class="next" style="float: right;"><a href="migration4.missing.html">Missing functions</a></div>
+ <div class="up"><a href="migration4.html">Migrating from PHP 3 to PHP 4</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

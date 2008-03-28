@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Transfers a result set from the last query</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.mysqli-stmt-store-result.html">mysqli_stmt_store_result</a></div>
+ <div class="next" style="float: right;"><a href="function.mysqli-thread-id.html">mysqli_thread_id</a></div>
+ <div class="up"><a href="ref.mysqli.html">mysqli</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.mysqli-store-result" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysqli_store_result</h1>
+  <h1 class="refname">mysqli-&gt;store_result()</h1>
+  <p class="verinfo">(PHP 5)</p><p class="refpurpose">mysqli->store_result() — Transfers a result set from the last query</p>
+
+ </div>
+
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <p class="para">Procedural style:</p>
+  <div class="methodsynopsis">
+   <span class="type">mysqli_result</span> <span class="methodname"><b><b>mysqli_store_result</b></b></span>
+    ( <span class="methodparam"><span class="type">mysqli</span> <tt class="parameter">$link</tt></span>
+   )</div>
+
+  <p class="para">Object oriented style (method):</p>
+  <div class="classsynopsis">
+   <div class="ooclass"><b class="classname">mysqli</b></div>
+   <div class="methodsynopsis">
+    <span class="type">mysqli_result</span> <span class="methodname"><b><b>store_result</b></b></span>
+     ( <span class="methodparam">void</span>
+    )</div>
+
+  </div>
+  <p class="para">
+   Transfers the result set from the last query on the database connection
+   represented by the <i><tt class="parameter">link</tt></i>
+ parameter to be used with
+   the <a href="function.mysqli-data-seek.html" class="function">mysqli_data_seek()</a> function.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+<span class="term"><i><tt class="parameter">
+link</tt></i>
+</span><dd>
+<p class="para">Procedural style only: A link identifier
+returned by <a href="function.mysqli-connect.html" class="function">mysqli_connect()</a> or <a href="function.mysqli-init.html" class="function">mysqli_init()</a>
+</p></dd>
+</dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns a buffered result object or <b><tt>FALSE</tt></b> if an error occurred.
+  </p>
+  <blockquote><p><b class="note">Note</b>: 
+   
+    <b>mysqli_store_result()</b> returns <b><tt>FALSE</tt></b> in case the query
+    didn&#039;t return a result set (if the query was, for example an INSERT
+    statement). This function also returns <b><tt>FALSE</tt></b> if the reading of the
+    result set failed. You can check if you have got an error by checking
+    if <a href="function.mysqli-error.html" class="function">mysqli_error()</a> doesn&#039;t return an empty string, if
+    <a href="function.mysqli-errno.html" class="function">mysqli_errno()</a> returns a non zero value, or if
+    <a href="function.mysqli-field-count.html" class="function">mysqli_field_count()</a> returns a non zero value.
+    Also possible reason for this function returning <b><tt>FALSE</tt></b> after
+    successfull call to <a href="function.mysqli-query.html" class="function">mysqli_query()</a> can be too large
+    result set (memory for it cannot be allocated). If
+    <a href="function.mysqli-field-count.html" class="function">mysqli_field_count()</a> returns a non-zero value, the
+    statement should have produced a non-empty result set.
+   <br />
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 notes">
+  <h3 class="title">Notes</h3>
+  <blockquote><p><b class="note">Note</b>: 
+   
+    Although it is always good practice to free the memory used by the result
+    of a query using the <a href="function.mysqli-free-result.html" class="function">mysqli_free_result()</a> function,
+    when transfering large result sets using the 
+    <b>mysqli_store_result()</b> this becomes particularly
+    important.
+   <br />
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   See <a href="function.mysqli-multi-query.html" class="function">mysqli_multi_query()</a>.
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.mysqli-real-query.html" class="function">mysqli_real_query()</a></li>
+    <li class="member"><a href="function.mysqli-use-result.html" class="function">mysqli_use_result()</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.mysqli-stmt-store-result.html">mysqli_stmt_store_result</a></div>
+ <div class="next" style="float: right;"><a href="function.mysqli-thread-id.html">mysqli_thread_id</a></div>
+ <div class="up"><a href="ref.mysqli.html">mysqli</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

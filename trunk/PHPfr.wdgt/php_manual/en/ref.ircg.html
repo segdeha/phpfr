@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>IRC Gateway Functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ingres-rollback.html">ingres_rollback</a></div>
+ <div class="next" style="float: right;"><a href="function.ircg-channel-mode.html">ircg_channel_mode</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">IRC Gateway Functions</h1>
+  
+  <div class="partintro">
+
+   <div id="ircg.intro" class="section">
+   <h2 class="title">Introduction</h2>
+    <p class="para">
+     With IRCG you can rapidly stream XML data to thousands of concurrently
+     connected users. This can be used to build powerful, extensible
+     interactive platforms such as online games and webchats. 
+     IRCG also features support for a non-streaming mode where a helper
+     application reformats incoming data and supplies static file snippets in
+     special formats such as cHTML (i-mode) or WML (WAP). These static files
+     are then delivered by the high-performance web server.
+    </p>
+    <p class="para">
+     Up to v4, IRCG runs under these platforms:
+     <ul class="itemizedlist">
+      <li class="listitem"><p class="para">AIX</p></li>
+      <li class="listitem"><p class="para">FreeBSD</p></li>
+      <li class="listitem"><p class="para">HP-UX</p></li>
+      <li class="listitem"><p class="para">Irix</p></li>
+      <li class="listitem"><p class="para">Linux</p></li>
+      <li class="listitem"><p class="para">Solaris</p></li>
+      <li class="listitem"><p class="para">Tru64</p></li>
+      <li class="listitem"><p class="para">Windows</p></li>
+     </ul>
+    </p>
+    <blockquote><p><b class="note">Note</b>: 
+     
+      This extension has been moved to the 
+<a href="http://pecl.php.net/" class="link external">&raquo; PECL</a> repository and is no longer bundled with 
+PHP as of PHP 5.1.0.
+     <br />
+    </p></blockquote>
+   </div>
+
+   
+
+<div id="ircg.install" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="para">
+  Detailed installation instructions can be found
+  at <a href="http://www.schumann.cx/ircg/" class="link external">&raquo; http://www.schumann.cx/ircg/</a>. We urge you to use
+  the provided installation script.
+ </p>
+ <p class="para">
+  It is not recommended, but you can try enable IRCG support yourself. Provide
+  the path to the ircg-config script,
+  <span class="option">--with-ircg-config=path/to/irc-config</span>
+  and in addition add <span class="option">--with-ircg</span> to your
+  configure line.
+ </p>
+</div>
+
+
+
+
+   <div id="ircg.configuration" class="section">
+    <h2 class="title">Runtime Configuration</h2>
+     <p class="para">This extension has no configuration directives defined in <var class="filename">php.ini</var>.</p>
+   </div>
+
+   <div id="ircg.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+    <p class="para">
+     
+
+    </p>
+   </div>
+
+   <div id="ircg.constants" class="section">
+    <h2 class="title">Predefined Constants</h2>
+     <p class="para">This extension has no constants defined.</p>
+   </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.ircg-channel-mode.html">ircg_channel_mode</a> — Set channel mode flags for user</li><li><a href="function.ircg-disconnect.html">ircg_disconnect</a> — Close connection to server</li><li><a href="function.ircg-eval-ecmascript-params.html">ircg_eval_ecmascript_params</a> — Decodes a list of JS-encoded parameters</li><li><a href="function.ircg-fetch-error-msg.html">ircg_fetch_error_msg</a> — Returns the error from previous IRCG operation</li><li><a href="function.ircg-get-username.html">ircg_get_username</a> — Get username for connection</li><li><a href="function.ircg-html-encode.html">ircg_html_encode</a> — Encodes HTML preserving output</li><li><a href="function.ircg-ignore-add.html">ircg_ignore_add</a> — Add a user to your ignore list on a server</li><li><a href="function.ircg-ignore-del.html">ircg_ignore_del</a> — Remove a user from your ignore list on a server</li><li><a href="function.ircg-invite.html">ircg_invite</a> — Invites nickname to channel</li><li><a href="function.ircg-is-conn-alive.html">ircg_is_conn_alive</a> — Check connection status</li><li><a href="function.ircg-join.html">ircg_join</a> — Join a channel on a connected server</li><li><a href="function.ircg-kick.html">ircg_kick</a> — Kick a user out of a channel on server</li><li><a href="function.ircg-list.html">ircg_list</a> — List topic/user count of channel(s)</li><li><a href="function.ircg-lookup-format-messages.html">ircg_lookup_format_messages</a> — Check for the existence of a format message set</li><li><a href="function.ircg-lusers.html">ircg_lusers</a> — IRC network statistics</li><li><a href="function.ircg-msg.html">ircg_msg</a> — Send message to channel or user on server</li><li><a href="function.ircg-names.html">ircg_names</a> — Query visible usernames</li><li><a href="function.ircg-nick.html">ircg_nick</a> — Change nickname on server</li><li><a href="function.ircg-nickname-escape.html">ircg_nickname_escape</a> — Encode special characters in nickname to be IRC-compliant</li><li><a href="function.ircg-nickname-unescape.html">ircg_nickname_unescape</a> — Decodes encoded nickname</li><li><a href="function.ircg-notice.html">ircg_notice</a> — Send a notice to a user on server</li><li><a href="function.ircg-oper.html">ircg_oper</a> — Elevates privileges to IRC OPER</li><li><a href="function.ircg-part.html">ircg_part</a> — Leave a channel on server</li><li><a href="function.ircg-pconnect.html">ircg_pconnect</a> — Connect to an IRC server</li><li><a href="function.ircg-register-format-messages.html">ircg_register_format_messages</a> — Register a format message set</li><li><a href="function.ircg-set-current.html">ircg_set_current</a> — Set current connection for output</li><li><a href="function.ircg-set-file.html">ircg_set_file</a> — Set logfile for connection</li><li><a href="function.ircg-set-on-die.html">ircg_set_on_die</a> — Set action to be executed when connection dies</li><li><a href="function.ircg-topic.html">ircg_topic</a> — Set topic for channel on server</li><li><a href="function.ircg-who.html">ircg_who</a> — Queries server for WHO information</li><li><a href="function.ircg-whois.html">ircg_whois</a> — Query server for user information</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ingres-rollback.html">ingres_rollback</a></div>
+ <div class="next" style="float: right;"><a href="function.ircg-channel-mode.html">ircg_channel_mode</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

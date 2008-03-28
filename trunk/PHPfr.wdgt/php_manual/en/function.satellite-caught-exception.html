@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>See if an exception was caught from the previous function</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.orbitstruct.html">OrbitStruct</a></div>
+ <div class="next" style="float: right;"><a href="function.satellite-exception-id.html">satellite_exception_id</a></div>
+ <div class="up"><a href="ref.satellite.html">Satellite</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.satellite-caught-exception" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">satellite_caught_exception</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.3)</p><p class="refpurpose">satellite_caught_exception — See if an exception was caught from the previous function</p>
+
+ </div>
+
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">bool</span> <span class="methodname"><b><b>satellite_caught_exception</b></b></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+
+  <div class="warning"><b class="warning">Warning</b><p class="simpara">This function is
+<em class="emphasis">EXPERIMENTAL</em>. The behaviour of this function, the
+name of this function, and anything else documented about this
+function may change without notice in a future release of PHP. 
+Use this function at your own risk.</p></div>
+  <p class="para">
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   This function returns <b><tt>TRUE</tt></b> if an exception has been caught, <b><tt>FALSE</tt></b>
+   otherwise.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#1 Sample IDL file</b></p>
+    <div class="example-contents">
+<div class="cdata"><pre>
+/* ++?????++ Out of Cheese Error. Redo From Start. */
+exception OutOfCheeseError {
+    int parameter;
+}
+
+interface AnotherInterface {
+    void AskWhy() raises (OutOfCheeseError);
+}
+</pre></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#2 PHP code for handling CORBA exceptions</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$obj&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">OrbitObject&nbsp;</span><span style="color: #007700">(</span><span style="color: #0000BB">$ior</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$obj</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">AskWhy</span><span style="color: #007700">();<br /><br />if&nbsp;(</span><span style="color: #0000BB">satellite_caught_exception</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #DD0000">"IDL:OutOfCheeseError:1.0"&nbsp;</span><span style="color: #007700">==&nbsp;</span><span style="color: #0000BB">satellite_exception_id</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$exception&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">satellite_exception_value</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$exception</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">parameter</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.orbitstruct.html">OrbitStruct</a></div>
+ <div class="next" style="float: right;"><a href="function.satellite-exception-id.html">satellite_exception_id</a></div>
+ <div class="up"><a href="ref.satellite.html">Satellite</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

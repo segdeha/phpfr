@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>XSL functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.xmlwriter-write-raw.html">XMLWriter::writeRaw</a></div>
+ <div class="next" style="float: right;"><a href="function.xsl-xsltprocessor-construct.html">XSLTProcessor::__construct</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">XSL functions</h1>
+  
+
+  <div class="partintro">
+
+   <div id="xsl.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+     The XSL extension implements the XSL standard, performing <a href="http://www.w3.org/TR/xslt" class="link external">&raquo; XSLT transformations</a> using the <a href="http://xmlsoft.org/XSLT/" class="link external">&raquo; libxslt library</a>
+    </p>
+   </div>
+
+   <div id="xsl.requirements" class="section">
+    <h2 class="title">Requirements</h2>
+    <p class="para">
+     This extension uses <span class="productname">libxslt</span> which can be
+     found at <a href="http://xmlsoft.org/XSLT/" class="link external">&raquo; http://xmlsoft.org/XSLT/</a>. libxslt
+     version 1.1.0 or greater is required.
+    </p>
+   </div>
+
+   
+
+<div id="xsl.installation" class="section">
+ <h2 class="title">Installation</h2>
+  <p class="para">
+   PHP 5 includes the XSL extension by default and can be enabled
+   by adding the argument <span class="option">--with-xsl[=DIR]</span>
+   to your configure line. <i class="literal">DIR</i> is the libxslt installation
+   directory.
+  </p>
+</div>
+
+
+
+
+   <div id="xsl.classes" class="section">
+    <h2 class="title">Predefined Classes</h2>
+    <p class="para">
+    </p>
+
+    <div id="xsl.class.xsltprocessor" class="section">
+     <h2 class="title"><span class="classname">XSLTProcessor</span></h2>
+     <p class="para">
+      </p>
+     <div id="xsl.class.xsltprocessor.constructor" class="section">
+      <h2 class="title">Constructor</h2>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-construct.html" class="xref">XSLTProcessor::__construct</a> - construct a new XSLTProcessor object</p>
+       </li>
+      </ul>
+     </div>
+     <div id="xsl.class.xsltprocessor.methods" class="section">
+      <h2 class="title">Methods</h2>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-get-parameter.html" class="xref">XSLTProcessor::getParameter</a> - Get value of a parameter</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-has-exslt-support.html" class="xref">XSLTProcessor::hasExsltSupport</a> - Determine if PHP has EXSLT support</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-import-stylesheet.html" class="xref">XSLTProcessor::importStylesheet</a> - Import stylesheet</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-register-php-functions.html" class="xref">XSLTProcessor::registerPHPFunctions</a> - Enables the ability to use PHP functions as XSLT functions</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-remove-parameter.html" class="xref">XSLTProcessor::removeParameter</a> - Remove parameter</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-set-parameter.html" class="xref">XSLTProcessor::setParameter</a> - Set value for a parameter</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-transform-to-doc.html" class="xref">XSLTProcessor::transformToDoc</a> - Transform to DOMDocument</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-transform-to-uri.html" class="xref">XSLTProcessor::transformToURI</a> - Transform to URI</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xsl-xsltprocessor-transform-to-xml.html" class="xref">XSLTProcessor::transformToXML</a> - Transform to XML</p>
+       </li>
+      </ul>
+     </div>
+    </div>
+   </div>
+   
+   <div id="xsl.examples" class="section">
+    <h2 class="title">Examples</h2>
+    <p class="para">
+     Many examples in this reference require both an XML and an XSL file.
+     We will use <var class="filename">collection.xml</var> and 
+     <var class="filename">collection.xsl</var> that contains the following:
+    </p>
+    <p class="para">
+     <div class="example">
+      <p><b>Example#1 collection.xml</b></p>
+      <div class="example-contents">
+<div class="cdata"><pre>
+&lt;collection&gt;
+ &lt;cd&gt;
+  &lt;title&gt;Fight for your mind&lt;/title&gt;
+  &lt;artist&gt;Ben Harper&lt;/artist&gt;
+  &lt;year&gt;1995&lt;/year&gt;
+ &lt;/cd&gt;
+ &lt;cd&gt;
+  &lt;title&gt;Electric Ladyland&lt;/title&gt;
+  &lt;artist&gt;Jimi Hendrix&lt;/artist&gt;
+  &lt;year&gt;1997&lt;/year&gt;
+ &lt;/cd&gt;
+&lt;/collection&gt;
+</pre></div>
+      </div>
+
+     </div>
+     <div class="example">
+      <p><b>Example#2 collection.xsl</b></p>
+      <div class="example-contents">
+<div class="cdata"><pre>
+&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;&gt;
+ &lt;xsl:param name=&quot;owner&quot; select=&quot;&#039;Nicolas Eliaszewicz&#039;&quot;/&gt;
+ &lt;xsl:output method=&quot;html&quot; encoding=&quot;iso-8859-1&quot; indent=&quot;no&quot;/&gt;
+ &lt;xsl:template match=&quot;collection&quot;&gt;
+  Hey! Welcome to &lt;xsl:value-of select=&quot;$owner&quot;/&gt;&#039;s sweet CD collection! 
+  &lt;xsl:apply-templates/&gt;
+ &lt;/xsl:template&gt;
+ &lt;xsl:template match=&quot;cd&quot;&gt;
+  &lt;h1&gt;&lt;xsl:value-of select=&quot;title&quot;/&gt;&lt;/h1&gt;
+  &lt;h2&gt;by &lt;xsl:value-of select=&quot;artist&quot;/&gt; - &lt;xsl:value-of select=&quot;year&quot;/&gt;&lt;/h2&gt;
+  &lt;hr /&gt;
+ &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+</pre></div>
+      </div>
+
+     </div>
+    </p>
+   </div>
+      
+   
+
+<div id="xsl.constants" class="section">
+ <h2 class="title">Predefined Constants</h2>
+ <p class="simpara">
+The constants below are defined by this extension, and
+will only be available when the extension has either
+been compiled into PHP or dynamically loaded at runtime.
+</p>
+ <dl>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>XSL_CLONE_AUTO</tt></b>
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>XSL_CLONE_NEVER</tt></b>
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>XSL_CLONE_ALWAYS</tt></b>
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>LIBXSLT_VERSION</tt></b>
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     libxslt version like 10117. Available as of PHP 5.1.2.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>LIBXSLT_DOTTED_VERSION</tt></b>
+    (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     libxslt version like 1.1.17. Available as of PHP 5.1.2.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>LIBEXSLT_VERSION</tt></b>
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     libexslt version like 813. Available as of PHP 5.1.2.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>LIBEXSLT_DOTTED_VERSION</tt></b>
+    (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     libexslt version like 1.1.17. Available as of PHP 5.1.2.
+    </span>
+   </dd>
+
+  </dt>
+
+ </dl>
+
+</div>
+
+
+
+      
+  </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.xsl-xsltprocessor-construct.html">XSLTProcessor::__construct</a> — Creates a new XSLTProcessor object</li><li><a href="function.xsl-xsltprocessor-get-parameter.html">XSLTProcessor::getParameter</a> — Get value of a parameter</li><li><a href="function.xsl-xsltprocessor-has-exslt-support.html">XSLTProcessor::hasExsltSupport</a> — Determine if PHP has EXSLT support</li><li><a href="function.xsl-xsltprocessor-import-stylesheet.html">XSLTProcessor::importStylesheet</a> — Import stylesheet</li><li><a href="function.xsl-xsltprocessor-register-php-functions.html">XSLTProcessor::registerPHPFunctions</a> — Enables the ability to use PHP functions as XSLT functions</li><li><a href="function.xsl-xsltprocessor-remove-parameter.html">XSLTProcessor::removeParameter</a> — Remove parameter</li><li><a href="function.xsl-xsltprocessor-set-parameter.html">XSLTProcessor::setParameter</a> — Set value for a parameter</li><li><a href="function.xsl-xsltprocessor-transform-to-doc.html">XSLTProcessor::transformToDoc</a> — Transform to a DOMDocument</li><li><a href="function.xsl-xsltprocessor-transform-to-uri.html">XSLTProcessor::transformToURI</a> — Transform to URI</li><li><a href="function.xsl-xsltprocessor-transform-to-xml.html">XSLTProcessor::transformToXML</a> — Transform to XML</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.xmlwriter-write-raw.html">XMLWriter::writeRaw</a></div>
+ <div class="next" style="float: right;"><a href="function.xsl-xsltprocessor-construct.html">XSLTProcessor::__construct</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

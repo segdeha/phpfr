@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Gets children of remote document</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.hw-getremote.html">hw_GetRemote</a></div>
+ <div class="next" style="float: right;"><a href="function.hw-getsrcbydestobj.html">hw_GetSrcByDestObj</a></div>
+ <div class="up"><a href="ref.hw.html">Hyperwave</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.hw-getremotechildren" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">hw_getremotechildren</h1>
+    <p class="verinfo">(PHP 4)</p><p class="refpurpose">hw_getremotechildren — Gets children of remote document</p>
+
+   </div>
+   <div class="refsect1 u">
+    <h3 class="title">Description</h3>
+     <div class="methodsynopsis">
+      <span class="type">mixed</span> <span class="methodname"><b><b>hw_getremotechildren</b></b></span>
+       ( <span class="methodparam"><span class="type">int</span> <tt class="parameter">$connection</tt></span>
+      , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$object_record</tt></span>
+      )</div>
+
+    <p class="para">
+     Returns the children of a remote document. Children of a remote
+     document are remote documents itself.
+     This makes sense
+     if a database query has to be narrowed and is explained in
+     Hyperwave Programmers&#039; Guide. If the number of children is 1 the
+     function will return the document itself formatted by the Hyperwave
+     Gateway Interface (HGI). If the number of children
+     is greater than 1 it will return an array of object record with
+     each maybe the input value for another call to
+     <b>hw_getremotechildren()</b>. Those object records are
+     virtual and do not exist in the Hyperwave server, therefore they
+     do not have a valid object ID. How exactly such an object record
+     looks like is up to the HGI.
+     If you want to use this function you should be very familiar with HGIs.
+     You should also consider to use PHP instead of Hyperwave to access
+     external
+     sources. Adding database support by a Hyperwave gateway should be more
+     difficult than doing it in PHP.
+    </p> 
+    <p class="para">
+     See also <a href="function.hw-getremote.html" class="function">hw_getremote()</a>.
+    </p>
+   </div>
+
+  </div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.hw-getremote.html">hw_GetRemote</a></div>
+ <div class="next" style="float: right;"><a href="function.hw-getsrcbydestobj.html">hw_GetSrcByDestObj</a></div>
+ <div class="up"><a href="ref.hw.html">Hyperwave</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

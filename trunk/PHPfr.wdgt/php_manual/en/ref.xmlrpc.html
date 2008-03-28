@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>XML-RPC Functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.xml-set-unparsed-entity-decl-handler.html">xml_set_unparsed_entity_decl_handler</a></div>
+ <div class="next" style="float: right;"><a href="function.xmlrpc-decode-request.html">xmlrpc_decode_request</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">XML-RPC Functions</h1>
+  
+
+  <div class="partintro">
+   <div id="xmlrpc.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+     These functions can be used to write XML-RPC servers and clients.
+     You can find more information about XML-RPC at
+     <a href="http://www.xmlrpc.com/" class="link external">&raquo; http://www.xmlrpc.com/</a>, and more
+     documentation on this extension and its functions at
+     <a href="http://xmlrpc-epi.sourceforge.net/" class="link external">&raquo; http://xmlrpc-epi.sourceforge.net/</a>.
+    </p>
+    <div class="warning"><b class="warning">Warning</b><p class="simpara">This extension is
+<em class="emphasis">EXPERIMENTAL</em>. The behaviour of this extension --
+including the names of its functions and anything else documented
+about this extension -- may change without notice in a future release of PHP. 
+Use this extension at your own risk.</p></div>
+   </div>
+   
+   <div id="xmlrpc.requirements" class="section">
+    <h2 class="title">Requirements</h2>
+    <p class="para">No external libraries are needed to build this extension.</p>
+   </div>
+   
+   
+
+<div id="xmlrpc.installation" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="para">
+  XML-RPC support in PHP is not enabled by default. You will need to
+  use the <span class="option">--with-xmlrpc[=DIR]</span> configuration
+  option when compiling PHP to enable XML-RPC support. This extension is
+  bundled into PHP as of 4.1.0.
+ </p>
+</div>
+
+
+
+
+
+   
+
+<div id="xmlrpc.configuration" class="section">
+ <h2 class="title">Runtime Configuration</h2>
+ <p class="simpara">
+The behaviour of these functions is affected by settings in <var class="filename">php.ini</var>.
+</p>
+ <p class="para">
+ <table border="5">
+  <caption><b>XML-RPC configuration options</b></caption>
+  <colgroup>
+
+   <thead valign="middle">
+    <tr valign="middle">
+     <th colspan="1">Name</th>
+     <th colspan="1">Default</th>
+     <th colspan="1">Changeable</th>
+     <th colspan="1">Changelog</th>
+    </tr>
+
+   </thead>
+
+   <tbody valign="middle">
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">xmlrpc_errors</td>
+     <td colspan="1" rowspan="1" align="left">&quot;0&quot;</td>
+     <td colspan="1" rowspan="1" align="left">PHP_INI_SYSTEM</td>
+     <td colspan="1" rowspan="1" align="left">Available since PHP 4.1.0.</td>
+    </tr>
+
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">xmlrpc_error_number</td>
+     <td colspan="1" rowspan="1" align="left">&quot;0&quot;</td>
+     <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+     <td colspan="1" rowspan="1" align="left">Available since PHP 4.1.0.</td>
+    </tr>
+
+   </tbody>
+  </colgroup>
+
+ </table>
+
+ For further details and definitions of the 
+PHP_INI_* constants, see the <a href="ini.html" class="xref">php.ini directives</a>.
+ </p>
+</div>
+
+
+
+
+
+   <div id="xmlrpc.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+    <p class="para">
+     This extension defines a XML-RPC server resource returned by
+     <a href="function.xmlrpc-server-create.html" class="function">xmlrpc_server_create()</a>.
+    </p>
+   </div>
+
+   <div id="xmlrpc.constants" class="section">
+    <h2 class="title">Predefined Constants</h2>
+    <p class="para">This extension has no constants defined.</p>
+   </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.xmlrpc-decode-request.html">xmlrpc_decode_request</a> — Decodes XML into native PHP types</li><li><a href="function.xmlrpc-decode.html">xmlrpc_decode</a> — Decodes XML into native PHP types</li><li><a href="function.xmlrpc-encode-request.html">xmlrpc_encode_request</a> — Generates XML for a method request</li><li><a href="function.xmlrpc-encode.html">xmlrpc_encode</a> — Generates XML for a PHP value</li><li><a href="function.xmlrpc-get-type.html">xmlrpc_get_type</a> — Gets xmlrpc type for a PHP value</li><li><a href="function.xmlrpc-is-fault.html">xmlrpc_is_fault</a> — Determines if an array value represents an XMLRPC fault</li><li><a href="function.xmlrpc-parse-method-descriptions.html">xmlrpc_parse_method_descriptions</a> — Decodes XML into a list of method descriptions</li><li><a href="function.xmlrpc-server-add-introspection-data.html">xmlrpc_server_add_introspection_data</a> — Adds introspection documentation</li><li><a href="function.xmlrpc-server-call-method.html">xmlrpc_server_call_method</a> — Parses XML requests and call methods</li><li><a href="function.xmlrpc-server-create.html">xmlrpc_server_create</a> — Creates an xmlrpc server</li><li><a href="function.xmlrpc-server-destroy.html">xmlrpc_server_destroy</a> — Destroys server resources</li><li><a href="function.xmlrpc-server-register-introspection-callback.html">xmlrpc_server_register_introspection_callback</a> — Register a PHP function to generate documentation</li><li><a href="function.xmlrpc-server-register-method.html">xmlrpc_server_register_method</a> — Register a PHP function to resource method matching method_name</li><li><a href="function.xmlrpc-set-type.html">xmlrpc_set_type</a> — Sets xmlrpc type, base64 or datetime, for a PHP string value</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.xml-set-unparsed-entity-decl-handler.html">xml_set_unparsed_entity_decl_handler</a></div>
+ <div class="next" style="float: right;"><a href="function.xmlrpc-decode-request.html">xmlrpc_decode_request</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

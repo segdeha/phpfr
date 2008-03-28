@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Open SESAM database connection</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.sesam-commit.html">sesam_commit</a></div>
+ <div class="next" style="float: right;"><a href="function.sesam-diagnostic.html">sesam_diagnostic</a></div>
+ <div class="up"><a href="ref.sesam.html">SESAM</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.sesam-connect" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">sesam_connect</h1>
+  <p class="verinfo">(No version information available, might be only in CVS)</p><p class="refpurpose">sesam_connect — Open SESAM database connection</p>
+
+ </div>
+ 
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">bool</span> <span class="methodname"><b><b>sesam_connect</b></b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$catalog</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$schema</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$user</tt></span>
+   )</div>
+
+  <p class="para">
+   Establishes a connection to a SESAM database handler task. The connection
+   is always &quot;persistent&quot; in the sense that only the very first invocation
+   will actually load the driver from the configured SESAM OML PLAM library.
+   Subsequent calls will reuse the driver and will immediately use the given
+   catalog, schema, and user.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">catalog</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       When creating a database, the <i><tt class="parameter">&quot;catalog&quot;</tt></i>
+ name is
+       specified in the SESAM configuration directive
+       <strong class="command">//ADD-SQL-DATABASE-CATALOG-LIST ENTRY-1 =
+       *CATALOG(CATALOG-NAME = catalogname,...)</strong>
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">schema</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       The <i><tt class="parameter">schema</tt></i>
+ references the desired database
+       schema (see SESAM handbook).
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">user</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       The <i><tt class="parameter">&quot;user&quot;</tt></i>
+ argument references one of the users
+       which are allowed to access this <i><tt class="parameter">&quot;catalog&quot;</tt></i>
+ /
+       <i><tt class="parameter">&quot;schema&quot;</tt></i>
+ combination. Note that
+       <i><tt class="parameter">&quot;user&quot;</tt></i>
+ is completely independent from both the
+       system&#039;s user id&#039;s and from HTTP user/password protection. It appears
+       in the SESAM configuration only.
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns <b><tt>TRUE</tt></b> on success or <b><tt>FALSE</tt></b> on failure.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#1 Connect to a SESAM database</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">if&nbsp;(!</span><span style="color: #0000BB">sesam_connect&nbsp;</span><span style="color: #007700">(</span><span style="color: #DD0000">"mycatalog"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"myschema"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"otto"</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;die(</span><span style="color: #DD0000">"Unable&nbsp;to&nbsp;connect&nbsp;to&nbsp;SESAM"</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.sesam-disconnect.html" class="function">sesam_disconnect()</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.sesam-commit.html">sesam_commit</a></div>
+ <div class="next" style="float: right;"><a href="function.sesam-diagnostic.html">sesam_diagnostic</a></div>
+ <div class="up"><a href="ref.sesam.html">SESAM</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

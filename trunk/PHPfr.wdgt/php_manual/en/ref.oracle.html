@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Oracle Functions [deprecated]</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.openssl-x509-read.html">openssl_x509_read</a></div>
+ <div class="next" style="float: right;"><a href="function.ora-bind.html">ora_bind</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">Oracle Functions [deprecated]</h1>
+  
+  
+  <div class="partintro">
+   <div id="oracle.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <div class="warning"><b class="warning">Warning</b>
+     <p class="para">
+      This extension is deprecated. Instead, use the improved 
+      <a href="ref.oci8.html" class="link">oci8</a> extension. Functions
+      documented here do list recommended oci8 alternatives.
+     </p>
+    </div>
+    <p class="para">
+     This extension adds support for Oracle database server access.
+    </p>
+    <blockquote><p><b class="note">Note</b>: 
+     
+      This extension has been moved to the 
+<a href="http://pecl.php.net/" class="link external">&raquo; PECL</a> repository and is no longer bundled with 
+PHP as of PHP 5.1.0.
+     <br />
+    </p></blockquote>
+   </div>
+
+   
+
+<div id="oracle.installation" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="para">
+  You have to compile PHP with the option
+  <span class="option">--with-oracle[=DIR]</span>, where DIR defaults
+  to your environment variable ORACLE_HOME.
+ </p>
+</div>
+
+
+
+
+
+   <div id="oracle.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+    <p class="para">
+     This extension defines two resource types: an Oracle connection
+     identifier and an Oracle cursor index.
+    </p>
+   </div>
+
+   
+
+<div id="oracle.constants" class="section">
+ <h2 class="title">Predefined Constants</h2>
+ <p class="simpara">
+The constants below are defined by this extension, and
+will only be available when the extension has either
+been compiled into PHP or dynamically loaded at runtime.
+</p>
+ <dl>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>ORA_BIND_INOUT</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>ORA_BIND_IN</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>ORA_BIND_OUT</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>ORA_FETCHINTO_ASSOC</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>ORA_FETCHINTO_NULLS</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     
+    </span>
+   </dd>
+
+  </dt>
+
+ </dl>
+
+</div>
+
+
+
+   
+  </div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.ora-bind.html">ora_bind</a> — Binds a PHP variable to an Oracle parameter</li><li><a href="function.ora-close.html">ora_close</a> — Closes an Oracle cursor</li><li><a href="function.ora-columnname.html">ora_columnname</a> — Gets the name of an Oracle result column</li><li><a href="function.ora-columnsize.html">ora_columnsize</a> — Returns the size of an Oracle result column</li><li><a href="function.ora-columntype.html">ora_columntype</a> — Gets the type of an Oracle result column</li><li><a href="function.ora-commit.html">ora_commit</a> — Commit an Oracle transaction</li><li><a href="function.ora-commitoff.html">ora_commitoff</a> — Disable automatic commit</li><li><a href="function.ora-commiton.html">ora_commiton</a> — Enable automatic commit</li><li><a href="function.ora-do.html">ora_do</a> — Parse, Exec, Fetch</li><li><a href="function.ora-error.html">ora_error</a> — Gets an Oracle error message</li><li><a href="function.ora-errorcode.html">ora_errorcode</a> — Gets an Oracle error code</li><li><a href="function.ora-exec.html">ora_exec</a> — Execute a parsed statement on an Oracle cursor</li><li><a href="function.ora-fetch-into.html">ora_fetch_into</a> — Fetch a row into the specified result array</li><li><a href="function.ora-fetch.html">ora_fetch</a> — Fetch a row of data from a cursor</li><li><a href="function.ora-getcolumn.html">ora_getcolumn</a> — Get data from a fetched column</li><li><a href="function.ora-logoff.html">ora_logoff</a> — Close an Oracle connection</li><li><a href="function.ora-logon.html">ora_logon</a> — Open an Oracle connection</li><li><a href="function.ora-numcols.html">ora_numcols</a> — Returns the number of columns</li><li><a href="function.ora-numrows.html">ora_numrows</a> — Returns the number of rows</li><li><a href="function.ora-open.html">ora_open</a> — Opens an Oracle cursor</li><li><a href="function.ora-parse.html">ora_parse</a> — Parse an SQL statement with Oracle</li><li><a href="function.ora-plogon.html">ora_plogon</a> — Open a persistent Oracle connection</li><li><a href="function.ora-rollback.html">ora_rollback</a> — Rolls back a transaction</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.openssl-x509-read.html">openssl_x509_read</a></div>
+ <div class="next" style="float: right;"><a href="function.ora-bind.html">ora_bind</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

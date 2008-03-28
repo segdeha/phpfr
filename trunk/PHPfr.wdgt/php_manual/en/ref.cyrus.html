@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Cyrus IMAP administration Functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.cybermut-testmac.html">cybermut_testmac</a></div>
+ <div class="next" style="float: right;"><a href="function.cyrus-authenticate.html">cyrus_authenticate</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">Cyrus IMAP administration Functions</h1>
+  
+
+  <div class="partintro">
+
+   <div id="cyrus.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+     <blockquote><p><b class="note">Note</b>: <span class="simpara">This extension is not
+available on Windows platforms.</span></p></blockquote>
+    </p>
+    <blockquote><p><b class="note">Note</b>: 
+     
+      This extension has been moved to the 
+<a href="http://pecl.php.net/" class="link external">&raquo; PECL</a> repository and is no longer bundled with 
+PHP as of PHP 5.0.0.
+     <br />
+    </p></blockquote>
+   </div>
+
+   
+
+<div id="cyrus.installation" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="para">
+  To enable Cyrus IMAP support and to use these functions you have to compile
+  PHP with the <span class="option">--with-cyrus</span> option.
+ </p>
+
+ <div class="warning"><b class="warning">Warning</b><p class="simpara">The <a href="ref.imap.html" class="link">IMAP</a>, <a href="ref.recode.html" class="link">recode</a>,
+<a href="ref.yaz.html" class="link">YAZ</a> and <a href="ref.cyrus.html" class="link">Cyrus</a>
+extensions cannot be used in conjuction, because they
+all share the same internal symbol.</p></div>
+
+</div>
+
+
+
+
+   <div id="cyrus.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+    <p class="para">
+     This extension defines a Cyrus IMAP connection identifier returned by
+     <a href="function.cyrus-connect.html" class="function">cyrus_connect()</a>.
+    </p>
+   </div>
+
+   
+
+<div id="cyrus.constants" class="section">
+ <h2 class="title">Predefined Constants</h2>
+ <p class="simpara">
+The constants below are defined by this extension, and
+will only be available when the extension has either
+been compiled into PHP or dynamically loaded at runtime.
+</p>
+ <dl>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>CYRUS_CONN_NONSYNCLITERAL</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>CYRUS_CONN_INITIALRESPONSE</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>CYRUS_CALLBACK_NUMBERED</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>CYRUS_CALLBACK_NOLITERAL</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     
+    </span>
+   </dd>
+
+  </dt>
+
+ </dl>
+
+</div>
+
+
+
+   
+  </div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.cyrus-authenticate.html">cyrus_authenticate</a> — Authenticate against a Cyrus IMAP server</li><li><a href="function.cyrus-bind.html">cyrus_bind</a> — Bind callbacks to a Cyrus IMAP connection</li><li><a href="function.cyrus-close.html">cyrus_close</a> — Close connection to a Cyrus IMAP server</li><li><a href="function.cyrus-connect.html">cyrus_connect</a> — Connect to a Cyrus IMAP server</li><li><a href="function.cyrus-query.html">cyrus_query</a> — Send a query to a Cyrus IMAP server</li><li><a href="function.cyrus-unbind.html">cyrus_unbind</a> — Unbind ...</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.cybermut-testmac.html">cybermut_testmac</a></div>
+ <div class="next" style="float: right;"><a href="function.cyrus-authenticate.html">cyrus_authenticate</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

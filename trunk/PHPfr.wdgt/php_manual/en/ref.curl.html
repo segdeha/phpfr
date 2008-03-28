@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>CURL, Client URL Library Functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ctype-xdigit.html">ctype_xdigit</a></div>
+ <div class="next" style="float: right;"><a href="curl.constants.html">Constants</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">CURL, Client URL Library Functions</h1>
+  
+
+  <div class="partintro">
+   <div id="curl.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+     PHP supports libcurl, a library created by Daniel Stenberg, that
+     allows you to connect and communicate to many different types of
+     servers with many different types of protocols. libcurl currently
+     supports the http, https, ftp, gopher, telnet, dict, file, and
+     ldap protocols. libcurl also supports HTTPS certificates, HTTP
+     POST, HTTP PUT, FTP uploading (this can also be done with PHP&#039;s
+     ftp extension), HTTP form based upload, proxies, cookies, and
+     user+password authentication.
+    </p>
+    <p class="para">
+     These functions have been added in PHP 4.0.2.
+    </p>
+   </div>
+   
+   <div id="curl.requirements" class="section">
+    <h2 class="title">Requirements</h2>
+    <p class="para">
+     In order to use PHP&#039;s cURL functions you need to install the <a href="http://curl.haxx.se/" class="link external">&raquo; libcurl</a> package. PHP requires that you use
+     libcurl 7.0.2-beta or higher. In PHP 4.2.3, you will need 
+     libcurl version 7.9.0 or higher.  From PHP 4.3.0, you will need a libcurl
+     version that&#039;s 7.9.8 or higher.  PHP 5.0.0 requires
+     a libcurl version 7.10.5 or greater.
+    </p>
+   </div>
+   
+   
+
+<div id="curl.installation" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="para">
+  To use PHP&#039;s cURL support you must also compile PHP <span class="option">--with-curl[=DIR]</span> where DIR is the
+  location of the directory containing the lib and include
+  directories. In the &quot;include&quot; directory there should be a folder
+  named &quot;curl&quot; which should contain the <var class="filename">easy.h</var> and
+  <var class="filename">curl.h</var> files. There should be a file named 
+  <var class="filename">libcurl.a</var> located in the &quot;lib&quot; directory. Beginning
+  with PHP 4.3.0 you can configure PHP to use cURL for URL streams
+  <span class="option">--with-curlwrappers</span>.
+ </p>
+ <blockquote><p><b class="note">Note</b>: 
+  <b>Note to Win32 Users</b>
+  <span class="simpara">
+  In order to enable this module on a Windows environment, 
+  <var class="filename">libeay32.dll</var> and <var class="filename">ssleay32.dll</var>
+  must be present in your PATH.
+  </span>
+  <span class="simpara">
+  You don&#039;t need <var class="filename">libcurl.dll</var> from the cURL site.
+  </span>
+  </p></blockquote>
+</div>
+
+
+
+   
+   <div id="curl.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+    <p class="para">
+     This extension defines two resource types: a cURL handle and a cURL multi
+     handle.
+    </p>
+   </div>
+   
+   <div class="section">
+    <h2 class="title">Predefined Constants</h2>
+    <p class="para">
+     See also the cURL <a href="curl.constants.html" class="link">Predefined Constants</a>
+    </p>
+   </div>
+   
+   <div id="curl.examples" class="section">
+    <h2 class="title">Examples</h2>
+    <p class="para">
+     Once you&#039;ve compiled PHP with cURL support, you can begin using
+     the cURL functions. The basic idea behind the cURL functions is
+     that you initialize a cURL session using the
+     <a href="function.curl-init.html" class="function">curl_init()</a>, then you can set all your
+     options for the transfer via the <a href="function.curl-setopt.html" class="function">curl_setopt()</a>,
+     then you can execute the session with the 
+     <a href="function.curl-exec.html" class="function">curl_exec()</a> and then you finish off 
+     your session using the <a href="function.curl-close.html" class="function">curl_close()</a>. 
+     Here is an example that uses the cURL functions to fetch the 
+     example.com homepage into a file:
+     <div class="example">
+      <p><b>Example#1 Using PHP&#039;s cURL module to fetch the example.com homepage</b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$ch&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">curl_init</span><span style="color: #007700">(</span><span style="color: #DD0000">"http://www.example.com/"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$fp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #DD0000">"example_homepage.txt"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"w"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">curl_setopt</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">CURLOPT_FILE</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$fp</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">curl_setopt</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">CURLOPT_HEADER</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">curl_exec</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">curl_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$ch</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">fclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+    </p>
+   </div>
+
+  </div>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="curl.constants.html">Constants</a> — Curl Predefined Constants</li><li><a href="function.curl-close.html">curl_close</a> — Close a cURL session</li><li><a href="function.curl-copy-handle.html">curl_copy_handle</a> — Copy a cURL handle along with all of its preferences</li><li><a href="function.curl-errno.html">curl_errno</a> — Return the last error number</li><li><a href="function.curl-error.html">curl_error</a> — Return a string containing the last error for the current session</li><li><a href="function.curl-exec.html">curl_exec</a> — Perform a cURL session</li><li><a href="function.curl-getinfo.html">curl_getinfo</a> — Get information regarding a specific transfer</li><li><a href="function.curl-init.html">curl_init</a> — Initialize a cURL session</li><li><a href="function.curl-multi-add-handle.html">curl_multi_add_handle</a> — Add a normal cURL handle to a cURL multi handle</li><li><a href="function.curl-multi-close.html">curl_multi_close</a> — Close a set of cURL handles</li><li><a href="function.curl-multi-exec.html">curl_multi_exec</a> — Run the sub-connections of the current cURL handle</li><li><a href="function.curl-multi-getcontent.html">curl_multi_getcontent</a> — Return the content of a cURL handle if CURLOPT_RETURNTRANSFER is set</li><li><a href="function.curl-multi-info-read.html">curl_multi_info_read</a> — Get information about the current transfers</li><li><a href="function.curl-multi-init.html">curl_multi_init</a> — Returns a new cURL multi handle</li><li><a href="function.curl-multi-remove-handle.html">curl_multi_remove_handle</a> — Remove a multi handle from a set of cURL handles</li><li><a href="function.curl-multi-select.html">curl_multi_select</a> — Get all the sockets associated with the cURL extension, which can then be "selected"</li><li><a href="function.curl-setopt-array.html">curl_setopt_array</a> — Set multiple options for a cURL transfer</li><li><a href="function.curl-setopt.html">curl_setopt</a> — Set an option for a cURL transfer</li><li><a href="function.curl-version.html">curl_version</a> — Gets cURL version information</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ctype-xdigit.html">ctype_xdigit</a></div>
+ <div class="next" style="float: right;"><a href="curl.constants.html">Constants</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

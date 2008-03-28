@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Execute an "immediate" SQL-statement</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.sesam-errormsg.html">sesam_errormsg</a></div>
+ <div class="next" style="float: right;"><a href="function.sesam-fetch-array.html">sesam_fetch_array</a></div>
+ <div class="up"><a href="ref.sesam.html">SESAM</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.sesam-execimm" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">sesam_execimm</h1>
+  <p class="verinfo">(No version information available, might be only in CVS)</p><p class="refpurpose">sesam_execimm — Execute an &quot;immediate&quot; SQL-statement</p>
+
+ </div>
+ 
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">string</span> <span class="methodname"><b><b>sesam_execimm</b></b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$query</tt></span>
+   )</div>
+
+  <p class="para">
+   Executes an &quot;immediate&quot; statement.
+  </p>
+  <p class="para">
+   Sets the <i><tt class="parameter">affected_rows</tt></i>
+ value for retrieval by the
+   <a href="function.sesam-affected-rows.html" class="function">sesam_affected_rows()</a> function.
+  </p>
+  <p class="para">
+   Note that <a href="function.sesam-query.html" class="function">sesam_query()</a> can handle both &quot;immediate&quot; and
+   &quot;select-type&quot; queries. Use <b>sesam_execimm()</b> only if you
+   know beforehand what type of statement will be executed.  An attempt to
+   use SELECT type queries with <b>sesam_execimm()</b> will
+   return <i class="literal">$err[&quot;sqlstate&quot;] == &quot;42SBW&quot;</i>.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">query</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       An &quot;immediate&quot; statement (i.e., a statement like UPDATE, INSERT or
+       DELETE which returns no result, and has no INPUT or OUTPUT variables).
+      &quot;select type&quot; queries can not be used with
+       <b>sesam_execimm()</b>.
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns a SESAM result identifier on success, or <b><tt>FALSE</tt></b> on error.
+  </p>
+  <p class="para">
+   The returned &quot;result identifier&quot; can not be used for retrieving anything
+   but the <a href="function.sesam-affected-rows.html" class="function">sesam_affected_rows()</a>; it is only returned for
+   symmetry with the <a href="function.sesam-query.html" class="function">sesam_query()</a> function.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#1 <b>sesam_execimm()</b> Example</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$stmt&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">"INSERT&nbsp;INTO&nbsp;mytable&nbsp;VALUES&nbsp;('one',&nbsp;'two')"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sesam_execimm</span><span style="color: #007700">(</span><span style="color: #0000BB">$stmt</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$err&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">sesam_diagnostic</span><span style="color: #007700">();<br />echo&nbsp;</span><span style="color: #DD0000">"sqlstate&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$err</span><span style="color: #007700">[</span><span style="color: #DD0000">"sqlstate"</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"Affected&nbsp;rows&nbsp;=&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$err</span><span style="color: #007700">[</span><span style="color: #DD0000">"rowcount"</span><span style="color: #007700">]&nbsp;.&nbsp;</span><span style="color: #DD0000">"&nbsp;==&nbsp;"&nbsp;</span><span style="color: #007700">.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">sesam_affected_rows</span><span style="color: #007700">(</span><span style="color: #0000BB">$result</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.sesam-query.html" class="function">sesam_query()</a></li>
+    <li class="member"><a href="function.sesam-affected-rows.html" class="function">sesam_affected_rows()</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.sesam-errormsg.html">sesam_errormsg</a></div>
+ <div class="next" style="float: right;"><a href="function.sesam-fetch-array.html">sesam_fetch_array</a></div>
+ <div class="up"><a href="ref.sesam.html">SESAM</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

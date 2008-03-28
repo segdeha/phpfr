@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>HTTP and HTTPS</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="wrappers.socket.html">Socket</a></div>
+ <div class="next" style="float: right;"><a href="wrappers.ftp.html">FTP and FTPS</a></div>
+ <div class="up"><a href="wrappers.html">List of Supported Protocols/Wrappers</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="wrappers.http" class="section">
+  <h2 class="title">HTTP and HTTPS</h2>
+   <p class="simpara">PHP 3, PHP 4, PHP 5. <var class="filename">https://</var> since PHP 4.3.0</p>
+
+  <ul class="itemizedlist">
+   <li class="listitem"><span class="simpara"><var class="filename">http://example.com</var></span></li>
+   <li class="listitem"><span class="simpara"><var class="filename">http://example.com/file.php?var1=val1&amp;var2=val2</var></span></li>
+   <li class="listitem"><span class="simpara"><var class="filename">http://user:password@example.com</var></span></li>
+   <li class="listitem"><span class="simpara"><var class="filename">https://example.com</var></span></li>
+   <li class="listitem"><span class="simpara"><var class="filename">https://example.com/file.php?var1=val1&amp;var2=val2</var></span></li>
+   <li class="listitem"><span class="simpara"><var class="filename">https://user:password@example.com</var></span></li>
+  </ul>
+
+  <p class="simpara">Allows read-only access to files/resources via HTTP 1.0,
+   using the HTTP GET method. A <i class="literal">Host:</i> header is sent with the request
+   to handle name-based virtual hosts.  If you have configured
+   a <a href="ref.filesystem.html#ini.user-agent" class="link">user_agent</a> string using
+   your ini file or the stream context, it will also be included
+   in the request.
+  </p>
+  <div class="warning"><b class="warning">Warning</b><p class="para">When using SSL, Microsoft IIS
+will violate the protocol by closing the connection without sending a
+close_notify indicator.  PHP will report this as &quot;SSL: Fatal Protocol Error&quot;
+when you reach the end of the data.  To workaround this, you should lower your
+<a href="ref.errorfunc.html#ini.error-reporting" class="link">error_reporting</a> level not to include warnings.
+PHP 4.3.7 and higher can detect buggy IIS server software when you open
+the stream using the https:// wrapper and will suppress the warning for you.
+If you are using <a href="function.fsockopen.html" class="function">fsockopen()</a> to create an ssl:// socket,
+you are responsible for detecting and suppressing the warning yourself.
+</p></div>
+  <p class="simpara">
+   Redirects have been supported since PHP 4.0.5; if you are using
+   an earlier version you will need to include trailing slashes in
+   your URLs.  If it&#039;s important to know the URL of the resource where
+   your document came from (after all redirects have been processed),
+   you&#039;ll need to process the series of response headers returned by the
+   stream.
+  </p>
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$url&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'http://www.example.com/redirecting_page.php'</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$fp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #0000BB">$url</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'r'</span><span style="color: #007700">);<br /><br /></span><span style="color: #FF8000">/*&nbsp;Prior&nbsp;to&nbsp;PHP&nbsp;4.3.0&nbsp;use&nbsp;$http_response_header&nbsp;<br />&nbsp;&nbsp;&nbsp;instead&nbsp;of&nbsp;stream_get_meta_data()&nbsp;*/<br /></span><span style="color: #0000BB">$meta_data&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">stream_get_meta_data</span><span style="color: #007700">(</span><span style="color: #0000BB">$fp</span><span style="color: #007700">);<br />foreach(</span><span style="color: #0000BB">$meta_data</span><span style="color: #007700">[</span><span style="color: #DD0000">'wrapper_data'</span><span style="color: #007700">]&nbsp;as&nbsp;</span><span style="color: #0000BB">$response</span><span style="color: #007700">)&nbsp;{<br /><br />&nbsp;&nbsp;</span><span style="color: #FF8000">/*&nbsp;Were&nbsp;we&nbsp;redirected?&nbsp;*/<br />&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">strtolower</span><span style="color: #007700">(</span><span style="color: #0000BB">$response</span><span style="color: #007700">),&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">10</span><span style="color: #007700">)&nbsp;==&nbsp;</span><span style="color: #DD0000">'location:&nbsp;'</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">/*&nbsp;update&nbsp;$url&nbsp;with&nbsp;where&nbsp;we&nbsp;were&nbsp;redirected&nbsp;to&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$url&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">substr</span><span style="color: #007700">(</span><span style="color: #0000BB">$response</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">18</span><span style="color: #007700">);<br />&nbsp;&nbsp;}<br /><br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+  <div class="example">
+   <p><b>Example#1 Fetch a page and send POST data</b></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$postdata&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">http_build_query</span><span style="color: #007700">(<br />&nbsp;&nbsp;&nbsp;&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'var1'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'some&nbsp;content'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'var2'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'doh'<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)<br />);<br /><br /></span><span style="color: #0000BB">$opts&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">'http'&nbsp;</span><span style="color: #007700">=&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'method'&nbsp;&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'POST'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'header'&nbsp;&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'Content-type:&nbsp;application/x-www-form-urlencoded'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">'content'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$postdata<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">)<br />);<br /><br /></span><span style="color: #0000BB">$context&nbsp;&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">stream_context_create</span><span style="color: #007700">(</span><span style="color: #0000BB">$opts</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file_get_contents</span><span style="color: #007700">(</span><span style="color: #DD0000">'http://example.com/submit.php'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">false</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$context</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+  <p class="simpara">
+   The stream allows access to the <em class="emphasis">body</em> of
+   the resource; the headers are stored in the
+   <var class="varname">$http_response_header</var> variable.
+   Since PHP 4.3.0, the headers are available using
+   <a href="function.stream-get-meta-data.html" class="function">stream_get_meta_data()</a>.
+  </p>
+  <p class="simpara">
+   HTTP connections are read-only; you cannot write data or copy
+   files to an HTTP resource.
+  </p>
+  <blockquote><p><b class="note">Note</b>: 
+   <span class="simpara">HTTPS is supported starting from PHP 4.3.0, if you
+    have compiled in support for OpenSSL.
+   </span>
+  </p></blockquote>
+  <p class="para">
+   <table border="5">
+    <caption><b>Wrapper Summary</b></caption>
+    <colgroup>
+
+     <thead valign="middle">
+      <tr valign="middle">
+       <th colspan="1">Attribute</th>
+       <th colspan="1">Supported</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle">
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Restricted by <a href="ref.filesystem.html#ini.allow-url-fopen" class="link">allow_url_fopen</a></td>
+       <td colspan="1" rowspan="1" align="left">Yes</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Allows Reading</td>
+       <td colspan="1" rowspan="1" align="left">Yes</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Allows Writing</td>
+       <td colspan="1" rowspan="1" align="left">No</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Allows Appending</td>
+       <td colspan="1" rowspan="1" align="left">No</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Allows Simultaneous Reading and Writing</td>
+       <td colspan="1" rowspan="1" align="left">N/A</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Supports <a href="function.stat.html" class="function">stat()</a></td>
+       <td colspan="1" rowspan="1" align="left">No</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Supports <a href="function.unlink.html" class="function">unlink()</a></td>
+       <td colspan="1" rowspan="1" align="left">No</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Supports <a href="function.rename.html" class="function">rename()</a></td>
+       <td colspan="1" rowspan="1" align="left">No</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Supports <a href="function.mkdir.html" class="function">mkdir()</a></td>
+       <td colspan="1" rowspan="1" align="left">No</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">Supports <a href="function.rmdir.html" class="function">rmdir()</a></td>
+       <td colspan="1" rowspan="1" align="left">No</td>
+      </tr>
+
+     </tbody>
+    </colgroup>
+
+   </table>
+
+  </p>
+  <p class="para">
+   <table border="5">
+    <caption><b>Context options</b></caption>
+    <colgroup>
+
+     <thead valign="middle">
+      <tr valign="middle">
+       <th colspan="1">Name</th>
+       <th colspan="1">Usage</th>
+       <th colspan="1">Default</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle">
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">method</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        <b><tt>GET</tt></b>, <b><tt>POST</tt></b>, or
+        any other HTTP method supported by the remote server.
+       </td>
+       <td colspan="1" rowspan="1" align="left"><b><tt>GET</tt></b></td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">header</i></td>
+       <td colspan="1" rowspan="1" align="left">Additional headers to be sent during request.  Values
+        in this option will override other values (such as
+        <i class="literal">User-agent:</i>, <i class="literal">Host:</i>,
+        and <i class="literal">Authentication:</i>).
+       </td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">user_agent</i></td>
+       <td colspan="1" rowspan="1" align="left">Value to send with User-Agent: header.  This value will
+        only be used if user-agent is <em class="emphasis">not</em> specified
+        in the <i class="literal">header</i> context option above.  
+       </td>
+       <td colspan="1" rowspan="1" align="left">
+        <var class="filename">php.ini</var> setting: <i class="literal">user_agent</i>
+       </td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">content</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        Additional data to be sent after the headers.  Typically used
+        with POST or PUT requests.
+       </td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">proxy</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        URI specifying address of proxy server. (e.g. 
+        <i class="literal">tcp://proxy.example.com:5100</i>). HTTPS proxying
+        (through HTTP proxies) only works in PHP 5.1.0 or greater.
+       </td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">request_fulluri</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        When set to <b><tt>TRUE</tt></b>, the entire URI will be used when
+        constructing the request.  (i.e. 
+        <i class="literal">GET http://www.example.com/path/to/file.html HTTP/1.0</i>).
+        While this is a non-standard request format, some
+        proxy servers require it.
+       </td>
+       <td colspan="1" rowspan="1" align="left"><b><tt>FALSE</tt></b></td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">max_redirects</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        The max number of redirects to follow. Value <i class="literal">1</i> or
+        less means that no redirects are followed.
+        Added in PHP 5.1.0.
+       </td>
+       <td colspan="1" rowspan="1" align="left">20</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">protocol_version</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        HTTP protocol version. Added in PHP 5.1.0.
+       </td>
+       <td colspan="1" rowspan="1" align="left">1.0</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">timeout</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        Read timeout in seconds, specified by a <a href="language.types.float.html" class="type float">float</a> (e.g.
+        <i class="literal">10.5</i>). Added in PHP 5.2.1.
+       </td>
+       <td colspan="1" rowspan="1" align="left"><a href="ref.filesystem.html#ini.default-socket-timeout" class="link">default_socket_timeout</a></td>
+      </tr>
+
+     </tbody>
+    </colgroup>
+
+   </table>
+
+  </p>
+
+  <blockquote><p><b class="note">Note</b>: 
+   <b>Underlying socket stream context options</b>
+   <span class="simpara">
+    Additional context options may be supported by the 
+    <a href="transports.html#transports.inet" class="link">underlying transport</a>
+    For <i class="literal">http://</i> streams, refer to context
+    options for the <i class="literal">tcp://</i> transport.  For
+    <i class="literal">https://</i> streams, refer to context options
+    for the <i class="literal">ssl://</i> transport.
+   </span>
+  </p></blockquote>
+
+  <p class="para">
+   Custom headers may be sent with an HTTP request prior to
+   version 5 by taking advantage of a side-effect in the
+   handling of the <i class="literal">user_agent</i> INI setting.
+   Set <i class="literal">user_agent</i> to any valid string
+   (such as the default <i class="literal">PHP/version</i> setting)
+   followed by a carriage-return/line-feed pair and any
+   additional headers.
+   This method works in PHP 4 and all later versions.
+  </p>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#2 Sending custom headers with an HTTP request</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />ini_set</span><span style="color: #007700">(</span><span style="color: #DD0000">'user_agent'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"PHP\r\nX-MyCustomHeader:&nbsp;Foo"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$fp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #DD0000">'http://www.example.com/index.php'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'r'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>Results in the following request being sent:</p></div>
+    <div class="example-contents"><pre>
+<div class="cdata"><pre>
+GET /index.php HTTP/1.0
+Host: www.example.com
+User-Agent: PHP
+X-MyCustomHeader: Foo
+</pre></div>
+    </pre></div>
+   </div>
+  </p>
+ </div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="wrappers.socket.html">Socket</a></div>
+ <div class="next" style="float: right;"><a href="wrappers.ftp.html">FTP and FTPS</a></div>
+ <div class="up"><a href="wrappers.html">List of Supported Protocols/Wrappers</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

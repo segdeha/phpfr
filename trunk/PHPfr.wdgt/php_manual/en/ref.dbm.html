@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>DBM Functions [deprecated]</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.dbase-replace-record.html">dbase_replace_record</a></div>
+ <div class="next" style="float: right;"><a href="function.dblist.html">dblist</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">DBM Functions [deprecated]</h1>
+  
+
+  <div class="partintro">
+   <div id="dbm.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+     These functions allow you to store records stored in a dbm-style
+     database. This type of database (supported by the Berkeley DB,
+     <a href="ftp://ftp.gnu.org/pub/gnu/gdbm/" class="link external">&raquo; GDBM</a>, and some system libraries,
+     as well as a built-in flatfile library) stores key/value pairs
+     (as opposed to the full-blown records supported by relational
+     databases).
+    </p>
+    <blockquote><p><b class="note">Note</b>: 
+     
+      DBM support is deprecated and you are encouraged to use the
+      <a href="ref.dba.html" class="link">Database (dbm-style) abstraction layer functions</a>
+      instead.
+     <br />
+    </p></blockquote>
+    <blockquote><p><b class="note">Note</b>: 
+     
+      This extension has been removed from PHP and is no longer available as
+      of PHP 5.0.0. 
+     <br />
+    </p></blockquote>
+   </div>
+   
+   <div id="dbm.required" class="section">
+    <h2 class="title">Requirements</h2>
+    <p class="para">
+     To use this functions you have to compile PHP with support for an
+     underlying database. See the 
+     <a href="ref.dba.html#dba.requirements" class="link">list</a> of supported Databases.
+    </p>
+   </div>
+   
+   
+
+<div id="dbm.installation" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="para">
+  In order to use these functions, you must compile PHP with dbm support
+  by using the <span class="option">--with-db</span> option. In
+  addition you must ensure <a href="ref.dba.html#dba.installation" class="link">support</a>
+  for an underlying database or you can use some system libraries.
+ </p>
+</div>
+
+
+
+   
+   <div id="dbm.runtime" class="section">
+    <h2 class="title">Runtime Configuration</h2>
+    <p class="para">This extension has no configuration directives defined in <var class="filename">php.ini</var>.</p>
+   </div>
+
+   <div id="dbm.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+    <p class="para">
+     The function <a href="function.dbmopen.html" class="function">dbmopen()</a> returns an database identifier
+     which is used by the other dbm-functions.
+    </p>
+   </div>
+   
+   <div id="dbm.constants" class="section">
+    <h2 class="title">Predefined Constants</h2>
+    <p class="para">This extension has no constants defined.</p>
+   </div>
+   
+   <div id="dbm.examples" class="section">
+   <h2 class="title">Examples</h2>
+   <p class="para">
+    <div class="example">
+     <p><b>Example#1 DBM example</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$dbm&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dbmopen</span><span style="color: #007700">(</span><span style="color: #DD0000">"lastseen"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"w"</span><span style="color: #007700">);<br />if&nbsp;(</span><span style="color: #0000BB">dbmexists</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbm</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$userid</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$last_seen&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">dbmfetch</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbm</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$userid</span><span style="color: #007700">);<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">dbminsert</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbm</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$userid</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">time</span><span style="color: #007700">());<br />}<br /></span><span style="color: #0000BB">do_stuff</span><span style="color: #007700">();<br /></span><span style="color: #0000BB">dbmreplace</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbm</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$userid</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">time</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">dbmclose</span><span style="color: #007700">(</span><span style="color: #0000BB">$dbm</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.dblist.html">dblist</a> — Describes the DBM-compatible library being used</li><li><a href="function.dbmclose.html">dbmclose</a> — Closes a dbm database</li><li><a href="function.dbmdelete.html">dbmdelete</a> — Deletes the value for a key from a DBM database</li><li><a href="function.dbmexists.html">dbmexists</a> — Tells if a value exists for a key in a DBM database</li><li><a href="function.dbmfetch.html">dbmfetch</a> — Fetches a value for a key from a DBM database</li><li><a href="function.dbmfirstkey.html">dbmfirstkey</a> — Retrieves the first key from a DBM database</li><li><a href="function.dbminsert.html">dbminsert</a> — Inserts a value for a key in a DBM database</li><li><a href="function.dbmnextkey.html">dbmnextkey</a> — Description</li><li><a href="function.dbmopen.html">dbmopen</a> — Opens a DBM database</li><li><a href="function.dbmreplace.html">dbmreplace</a> — Replaces the value for a key in a DBM database</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.dbase-replace-record.html">dbase_replace_record</a></div>
+ <div class="next" style="float: right;"><a href="function.dblist.html">dblist</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

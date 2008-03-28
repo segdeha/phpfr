@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Performs debugging operations</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.mysqli-data-seek.html">mysqli_data_seek</a></div>
+ <div class="next" style="float: right;"><a href="function.mysqli-disable-reads-from-master.html">mysqli_disable_reads_from_master</a></div>
+ <div class="up"><a href="ref.mysqli.html">mysqli</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.mysqli-debug" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mysqli_debug</h1>
+  <h1 class="refname">mysqli-&gt;debug()</h1>
+  <p class="verinfo">(PHP 5)</p><p class="refpurpose">mysqli->debug() — Performs debugging operations</p>
+
+ </div>
+
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <p class="para">Procedural style:</p>
+  <div class="methodsynopsis">
+   <span class="type">bool</span> <span class="methodname"><b><b>mysqli_debug</b></b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$message</tt></span>
+   )</div>
+
+  <p class="para">Object oriented style (method):</p>
+  <div class="classsynopsis">
+   <div class="ooclass"><b class="classname">mysqli</b></div>
+   <div class="methodsynopsis">
+    <span class="type">bool</span> <span class="methodname"><b><b>debug</b></b></span>
+     ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$message</tt></span>
+    )</div>
+
+  </div>
+  <p class="para">
+   Performs debugging operations using the Fred Fish debugging library.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">message</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       A string representing the debugging operation to perform
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns <b><tt>TRUE</tt></b>.
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes">
+  <h3 class="title">Notes</h3>
+  <blockquote><p><b class="note">Note</b>: 
+   
+    To use the <b>mysqli_debug()</b> function you must complile
+    the MySQL client library to support debugging.
+   <br />
+  </p></blockquote>
+ </div>
+
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#1 Generating a Trace File</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">/*&nbsp;Create&nbsp;a&nbsp;trace&nbsp;file&nbsp;in&nbsp;'/tmp/client.trace'&nbsp;on&nbsp;the&nbsp;local&nbsp;(client)&nbsp;machine:&nbsp;*/<br /></span><span style="color: #0000BB">mysqli_debug</span><span style="color: #007700">(</span><span style="color: #DD0000">"d:t:0,/tmp/client.trace"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.mysqli-dump-debug-info.html" class="function">mysqli_dump_debug_info()</a></li>
+    <li class="member"><a href="function.mysqli-report.html" class="function">mysqli_report()</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.mysqli-data-seek.html">mysqli_data_seek</a></div>
+ <div class="next" style="float: right;"><a href="function.mysqli-disable-reads-from-master.html">mysqli_disable_reads_from_master</a></div>
+ <div class="up"><a href="ref.mysqli.html">mysqli</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

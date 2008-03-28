@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Expression types</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="migration.while.html">while syntax</a></div>
+ <div class="next" style="float: right;"><a href="migration.errors.html">Error messages have changed</a></div>
+ <div class="up"><a href="migration.html">Migrating from PHP/FI 2 to PHP 3</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="migration.expr" class="section">
+  <h2 class="title">Expression types</h2>
+  <p class="simpara">
+   PHP/FI 2.0 used the left side of expressions to determine what type
+   the result should be.  PHP 3.0 takes both sides into account when
+   determining result types, and this may cause 2.0 scripts to behave
+   unexpectedly in 3.0.
+  </p>
+  <p class="para">
+   Consider this example:
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+$a[0]=5;<br />$a[1]=7;<br /><br />$key&nbsp;=&nbsp;key($a);<br />while&nbsp;(""&nbsp;!=&nbsp;$key)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;"$keyn";<br />&nbsp;&nbsp;&nbsp;&nbsp;next($a);<br />}</span>
+</code></div>
+    </div>
+
+   </div>
+
+   In PHP/FI 2.0, this would display both of $a&#039;s indices.  In PHP
+   3.0, it wouldn&#039;t display anything.  The reason is that in PHP 2.0,
+   because the left argument&#039;s type was string, a string comparison
+   was made, and indeed <i class="literal">&quot;&quot;</i> does not equal
+   <i class="literal">&quot;0&quot;</i>, and the loop went through.  In PHP 3.0,
+   when a string is compared with an integer, an integer comparison is
+   made (the string is converted to an integer).  This results in
+   comparing <i class="literal">atoi(&quot;&quot;)</i> which is
+   <i class="literal">0</i>, and <i class="literal">variablelist</i> which is
+   also <i class="literal">0</i>, and since <i class="literal">0==0</i>, the
+   loop doesn&#039;t go through even once.
+  </p>
+  <p class="para">
+   The fix for this is simple.  Replace the while statement with:
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+while&nbsp;((string)$key&nbsp;!=&nbsp;"")&nbsp;{</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="migration.while.html">while syntax</a></div>
+ <div class="next" style="float: right;"><a href="migration.errors.html">Error messages have changed</a></div>
+ <div class="up"><a href="migration.html">Migrating from PHP/FI 2 to PHP 3</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Gets the properties of the given object</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.get-declared-interfaces.html">get_declared_interfaces</a></div>
+ <div class="next" style="float: right;"><a href="function.get-parent-class.html">get_parent_class</a></div>
+ <div class="up"><a href="ref.classobj.html">Classes/Objects</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.get-object-vars" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">get_object_vars</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose">get_object_vars — Gets the properties of the given object</p>
+
+ </div>
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">array</span> <span class="methodname"><b><b>get_object_vars</b></b></span>
+    ( <span class="methodparam"><span class="type">object</span> <tt class="parameter">$object</tt></span>
+   )</div>
+
+  <p class="para">
+   Gets the properties of the given <i><tt class="parameter">object</tt></i>
+.
+  </p>
+ </div>
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">object</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       An object instance.
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns an associative array of defined object properties for the
+   specified <i><tt class="parameter">object</tt></i>
+. If a property have not been
+   assigned a value, it will be returned with a <b><tt>NULL</tt></b> value.
+  </p>
+ </div>
+
+ <div class="refsect1 changelog">
+  <h3 class="title">ChangeLog</h3>
+  <p class="para">
+   <table class="informaltable">
+    <colgroup>
+
+     <thead valign="middle">
+      <tr valign="middle">
+       <th colspan="1">Version</th>
+       <th colspan="1">Description</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle">
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">prior to 4.2.0</td>
+       <td colspan="1" rowspan="1" align="left">
+        If the variables declared in the class of which the
+        <i><tt class="parameter">object</tt></i>
+ is an instance, have not been assigned a
+        value, those will not be returned in the array
+       </td>
+      </tr>
+
+     </tbody>
+    </colgroup>
+
+   </table>
+  </p>
+ </div>
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#1 Use of <b>get_object_vars()</b></b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">Point2D&nbsp;</span><span style="color: #007700">{<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span style="color: #0000BB">$x</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$y</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;</span><span style="color: #0000BB">$label</span><span style="color: #007700">;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">Point2D</span><span style="color: #007700">(</span><span style="color: #0000BB">$x</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$y</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">x&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$x</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">y&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$y</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">setLabel</span><span style="color: #007700">(</span><span style="color: #0000BB">$label</span><span style="color: #007700">)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">label&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$label</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">getPoint</span><span style="color: #007700">()<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;array(</span><span style="color: #DD0000">"x"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">x</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"y"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">y</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"label"&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$this</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">label</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br /></span><span style="color: #FF8000">//&nbsp;"$label"&nbsp;is&nbsp;declared&nbsp;but&nbsp;not&nbsp;defined<br /></span><span style="color: #0000BB">$p1&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Point2D</span><span style="color: #007700">(</span><span style="color: #0000BB">1.233</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3.445</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">get_object_vars</span><span style="color: #007700">(</span><span style="color: #0000BB">$p1</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">$p1</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setLabel</span><span style="color: #007700">(</span><span style="color: #DD0000">"point&nbsp;#1"</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">get_object_vars</span><span style="color: #007700">(</span><span style="color: #0000BB">$p1</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output:</p></div>
+    <div class="example-contents"><pre>
+<div class="cdata"><pre>
+ Array
+ (
+     [x] =&gt; 1.233
+     [y] =&gt; 3.445
+     [label] =&gt;
+ )
+
+ Array
+ (
+     [x] =&gt; 1.233
+     [y] =&gt; 3.445
+     [label] =&gt; point #1
+ )
+</pre></div>
+    </pre></div>
+   </div>
+  </p>
+ </div>
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.get-class-methods.html" class="function">get_class_methods()</a></li>
+    <li class="member"><a href="function.get-class-vars.html" class="function">get_class_vars()</a></li>
+   </ul>
+  </p>
+ </div>
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.get-declared-interfaces.html">get_declared_interfaces</a></div>
+ <div class="next" style="float: right;"><a href="function.get-parent-class.html">get_parent_class</a></div>
+ <div class="up"><a href="ref.classobj.html">Classes/Objects</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

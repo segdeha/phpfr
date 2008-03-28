@@ -1,0 +1,647 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>XMLReader functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.xmlrpc-set-type.html">xmlrpc_set_type</a></div>
+ <div class="next" style="float: right;"><a href="function.xmlreader-close.html">XMLReader::close</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">XMLReader functions</h1>
+  
+
+  <div class="partintro">
+
+   <div id="xmlreader.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+     The XMLReader extension is an XML Pull parser. The reader acts as a 
+     cursor going forward on the document stream and stopping at each node 
+     on the way.
+    </p>
+   </div>
+
+   <div id="xmlreader.encoding" class="section">
+    <h2 class="title">Encoding</h2>
+    <p class="para">
+     It is important to note that internally, libxml uses the UTF-8 encoding
+     and as such, the encoding of the retrieved contents will always be in 
+     UTF-8 encoding.
+    </p>
+   </div>
+
+   
+
+<div id="xmlreader.installation" class="section">
+ <h2 class="title">Installation</h2>
+  <p class="para">
+   The XMLReader extension is available in PECL as of PHP 5.0.0 and is 
+   included and enabled as of PHP 5.1.0 by default. It can be enabled
+   by adding the argument <span class="option">--enable-xmlreader</span>
+   (or <span class="option">--with-xmlreader</span> before 5.1.0)
+   to your configure line. The <a href="ref.libxml.html" class="link">libxml</a>
+   extension is required.
+  </p>
+</div>
+
+
+
+
+   <div id="xmlreader.classes" class="section">
+    <h2 class="title">Predefined Classes</h2>
+    <p class="para">
+    </p>
+
+    <div id="xmlreader.class.xmlreader" class="section">
+     <h2 class="title"><span class="classname">XMLReader</span></h2>
+     <p class="para">
+      </p>
+     <div id="xmlreader.class.xmlreader.methods" class="section">
+      <h2 class="title">Methods</h2>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-close.html" class="xref">XMLReader::close</a> - Close the XMLReader input</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-expand.html" class="xref">XMLReader::expand</a> - Export current node to a DOM node</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-getattribute.html" class="xref">XMLReader::getAttribute</a> - Get value of attribute by name</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-getattributeno.html" class="xref">XMLReader::getAttributeNo</a> - Get value of attribute by position</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-getattributens.html" class="xref">XMLReader::getAttributeNs</a> - Get value of attribute by name and URI</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-getparserproperty.html" class="xref">XMLReader::getParserProperty</a> - Indicates if parser property is set or not</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-isvalid.html" class="xref">XMLReader::isValid</a> - Indicates if document is valid</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-lookupnamespace.html" class="xref">XMLReader::lookupNamespace</a> - Get URI for prefix in scope of node</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-movetoattribute.html" class="xref">XMLReader::moveToAttribute</a> - Positions reader on named attribute</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-movetoattributeno.html" class="xref">XMLReader::moveToAttributeNo</a> - Positions reader on attribute by index</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-movetoattributens.html" class="xref">XMLReader::moveToAttributeNs</a> - Position reader on attribute by name and URI</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-movetoelement.html" class="xref">XMLReader::moveToElement</a> - Move to parent element of current attribute node</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-movetofirstattribute.html" class="xref">XMLReader::moveToFirstAttribute</a> - Move to first attribute of node</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-movetonextattribute.html" class="xref">XMLReader::moveToNextAttribute</a> - Move to next attribute of node</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-next.html" class="xref">XMLReader::next</a> - Move to next element skipping children</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-open.html" class="xref">XMLReader::open</a> - Set URI to be parsed</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-read.html" class="xref">XMLReader::read</a> - Move to next node in stream</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-setparserproperty.html" class="xref">XMLReader::setParserProperty</a> - Set parser property</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-setrelaxngschema.html" class="xref">XMLReader::setRelaxNGSchema</a> - Set URI of RelaxNG schema to validate against</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-setrelaxngschemasource.html" class="xref">XMLReader::setRelaxNGSchemaSource</a> - Set string containing RelaxNG schema to validate against</p>
+       </li>
+       <li class="listitem">
+        <p class="para"><a href="function.xmlreader-xml.html" class="xref">XMLReader::XML</a> - Set string of data to be parsed</p>
+       </li>
+      </ul>
+     </div>
+     <div id="xmlreader.class.xmlreader.properties" class="section">
+      <h2 class="title">Properties</h2>
+      <table border="5">
+       
+       <colgroup>
+
+        <thead valign="middle">
+         <tr valign="middle">
+          <th colspan="1">Name</th>
+          <th colspan="1">Type</th>
+          <th colspan="1">Read-only</th>
+          <th colspan="1">Description</th>
+         </tr>
+
+        </thead>
+
+        <tbody valign="middle">
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">attributeCount</td>
+          <td colspan="1" rowspan="1" align="left">int</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">The number of attributes on the node</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">baseURI</td>
+          <td colspan="1" rowspan="1" align="left">string</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">The base URI of the node</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">depth</td>
+          <td colspan="1" rowspan="1" align="left">int</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">Depth of the node in the tree starting at 0</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">hasAttributes</td>
+          <td colspan="1" rowspan="1" align="left">bool</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">Indicates if node has attributes</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">hasValue</td>
+          <td colspan="1" rowspan="1" align="left">bool</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">Indicates if node has a text value</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">isDefault</td>
+          <td colspan="1" rowspan="1" align="left">bool</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">Indicates if attribute is defaulted from DTD</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">isEmptyElement</td>
+          <td colspan="1" rowspan="1" align="left">bool</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">Indicates if node is an empty element tag</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">localName</td>
+          <td colspan="1" rowspan="1" align="left">string</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">The local name of the node</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">name</td>
+          <td colspan="1" rowspan="1" align="left">string</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">The qualified name of the node</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">namespaceURI</td>
+          <td colspan="1" rowspan="1" align="left">string</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">The URI of the namespace associated with the node</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">nodeType</td>
+          <td colspan="1" rowspan="1" align="left">int</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">The node type for the node</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">prefix</td>
+          <td colspan="1" rowspan="1" align="left">string</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">The prefix of the namespace associated with the node</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">value</td>
+          <td colspan="1" rowspan="1" align="left">string</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">The text value of the node</td>
+         </tr>
+
+         <tr valign="middle">
+          <td colspan="1" rowspan="1" align="left">xmlLang</td>
+          <td colspan="1" rowspan="1" align="left">string</td>
+          <td colspan="1" rowspan="1" align="left">yes</td>
+          <td colspan="1" rowspan="1" align="left">The xml:lang scope which the node resides</td>
+         </tr>
+
+        </tbody>
+       </colgroup>
+
+      </table>
+
+     </div>
+    </div>
+   </div>
+      
+   
+
+<div id="xmlreader.constants" class="section">
+ <h2 class="title">Predefined Constants</h2>
+ <p class="simpara">
+The constants below are defined by this extension, and
+will only be available when the extension has either
+been compiled into PHP or dynamically loaded at runtime.
+</p>
+  <div class="warning"><b class="warning">Warning</b>
+   <p class="para">
+    XMLReader uses class constants since PHP 5.1. Prior releases use global
+    constants in the form <b><tt>XMLREADER_ELEMENT</tt></b>.
+   </p>
+  </div>
+  <table border="5">
+   <caption><b>XMLReader Node Types</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Constant</th>
+      <th colspan="1">Value</th>
+      <th colspan="1">Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::NONE</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">0</td>
+      <td colspan="1" rowspan="1" align="left">No node type</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::ELEMENT</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">1</td>
+      <td colspan="1" rowspan="1" align="left">Start element</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::ATTRIBUTE</tt></b> 
+      (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">2</td>
+      <td colspan="1" rowspan="1" align="left">Attribute node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::TEXT</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">3</td>
+      <td colspan="1" rowspan="1" align="left">Text node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::CDATA</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">4</td>
+      <td colspan="1" rowspan="1" align="left">CDATA node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::ENTITY_REF</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">5</td>
+      <td colspan="1" rowspan="1" align="left">Entity Reference node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::ENTITY</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">6</td>
+      <td colspan="1" rowspan="1" align="left">Entity Declaration node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::PI</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">7</td>
+      <td colspan="1" rowspan="1" align="left">Processing Instruction node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::COMMENT</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">8</td>
+      <td colspan="1" rowspan="1" align="left">Comment node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::DOC</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">9</td>
+      <td colspan="1" rowspan="1" align="left">Document node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::DOC_TYPE</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">10</td>
+      <td colspan="1" rowspan="1" align="left">Document Type node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::DOC_FRAGMENT</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">11</td>
+      <td colspan="1" rowspan="1" align="left">Document Fragment node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::NOTATION</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">12</td>
+      <td colspan="1" rowspan="1" align="left">Notation node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::WHITESPACE</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">13</td>
+      <td colspan="1" rowspan="1" align="left">Whitespace node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::SIGNIFICANT_WHITESPACE</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">14</td>
+      <td colspan="1" rowspan="1" align="left">Significant Whitespace node</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::END_ELEMENT</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">15</td>
+      <td colspan="1" rowspan="1" align="left">End Element</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::END_ENTITY</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">16</td>
+      <td colspan="1" rowspan="1" align="left">End Entity</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::XML_DECLARATION</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">17</td>
+      <td colspan="1" rowspan="1" align="left">XML Declaration node</td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+  <table border="5">
+   <caption><b>XMLReader Parser Options</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Constant</th>
+      <th colspan="1">Value</th>
+      <th colspan="1">Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::LOADDTD</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">1</td>
+      <td colspan="1" rowspan="1" align="left">Load DTD but do not validate</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::DEFAULTATTRS</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">2</td>
+      <td colspan="1" rowspan="1" align="left">Load DTD and default attributes but do not validate</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::VALIDATE</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">3</td>
+      <td colspan="1" rowspan="1" align="left">Load DTD and validate while parsing</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">
+       <b><tt>XMLReader::SUBST_ENTITIES</tt></b>
+       (<a href="language.types.integer.html" class="type integer">integer</a>)
+      </td>
+      <td colspan="1" rowspan="1" align="left">4</td>
+      <td colspan="1" rowspan="1" align="left">Substitute entities and expand references</td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+</div>
+
+
+
+      
+  </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.xmlreader-close.html">XMLReader::close</a> — Close the XMLReader input</li><li><a href="function.xmlreader-expand.html">XMLReader::expand</a> — Returns a copy of the current node as a DOM object</li><li><a href="function.xmlreader-getattribute.html">XMLReader::getAttribute</a> — Get the value of a named attribute</li><li><a href="function.xmlreader-getattributeno.html">XMLReader::getAttributeNo</a> — Get the value of an attribute by index</li><li><a href="function.xmlreader-getattributens.html">XMLReader::getAttributeNs</a> — Get the value of an attribute by localname and URI</li><li><a href="function.xmlreader-getparserproperty.html">XMLReader::getParserProperty</a> — Indicates if specified property has been set</li><li><a href="function.xmlreader-isvalid.html">XMLReader::isValid</a> — Indicates if the parsed document is valid</li><li><a href="function.xmlreader-lookupnamespace.html">XMLReader::lookupNamespace</a> — Lookup namespace for a prefix</li><li><a href="function.xmlreader-movetoattribute.html">XMLReader::moveToAttribute</a> — Move cursor to a named attribute</li><li><a href="function.xmlreader-movetoattributeno.html">XMLReader::moveToAttributeNo</a> — Move cursor to an attribute by index</li><li><a href="function.xmlreader-movetoattributens.html">XMLReader::moveToAttributeNs</a> — Move cursor to a named attribute</li><li><a href="function.xmlreader-movetoelement.html">XMLReader::moveToElement</a> — Position cursor on the parent Element of current Attribute</li><li><a href="function.xmlreader-movetofirstattribute.html">XMLReader::moveToFirstAttribute</a> — Position cursor on the first Attribute</li><li><a href="function.xmlreader-movetonextattribute.html">XMLReader::moveToNextAttribute</a> — Position cursor on the next Attribute</li><li><a href="function.xmlreader-next.html">XMLReader::next</a> — Move cursor to next node skipping all subtrees</li><li><a href="function.xmlreader-open.html">XMLReader::open</a> — Set the URI containing the XML to parse</li><li><a href="function.xmlreader-read.html">XMLReader::read</a> — Move to next node in document</li><li><a href="function.xmlreader-setparserproperty.html">XMLReader::setParserProperty</a> — Set or Unset parser options</li><li><a href="function.xmlreader-setrelaxngschema.html">XMLReader::setRelaxNGSchema</a> — Set the filename or URI for a RelaxNG Schema</li><li><a href="function.xmlreader-setrelaxngschemasource.html">XMLReader::setRelaxNGSchemaSource</a> — Set the data containing a RelaxNG Schema</li><li><a href="function.xmlreader-xml.html">XMLReader::XML</a> — Set the data containing the XML to parse</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.xmlrpc-set-type.html">xmlrpc_set_type</a></div>
+ <div class="next" style="float: right;"><a href="function.xmlreader-close.html">XMLReader::close</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

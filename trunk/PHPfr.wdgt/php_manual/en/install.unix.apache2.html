@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Apache 2.0 on Unix systems</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="install.unix.html">Installation on Unix systems</a></div>
+ <div class="next" style="float: right;"><a href="install.unix.caudium.html">Caudium</a></div>
+ <div class="up"><a href="install.unix.html">Installation on Unix systems</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="install.unix.apache2" class="sect1">
+    <h2 class="title">Apache 2.0 on Unix systems</h2>
+    <p class="para">
+     This section contains notes and hints specific to Apache 2.0 installs
+     of PHP on Unix systems.
+    </p>
+   
+    <div class="warning"><b class="warning">Warning</b><p class="para">We do not recommend using a threaded MPM
+in production with Apache2.  Use the prefork MPM instead, or use Apache1.  For information
+on why, read the related FAQ entry on using
+<a href="faq.installation.html#faq.installation.apache2" class="link">Apache2 with a threaded MPM</a></p></div>
+    
+    <p class="para">
+     You are highly encouraged to take a look at the
+     <a href="http://httpd.apache.org/docs/2.0/" class="link external">&raquo; Apache Documentation</a> to get
+     a basic understanding of the Apache 2.0 Server.
+    </p>
+
+    
+
+    <blockquote><p><b class="note">Note</b>: 
+     <b>PHP and Apache 2.0.x compatibility notes</b>
+     
+      The following versions of PHP are known to work with the most recent
+      version of Apache 2.0.x:
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <span class="simpara">
+         PHP 4.3.0 or later available at
+         <a href="http://www.php.net/downloads.php" class="link external">&raquo; http://www.php.net/downloads.php</a>.
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         the latest stable development version.
+         Get the source code <a href="http://snaps.php.net/php5-latest.tar.gz" class="link external">&raquo; 
+         http://snaps.php.net/php5-latest.tar.gz</a> or download binaries
+         for Windows <a href="http://snaps.php.net/win32/php5-win32-latest.zip" class="link external">&raquo; 
+         http://snaps.php.net/win32/php5-win32-latest.zip</a>.
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         a prerelease version downloadable from
+         <a href="http://qa.php.net/" class="link external">&raquo; http://qa.php.net/</a>.
+        </span>
+       </li>
+       <li class="listitem">
+        <span class="simpara">
+         you have always the option to obtain PHP through
+         <a href="http://www.php.net/anoncvs.php" class="link external">&raquo; anonymous CVS</a>.
+        </span>
+       </li>
+      </ul>
+      These versions of PHP are compatible to Apache 2.0.40 and later.
+     <br />
+     
+      Apache 2.0 <i class="literal">SAPI</i>-support started with PHP 4.2.0.
+      PHP 4.2.3 works with Apache 2.0.39, don&#039;t use any other version of Apache with
+      PHP 4.2.3. However, the recommended setup is to use PHP 4.3.0 or later with
+      the most recent version of Apache2.
+     <br />
+     
+      All mentioned versions of PHP will work still with
+      Apache 1.3.x.
+     <br />
+    </p></blockquote>
+
+
+
+
+    <p class="para">
+     Download the most recent version of <a href="http://www.apache.org/" class="link external">&raquo; 
+     Apache 2.0</a> and a fitting PHP version from the above mentioned places.
+     This quick guide covers only the basics to get started with Apache 2.0
+     and PHP. For more information read the
+     <a href="http://httpd.apache.org/docs/2.0/" class="link external">&raquo; Apache Documentation</a>.
+     The version numbers have been omitted here, to ensure the
+     instructions are not incorrect. You will need to replace the
+     &#039;NN&#039; here with the correct values from your files.
+    </p>
+    <div class="example">
+     <p><b>Example#1 
+      Installation Instructions (Apache 2 Shared Module Version)
+     </b></p>
+     <div class="example-contents"><pre>
+<div class="cdata"><pre>
+1.  gzip -d httpd-2_0_NN.tar.gz
+2.  tar xvf httpd-2_0_NN.tar
+3.  gunzip php-NN.tar.gz
+4.  tar -xvf php-NN.tar
+5.  cd httpd-2_0_NN
+6.  ./configure --enable-so
+7.  make
+8.  make install
+
+    Now you have Apache 2.0.NN available under /usr/local/apache2,
+    configured with loadable module support and the standard MPM prefork.
+    To test the installation use your normal procedure for starting
+    the Apache server, e.g.:
+    /usr/local/apache2/bin/apachectl start
+    and stop the server to go on with the configuration for PHP:
+    /usr/local/apache2/bin/apachectl stop.
+
+9.  cd ../php-NN
+
+10. Now, configure your PHP.  This is where you customize your PHP
+    with various options, like which extensions will be enabled.  Do a
+    ./configure --help for a list of available options.  In our example
+    we&#039;ll do a simple configure with Apache 2 and MySQL support.  Your
+    path to apxs may differ, in fact, the binary may even be named apxs2 on
+    your system. 
+    
+      ./configure --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql
+
+11. make
+12. make install
+
+    If you decide to change your configure options after installation,
+    you only need to repeat the last three steps. You only need to
+    restart apache for the new module to take effect. A recompile of
+    Apache is not needed.
+                
+    Note that unless told otherwise, &#039;make install&#039; will also install PEAR,
+    various PHP tools such as phpize, install the PHP CLI, and more.
+    
+13. Setup your php.ini 
+    
+    cp php.ini-dist /usr/local/lib/php.ini
+          
+    You may edit your .ini file to set PHP options.  If you prefer having
+    php.ini in another location, use --with-config-file-path=/some/path in
+    step 10.
+    
+    If you instead choose php.ini-recommended, be certain to read the list
+    of changes within, as they affect how PHP behaves.
+
+14. Edit your httpd.conf to load the PHP module.  The path on the right hand
+    side of the LoadModule statement must point to the path of the PHP
+    module on your system.  The make install from above may have already
+    added this for you, but be sure to check.
+
+    For PHP 4:
+  
+      LoadModule php4_module modules/libphp4.so
+      
+    For PHP 5:
+    
+      LoadModule php5_module modules/libphp5.so
+ 
+15. Tell Apache to parse certain extensions as PHP.  For example,
+    let&#039;s have Apache parse the .php extension as PHP.  You could
+    have any extension(s) parse as PHP by simply adding more, with
+    each separated by a space.  We&#039;ll add .phtml to demonstrate.
+            
+      AddType application/x-httpd-php .php .phtml
+                  
+    It&#039;s also common to setup the .phps extension to show highlighted PHP
+    source, this can be done with:
+    
+      AddType application/x-httpd-php-source .phps
+ 
+16. Use your normal procedure for starting the Apache server, e.g.:
+   
+      /usr/local/apache2/bin/apachectl start
+   
+</pre></div>
+
+      </pre></div>
+     </div>
+    <p class="para">
+     Following the steps above you will have a running Apache 2.0 with
+     support for PHP as <i class="literal">SAPI</i> module.
+     Of course there are many more configuration options available for both,
+     Apache and PHP. For more information use
+     <strong class="command">./configure --help</strong> in the corresponding source
+     tree. In case you wish to build a multithreaded version of Apache 2.0
+     you must overwrite the standard MPM-Module <var class="filename">prefork</var>
+     either with <var class="filename">worker</var> or <var class="filename">perchild</var>.
+     To do so append to your configure line in step 6 above either the option
+     <span class="option">--with-mpm=worker</span> or
+     <span class="option">--with-mpm=perchild</span>. Take care about
+     the consequences and understand what you are doing. For more information
+     read the Apache documentation about the <a href="http://httpd.apache.org/docs/2.0/mpm.html" class="link external">&raquo; 
+     MPM-Modules</a>.
+    </p>
+    <blockquote><p><b class="note">Note</b>: 
+     
+      If you want to use content negotiation, read the 
+      <a href="faq.installation.html#faq.installation.apache.multiviews" class="link">Apache MultiViews 
+      FAQ</a>.
+     <br />
+    </p></blockquote>
+    <blockquote><p><b class="note">Note</b>: 
+     
+      To build a multithreaded version of Apache your system must support threads.
+      This also implies to build PHP with experimental
+      Zend Thread Safety (ZTS). Therefore not all extensions might be available.
+      The recommended setup is to build Apache with the standard
+      <var class="filename">prefork</var> MPM-Module.
+     <br />
+    </p></blockquote>
+   </div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="install.unix.html">Installation on Unix systems</a></div>
+ <div class="next" style="float: right;"><a href="install.unix.caudium.html">Caudium</a></div>
+ <div class="up"><a href="install.unix.html">Installation on Unix systems</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

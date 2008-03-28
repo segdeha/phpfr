@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Ovrimos SQL Functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.output-reset-rewrite-vars.html">output_reset_rewrite_vars</a></div>
+ <div class="next" style="float: right;"><a href="function.ovrimos-close.html">ovrimos_close</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">Ovrimos SQL Functions</h1>
+  
+
+  <div class="partintro">
+   <div id="ovrimos.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+     Ovrimos SQL Server, is a client/server, transactional RDBMS
+     combined with Web capabilities and fast transactions.
+    </p>
+    <blockquote><p><b class="note">Note</b>: 
+     
+      This extension has been moved to the 
+<a href="http://pecl.php.net/" class="link external">&raquo; PECL</a> repository and is no longer bundled with 
+PHP as of PHP 4.4.5 and PHP 5.1.0.
+     <br />
+    </p></blockquote>
+    <blockquote><p><b class="note">Note</b>: <span class="simpara">This extension is not
+available on Windows platforms.</span></p></blockquote>
+   </div>
+   
+   <div id="ovrimos.requirements" class="section">
+    <h2 class="title">Requirements</h2>
+    <p class="para">
+     You&#039;ll need to install the
+     sqlcli library available in the Ovrimos SQL Server distribution.
+    </p>
+   </div>
+
+   
+
+<div id="ovrimos.installation" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="para">
+  To enable Ovrimos support in PHP just compile PHP with the
+  <span class="option">--with-ovrimos[=DIR]</span>
+  parameter to your configure line. DIR is the Ovrimos&#039; libsqlcli install
+  directory.
+ </p>
+</div>
+
+
+
+
+
+   <div id="ovrimos.configuration" class="section">
+    <h2 class="title">Runtime Configuration</h2>
+    <p class="para">This extension has no configuration directives defined in <var class="filename">php.ini</var>.</p>
+   </div>
+
+   <div id="ovrimos.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+    <p class="para">
+    </p>
+   </div>
+
+   <div id="ovrimos.examples" class="section">
+   <h2 class="title">Examples</h2>
+    <p class="para">
+     <div class="example">
+      <p><b>Example#1 
+       Connect to Ovrimos SQL Server and select from a system table
+      </b></p>
+      <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$conn&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ovrimos_connect</span><span style="color: #007700">(</span><span style="color: #DD0000">"server.domain.com"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"8001"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"admin"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"password"</span><span style="color: #007700">);<br />if&nbsp;(</span><span style="color: #0000BB">$conn&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Connection&nbsp;ok!"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ovrimos_exec</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"select&nbsp;table_id,&nbsp;table_name&nbsp;from&nbsp;sys.tables"</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">$res&nbsp;</span><span style="color: #007700">!=&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Statement&nbsp;ok!"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">ovrimos_result_all</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">ovrimos_free_result</span><span style="color: #007700">(</span><span style="color: #0000BB">$res</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">ovrimos_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn</span><span style="color: #007700">);<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+      </div>
+
+     </div>
+     This will just connect to an Ovrimos SQL server.
+    </p>
+   </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.ovrimos-close.html">ovrimos_close</a> — Closes the connection to ovrimos</li><li><a href="function.ovrimos-commit.html">ovrimos_commit</a> — Commits the transaction</li><li><a href="function.ovrimos-connect.html">ovrimos_connect</a> — Connect to the specified database</li><li><a href="function.ovrimos-cursor.html">ovrimos_cursor</a> — Returns the name of the cursor</li><li><a href="function.ovrimos-exec.html">ovrimos_exec</a> — Executes an SQL statement</li><li><a href="function.ovrimos-execute.html">ovrimos_execute</a> — Executes a prepared SQL statement</li><li><a href="function.ovrimos-fetch-into.html">ovrimos_fetch_into</a> — Fetches a row from the result set</li><li><a href="function.ovrimos-fetch-row.html">ovrimos_fetch_row</a> — Fetches a row from the result set</li><li><a href="function.ovrimos-field-len.html">ovrimos_field_len</a> — Returns the length of the output column</li><li><a href="function.ovrimos-field-name.html">ovrimos_field_name</a> — Returns the output column name</li><li><a href="function.ovrimos-field-num.html">ovrimos_field_num</a> — Returns the (1-based) index of the output column</li><li><a href="function.ovrimos-field-type.html">ovrimos_field_type</a> — Returns the type of the output column</li><li><a href="function.ovrimos-free-result.html">ovrimos_free_result</a> — Frees the specified result_id</li><li><a href="function.ovrimos-longreadlen.html">ovrimos_longreadlen</a> — Specifies how many bytes are to be retrieved from long datatypes</li><li><a href="function.ovrimos-num-fields.html">ovrimos_num_fields</a> — Returns the number of columns</li><li><a href="function.ovrimos-num-rows.html">ovrimos_num_rows</a> — Returns the number of rows affected by update operations</li><li><a href="function.ovrimos-prepare.html">ovrimos_prepare</a> — Prepares an SQL statement</li><li><a href="function.ovrimos-result-all.html">ovrimos_result_all</a> — Prints the whole result set as an HTML table</li><li><a href="function.ovrimos-result.html">ovrimos_result</a> — Retrieves the output column</li><li><a href="function.ovrimos-rollback.html">ovrimos_rollback</a> — Rolls back the transaction</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.output-reset-rewrite-vars.html">output_reset_rewrite_vars</a></div>
+ <div class="next" style="float: right;"><a href="function.ovrimos-close.html">ovrimos_close</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

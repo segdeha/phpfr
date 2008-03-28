@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>List of Supported Socket Transports</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="filters.encryption.html">Encryption Filters</a></div>
+ <div class="next" style="float: right;"><a href="transports.unix.html">Unix Domain: Unix and UDG</a></div>
+ <div class="up"><a href="appendices.html">Appendices</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+ <h1>List of Supported Socket Transports</h1>
+<h2>Table of Contents</h2><ul class="chunklist chunklist_appendix"><li><a href="transports.unix.html">Unix Domain: Unix and UDG</a></li></ul>
+
+ <p class="para">
+  The following is a list of the various URL style socket transports
+  that PHP has built-in for use with the streams based socket
+  functions such as <a href="function.fsockopen.html" class="function">fsockopen()</a>, and
+  <a href="function.stream-socket-client.html" class="function">stream_socket_client()</a>.  These transports do
+  <em class="emphasis">not</em> apply to the 
+  <a href="ref.sockets.html" class="link">Sockets Extension</a>.
+ </p>
+
+ <p class="para">
+  For a list of transports installed in your version of
+  PHP use <a href="function.stream-get-transports.html" class="function">stream_get_transports()</a>.
+ </p>
+
+ <div id="transports.inet" class="section">
+  <h2 class="title">Internet Domain: TCP, UDP, SSL, and TLS</h2>
+  <p class="simpara">
+   PHP 3, PHP 4, PHP 5.
+   <i class="literal">ssl://</i> &amp; <i class="literal">tls://</i> since PHP 4.3.0
+   <i class="literal">sslv2://</i> &amp; <i class="literal">sslv3://</i> since PHP 5.0.2
+  </p>
+
+  <blockquote><p><b class="note">Note</b>: 
+   <span class="simpara">
+    If no transport is specified, <i class="literal">tcp://</i> will be assumed.
+   </span>
+  </p></blockquote>
+
+  <ul class="itemizedlist">
+   <li class="listitem"><span class="simpara"><i class="literal">127.0.0.1</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">fe80::1</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">www.example.com</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">tcp://127.0.0.1</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">tcp://fe80::1</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">tcp://www.example.com</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">udp://www.example.com</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">ssl://www.example.com</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">sslv2://www.example.com</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">sslv3://www.example.com</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">tls://www.example.com</i></span></li>
+  </ul>
+
+  <p class="simpara">
+   Internet Domain sockets expect a port number in addition
+   to a target address.  In the case of <a href="function.fsockopen.html" class="function">fsockopen()</a>
+   this is specified in a second parameter and therefore does
+   not impact the formatting of transport URL.  With
+   <a href="function.stream-socket-client.html" class="function">stream_socket_client()</a> and related functions
+   as with traditional URLs however, the port number is specified
+   as a suffix of the transport URL delimited by a colon.
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem"><span class="simpara"><i class="literal">tcp://127.0.0.1:80</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">tcp://[fe80::1]:80</i></span></li>
+   <li class="listitem"><span class="simpara"><i class="literal">tcp://www.example.com:80</i></span></li>
+  </ul>
+
+  <blockquote><p><b class="note">Note</b>: 
+   <b>IPv6 numeric addresses with port numbers</b>
+   <span class="simpara">
+    In the second example above, while the IPv4 and hostname
+    examples are left untouched apart from the addition of 
+    their colon and portnumber, the IPv6 address is wrapped in
+    square brackets: <i class="literal">[fe80::1]</i>.  This is to
+    distinguish between the colons used in an IPv6 address and
+    the colon used to delimit the portnumber.
+   </span>
+  </p></blockquote>
+
+  <p class="simpara">
+   The <i class="literal">ssl://</i> and <i class="literal">tls://</i> transports 
+   (available only when openssl support is compiled into PHP) are extensions 
+   of the <i class="literal">tcp://</i> transport which include SSL encryption.
+   Since PHP 4.3.0 OpenSSL support must be statically 
+   compiled into PHP, since PHP 5.0.0
+   it may be compiled as a module or statically.
+  </p>
+
+  <p class="simpara">
+   <i class="literal">ssl://</i> will attempt to negotiate an SSL V2,
+   or SSL V3 connection depending on the capabilities and preferences
+   of the remote host.  <i class="literal">sslv2://</i> and 
+   <i class="literal">sslv3://</i> will select the SSL V2 or SSL V3
+   protocol explicitly.
+  </p>
+
+  <p class="para">
+   <table border="5">
+    <caption><b>
+     Context options for <i class="literal">ssl://</i> and <i class="literal">tls://</i> 
+     transports (since PHP 4.3.2)
+    </b></caption>
+    <colgroup>
+
+     <thead valign="middle">
+      <tr valign="middle">
+       <th colspan="1">Name</th>
+       <th colspan="1">Usage</th>
+       <th colspan="1">Default</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle">
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">verify_peer</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        <b><tt>TRUE</tt></b> or <b><tt>FALSE</tt></b>.
+        Require verification of SSL certificate used.
+       </td>
+       <td colspan="1" rowspan="1" align="left"><b><tt>FALSE</tt></b></td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">allow_self_signed</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        <b><tt>TRUE</tt></b> or <b><tt>FALSE</tt></b>.
+        Allow self-signed certificates.
+       </td>
+       <td colspan="1" rowspan="1" align="left"><b><tt>FALSE</tt></b></td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">cafile</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        Location of Certificate Authority file on local filesystem
+        which should be used with the <i class="literal">verify_peer</i>
+        context option to authenticate the identity of the remote peer.
+       </td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">capath</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        If <i class="literal">cafile</i> is not specified or if the certificate
+        is not found there, the directory pointed to by <i class="literal">capath</i> 
+        is searched for a suitable certificate.  <i class="literal">capath</i>
+        must be a correctly hashed certificate directory.
+       </td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">local_cert</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        Path to local certificate file on filesystem.  It must be a PEM
+        encoded file which contains your certificate and private key.
+        It can optionally contain the certificate chain of issuers.
+       </td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">passphrase</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        Passphrase with which your <i class="literal">local_cert</i> file
+        was encoded.
+       </td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left"><i class="literal">CN_match</i></td>
+       <td colspan="1" rowspan="1" align="left">
+        Common Name we are expecting.  PHP will perform limited wildcard
+        matching.  If the Common Name does not match this, the connection
+        attempt will fail.
+       </td>
+       <td class="empty">&nbsp;</td>
+      </tr>
+
+     </tbody>
+    </colgroup>
+
+   </table>
+
+  </p>
+
+  <blockquote><p><b class="note">Note</b>: 
+   <span class="simpara">
+    Because <i class="literal">ssl://</i> is the underlying transport for the
+    <a href="wrappers.http.html" class="link"><i class="literal">https://</i></a> and
+    <a href="wrappers.ftp.html" class="link"><i class="literal">ftps://</i></a> wrappers, 
+    any context options which apply to <i class="literal">ssl://</i> also apply to
+    <i class="literal">https://</i> and <i class="literal">ftps://</i>.
+   </span>
+  </p></blockquote>
+ </div>
+
+ 
+
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="filters.encryption.html">Encryption Filters</a></div>
+ <div class="next" style="float: right;"><a href="transports.unix.html">Unix Domain: Unix and UDG</a></div>
+ <div class="up"><a href="appendices.html">Appendices</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

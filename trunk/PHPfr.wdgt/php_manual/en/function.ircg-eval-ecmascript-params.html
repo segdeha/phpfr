@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Decodes a list of JS-encoded parameters</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ircg-disconnect.html">ircg_disconnect</a></div>
+ <div class="next" style="float: right;"><a href="function.ircg-fetch-error-msg.html">ircg_fetch_error_msg</a></div>
+ <div class="up"><a href="ref.ircg.html">IRC Gateway</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.ircg-eval-ecmascript-params" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ircg_eval_ecmascript_params</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.3.0, PHP 5 &lt;= 5.0.5)</p><p class="refpurpose">ircg_eval_ecmascript_params — Decodes a list of JS-encoded parameters</p>
+
+ </div>
+ 
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">array</span> <span class="methodname"><b><b>ircg_eval_ecmascript_params</b></b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$params</tt></span>
+   )</div>
+
+
+  <div class="warning"><b class="warning">Warning</b><p class="simpara">This function is
+currently not documented; only the argument list is
+available.</p></div>
+
+  <div class="example-contents"><pre>
+   From the ircg_eval_ecmascript_params source file:
+   /*
+    * State 0: Looking for &#039; or digit
+    * State 1: Assembling parameter inside &#039;..&#039;
+    * State 2: After escape sign: Copies single char verbatim, go to 1
+    * State 3: Assembling numeric para, no quotation
+    * State 4: Looking for &quot;,&quot;, skipping whitespace
+    */
+  </pre></div>
+ </div>
+
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.ircg-lookup-format-messages.html" class="function">ircg_lookup_format_messages()</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ircg-disconnect.html">ircg_disconnect</a></div>
+ <div class="next" style="float: right;"><a href="function.ircg-fetch-error-msg.html">ircg_fetch_error_msg</a></div>
+ <div class="up"><a href="ref.ircg.html">IRC Gateway</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

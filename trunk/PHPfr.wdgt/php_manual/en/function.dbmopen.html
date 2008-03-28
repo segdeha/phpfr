@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Opens a DBM database</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.dbmnextkey.html">dbmnextkey</a></div>
+ <div class="next" style="float: right;"><a href="function.dbmreplace.html">dbmreplace</a></div>
+ <div class="up"><a href="ref.dbm.html">DBM</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.dbmopen" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">dbmopen</h1>
+  <p class="verinfo">(PHP 4)</p><p class="refpurpose">dbmopen — Opens a DBM database</p>
+
+ </div>
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">resource</span> <span class="methodname"><b><b>dbmopen</b></b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$filename</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$flags</tt></span>
+   )</div>
+
+  <p class="para">
+   Opens the specified DBM database in the given mode.
+  </p>
+ </div>
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">filename</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       The full-path filename of the DBM file to be opened
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">flags</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       The file open mode which is one of <i class="literal">r</i>,
+       <i class="literal">n</i>, <i class="literal">c</i> or <i class="literal">w</i>,
+       for read-only, new (implies read-write, and most likely will truncate
+       an already-existing database of the same name), create (implies 
+       read-write, and will not truncate an already-existing database of the
+       same name) and read-write respectively.
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns an identifier to be passed to the other DBM functions on
+   success, or <b><tt>FALSE</tt></b> on failure.
+  </p>
+ </div>
+
+ <div class="refsect1 notes">
+  <h3 class="title">Notes</h3>
+  <blockquote><p><b class="note">Note</b>: 
+   
+    If NDBM support is used, NDBM will actually create 
+    <var class="filename">filename.dir</var> and <var class="filename">filename.pag</var>
+    files. GDBM only uses one file, as does the internal flat-file support,
+    and Berkeley DB creates a <var class="filename">filename.db</var> file.
+   <br />
+   
+    Note that PHP does its own file locking in addition to any file locking
+    that may be done by the DBM library itself. PHP does not delete the
+    <var class="filename">.lck</var> files it creates. It uses these files simply as
+    fixed inodes on which to do the file locking. For more information on DBM
+    files, see your Unix man pages, or obtain
+    <a href="ftp://ftp.gnu.org/pub/gnu/gdbm/" class="link external">&raquo; GNU&#039;s GDBM</a>.
+   <br />
+  </p></blockquote>
+  <blockquote><p><b class="note">Note</b>: <span class="simpara">When <a href="features.safe-mode.html" class="link">safe mode</a> is enabled, PHP checks whether 
+the files or directories you are about to operate on have the same UID (owner) as the 
+script that is being executed.</span></p></blockquote>
+ </div>
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.dbmclose.html" class="function">dbmclose()</a></li>
+   </ul>
+  </p>
+ </div>
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.dbmnextkey.html">dbmnextkey</a></div>
+ <div class="next" style="float: right;"><a href="function.dbmreplace.html">dbmreplace</a></div>
+ <div class="up"><a href="ref.dbm.html">DBM</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

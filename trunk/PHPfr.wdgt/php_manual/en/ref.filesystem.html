@@ -1,0 +1,1034 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Filesystem Functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.filepro.html">filepro</a></div>
+ <div class="next" style="float: right;"><a href="function.basename.html">basename</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">Filesystem Functions</h1>
+  
+
+  <div class="partintro">
+   <div id="filesystem.intro" class="section">
+   <h2 class="title">Introduction</h2>
+    <p class="para">
+    </p>
+   </div>
+
+   <div id="filesystem.requirements" class="section">
+    <h2 class="title">Requirements</h2>
+    <p class="para">
+     No external libraries are needed to build this extension, but if you want
+     PHP to support LFS (large files) on Linux, then you need to have a recent
+     glibc and you need compile PHP with the following compiler flags:
+     <i class="literal">-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64</i>.
+    </p>
+   </div>
+   
+   <div id="filesystem.installation" class="section">
+    <h2 class="title">Installation</h2>
+    <p class="para">There is no installation needed to use these
+functions; they are part of the PHP core.</p>
+   </div>
+
+   
+
+<div id="filesystem.configuration" class="section">
+ <h2 class="title">Runtime Configuration</h2>
+ <p class="simpara">
+The behaviour of these functions is affected by settings in <var class="filename">php.ini</var>.
+</p>
+ <p class="para">
+  <table border="5">
+   <caption><b>Filesystem and Streams Configuration Options</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Name</th>
+      <th colspan="1">Default</th>
+      <th colspan="1">Changeable</th>
+      <th colspan="1">Changelog</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">allow_url_fopen</td>
+      <td colspan="1" rowspan="1" align="left">&quot;1&quot;</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL in PHP &lt;= 4.3.4. PHP_INI_SYSTEM in PHP &lt; 6. Available since PHP 4.0.4.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">allow_url_include</td>
+      <td colspan="1" rowspan="1" align="left">&quot;0&quot;</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_SYSTEM in PHP 5. Available since PHP 5.2.0.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">user_agent</td>
+      <td colspan="1" rowspan="1" align="left">NULL</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+      <td colspan="1" rowspan="1" align="left">Available since PHP 4.3.0.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">default_socket_timeout</td>
+      <td colspan="1" rowspan="1" align="left">&quot;60&quot;</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+      <td colspan="1" rowspan="1" align="left">Available since PHP 4.3.0.</td>
+    </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">from</td>
+      <td colspan="1" rowspan="1" align="left">&quot;&quot;</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+      <td class="empty">&nbsp;</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">auto_detect_line_endings</td>
+      <td colspan="1" rowspan="1" align="left">&quot;0&quot;</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+      <td colspan="1" rowspan="1" align="left">Available since PHP 4.3.0.</td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+ </p>
+ 
+ <p class="para">Here&#039;s a short explanation of
+the configuration directives.</p>
+ 
+ <p class="para">
+  <dl>
+
+   <dt id="ini.allow-url-fopen">
+    <span class="term">
+     <i><tt class="parameter">allow_url_fopen</tt></i>
+
+     <a href="language.types.boolean.html" class="type boolean">boolean</a>
+    </span>
+    <dd>
+
+     <p class="para">
+      This option enables the URL-aware fopen wrappers that enable 
+      accessing URL object like files. Default wrappers are provided for 
+      the access of <a href="features.remote-files.html" class="link">remote files</a>
+      using the ftp or http protocol, some extensions like
+      <a href="ref.zlib.html" class="link">zlib</a> may register additional
+      wrappers. 
+     </p>
+     <blockquote><p><b class="note">Note</b>: 
+      
+       This setting can only be set in php.ini due to security reasons.
+      <br />
+     </p></blockquote>
+     <blockquote><p><b class="note">Note</b>: 
+      
+       This option was introduced immediately after the release of version 
+       4.0.3. For versions up to and including 4.0.3 you can only disable this 
+       feature at compile time by using the configuration switch 
+       <a href="configure.html#configure.disable-url-fopen-wrapper" class="link"><i><tt class="parameter">
+       --disable-url-fopen-wrapper</tt></i>
+</a>.
+      <br />
+     </p></blockquote>
+     <div class="warning"><b class="warning">Warning</b>
+      <p class="para"> 
+       On Windows versions prior to PHP 4.3.0, the following functions do not
+       support remote file accessing: <a href="function.include.html" class="function">include()</a>,
+       <a href="function.include-once.html" class="function">include_once()</a>, <a href="function.require.html" class="function">require()</a>,
+       <a href="function.require-once.html" class="function">require_once()</a> and the imagecreatefromXXX
+       functions in the <a href="ref.image.html" class="xref">Image</a> extension.
+      </p>
+     </div>
+    </dd>
+
+   </dt>
+
+
+   <dt id="ini.allow-url-include">
+    <span class="term">
+     <i><tt class="parameter">allow_url_include</tt></i>
+
+     <a href="language.types.boolean.html" class="type boolean">boolean</a>
+    </span>
+    <dd>
+
+     <p class="para">
+      This option allows the use of URL-aware fopen wrappers with the following 
+      functions: <a href="function.include.html" class="function">include()</a>, <a href="function.include-once.html" class="function">include_once()</a>, 
+      <a href="function.require.html" class="function">require()</a>, <a href="function.require-once.html" class="function">require_once()</a>.
+     </p>
+     <blockquote><p><b class="note">Note</b>: 
+      
+       This setting requires allow_url_fopen to be on. 
+      <br />
+     </p></blockquote>
+    </dd>
+
+   </dt>
+
+
+   <dt id="ini.user-agent">
+    <span class="term">
+     <i><tt class="parameter">user_agent</tt></i>
+
+     <a href="language.types.string.html" class="type string">string</a>
+    </span>
+    <dd>
+
+     <p class="para">
+      Define the user agent for PHP to send.
+     </p>
+    </dd>
+
+   </dt>
+
+
+   <dt id="ini.default-socket-timeout">
+    <span class="term">
+     <i><tt class="parameter">default_socket_timeout</tt></i>
+
+     <a href="language.types.integer.html" class="type integer">integer</a>
+    </span>
+    <dd>
+
+     <p class="para">
+      Default timeout (in seconds) for socket based streams.
+     </p>
+     <blockquote><p><b class="note">Note</b>: 
+      <span class="simpara">
+       This configuration option was introduced in PHP 4.3.0
+      </span>
+     </p></blockquote>
+    </dd>
+
+   </dt>
+
+
+   <dt id="ini.from">
+    <span class="term">
+     <i><tt class="parameter">from</tt></i>
+
+     <a href="language.types.string.html" class="type string">string</a>
+    </span>
+    <dd>
+
+     <p class="para">
+      Define the anonymous ftp password (your email address).
+     </p>
+    </dd>
+
+   </dt>
+
+
+   <dt id="ini.auto-detect-line-endings">
+    <span class="term">
+     <i><tt class="parameter">auto_detect_line_endings</tt></i>
+
+     <a href="language.types.boolean.html" class="type boolean">boolean</a>
+    </span>
+    <dd>
+
+     <p class="para">
+      When turned on, PHP will examine the data read by
+      <a href="function.fgets.html" class="function">fgets()</a> and <a href="function.file.html" class="function">file()</a> to see if it
+      is using Unix, MS-Dos or Macintosh line-ending conventions.
+     </p>
+     <p class="para">This enables PHP to interoperate with Macintosh systems,
+      but defaults to Off, as there is a very small performance penalty
+      when detecting the EOL conventions for the first line, and also
+      because people using carriage-returns as item separators under
+      Unix systems would experience non-backwards-compatible behaviour.
+     </p>
+     <blockquote><p><b class="note">Note</b>: 
+      <span class="simpara">
+       This configuration option was introduced in PHP 4.3.0
+      </span>
+     </p></blockquote>
+    </dd>
+
+   </dt>
+
+  </dl>
+
+ </p>
+</div>
+
+
+
+
+   <div id="filesystem.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+     <p class="para">
+     </p>
+   </div>
+
+   
+
+<div id="filesystem.constants" class="section">
+ <h2 class="title">Predefined Constants</h2>
+ <p class="simpara">
+The constants below are defined by this extension, and
+will only be available when the extension has either
+been compiled into PHP or dynamically loaded at runtime.
+</p>
+ <dl>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>GLOB_BRACE</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>GLOB_ONLYDIR</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>GLOB_MARK</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>GLOB_NOSORT</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>GLOB_NOCHECK</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>GLOB_NOESCAPE</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>PATHINFO_DIRNAME</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>PATHINFO_BASENAME</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>PATHINFO_EXTENSION</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>PATHINFO_FILENAME</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+    Since PHP 5.2.0.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FILE_USE_INCLUDE_PATH</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Search for <i><tt class="parameter">filename</tt></i>
+ in
+     <a href="ini.core.html#ini.include-path" class="link">include_path</a> (since PHP 5).
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FILE_APPEND</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Append content to existing file.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FILE_IGNORE_NEW_LINES</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Strip EOL characters (since PHP 5).
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FILE_SKIP_EMPTY_LINES</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Skip empty lines (since PHP 5).
+    </span>
+   </dd>
+
+  </dt>
+
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FILE_BINARY</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Binary mode (since PHP 6).
+    </span>
+   </dd>
+
+  </dt>
+
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FILE_TEXT</tt></b>
+     (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Text mode (since PHP 6).
+    </span>
+   </dd>
+
+  </dt>
+
+ </dl>
+
+</div>
+
+
+
+
+   <div id="filesystem.seealso" class="section">
+   <h2 class="title">See Also</h2>
+    <p class="simpara">
+     For related functions, see also the <a href="ref.dir.html" class="link">Directory</a>
+     and <a href="ref.exec.html" class="link">Program Execution</a> sections.
+    </p>
+    <p class="simpara">
+     For a list and explanation of the various URL wrappers that can be used
+     as remote files, see also <a href="wrappers.html" class="xref">List of Supported Protocols/Wrappers</a>.
+    </p>
+   </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.basename.html">basename</a> — Returns filename component of path</li><li><a href="function.chgrp.html">chgrp</a> — Changes file group</li><li><a href="function.chmod.html">chmod</a> — Changes file mode</li><li><a href="function.chown.html">chown</a> — Changes file owner</li><li><a href="function.clearstatcache.html">clearstatcache</a> — Clears file status cache</li><li><a href="function.copy.html">copy</a> — Copies file</li><li><a href="function.delete.html">delete</a> — See unlink or unset</li><li><a href="function.dirname.html">dirname</a> — Returns directory name component of path</li><li><a href="function.disk-free-space.html">disk_free_space</a> — Returns available space in directory</li><li><a href="function.disk-total-space.html">disk_total_space</a> — Returns the total size of a directory</li><li><a href="function.diskfreespace.html">diskfreespace</a> — Alias of disk_free_space</li><li><a href="function.fclose.html">fclose</a> — Closes an open file pointer</li><li><a href="function.feof.html">feof</a> — Tests for end-of-file on a file pointer</li><li><a href="function.fflush.html">fflush</a> — Flushes the output to a file</li><li><a href="function.fgetc.html">fgetc</a> — Gets character from file pointer</li><li><a href="function.fgetcsv.html">fgetcsv</a> — Gets line from file pointer and parse for CSV fields</li><li><a href="function.fgets.html">fgets</a> — Gets line from file pointer</li><li><a href="function.fgetss.html">fgetss</a> — Gets line from file pointer and strip HTML tags</li><li><a href="function.file-exists.html">file_exists</a> — Checks whether a file or directory exists</li><li><a href="function.file-get-contents.html">file_get_contents</a> — Reads entire file into a string</li><li><a href="function.file-put-contents.html">file_put_contents</a> — Write a string to a file</li><li><a href="function.file.html">file</a> — Reads entire file into an array</li><li><a href="function.fileatime.html">fileatime</a> — Gets last access time of file</li><li><a href="function.filectime.html">filectime</a> — Gets inode change time of file</li><li><a href="function.filegroup.html">filegroup</a> — Gets file group</li><li><a href="function.fileinode.html">fileinode</a> — Gets file inode</li><li><a href="function.filemtime.html">filemtime</a> — Gets file modification time</li><li><a href="function.fileowner.html">fileowner</a> — Gets file owner</li><li><a href="function.fileperms.html">fileperms</a> — Gets file permissions</li><li><a href="function.filesize.html">filesize</a> — Gets file size</li><li><a href="function.filetype.html">filetype</a> — Gets file type</li><li><a href="function.flock.html">flock</a> — Portable advisory file locking</li><li><a href="function.fnmatch.html">fnmatch</a> — Match filename against a pattern</li><li><a href="function.fopen.html">fopen</a> — Opens file or URL</li><li><a href="function.fpassthru.html">fpassthru</a> — Output all remaining data on a file pointer</li><li><a href="function.fputcsv.html">fputcsv</a> — Format line as CSV and write to file pointer</li><li><a href="function.fputs.html">fputs</a> — Alias of fwrite</li><li><a href="function.fread.html">fread</a> — Binary-safe file read</li><li><a href="function.fscanf.html">fscanf</a> — Parses input from a file according to a format</li><li><a href="function.fseek.html">fseek</a> — Seeks on a file pointer</li><li><a href="function.fstat.html">fstat</a> — Gets information about a file using an open file pointer</li><li><a href="function.ftell.html">ftell</a> — Tells file pointer read/write position</li><li><a href="function.ftruncate.html">ftruncate</a> — Truncates a file to a given length</li><li><a href="function.fwrite.html">fwrite</a> — Binary-safe file write</li><li><a href="function.glob.html">glob</a> — Find pathnames matching a pattern</li><li><a href="function.is-dir.html">is_dir</a> — Tells whether the filename is a directory</li><li><a href="function.is-executable.html">is_executable</a> — Tells whether the filename is executable</li><li><a href="function.is-file.html">is_file</a> — Tells whether the filename is a regular file</li><li><a href="function.is-link.html">is_link</a> — Tells whether the filename is a symbolic link</li><li><a href="function.is-readable.html">is_readable</a> — Tells whether the filename is readable</li><li><a href="function.is-uploaded-file.html">is_uploaded_file</a> — Tells whether the file was uploaded via HTTP POST</li><li><a href="function.is-writable.html">is_writable</a> — Tells whether the filename is writable</li><li><a href="function.is-writeable.html">is_writeable</a> — Alias of is_writable</li><li><a href="function.lchgrp.html">lchgrp</a> — Changes group ownership of symlink</li><li><a href="function.lchown.html">lchown</a> — Changes user ownership of symlink</li><li><a href="function.link.html">link</a> — Create a hard link</li><li><a href="function.linkinfo.html">linkinfo</a> — Gets information about a link</li><li><a href="function.lstat.html">lstat</a> — Gives information about a file or symbolic link</li><li><a href="function.mkdir.html">mkdir</a> — Makes directory</li><li><a href="function.move-uploaded-file.html">move_uploaded_file</a> — Moves an uploaded file to a new location</li><li><a href="function.parse-ini-file.html">parse_ini_file</a> — Parse a configuration file</li><li><a href="function.pathinfo.html">pathinfo</a> — Returns information about a file path</li><li><a href="function.pclose.html">pclose</a> — Closes process file pointer</li><li><a href="function.popen.html">popen</a> — Opens process file pointer</li><li><a href="function.readfile.html">readfile</a> — Outputs a file</li><li><a href="function.readlink.html">readlink</a> — Returns the target of a symbolic link</li><li><a href="function.realpath.html">realpath</a> — Returns canonicalized absolute pathname</li><li><a href="function.rename.html">rename</a> — Renames a file or directory</li><li><a href="function.rewind.html">rewind</a> — Rewind the position of a file pointer</li><li><a href="function.rmdir.html">rmdir</a> — Removes directory</li><li><a href="function.set-file-buffer.html">set_file_buffer</a> — Alias of stream_set_write_buffer</li><li><a href="function.stat.html">stat</a> — Gives information about a file</li><li><a href="function.symlink.html">symlink</a> — Creates a symbolic link</li><li><a href="function.tempnam.html">tempnam</a> — Create file with unique file name</li><li><a href="function.tmpfile.html">tmpfile</a> — Creates a temporary file</li><li><a href="function.touch.html">touch</a> — Sets access and modification time of file</li><li><a href="function.umask.html">umask</a> — Changes the current umask</li><li><a href="function.unlink.html">unlink</a> — Deletes a file</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.filepro.html">filepro</a></div>
+ <div class="next" style="float: right;"><a href="function.basename.html">basename</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

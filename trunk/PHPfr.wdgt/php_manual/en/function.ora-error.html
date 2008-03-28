@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Gets an Oracle error message</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ora-do.html">ora_do</a></div>
+ <div class="next" style="float: right;"><a href="function.ora-errorcode.html">ora_errorcode</a></div>
+ <div class="up"><a href="ref.oracle.html">Oracle</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.ora-error" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ora_error</h1>
+  <p class="verinfo">(PHP 4, PHP 5 &lt;= 5.0.5)</p><p class="refpurpose">ora_error — Gets an Oracle error message</p>
+
+ </div>
+ 
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">string</span> <span class="methodname"><b><b>ora_error</b></b></span>
+    ([ <span class="methodparam"><span class="type">resource</span> <tt class="parameter">$cursor_or_connection</tt></span>
+  ] )</div>
+
+  <p class="para">
+   Returns the error message of the last executed statement on the
+   specified cursor or connection.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">cursor_or_connection</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       An Oracle cursor or connection identifier.
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns an error message of the form
+   <span class="replaceable">XXX</span>-<span class="replaceable">NNNNN</span>
+   where <span class="replaceable">XXX</span> is where the error comes
+   from and <span class="replaceable">NNNNN</span> identifies the error
+   message.
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog">
+  <h3 class="title">ChangeLog</h3>
+  <p class="para">
+   <table class="informaltable">
+    <colgroup>
+
+     <thead valign="middle">
+      <tr valign="middle">
+       <th colspan="1">Version</th>
+       <th colspan="1">Description</th>
+      </tr>
+
+     </thead>
+
+     <tbody valign="middle">
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">5.1.0</td>
+       <td colspan="1" rowspan="1" align="left">
+        <p class="para">The <a href="ref.oracle.html" class="link">oracle</a> 
+extension is deprecated in favor of <a href="ref.oci8.html" class="link">oci8</a>.
+</p>
+       </td>
+      </tr>
+
+      <tr valign="middle">
+       <td colspan="1" rowspan="1" align="left">3.0.4</td>
+       <td colspan="1" rowspan="1" align="left">
+        Support for connection identifiers was added.
+       </td>
+      </tr>
+
+     </tbody>
+    </colgroup>
+
+   </table>
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   On Unix versions of Oracle, you can find details about an error
+   message like this:
+   <div class="informalexample">
+    <div class="example-contents">
+<div class="cdata"><pre>
+$&gt; oerr ora 00001
+</pre></div>
+    </div>
+
+    <p class="para">The above example will output 
+something similar to:</p>
+    <div class="example-contents"><pre>
+<div class="cdata"><pre>
+00001, 00000,
+&quot;unique constraint (%s.%s) violated&quot; // *Cause: An update or insert
+statement attempted to insert a duplicate key //         For Trusted
+ORACLE configured in DBMS MAC mode, you may see //         this message
+if a duplicate entry exists at a different level.  // *Action: Either
+remove the unique restriction or do not insert the key
+</pre></div>
+    </pre></div>
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 notes">
+  <h3 class="title">Notes</h3>
+   <p class="para">
+    When using <a href="ref.oci8.html" class="link">oci8</a> 
+as a replacement for the deprecated <a href="ref.oracle.html" class="link">oracle</a> 
+extension, consider using: 
+    <ul class="simplelist">
+     <li class="member"><a href="function.oci-error.html" class="function">oci_error()</a></li>
+    </ul>
+   </p>
+ </div>
+
+ 
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ora-do.html">ora_do</a></div>
+ <div class="next" style="float: right;"><a href="function.ora-errorcode.html">ora_errorcode</a></div>
+ <div class="up"><a href="ref.oracle.html">Oracle</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

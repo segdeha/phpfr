@@ -1,0 +1,1178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Phar archive stream and classes</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.PDOStatement-setFetchMode.html">PDOStatement->setFetchMode()</a></div>
+ <div class="next" style="float: right;"><a href="function.phar-apiversion.html">Phar::apiVersion</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">Phar archive stream and classes</h1>
+  
+  <div class="partintro">
+   <div id="phar.intro" class="section">
+     <h2 class="title">Introduction</h2>
+   <p class="para">
+    The phar extension
+    provides the <i class="literal">phar</i> stream wrapper and the <span class="classname">Phar</span>
+    class for manipulating self-contained PHP Archive (phar) files.  The
+    Phar class can be used to create and to extract contents of phar files as
+    well as iterating over their contents.
+   </p>
+   <p class="para">
+    PHP Archive files (Phars) are special collections of files that can be transparently
+    run right out of the file, similar to Java&#039;s jar archive files.  Using a phar archive,
+    it is possible to distribute a complete PHP application in a single file that will
+    run out of the file without modification or extraction.  Phar
+    archives can also be used to store files for extraction similar to tar or zip
+    archive files.  Phars support compression using gzip if the
+    <a href="ref.zlib.html" class="link">zlib</a> extension is present, and using bzip2 if
+    the <a href="ref.bzip2.html" class="link">bz2</a> extension is present.  In addition,
+    iteration and other features are available if the <a href="ref.spl.html" class="link">SPL</a>
+    extension is available.  Phar signature verification using md5 or sha1 is natively
+    supported to ensure archive integrity.
+   </p>
+   <p class="para">
+    The original implementation for Phar archives was in the PEAR package
+    <a href="http://pear.php.net/PHP_Archive" class="link external">&raquo; PHP_Archive</a>, and
+    the implementation details are very similar, although the Phar extension
+    is more full-featured.  PHP_Archive has more flexibility in Phar creation,
+    and helpful debugging tools like the <span class="classname">PHP_Archive_Manager</span>
+    class, and the Phar extension supports iteration, array access, and
+    directly manipulating Phar contents through a simple interface.  PHP_Archive
+    supports creation of Phar archives that can be processed using the Phar
+    extension or PHP_Archive seamlessly, whereas the Phar extension is designed
+    to create extensions that function with the Phar extension.  In addition,
+    the Phar extension will continue to work even if the
+    <a href="ref.filesystem.html#ini.allow-url-include" class="link">allow_url_include</a> or
+    <a href="ref.filesystem.html#ini.allow-url-fopen" class="link">allow_url_fopen</a> INI variables
+    are disabled, while PHP_Archive-based Phar archives (without the Phar extension)
+    will not function.
+   </p>
+  </div>
+  <div id="phar.requirements" class="section">
+   <h2 class="title">Requirements</h2>
+   <p class="para">
+    Phar requires PHP 5.2.0 or newer.  Additional features require the
+    <a href="ref.spl.html" class="link">SPL</a> extension in order to take advantage
+    of iteration and array access to a Phar&#039;s file contents.  The <i class="literal">phar</i>
+    stream does not require any additional extensions to function.
+   </p>
+   <p class="para">
+    You may optionally wish to enable the <a href="ref.zlib.html" class="link">zlib</a>
+    and <a href="ref.bzip2.html" class="link">bzip2</a> extensions to take
+    advantage of compressed phar support.
+   </p>
+  </div>
+   
+
+<div id="phar.installation" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="simpara">
+  <em class="emphasis">Windows</em> binaries may be found at
+  <a href="http://snaps.php.net/" class="link external">&raquo; http://snaps.php.net/</a>.
+  To install, download php_phar.dll to the folder specified
+  by your php.ini file&#039;s <i class="literal">extension_dir</i> directive.
+  Enable it by adding <i class="literal">extension=php_phar.dll</i>
+  to your php.ini and restarting your web server.
+ </p>
+
+ <div class="example-contents"><pre>
+<div class="cdata"><pre>
+extension_dir=c:/php5/exts/
+extension=php_phar.dll
+</pre></div>
+ </pre></div>
+
+ <p class="simpara">
+  <em class="emphasis">Linux, BSD, and other *nix variants</em>
+  can be compiled using the following steps:
+ </p>
+
+ <ul class="itemizedlist">
+
+  <li class="listitem">
+   <span class="simpara">
+    Either:
+   </span>
+   <p class="para">
+    <ul class="itemizedlist">
+     <li class="listitem">
+      <span class="simpara">
+       Run the pear installer for PECL/phar: <i class="literal">pecl install phar</i>
+      </span>
+     </li>
+
+     <li class="listitem">
+      <span class="simpara">
+       Copy <i class="literal">phar.so</i> from the directory indicated by the
+       build process to the location specified in your php.ini file under
+       <i class="literal">extension_dir</i>.
+      </span>
+     </li>
+
+     <li class="listitem">
+      <span class="simpara">
+       Add <i class="literal">extension=phar.so</i> to your php.ini
+      </span>
+     </li>
+    </ul>
+   </p>
+   <span class="simpara">
+    Or:
+   </span>
+   <p class="para">
+    <ul class="itemizedlist">
+     <li class="listitem">
+      <span class="simpara">
+       Set the path to your php.ini via:
+      </span>
+      <span class="simpara">
+       <i class="literal">pecl config-set php_ini /path/to/php.ini</i>
+      </span>
+     </li>
+
+     <li class="listitem">
+      <span class="simpara">
+       Run the pear installer for PECL/phar: <i class="literal">pecl install phar</i>
+      </span>
+     </li>
+    </ul>
+   </p>
+  </li>
+
+  <li class="listitem">
+   <span class="simpara">
+    Restart your web server to reload your php.ini settings.
+   </span>
+  </li>
+
+ </ul>
+
+ <blockquote><p><b class="note">Note</b>: 
+  <b>Development Versions</b>
+  <span class="simpara">
+   There are currently no <i class="literal">stable</i> versions of PECL/phar,
+   to force installation of the <i class="literal">alpha</i> version of PECL/phar
+   execute: <i class="literal">pecl install phar-</i><em class="emphasis">alpha</em>
+  </span>
+ </p></blockquote>
+
+ <div class="tip"><b class="tip">Tip</b>
+  <h1 class="title">Compiling PECL/phar without using the PEAR command</h1>
+  <p class="simpara">
+   Rather than using <i class="literal">pecl install phar</i> to automatically
+   download and install PECL/phar, you may download the tarball from
+   <a href="http://pecl.php.net/package/phar" class="link external">&raquo; PECL</a>.
+   From the root of the unpacked tarball, run:
+   <i class="literal">phpize &amp;&amp; ./configure --enable-phar &amp;&amp; make</i>
+   to generate <i class="literal">phar.so</i>.
+   Once built, continue the installation from step 4 above.
+  </p>
+ </div>
+
+ <p class="simpara">
+  Information for installing this PECL extension may be
+found in the manual chapter titled <a href="install.pecl.html" class="link">Installation 
+of PECL extensions</a>. Additional information such as new releases,
+downloads, source files, maintainer information, and a CHANGELOG, can be
+located here: 
+  <a href="http://pecl.php.net/package/phar" class="link external">&raquo; http://pecl.php.net/package/phar</a>.
+ </p>
+</div>
+
+
+
+   
+   
+   
+   
+
+<div id="phar.configuration" class="section">
+ <h2 class="title">Runtime Configuration</h2>
+ <p class="simpara">
+The behaviour of these functions is affected by settings in <var class="filename">php.ini</var>.
+</p>
+ <p class="para">
+  <table border="5">
+   <caption><b>Filesystem and Streams Configuration Options</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Name</th>
+      <th colspan="1">Default</th>
+      <th colspan="1">Changeable</th>
+      <th colspan="1">Changelog</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">phar.readonly</td>
+      <td colspan="1" rowspan="1" align="left">&quot;1&quot;</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+      <td class="empty">&nbsp;</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">phar.require_hash</td>
+      <td colspan="1" rowspan="1" align="left">&quot;1&quot;</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+      <td class="empty">&nbsp;</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">phar.extract_list</td>
+      <td colspan="1" rowspan="1" align="left">&quot;&quot;</td>
+      <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+      <td colspan="1" rowspan="1" align="left">Available since phar 1.1.0.</td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+ </p>
+ 
+ <p class="para">Here&#039;s a short explanation of
+the configuration directives.</p>
+ 
+ <p class="para">
+  <dl>
+
+   <dt id="ini.phar.readonly">
+    <span class="term">
+     <i><tt class="parameter">phar.readonly</tt></i>
+
+     <a href="language.types.boolean.html" class="type boolean">boolean</a>
+    </span>
+    <dd>
+
+     <p class="para">
+      This option disables creation or modification of Phar archives
+      using the <i class="literal">phar</i> stream or <span class="classname">Phar</span>
+      object&#039;s write support.  This setting should always be enabled on
+      production machines, as the phar extension&#039;s convenient write support
+      could allow straightforward creation of a php-based virus when coupled
+      with other common security vulnerabilities.
+     </p>
+     <blockquote><p><b class="note">Note</b>: 
+      
+       This setting can only be unset in php.ini due to security reasons.
+       If <i class="literal">phar.readonly</i> is disabled in php.ini, the
+       user may enable <i class="literal">phar.readonly</i> in a script
+       or disable it later.  If <i class="literal">phar.readonly</i> is
+       enabled in php.ini, a script may harmlessly &quot;re-enable&quot;
+       the INI variable, but may not disable it.
+      <br />
+     </p></blockquote>
+    </dd>
+
+   </dt>
+
+
+   <dt id="ini.phar.require-hash">
+    <span class="term">
+     <i><tt class="parameter">phar.require_hash</tt></i>
+
+     <a href="language.types.boolean.html" class="type boolean">boolean</a>
+    </span>
+    <dd>
+
+     <p class="para">
+      This option will force all opened Phar archives to contain some
+      kind of signature (currently MD5 and SHA1 are supported), and will
+      refuse to process any Phar archive that does not contain a signature.
+     </p>
+     <blockquote><p><b class="note">Note</b>: 
+      
+       This setting can only be unset in php.ini due to security reasons.
+       If <i class="literal">phar.require_hash</i> is disabled in php.ini, the
+       user may enable <i class="literal">phar.require_hash</i> in a script
+       or disable it later.  If <i class="literal">phar.require_hash</i> is
+       enabled in php.ini, a script may harmlessly &quot;re-enable&quot;
+       the INI variable, but may not disable it.
+      <br />
+     </p></blockquote>
+    </dd>
+
+   </dt>
+
+
+   <dt id="ini.phar.extract-list">
+    <span class="term">
+     <i><tt class="parameter">phar.extract_list</tt></i>
+
+     <a href="language.types.string.html" class="type string">string</a>
+    </span>
+    <dd>
+
+     <p class="para">
+      Allows mappings from a full path to a phar archive or its alias to
+      the location of its extracted files.
+      The format of the parameter is <i class="literal">name=archive,name2=archive2</i>.
+      This allows extraction of phar files to disk, and allows phar to act as a
+      kind of mapper to extracted disk files.  This is often done for performance
+      reasons, or to assist with debugging a phar.
+      <div class="example">
+       <p><b>Example#1 phar.extract_list usage example</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+in&nbsp;php.ini:<br />phar.extract_list&nbsp;=&nbsp;archive=/full/path/to/archive/,arch2=/full/path/to/arch2<br /><span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">include&nbsp;</span><span style="color: #DD0000">"phar://archive/content.php"</span><span style="color: #007700">;<br />include&nbsp;</span><span style="color: #DD0000">"phar://arch2/foo.php"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </dd>
+
+   </dt>
+
+  </dl>
+
+ </p>
+</div>
+
+
+
+  <div id="phar.resources" class="section">
+   <h2 class="title">Resource Types</h2>
+   <p class="para">
+    The Phar extension provides the <i class="literal">phar</i> stream, which
+    allows accessing files contained within a phar transparently.  The
+    file format of a Phar is described <a href="ref.phar.html#phar.fileformat" class="link">here</a>
+   </p>
+  </div>
+  <div class="section">
+    <h2 class="title">Predefined Classes</h2>
+    <ul class="simplelist">
+     <li class="member">
+      <span class="classname">Phar</span>
+     </li>
+     <li class="member">
+      <span class="classname">PharFileInfo</span>
+     </li>
+     <li class="member">
+      <span class="classname">PharException</span>
+     </li>
+   </ul>
+  </div>
+  
+
+<div id="phar.using.basics" class="section">
+ <h2 class="title">Using Phar Archives: Introduction</h2>
+ <p class="para">
+  Phar archives are similar in concept to Java JAR archives, but are
+  tailored to the needs and to the flexibility of PHP applications.  A
+  Phar archive is used to distribute a complete PHP application
+  or library in a single file.  Unlike Java&#039;s implementation of JAR archives,
+  no external tool is required to process or run a PHP Phar archive.  A
+  Phar archive application is processed exactly like any other PHP application:
+ </p>
+ <div class="example-contents"><pre>
+  <div class="cdata"><pre>
+php coolapplication.phar
+  </pre></div>
+ </pre></div>
+ <p class="para">
+  Using a Phar archive library is identical to using any other PHP library:
+ </p>
+ <p class="para">
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">include&nbsp;</span><span style="color: #DD0000">'coollibrary.phar'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+  What makes Phar archives incredibly useful is the <i class="literal">phar</i>
+  stream wrapper, which is explained in depth <a href="ref.phar.html#phar.using.stream" class="link">here</a>.
+  Using this stream wrapper, it is possible to access
+  individual files within a phar as if the phar were its own filesystem.
+  The <i class="literal">phar</i> stream wrapper supports all read/write operations
+  on files, and <a href="function.opendir.html" class="function">opendir()</a> on directories.
+ </p>
+ <p class="para">
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">include&nbsp;</span><span style="color: #DD0000">'phar://coollibrary.phar/internal/file.php'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">header</span><span style="color: #007700">(</span><span style="color: #DD0000">'Content-type:&nbsp;image/jpeg'</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;phars&nbsp;can&nbsp;be&nbsp;accessed&nbsp;by&nbsp;full&nbsp;path&nbsp;or&nbsp;by&nbsp;alias<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">file_get_contents</span><span style="color: #007700">(</span><span style="color: #DD0000">'phar:///fullpath/to/coollibrary.phar/images/wow.jpg'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+  Also provided with the Phar extension is the <span class="classname">Phar</span> class,
+  which allows accessing the files of the Phar archive as if it were an
+  associative array, and other functionality.  The Phar class is explained
+  <a href="ref.phar.html#phar.using.object" class="link">here</a>.
+ </p>
+ <p class="para">
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">try&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;open&nbsp;an&nbsp;existing&nbsp;phar<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Phar</span><span style="color: #007700">(</span><span style="color: #DD0000">'coollibrary.phar'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;foreach&nbsp;(</span><span style="color: #0000BB">$p&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$file</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;$file&nbsp;is&nbsp;a&nbsp;PharFileInfo&nbsp;class,&nbsp;and&nbsp;inherits&nbsp;from&nbsp;SplFileInfo<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$file</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getFileName</span><span style="color: #007700">()&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$file&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;display&nbsp;contents;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">}<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(isset(</span><span style="color: #0000BB">$p</span><span style="color: #007700">[</span><span style="color: #DD0000">'internal/file.php'</span><span style="color: #007700">]))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$p</span><span style="color: #007700">[</span><span style="color: #DD0000">'internal/file.php'</span><span style="color: #007700">]-&gt;</span><span style="color: #0000BB">getMetaData</span><span style="color: #007700">());<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;create&nbsp;a&nbsp;new&nbsp;phar&nbsp;-&nbsp;phar.readonly&nbsp;must&nbsp;be&nbsp;0&nbsp;in&nbsp;php.ini<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;phar.readonly&nbsp;is&nbsp;enabled&nbsp;by&nbsp;default&nbsp;for&nbsp;security&nbsp;reasons.<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;On&nbsp;production&nbsp;servers,&nbsp;Phars&nbsp;need&nbsp;never&nbsp;be&nbsp;created,<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;only&nbsp;executed.<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(</span><span style="color: #0000BB">Phar</span><span style="color: #007700">::</span><span style="color: #0000BB">canWrite</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Phar</span><span style="color: #007700">(</span><span style="color: #0000BB">dirname</span><span style="color: #007700">(</span><span style="color: #0000BB">__FILE__</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">'/newphar.phar'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'newphar.phar'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;create&nbsp;transaction&nbsp;-&nbsp;nothing&nbsp;is&nbsp;written&nbsp;to&nbsp;newphar.phar<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;until&nbsp;commit()&nbsp;is&nbsp;called,&nbsp;although&nbsp;temporary&nbsp;storage&nbsp;is&nbsp;needed<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">begin</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;add&nbsp;a&nbsp;new&nbsp;file,&nbsp;set&nbsp;its&nbsp;contents<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">[</span><span style="color: #DD0000">'file1.txt'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #DD0000">'Information'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$fp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">fopen</span><span style="color: #007700">(</span><span style="color: #DD0000">'hugefile.dat'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'rb'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;copy&nbsp;from&nbsp;the&nbsp;stream<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">[</span><span style="color: #DD0000">'data/hugefile.dat'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">$fp</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(</span><span style="color: #0000BB">Phar</span><span style="color: #007700">::</span><span style="color: #0000BB">canCompress</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">[</span><span style="color: #DD0000">'data/hugefile.dat'</span><span style="color: #007700">]-&gt;</span><span style="color: #0000BB">setCompressedGZ</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">[</span><span style="color: #DD0000">'images/wow.jpg'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">file_get_contents</span><span style="color: #007700">(</span><span style="color: #DD0000">'images/wow.jpg'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;any&nbsp;value&nbsp;can&nbsp;be&nbsp;saved&nbsp;as&nbsp;file-specific&nbsp;meta-data<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">[</span><span style="color: #DD0000">'images/wow.jpg'</span><span style="color: #007700">]-&gt;</span><span style="color: #0000BB">setMetaData</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'mime-type'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'image/jpeg'</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">[</span><span style="color: #DD0000">'index.php'</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">file_get_contents</span><span style="color: #007700">(</span><span style="color: #DD0000">'index.php'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setMetaData</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'bootstrap'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'index.php'</span><span style="color: #007700">));<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;set&nbsp;the&nbsp;loader&nbsp;stub<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setStub</span><span style="color: #007700">(</span><span style="color: #DD0000">'&lt;?php<br />$p&nbsp;=&nbsp;new&nbsp;Phar(__FILE__);<br />$m&nbsp;=&nbsp;$p-&gt;getMetaData();<br />require&nbsp;"phar://"&nbsp;.&nbsp;__FILE__&nbsp;.&nbsp;"/"&nbsp;.&nbsp;$m["bootstrap"];<br />__HALT_COMPILER();'</span><span style="color: #007700">);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;save&nbsp;the&nbsp;phar&nbsp;archive&nbsp;to&nbsp;disk<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$p</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">commit</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;catch&nbsp;(</span><span style="color: #0000BB">Exception&nbsp;$e</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">'Could&nbsp;not&nbsp;open&nbsp;Phar:&nbsp;'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$e</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+</div>
+<div id="phar.using.stream" class="section">
+ <h2 class="title">Using Phar Archives: the phar stream wrapper</h2>
+ <p class="para">
+  The Phar stream wrapper fully supports <a href="function.fopen.html" class="function">fopen()</a> for
+  read, write or append, <a href="function.unlink.html" class="function">unlink()</a>, <a href="function.stat.html" class="function">stat()</a>,
+  <a href="function.fstat.html" class="function">fstat()</a>, <a href="function.fseek.html" class="function">fseek()</a>, <a href="function.rename.html" class="function">rename()</a>
+  and directory stream operation <a href="function.opendir.html" class="function">opendir()</a>.  The Phar stream wrapper
+  does not support creating or erasing a directory, as files are stored only
+  as files, and the concept of an abstract directory does not exist.
+ </p>
+ <p class="para">
+  Individual file compression and per-file metadata can also be manipulated
+  in a Phar archive using stream contexts:
+ </p>
+ <p class="para">
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$context&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">stream_context_create</span><span style="color: #007700">(array(</span><span style="color: #DD0000">'phar'&nbsp;</span><span style="color: #007700">=&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(</span><span style="color: #DD0000">'compression'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">Phar</span><span style="color: #007700">::</span><span style="color: #0000BB">GZ</span><span style="color: #007700">)),<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(</span><span style="color: #DD0000">'metadata'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;array(</span><span style="color: #DD0000">'user'&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'cellog'</span><span style="color: #007700">)));<br /></span><span style="color: #0000BB">file_put_contents</span><span style="color: #007700">(</span><span style="color: #DD0000">'phar://my.phar/somefile.php'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$context</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+  The <i class="literal">phar</i> stream wrapper does not operate on remote files,
+  and cannot operate on remote files, and so is allowed even when the
+  <a href="ref.filesystem.html#ini.allow-url-fopen" class="link">allow_url_fopen</a> and
+  <a href="ref.filesystem.html#ini.allow-url-include" class="link">allow_url_include</a> INI options
+  are disabled.
+ </p>
+ <p class="para">
+  Although it is possible to create phar archives from scratch just using
+  stream operations, it is best to use the functionality built into
+  the Phar class.  The stream wrapper is best used for read operations.
+ </p>
+</div>
+<div id="phar.using.object" class="section">
+ <h2 class="title">Using Phar Archives: the Phar class</h2>
+ <p class="para">
+  The <span class="classname">Phar</span> class supports reading and manipulation
+  of Phar archives, as well as iteration through inherited functionality of
+  the
+  <a href="http://www.php.net/~helly/php/ext/spl/classRecursiveDirectoryIterator.html" class="link external">&raquo; <span class="classname">RecursiveDirectoryIterator</span></a>
+  class.  With support for the <span class="classname">ArrayAccess</span>
+  interface, files inside a Phar archive can be accessed as if they were
+  part of an associative array.
+ </p>
+ <p class="para">
+  It is important to note that when creating a Phar archive, the full path
+  should be passed to the <span class="classname">Phar</span> object constructor.
+  Relative paths will fail to initialize.
+ </p>
+ <p class="para">
+  Assuming that <i class="literal">$p</i> is a Phar object initialized as follows:
+ </p>
+ <p class="para">
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$p&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">Phar</span><span style="color: #007700">(</span><span style="color: #DD0000">'/path/to/myphar.phar'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'myphar.phar'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+  An empty Phar archive will be created at <i class="literal">/path/to/myphar.phar</i>,
+  or if <i class="literal">/path/to/myphar.phar</i> already exists, it will be opened
+  again.  The literal <i class="literal">myphar.phar</i> deomnstrates the concept of an alias
+  that can be used to reference <i class="literal">/path/to/myphar.phar</i> in URLs as in:
+ </p>
+ <p class="para">
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;these&nbsp;two&nbsp;calls&nbsp;to&nbsp;file_get_contents()&nbsp;are&nbsp;equivalent&nbsp;if<br />//&nbsp;/path/to/myphar.phar&nbsp;has&nbsp;an&nbsp;explicit&nbsp;alias&nbsp;of&nbsp;"myphar.phar"<br />//&nbsp;in&nbsp;its&nbsp;manifest,&nbsp;or&nbsp;if&nbsp;the&nbsp;phar&nbsp;was&nbsp;initialized&nbsp;with&nbsp;the<br />//&nbsp;previous&nbsp;example's&nbsp;Phar&nbsp;object&nbsp;setup<br /></span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file_get_contents</span><span style="color: #007700">(</span><span style="color: #DD0000">'phar:///path/to/myphar.phar/whatever.txt'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$f&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">file_get_contents</span><span style="color: #007700">(</span><span style="color: #DD0000">'phar://myphar.phar/whatever.txt'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+  </div>
+ </p>
+ <p class="para">
+  With the newly created <i class="literal">$p</i> <span class="classname">Phar</span> object,
+  the following is possible:
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <i class="literal">$a = $p[&#039;file.php&#039;]</i> creates a <span class="classname">PharFileInfo</span>
+     class that refers to the contents of <i class="literal">phar://myphar.phar/file.php</i>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <i class="literal">$p[&#039;file.php&#039;] = $v</i> creates a new file
+     (<i class="literal">phar://myphar.phar/file.php</i>), or overwrites
+     an existing file within <i class="literal">myphar.phar</i>.  <i class="literal">$v</i>
+     can be either a string or an open file pointer, in which case the entire
+     contents of the file will be used to create the new file.
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <i class="literal">isset($p[&#039;file.php&#039;])</i> can be used to determine
+     whether <i class="literal">phar://myphar.phar/file.php</i> exists within
+     <i class="literal">myphar.phar</i>.
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <i class="literal">unset($p[&#039;file.php&#039;])</i> erases
+     <i class="literal">phar://myphar.phar/file.php</i> from
+     <i class="literal">myphar.phar</i>.
+    </span>
+   </li>
+  </ul>
+ </p>
+ <p class="para">
+  In addition, the <span class="classname">Phar</span> object is the only way to access
+  Phar-specific metadata, through
+  <a href="function.phar-getmetadata.html" class="link"><a href="function.phar-getmetadata.html" class="function">Phar->getMetaData()</a></a>,
+  and the only way to set or retrieve a Phar archive&#039;s PHP loader stub through
+  <a href="function.phar-getstub.html" class="link"><a href="function.phar-getstub.html" class="function">Phar->getStub()</a></a> and
+  <a href="function.phar-setstub.html" class="link"><a href="function.phar-setstub.html" class="function">Phar->setStub()</a></a>.
+  Additionally, compression for the entire Phar archive at once can only be manipulated
+  using the <span class="classname">Phar</span> class.
+ </p>
+ <p class="para">
+  The full list of <span class="classname">Phar</span> object functionality is documented
+  below.
+ </p>
+ <p class="para">
+  The <span class="classname">PharFileInfo</span> class extends the
+  <a href="http://www.php.net/~helly/php/ext/spl/classSplFileInfo.html" class="link external">&raquo; <span class="classname">SplFileInfo</span></a>
+  class, and adds several methods for manipulating Phar-specific details of a file
+  contained within a Phar, such as manipulating compression and metadata.
+ </p>
+</div>
+
+
+
+  
+
+<div id="phar.fileformat" class="section">
+ <h2 class="title">Phar file format</h2>
+ <p class="para">
+  All Phar files contain three to four sections:
+  <ol class="orderedlist">
+   <li class="listitem">
+    <p class="para">a stub</p>
+   </li>
+   <li class="listitem">
+    <p class="para">a manifest describing the contents</p>
+   </li>
+   <li class="listitem">
+    <p class="para">the file contents</p>
+   </li>
+   <li class="listitem">
+    <p class="para">[optional] a signature for verifying Phar integrity</p>
+   </li>
+  </ol>
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">Phar file stub</h2>
+ <p class="para">
+  A Phar&#039;s stub is a simple PHP file.  The smallest possible stub follows:
+ </p>
+ <p class="para">
+  <div class="example-contents">
+   <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php&nbsp;</span><span style="color: #007700">__HALT_COMPILER();</span>
+</span>
+</code></div>
+  </div>
+
+ </p>
+ <p class="para">
+  A stub must contain as a minimum, the <i class="literal">__HALT_COMPILER();</i> token
+  at its conclusion.  Typically, a stub will contain loader functionality
+  like so:
+ </p>
+ <p class="para">
+  <div class="example-contents">
+   <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />Phar</span><span style="color: #007700">::</span><span style="color: #0000BB">mapPhar</span><span style="color: #007700">();<br />include&nbsp;</span><span style="color: #DD0000">'phar://myphar.phar/index.php'</span><span style="color: #007700">;<br />__HALT_COMPILER();</span>
+</span>
+</code></div>
+  </div>
+
+ </p>
+ <p class="para">
+  There are no restrictions on the contents of a Phar stub, except for the requirement
+  that it conclude with <i class="literal">__HALT_COMPILER();</i>.  The closing PHP tag
+  <i class="literal"><div class="cdata"><pre>?&gt;</pre></div></i> may be included or omitted, but there can be
+  no more than 1 space between the <i class="literal">;</i> and the close tag
+  <i class="literal"><div class="cdata"><pre>?&gt;</pre></div></i> or the phar extension will be unable
+  to process the Phar archive&#039;s manifest.
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">Phar Manifest Format</h2>
+ <p class="para">
+  The Phar manifest is a highly optimized format that allows per-file
+  specification of file compression, file permissions, and even user-defined
+  meta-data such as file user or group.  All values greater than 1 byte are stored
+  in little-endian byte order, with the exception of the API version, which
+  for historical reasons is stored as 3 nibbles in big-endian order.
+ </p>
+ <p class="para">
+  All unused flags are reserved for future use, and must not be used
+  to store custom information.  Use the per-file meta-data facility
+  to store customized information about particular files.
+ </p>
+ <p class="para">
+  The basic file format of a Phar archive manifest is as follows:
+ </p>
+ <p class="para">
+ <table border="5">
+  <caption><b>Global Phar manifest format</b></caption>
+  <colgroup>
+
+   <thead valign="middle">
+    <tr valign="middle">
+     <th colspan="1">Size in bytes</th>
+     <th colspan="1">Description</th>
+    </tr>
+
+   </thead>
+
+   <tbody valign="middle">
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">4 bytes</td>
+     <td colspan="1" rowspan="1" align="left">Length of manifest in bytes (1 MB limit)</td>
+    </tr>
+
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">4 bytes</td>
+     <td colspan="1" rowspan="1" align="left">Number of files in the Phar</td>
+    </tr>
+
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">2 bytes</td>
+     <td colspan="1" rowspan="1" align="left">API version of the Phar manifest (currently 1.0.0)</td>
+    </tr>
+
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">4 bytes</td>
+     <td colspan="1" rowspan="1" align="left">Global Phar bitmapped flags</td>
+    </tr>
+
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">4 bytes</td>
+     <td colspan="1" rowspan="1" align="left">Length of Phar alias</td>
+    </tr>
+
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">??</td>
+     <td colspan="1" rowspan="1" align="left">Phar alias (length based on previous)</td>
+    </tr>
+
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">4 bytes</td>
+     <td colspan="1" rowspan="1" align="left">Length of Phar metadata (<i class="literal">0</i> for none)</td>
+    </tr>
+
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">??</td>
+     <td colspan="1" rowspan="1" align="left">Serialized Phar Meta-data, stored in <a href="function.serialize.html" class="function">serialize()</a> format</td>
+    </tr>
+
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">at least 24 * number of entries bytes</td>
+     <td colspan="1" rowspan="1" align="left">entries for each file</td>
+    </tr>
+
+   </tbody>
+  </colgroup>
+
+ </table>
+
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">Global Phar bitmapped flags</h2>
+ <p class="para">
+  Here are the bitmapped flags currently recognized by the Phar extension
+  for the global Phar flat bitmap:
+ </p>
+ <p class="para">
+  <table border="5">
+   <caption><b>Bitmap values recognized</b></caption>
+   <colgroup>
+
+   <thead valign="middle">
+    <tr valign="middle">
+     <th colspan="1">Value</th>
+     <th colspan="1">Description</th>
+    </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left"><i class="literal">0x00010000</i></td>
+      <td colspan="1" rowspan="1" align="left">If set, this Phar contains a verification signature</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left"><i class="literal">0x00001000</i></td>
+      <td colspan="1" rowspan="1" align="left">
+       If set, this Phar contains at least 1 file that
+       is compressed with zlib compression
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left"><i class="literal">0x00002000</i></td>
+      <td colspan="1" rowspan="1" align="left">
+       If set, this Phar contains at least 1 file that
+       is compressed with bzip compression
+      </td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">Phar manifest file entry definition</h2>
+ <p class="para">
+  Each file in the manifest contains the following information:
+ </p>
+ <p class="para">
+  <table border="5">
+   <caption><b>Phar Manifest file entry</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Size in bytes</th>
+      <th colspan="1">Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">4 bytes</td>
+      <td colspan="1" rowspan="1" align="left">Filename length in bytes</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">??</td>
+      <td colspan="1" rowspan="1" align="left">Filename (length specified in previous)</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">4 bytes</td>
+      <td colspan="1" rowspan="1" align="left">Un-compressed file size in bytes</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">4 bytes</td>
+      <td colspan="1" rowspan="1" align="left">Unix timestamp of file</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">4 bytes</td>
+      <td colspan="1" rowspan="1" align="left">Compressed file size in bytes</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">4 bytes</td>
+      <td colspan="1" rowspan="1" align="left">CRC32 checksum of un-compressed file contents</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">4 bytes</td>
+      <td colspan="1" rowspan="1" align="left">Bit-mapped File-specific flags</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">4 bytes</td>
+      <td colspan="1" rowspan="1" align="left">Serialized File Meta-data length (<i class="literal">0</i> for none)</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">??</td>
+      <td colspan="1" rowspan="1" align="left">Serialized File Meta-data, stored in <a href="function.serialize.html" class="function">serialize()</a> format</td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+ </p>
+ <p class="para">
+  The File-specific bitmap values recognized are:
+ </p>
+ <p class="para">
+  <table border="5">
+   <caption><b>Bitmap values recognized</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Value</th>
+      <th colspan="1">Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left"><i class="literal">0x000001FF</i></td>
+      <td colspan="1" rowspan="1" align="left">
+       These bits are reserved for defining specific file permissions
+       of a file.  Permissions are used for <a href="function.fstat.html" class="function">fstat()</a>
+       and can be used to recreate desired permissions upon extraction.
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left"><i class="literal">0x00001000</i></td>
+      <td colspan="1" rowspan="1" align="left">
+       If set, this file is compressed with zlib compression
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left"><i class="literal">0x00002000</i></td>
+      <td colspan="1" rowspan="1" align="left">
+       If set, this file is compressed with bzip compression
+      </td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+ </p>
+</div>
+<div class="section">
+ <h2 class="title">Phar Signature format</h2>
+ <p class="para">
+  Phars containing a signature always have the signature appended to the
+  end of the Phar archive after the loader, manifest, and file contents.
+  The two signature formats supported at this time are MD5 and SHA1.
+ </p>
+ <p class="para">
+  <table border="5">
+   <caption><b>Signature format</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Length in bytes</th>
+      <th colspan="1">Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">16 or 20 bytes</td>
+      <td colspan="1" rowspan="1" align="left">
+       The actual signature, 20 bytes for an SHA1 signature,
+       16 bytes for an MD5 signature.
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">4 bytes</td>
+      <td colspan="1" rowspan="1" align="left">
+       Signature flags.  <i class="literal">0x0001</i> is used to
+       define an MD5 signature, and <i class="literal">0x0002</i> is used
+       to define an SHA1 signature.
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">4 bytes</td>
+      <td colspan="1" rowspan="1" align="left">
+       Magic <i class="literal">GBMB</i> used to define the presence of a signature.
+      </td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+ </p>
+</div>
+
+
+
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.phar-apiversion.html">Phar::apiVersion</a> — Returns the api version</li><li><a href="function.phar-cancompress.html">Phar::canCompress</a> — Returns whether phar extension supports compression using either zlib or bzip2</li><li><a href="function.phar-canwrite.html">Phar::canWrite</a> — Returns whether phar extension supports writing and creating phars</li><li><a href="function.phar-compressallfilesbzip2.html">Phar->compressAllFilesBZIP2</a> — Compresses all files in the current Phar archive using Bzip2 compression</li><li><a href="function.phar-compressallfilesgz.html">Phar->compressAllFilesGZ</a> — Compresses all files in the current Phar archive using Gzip compression</li><li><a href="function.phar-construct.html">Phar::__construct</a> — Construct a Phar archive object</li><li><a href="function.phar-count.html">Phar->count</a> — Returns the number of entries (files) in the Phar archive</li><li><a href="function.phar-getmetadata.html">Phar->getMetaData</a> — Returns phar archive meta-data</li><li><a href="function.phar-getmodified.html">Phar->getModified</a> — Return whether phar was modified</li><li><a href="function.phar-getsignature.html">Phar->getSignature</a> — Return MD5/SHA1 signature of a Phar archive</li><li><a href="function.phar-getstub.html">Phar->getStub</a> — Return the PHP loader or bootstrap stub of a Phar archive</li><li><a href="function.phar-getversion.html">Phar->getVersion</a> — Return version info of Phar archive</li><li><a href="function.phar-isbuffering.html">Phar->isBuffering</a> — Used to determine whether Phar write operations are being buffered, or are flushing directly to disk</li><li><a href="function.phar-loadphar.html">Phar::loadPhar</a> — Loads any phar archive with an alias</li><li><a href="function.phar-mapphar.html">Phar::mapPhar</a> — Reads the currently executed file (a phar) and registers its manifest</li><li><a href="function.phar-offsetexists.html">Phar::offsetExists</a> — determines whether a file exists in the phar</li><li><a href="function.phar-offsetget.html">Phar::offsetGet</a> — get a PharFileInfo object for a specific file</li><li><a href="function.phar-offsetset.html">Phar::offsetSet</a> — set the contents of an internal file to those of an external file</li><li><a href="function.phar-offsetunset.html">Phar::offsetUnset</a> — remove a file from a phar</li><li><a href="function.phar-setmetadata.html">Phar->setMetaData</a> — Sets phar archive meta-data</li><li><a href="function.phar-setstub.html">Phar->setStub</a> — Used to set the PHP loader or bootstrap stub of a Phar archive</li><li><a href="function.phar-startbuffering.html">Phar->startBuffering</a> — Start buffering Phar write operations, do not modify the Phar object on disk</li><li><a href="function.phar-stopbuffering.html">Phar->stopBuffering</a> — Stop buffering write requests to the Phar archive, and save changes to disk</li><li><a href="function.phar-uncompressallfiles.html">Phar->uncompressAllFiles</a> — Uncompresses all files in the current Phar archive</li><li><a href="function.pharfileinfo-chmod.html">PharFileInfo->chmod</a> — Sets file-specific permission bits</li><li><a href="function.pharfileinfo-construct.html">PharFileInfo::__construct</a> — Construct a Phar entry object</li><li><a href="function.pharfileinfo-getcompressedsize.html">PharFileInfo->getCompressedSize</a> — Returns the actual size of the file (with compression) inside the Phar archive</li><li><a href="function.pharfileinfo-getcrc32.html">PharFileInfo->getCRC32</a> — Returns CRC32 code or throws an exception if not CRC checked</li><li><a href="function.pharfileinfo-getmetadata.html">PharFileInfo->getMetaData</a> — Returns file-specific meta-data saved with a file</li><li><a href="function.pharfileinfo-getPharFlags.html">PharFileInfo->getPharFlags</a> — Returns the Phar file entry flags</li><li><a href="function.pharfileinfo-iscompressed.html">PharFileInfo->isCompressed</a> — Returns whether the entry is compressed</li><li><a href="function.pharfileinfo-iscompressedbzip2.html">PharFileInfo->isCompressedBZIP2</a> — Returns whether the entry is compressed using bzip2</li><li><a href="function.pharfileinfo-iscompressedgz.html">PharFileInfo->isCompressedGZ</a> — Returns whether the entry is compressed using gz</li><li><a href="function.pharfileinfo-iscrcchecked.html">PharFileInfo->isCRCChecked</a> — Returns whether file entry has had its CRC verified</li><li><a href="function.pharfileinfo-setcompressedbzip2.html">PharFileInfo->setCompressedBZIP2</a> — Compresses the current Phar entry within the phar using Bzip2 compression</li><li><a href="function.pharfileinfo-setcompressedgz.html">PharFileInfo->setCompressedGZ</a> — Compresses the current Phar entry within the phar using gz compression</li><li><a href="function.pharfileinfo-setmetadata.html">PharFileInfo->setMetaData</a> — Sets file-specific meta-data saved with a file</li><li><a href="function.pharfileinfo-setuncompressed.html">PharFileInfo->setUncompressed</a> — Uncompresses the current Phar entry within the phar, if it is compressed</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.PDOStatement-setFetchMode.html">PDOStatement->setFetchMode()</a></div>
+ <div class="next" style="float: right;"><a href="function.phar-apiversion.html">Phar::apiVersion</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

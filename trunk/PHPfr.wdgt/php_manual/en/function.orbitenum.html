@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Use CORBA enums</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="ref.satellite.html">Satellite</a></div>
+ <div class="next" style="float: right;"><a href="function.orbitobject.html">OrbitObject</a></div>
+ <div class="up"><a href="ref.satellite.html">Satellite</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.orbitenum" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">OrbitEnum</h1>
+  <p class="verinfo">(No version information available, might be only in CVS)</p><p class="refpurpose">OrbitEnum — Use CORBA enums</p>
+
+ </div>
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">new</span> <span class="methodname"><b><b>OrbitEnum</b></b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$id</tt></span>
+   )</div>
+
+  <div class="warning"><b class="warning">Warning</b><p class="simpara">This function is
+<em class="emphasis">EXPERIMENTAL</em>. The behaviour of this function, the
+name of this function, and anything else documented about this
+function may change without notice in a future release of PHP. 
+Use this function at your own risk.</p></div>
+  <p class="para">
+   This class represents the enumeration identified with the
+   <i><tt class="parameter">id</tt></i>
+ parameter.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">id</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       Can be either the name of the enumeration (e.g &quot;MyEnum&quot;), or the full
+       repository id (e.g. &quot;IDL:MyEnum:1.0&quot;).
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#1 Sample IDL file</b></p>
+    <div class="example-contents">
+<div class="cdata"><pre>
+enum MyEnum {
+    a,b,c,d,e
+};
+</pre></div>
+    </div>
+
+   </div>
+  </p>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#2 PHP code for accessing MyEnum</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$enum&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">OrbitEnum&nbsp;</span><span style="color: #007700">(</span><span style="color: #DD0000">"MyEnum"</span><span style="color: #007700">);<br /><br />echo&nbsp;</span><span style="color: #0000BB">$enum</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">a</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">/*&nbsp;write&nbsp;0&nbsp;*/<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$enum</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">c</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">/*&nbsp;write&nbsp;2&nbsp;*/<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">$enum</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">e</span><span style="color: #007700">;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">/*&nbsp;write&nbsp;4&nbsp;*/<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+   </div>
+  </p>
+ </div>
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="ref.satellite.html">Satellite</a></div>
+ <div class="next" style="float: right;"><a href="function.orbitobject.html">OrbitObject</a></div>
+ <div class="up"><a href="ref.satellite.html">Satellite</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

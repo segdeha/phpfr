@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Integers</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="language.types.boolean.html">Booleans</a></div>
+ <div class="next" style="float: right;"><a href="language.types.float.html">Floating point numbers</a></div>
+ <div class="up"><a href="language.types.html">Types</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="language.types.integer" class="sect1">
+    <h2 class="title">Integers</h2>
+    
+    <p class="simpara">
+     An <a href="language.types.integer.html" class="type integer">integer</a> is a number of the set 
+     Z = {..., -2, -1, 0, 1, 2, ...}.
+    </p>
+     
+    <p class="para">
+     See also:
+     <a href="ref.gmp.html" class="link">Arbitrary length integer / GMP</a>,
+     <a href="language.types.float.html" class="link">Floating point numbers</a>, and
+     <a href="ref.bc.html" class="link">Arbitrary precision / BCMath</a>
+    </p>
+
+    <div id="language.types.integer.syntax" class="sect2">
+     <h3 class="title">Syntax</h3>
+     <p class="simpara">
+      Integers can be specified in decimal (10-based), hexadecimal (16-based)
+      or octal (8-based) notation, optionally preceded by a sign (- or +).
+     </p>
+     <p class="para">
+      If you use the octal notation, you must precede the number with a 
+      <i class="literal">0</i> (zero), to use hexadecimal notation precede
+      the number with <i class="literal">0x</i>.
+      <div class="example">
+       <p><b>Example#1 Integer literals</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1234</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;decimal&nbsp;number<br /></span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;-</span><span style="color: #0000BB">123</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;a&nbsp;negative&nbsp;number<br /></span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0123</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;octal&nbsp;number&nbsp;(equivalent&nbsp;to&nbsp;83&nbsp;decimal)<br /></span><span style="color: #0000BB">$a&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">0x1A</span><span style="color: #007700">;&nbsp;</span><span style="color: #FF8000">//&nbsp;hexadecimal&nbsp;number&nbsp;(equivalent&nbsp;to&nbsp;26&nbsp;decimal)<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+      Formally the possible structure for integer literals is:
+      <div class="informalexample">
+       <div class="example-contents">
+<div class="cdata"><pre>
+decimal     : [1-9][0-9]*
+            | 0
+
+hexadecimal : 0[xX][0-9a-fA-F]+
+
+octal       : 0[0-7]+
+
+integer     : [+-]?decimal
+            | [+-]?hexadecimal
+            | [+-]?octal
+</pre></div>
+       </div>
+
+      </div>
+      The size of an integer is platform-dependent, although a 
+      maximum value of about two billion is the usual value 
+      (that&#039;s 32 bits signed). PHP does not support unsigned
+      integers.
+      Integer size can be determined from <b><tt>PHP_INT_SIZE</tt></b>,
+      maximum value from <b><tt>PHP_INT_MAX</tt></b> since PHP 4.4.0 and
+      PHP 5.0.5.
+     </p>
+     <div class="warning"><b class="warning">Warning</b>
+      <p class="para">
+       If an invalid digit is passed to octal integer (i.e. 8 or 9), the rest
+       of the number is ignored.
+       <div class="example">
+        <p><b>Example#2 Octal weirdness</b></p>
+        <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">01090</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;010&nbsp;octal&nbsp;=&nbsp;8&nbsp;decimal<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+        </div>
+
+       </div>
+      </p>
+     </div>
+    </div>
+   
+    <div id="language.types.integer.overflow" class="sect2">
+     <h3 class="title">Integer overflow</h3>
+     <p class="para">
+      If you specify a number beyond the bounds of the <a href="language.types.integer.html" class="type integer">integer</a>
+      type, it will be interpreted as a <a href="language.types.float.html" class="type float">float</a> instead. Also, if
+      you perform an operation that results in a number beyond the bounds of
+      the <a href="language.types.integer.html" class="type integer">integer</a> type, a <a href="language.types.float.html" class="type float">float</a> will be returned
+      instead.
+
+      <div class="informalexample">
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$large_number&nbsp;</span><span style="color: #007700">=&nbsp;&nbsp;</span><span style="color: #0000BB">2147483647</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$large_number</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;output:&nbsp;int(2147483647)<br /><br /></span><span style="color: #0000BB">$large_number&nbsp;</span><span style="color: #007700">=&nbsp;&nbsp;</span><span style="color: #0000BB">2147483648</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$large_number</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;output:&nbsp;float(2147483648)<br /><br />//&nbsp;it's&nbsp;true&nbsp;also&nbsp;for&nbsp;hexadecimal&nbsp;specified&nbsp;integers&nbsp;between&nbsp;2^31&nbsp;and&nbsp;2^32-1:<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">0xffffffff&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;output:&nbsp;float(4294967295)<br /><br />//&nbsp;this&nbsp;doesn't&nbsp;go&nbsp;for&nbsp;hexadecimal&nbsp;specified&nbsp;integers&nbsp;above&nbsp;2^32-1:<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(&nbsp;</span><span style="color: #0000BB">0x100000000&nbsp;</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;output:&nbsp;int(2147483647)<br /><br /></span><span style="color: #0000BB">$million&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">1000000</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$large_number&nbsp;</span><span style="color: #007700">=&nbsp;&nbsp;</span><span style="color: #0000BB">50000&nbsp;</span><span style="color: #007700">*&nbsp;</span><span style="color: #0000BB">$million</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$large_number</span><span style="color: #007700">);<br /></span><span style="color: #FF8000">//&nbsp;output:&nbsp;float(50000000000)<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+      <div class="warning"><b class="warning">Warning</b>
+       <p class="simpara">
+        Unfortunately, there was a bug in PHP so that this
+        does not always work correctly when there are negative numbers
+        involved. For example: when you do <i class="literal">-50000 *
+        $million</i>, the result will be
+        <i class="literal">-429496728</i>. However, when both operands are
+        positive there is no problem.
+       </p>
+       <p class="simpara">
+        This is solved in PHP 4.1.0.
+       </p>
+      </div>
+     </p>
+     <p class="para">
+      There is no integer division operator in PHP.
+      <i class="literal">1/2</i> yields the <a href="language.types.float.html" class="type float">float</a>
+      <i class="literal">0.5</i>. You can cast the value to
+      an integer to always round it downwards, or you can
+      use the <a href="function.round.html" class="function">round()</a> function.
+      <div class="informalexample">
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">25</span><span style="color: #007700">/</span><span style="color: #0000BB">7</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;float(3.5714285714286)&nbsp;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">((int)&nbsp;(</span><span style="color: #0000BB">25</span><span style="color: #007700">/</span><span style="color: #0000BB">7</span><span style="color: #007700">));&nbsp;</span><span style="color: #FF8000">//&nbsp;int(3)<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">round</span><span style="color: #007700">(</span><span style="color: #0000BB">25</span><span style="color: #007700">/</span><span style="color: #0000BB">7</span><span style="color: #007700">));&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;float(4)&nbsp;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </div>
+   
+
+    <div id="language.types.integer.casting" class="sect2">
+     <h3 class="title">Converting to integer</h3>
+      <p class="simpara">
+       To explicitly convert a value to <a href="language.types.integer.html" class="type integer">integer</a>, use either
+       the <i class="literal">(int)</i> or the <i class="literal">(integer)</i> cast.
+       However, in most cases you do not need to use the cast, since a value
+       will be automatically converted if an operator, function or 
+       control structure requires an <a href="language.types.integer.html" class="type integer">integer</a> argument.
+       You can also convert a value to integer with the function
+       <a href="function.intval.html" class="function">intval()</a>.
+      </p>
+      <p class="simpara">
+       See also <a href="language.types.type-juggling.html" class="link">type-juggling</a>.
+      </p>
+      
+      <div id="language.types.integer.casting.from-boolean" class="sect3">
+       <h4 class="title">From <a href="language.types.boolean.html" class="link">booleans</a></h4>
+       <p class="simpara">
+        <b><tt>FALSE</tt></b> will yield 
+        <i class="literal">0</i> (zero), and <b><tt>TRUE</tt></b> 
+        will yield <i class="literal">1</i> (one).
+       </p>
+      </div>
+
+      <div id="language.types.integer.casting.from-float" class="sect3">
+       <h4 class="title">From <a href="language.types.float.html" class="link">floating point numbers</a></h4> 
+       <p class="simpara">
+        When converting from float to integer, the number will
+        be rounded <em class="emphasis">towards zero</em>.
+       </p>
+       
+       <p class="para">
+        If the float is beyond the boundaries of integer
+        (usually <i class="literal">+/- 2.15e+9 = 2^31</i>), 
+        the result is undefined, since the float hasn&#039;t
+        got enough precision to give an exact integer result.
+        No warning, not even a notice will be issued in this 
+        case!
+       </p>
+       
+       <div class="warning"><b class="warning">Warning</b><p class="para">
+        Never cast an unknown fraction to <a href="language.types.integer.html" class="type integer">integer</a>, as this can
+        sometimes lead to unexpected results.
+        <div class="informalexample">
+         <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;(int)&nbsp;(&nbsp;(</span><span style="color: #0000BB">0.1</span><span style="color: #007700">+</span><span style="color: #0000BB">0.7</span><span style="color: #007700">)&nbsp;*&nbsp;</span><span style="color: #0000BB">10&nbsp;</span><span style="color: #007700">);&nbsp;</span><span style="color: #FF8000">//&nbsp;echoes&nbsp;7!<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+         </div>
+
+        </div>
+        
+        See for more information the <a href="language.types.float.html#warn.float-precision" class="link">warning 
+        about float-precision</a>.
+       </p></div>
+      </div>
+      
+      <div id="language.types.integer.casting.from-string" class="sect3">
+       <h4 class="title">From strings</h4>
+       <p class="simpara">
+        See <a href="language.types.string.html#language.types.string.conversion" class="link">String 
+        conversion to numbers</a>
+       </p>
+      </div>
+      
+      <div id="language.types.integer.casting.from-other" class="sect3">
+       <h4 class="title">From other types</h4>
+       <p class="para">
+        <div class="caution"><b class="caution">Caution</b>
+         <p class="simpara">
+          Behaviour of converting to integer is undefined for other
+          types. Currently, the behaviour is the same as if the value
+          was first <a href="language.types.boolean.html#language.types.boolean.casting" class="link">converted to boolean</a>. However, do
+          <em class="emphasis">not</em> rely on this behaviour, as it can
+          change without notice.
+         </p>
+        </div>
+       </p>
+      </div>
+    </div>
+  </div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="language.types.boolean.html">Booleans</a></div>
+ <div class="next" style="float: right;"><a href="language.types.float.html">Floating point numbers</a></div>
+ <div class="up"><a href="language.types.html">Types</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

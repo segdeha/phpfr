@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Retrieve a database connection attribute</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.PDO-exec.html">PDO->exec()</a></div>
+ <div class="next" style="float: right;"><a href="function.PDO-getAvailableDrivers.html">PDO->getAvailableDrivers()</a></div>
+ <div class="up"><a href="ref.pdo.html">PDO</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.PDO-getAttribute" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">PDO-&gt;getAttribute()</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.1.0, PECL pdo:0.2-1.0.3)</p><p class="refpurpose">PDO->getAttribute() — 
+   Retrieve a database connection attribute
+  </p>
+
+ </div>
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="classsynopsis">
+   <div class="ooclass"><b class="classname">PDO</b></div>
+   <div class="methodsynopsis">
+    <span class="type">mixed</span> <span class="methodname"><b><b>getAttribute</b></b></span>
+     ( <span class="methodparam"><span class="type">int</span> <tt class="parameter">$attribute</tt></span>
+    )</div>
+
+  </div>
+
+  <p class="para">
+   This function returns the value of a database connection attribute. To
+   retrieve PDOStatement attributes, refer to
+   <a href="function.PDOStatement-getAttribute.html" class="xref">PDOStatement->getAttribute()</a>.
+  </p>
+
+  <p class="para">
+   Note that some database/driver combinations may not support all of the
+   database connection attributes.
+  </p>
+
+ </div>
+
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">attribute</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       One of the <i class="literal">PDO::ATTR_*</i> constants. The constants that
+       apply to database connections are as follows:
+       <ul class="simplelist"> 
+        <li class="member"><i class="literal">PDO::ATTR_AUTOCOMMIT</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_CASE</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_CLIENT_VERSION</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_CONNECTION_STATUS</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_DRIVER_NAME</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_ERRMODE</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_ORACLE_NULLS</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_PERSISTENT</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_PREFETCH</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_SERVER_INFO</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_SERVER_VERSION</i></li>
+        <li class="member"><i class="literal">PDO::ATTR_TIMEOUT</i></li>
+       </ul> 
+      </p>
+     </dd>
+
+     </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   A successful call returns the value of the requested PDO attribute.
+   An unsuccessful call returns <i class="literal">null</i>.
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples">
+  <h3 class="title">Examples</h3>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#1 Retrieving database connection attributes</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$conn&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">PDO</span><span style="color: #007700">(</span><span style="color: #DD0000">'odbc:sample'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'db2inst1'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'ibmdb2'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$attributes&nbsp;</span><span style="color: #007700">=&nbsp;array(<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"AUTOCOMMIT"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"ERRMODE"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"CASE"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"CLIENT_VERSION"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"CONNECTION_STATUS"</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"ORACLE_NULLS"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"PERSISTENT"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"PREFETCH"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"SERVER_INFO"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"SERVER_VERSION"</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #DD0000">"TIMEOUT"<br /></span><span style="color: #007700">);<br /><br />foreach&nbsp;(</span><span style="color: #0000BB">$attributes&nbsp;</span><span style="color: #007700">as&nbsp;</span><span style="color: #0000BB">$val</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"PDO::ATTR_$val:&nbsp;"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">getAttribute</span><span style="color: #007700">(</span><span style="color: #0000BB">constant</span><span style="color: #007700">(</span><span style="color: #DD0000">"PDO::ATTR_$val"</span><span style="color: #007700">))&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    
+   </div>
+  </p>
+ </div>
+
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.PDO-setAttribute.html" class="xref">PDO->setAttribute()</a></li>
+    <li class="member"><a href="function.PDOStatement-getAttribute.html" class="xref">PDOStatement->getAttribute()</a></li>
+    <li class="member"><a href="function.PDOStatement-setAttribute.html" class="xref">PDOStatement->setAttribute()</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.PDO-exec.html">PDO->exec()</a></div>
+ <div class="next" style="float: right;"><a href="function.PDO-getAvailableDrivers.html">PDO->getAvailableDrivers()</a></div>
+ <div class="up"><a href="ref.pdo.html">PDO</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

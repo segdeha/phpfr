@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Fetches an event from the calendar stream</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.mcal-fetch-current-stream-event.html">mcal_fetch_current_stream_event</a></div>
+ <div class="next" style="float: right;"><a href="function.mcal-is-leap-year.html">mcal_is_leap_year</a></div>
+ <div class="up"><a href="ref.mcal.html">MCAL</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.mcal-fetch-event" class="refentry">
+   <div class="refnamediv">
+    <h1 class="refname">mcal_fetch_event</h1>
+    <p class="verinfo">(PHP 4)</p><p class="refpurpose">mcal_fetch_event — 
+     Fetches an event from the calendar stream
+    </p>
+
+   </div>
+   <div class="refsect1 u">
+    <h3 class="title">Description</h3>
+     <div class="methodsynopsis">
+      <span class="type">object</span> <span class="methodname"><b><b>mcal_fetch_event</b></b></span>
+       ( <span class="methodparam"><span class="type">int</span> <tt class="parameter">$mcal_stream</tt></span>
+      , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$event_id</tt></span>
+      [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$options</tt></span>
+     ] )</div>
+
+    <p class="para">  
+     <b>mcal_fetch_event()</b> fetches an event from the 
+     calendar stream specified by <i><tt class="parameter">id</tt></i>
+.
+    </p>
+    <p class="para">
+     Returns an event object consisting of:
+     <ul class="itemizedlist">
+      <li class="listitem"><span class="simpara">
+       int id - ID of that event.</span></li>
+      <li class="listitem"><span class="simpara">
+       int public - <b><tt>TRUE</tt></b> if the event if public, <b><tt>FALSE</tt></b> if it is
+       private.</span></li>
+      <li class="listitem"><span class="simpara">
+       string category - Category string of the event.</span></li> 
+      <li class="listitem"><span class="simpara">
+       string title - Title string of the event.</span></li>
+      <li class="listitem"><span class="simpara">
+       string description - Description string of the event.</span></li>
+      <li class="listitem"><span class="simpara">
+       int alarm - number of minutes before the event to send an
+       alarm/reminder.</span></li>
+      <li class="listitem"><span class="simpara">
+       object start - Object containing a datetime entry.</span></li>
+      <li class="listitem"><span class="simpara">
+       object end - Object containing a datetime entry.</span></li>
+      <li class="listitem"><span class="simpara">
+       int recur_type   - recurrence type</span></li>
+      <li class="listitem"><span class="simpara">
+       int recur_interval   - recurrence interval</span></li>
+      <li class="listitem"><span class="simpara">
+       datetime recur_enddate   - recurrence end date</span></li>
+      <li class="listitem"><span class="simpara">
+       int recur_data   - recurrence data</span></li>
+     </ul>
+
+     All datetime entries consist of an object that contains:
+
+     <ul class="itemizedlist">
+      <li class="listitem"><span class="simpara">
+       int year - year</span></li>
+      <li class="listitem"><span class="simpara">
+       int month - month</span></li>
+      <li class="listitem"><span class="simpara">
+       int mday  - day of month</span></li>
+      <li class="listitem"><span class="simpara">
+       int hour  - hour</span></li>
+      <li class="listitem"><span class="simpara">
+       int min   - minutes</span></li>
+      <li class="listitem"><span class="simpara">
+       int sec   - seconds</span></li>         
+      <li class="listitem"><span class="simpara">
+       int alarm   - minutes before event to send an alarm</span></li>         
+     </ul>
+
+     The possible values for recur_type are:
+
+     <ul class="itemizedlist">
+      <li class="listitem"><span class="simpara">
+       0 - Indicates that this event does not recur</span></li>
+      <li class="listitem"><span class="simpara">
+       1 - This event recurs daily</span></li>
+      <li class="listitem"><span class="simpara">
+       2 - This event recurs on a weekly basis</span></li>
+      <li class="listitem"><span class="simpara">
+       3 - This event recurs monthly on a specific day of the month (e.g. the 10th of the month)</span></li>
+      <li class="listitem"><span class="simpara">
+       4 - This event recurs monthly on a sequenced day of the week (e.g. the 3rd Saturday) </span></li>
+      <li class="listitem"><span class="simpara">
+       5 - This event recurs on an annual basis</span></li>         
+     </ul></p>
+   </div>
+
+  </div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.mcal-fetch-current-stream-event.html">mcal_fetch_current_stream_event</a></div>
+ <div class="next" style="float: right;"><a href="function.mcal-is-leap-year.html">mcal_is_leap_year</a></div>
+ <div class="up"><a href="ref.mcal.html">MCAL</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

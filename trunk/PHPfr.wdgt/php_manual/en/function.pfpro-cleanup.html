@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Shuts down the Payflow Pro library</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="ref.pfpro.html">Verisign Payflow Pro</a></div>
+ <div class="next" style="float: right;"><a href="function.pfpro-init.html">pfpro_init</a></div>
+ <div class="up"><a href="ref.pfpro.html">Verisign Payflow Pro</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.pfpro-cleanup" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">pfpro_cleanup</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.2, PHP 5 &lt;= 5.0.5)</p><p class="refpurpose">pfpro_cleanup — Shuts down the Payflow Pro library</p>
+
+ </div>
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">bool</span> <span class="methodname"><b><b>pfpro_cleanup</b></b></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+
+  <p class="para">
+   Used to shutdown the Payflow Pro library cleanly. 
+  </p>
+  <p class="para">
+   This function should be called after you have processed any transactions
+   and before the end of your script.
+   However you may omit this call, in which case this extension will
+   automatically call <b>pfpro_cleanup()</b> after your script 
+   terminates.
+  </p>
+ </div>
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns <b><tt>TRUE</tt></b> on success or <b><tt>FALSE</tt></b> on failure.
+  </p>
+ </div>
+
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.pfpro-init.html" class="function">pfpro_init()</a></li>
+   </ul>
+  </p>
+ </div>
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="ref.pfpro.html">Verisign Payflow Pro</a></div>
+ <div class="next" style="float: right;"><a href="function.pfpro-init.html">pfpro_init</a></div>
+ <div class="up"><a href="ref.pfpro.html">Verisign Payflow Pro</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

@@ -1,0 +1,1487 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>SAM - Simple Asynchronous Messaging</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.runkit-superglobals.html">runkit_superglobals</a></div>
+ <div class="next" style="float: right;"><a href="function.samconnection-commit.html">SAMConnection->commit()</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">SAM - Simple Asynchronous Messaging</h1>
+  
+
+  <div class="partintro">
+   <div id="sam.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+     This extension provides access to the functionality of messaging and
+     queueing systems, such as the IBM WebSphere MQSeries family of products,
+     from PHP scripts. The interface is designed to make it extremely simple
+     to do the more commonly required tasks such as deliver simple text
+     messages to queues while still allowing skilled users to do more complex
+     messaging operations. For many users the complexities of setting up
+     numerous options can be simply ignored.
+    </p>
+    <p class="para">
+     The SAM extension is a framework that provides a very simple API that can be used to
+     access a number of messaging middleware systems. Currently the package
+     includes built-in support for the MQTT (MQ Telemetry Transport) messaging protocol and support for the IBM
+     Messaging and Queuing middleware products. SAM is designed to be readily extended to
+     support other messaging systems and extension modules may be written in C or PHP.
+    </p>
+   </div>  
+
+   <div id="sam.installation" class="section">
+    <h2 class="title">Installation</h2>
+    <p class="para">
+      The SAM framework and MQTT support can be built and used without any other prerequisites.
+      Support for protocols other than MQTT is provided via a set of libraries and some client
+      side code referred to as XMS.
+    </p>
+    <p class="para">
+      If you only intend to use the built-in MQTT support then you can build and configure SAM as
+      an extension or simply refer to &quot;php_sam.php&quot; with a &quot;requires&quot; or &quot;requires_once&quot; clause
+      in your PHP script. In this case you need only install the code without building the
+      extension using the pear installer:
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+      pecl install -B SAM
+</pre></div>
+      </pre></div>
+    </p>
+    <div id="sam.installation.prerequisites" class="section">
+     <h2 class="title">Prerequisites</h2>
+      <p class="para">
+       The SAM extension interfaces to the IBM Messaging and Queuing
+       middleware products using a set of libraries and some client side code
+       referred to as XMS. This package is available as a free download in
+       the guise of IBM support pack IA94. There is a description of this
+       package and download links in the article <a href="http://www-1.ibm.com/support/docview.wss?uid=swg24007092" class="link external">&raquo; 
+       Introducing XMS - The IBM Message Service API</a>.
+      </p>
+      <p class="para">
+       If you intend to use SAM to access the Messaging and Queuing
+       infrastructure within WebSphere MQ then you will also need to have
+       installed a local MQ queue manager or installed the WebSphere MQ
+       clients package. The clients package is freely available as a support
+       pack (<a href="http://www-1.ibm.com/support/docview.wss?rs=171&uid=swg24009961&loc=en_US&cs=utf-8&lang=en" class="link external">&raquo; MQC6</a>).
+      </p>
+      <p class="para">
+       If you are only aiming to experiment with sending messages to and from
+       WebSphere Application Server queues using the WebSphere Platform
+       Messaging protocol (WPM) then you do not need to install the MQC6
+       package.
+      </p>
+      <p class="para">
+       After installing these packages you will need to ensure the XMS binary
+       and, if you are using it, the MQ client bin directory are included in
+       the PATH environment variable so that Apache and PHP can find the
+       dependent .DLLs/libraries.
+      </p>
+     </div>
+     <div id="sam.installation.linux" class="section">
+      <h2 class="title">Linux installation steps</h2>
+      <p class="para">
+The sam extension is supplied as a PECL module, which
+you should be able to download and install in one step as follows:
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+pecl install sam
+</pre></div>
+       </pre></div>
+       (Depending on your php environment, you will probably need to be root
+       to do this.)
+      </p>
+      <p class="para">
+       Make sure that the module is loaded by PHP, by adding following line
+       to <var class="filename">php.ini</var>:
+       <div class="example-contents"><pre>
+<div class="cdata"><pre>
+extension=sam.so
+</pre></div>
+      </pre></div>
+      If you intend to use the XMS support to access the IBM Messaging and Queuing family
+      you must also enable the SAM XMS extension.
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+extension=sam_xms.so
+</pre></div>
+      </pre></div>
+      </p>
+      <p class="para">
+If you cannot use the PEAR installer, you can download the extension and build
+it manually:
+      <div class="example-contents"><pre>
+<div class="cdata"><pre>
+pear download sam          #downloads sam-&lt;version&gt;.tgz
+tar -xzf sam-&lt;version&gt;.tgz
+cd sam-&lt;version&gt;
+phpize
+./configure
+make
+make install               #you may need to be root for this step
+</pre></div>
+      </pre></div>
+      </p>
+      <p class="para">
+       To work with the very latest source, you&#039;ll need to extract it from
+       cvs and build manually as above.
+      </p>
+     </div>
+     <div id="sam.installation.windows" class="section">
+     <h2 class="title">Windows installation steps</h2>
+      <p class="para">
+You will probably need to build the sam extension for Windows as there
+are only a limited range of pre-built binaries available from the SAM website.
+The extension can be built using the standard Windows extension build procedures.
+      </p>
+      <p class="para">
+       You will need the PHP source tree for the version of PHP you wish to
+       build the SAM extension against which you can obtain from php.net.
+       This should be unpacked into a working directory of your choice.
+      </p>
+      <p class="para">
+       You will also need the libraries and headers used by PHP extensions
+       available from http://www.php.net/extra/win32build.zip and this
+       should be unzipped so that is in your working directory.
+      </p>
+      <p class="para">
+       You should have something like:
+       <div class="example-contents"><pre>
+<div class="cdata"><pre>
+c:\php-build\-
+              |
+              |---php-5.0.5--|---build
+              |              |---ext
+              |              |--- ...
+              |
+              |---win32build--|---bin
+                              |---include
+                              |---lib
+</pre></div>
+       </pre></div>
+      </p>
+      <p class="para">
+       You will need a compiler such as the free version of Visual Studio C++
+       Express from the Microsoft web site. Also you need the Microsoft
+       Windows Platform SDK which again can be downloaded from the Microsoft web site.
+      </p>
+      <p class="para">
+Obtain the SAM extension source using pear (pecl download sam) or by using
+CVS and copy the files to a new &quot;sam&quot; directory under the &quot;ext&quot; directory
+in your PHP source tree.
+      </p>
+      <p class="para">
+       To build the extension open a build environment window by going to the
+       start menu-&gt;all programs-&gt;microsoft platform SDK for windows-&gt;
+       open build environment window-&gt;windows 200 build environment-&gt;
+       set windows 2000 build environment (retail)
+      </p>
+      <p class="para">
+       This should open a command prompt with all the environment variables
+       set up to access the platform SDK etc. You then need to set the
+       environment variables for Visual Studio by issuing the command
+       &quot;vcvars32.bat&quot; in the window.
+      </p>
+      <p class="para">
+       Change directory to your working directory e.g. cd c:\php-build. Then
+       make sure the win32build tools are accessible by adding them to the
+       PATH environment variable:
+       <div class="example-contents"><pre>
+<div class="cdata"><pre>
+set PATH=..\win32build\bin;%PATH%
+</pre></div>
+       </pre></div>
+      </p>
+      <p class="para">
+       Run the buildconf.bat command. This should rebuild the configure.js
+       file.
+      </p>
+      <p class="para">
+Run the cscript command with the appropriate options. To build just the
+SAM extension framework and MQTT support use:
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+cscript /nologo configure.js --with-sam
+</pre></div>
+      </pre></div>
+To build the SAM framework and the XMS support use:
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+cscript /nologo configure.js --with-sam --with-sam_xms=&quot;c:\program files\ibm\xms&quot;
+</pre></div>
+       </pre></div>
+      </p>
+      <p class="para">
+The additional parameter passed for sam_xms is the installation path to the
+XMS libraries and runtime that were installed as described under prerequisites
+at the top of this page.
+      </p>
+      <p class="para">
+       You can specify whatever other cscript parameters you require to
+       include or exclude items from the php build or select options.
+      </p>
+      <p class="para">
+Assuming all has gone well so far you can now finally run a make for the SAM framework!
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+nmake php_sam.dll
+</pre></div>
+      </pre></div>
+Also if you are using the XMS support you must make the sam_xms extensions:
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+nmake php_sam_xms.dll
+</pre></div>
+      </pre></div>
+      </p>
+      <p class="para">
+If you have used Visual Studio 2005 to build the DLLs please see below for additional steps that
+must be carried out before proceeding further.
+      </p>
+      <p class="para">
+The DLLs created (php_sam.dll and optionally php_sam_xms.dll) can now be copied to the
+subdirectory appropriate for your PHP set-up. Make sure that the module(s) are loaded by PHP, by adding following line to
+      <var class="filename">php.ini</var>
+      :
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+extension=php_sam.dll
+</pre></div>
+      </pre></div>
+      If you intend to use the XMS support to access the IBM Messgaing and Queuing family
+      you must also enable the SAM XMS extension.
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+extension=php_sam_xms.dll
+</pre></div>
+      </pre></div>
+      </p>
+     </div>
+     <div id="sam.installation.VS2005" class="section">
+      <h2 class="title">Additional steps for Visual Studio 2005</h2>
+      <p class="para">
+       If you build the SAM extension with the Microsoft Visual Studio 2005
+       compiler and tools you need to perform an additional step in the build
+       process to ensure the <var class="filename">php_sam.dll</var> is able to link
+       with the C runtime libraries at runtime. This step includes the
+       dependancy manifest into the DLL. Switch to the directory where the
+       <var class="filename">php_sam.dll</var> has been generated (usually
+       Release_TS or Debug_TS below the php source directory) and issue the
+       following magic incantation:
+       <div class="example-contents"><pre>
+<div class="cdata"><pre>
+mt.exe -manifest php_sam.dll.manifest -outputresource:php_sam.dll;2
+</pre></div>
+      </pre></div>
+If you are using the XMS capabilities you will need to do the same with the
+SAM XMS DLL:
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+mt.exe -manifest php_sam_xms.dll.manifest -outputresource:php_sam_xms.dll;2
+</pre></div>
+      </pre></div>
+      </p>
+      <p class="para">
+       If you build the SAM extension using the compiler and libaries from
+       Microsoft Visual Studio 2005 you will also need to ensure that the
+       runtime components are installed on the system on which you intend to
+       use SAM. This can be accomplished by installing Visual Studio 2005 or
+       by using the freely distributable
+       <a href="http://www.microsoft.com/downloads/details.aspx?familyid=32BC1BEE-A3F9-4C13-9C99-220B62A191EE&displaylang=en" class="link external">&raquo; runtime package</a>.
+      </p>
+     </div>
+     <div id="sam.installation.configutaion" class="section">
+      <h2 class="title">Protocol support and mapping</h2>
+      <p class="para">
+The SAM framework can be extended to support other messaging protocols and connection mechanisms. To add
+support for a new protocol or connection library a support class has to be defined, either as a C extension
+or as a PHP script, and a &quot;factory&quot; script must be created. The support class must implement all the
+methods of the SAMConnection class though it should not inherit from SAMConnection. The factory script
+will be called by the SAM framework to create an instance of the implemented class. The way SAM chooses
+which factory to call is based on the protocol specified as the first parameter of the &quot;connect&quot; call.
+      </p>
+      <p class="para">
+By default the built-in MQTT support will be used if a connect call specifies a protocol of SAM_MQTT (&quot;mqtt&quot;), for
+any other protocol SAM will attempt to use the XMS support extension. To add support for additional
+protocols or to modify the default behavior entries may be added to <var class="filename">php.ini</var> in the [sam] section. The
+default mapping is equivalent to the following entries:
+      <div class="example-contents"><pre>
+       <div class="cdata"><pre>
+[sam]
+sam.factory.mqtt=mqtt
+sam.factory.wmq=xms
+sam.factory.wmq:client=xms
+sam.factory.wmq:bindings=xms
+sam.factory.wpm=xms
+sam.factory.rtt=xms
+</pre></div>
+      </pre></div>
+As can be seen from these examples the entries take the form of &quot;sam.factory.pppp=xxx&quot; where pppp is the protocol
+string specified on the connect call and xxx is a factory suffix.  Note: SAM defines constants for these protocol
+strings such that SAM_WMQ=wmq, SAM_WPM=wpm, SAM_RTT=rtt, SAM_MQTT=mqtt, etc.
+      </p>
+      <p class="para">
+When identifying the support code to use on a connect call SAM looks up the protocol name in the <var class="filename">php.ini</var> entries
+and then invokes a factory script named sam_factory_xxx.php.  If no entry is found the support will default to XMS.
+      </p>
+     </div>
+   </div>  
+
+   <div id="sam.usage" class="section">
+    <h2 class="title">API Usage</h2>
+
+    <div id="sam.connections" class="section">
+     <h2 class="title">Connections</h2>
+      <p class="para">
+       In order to perform any messaging and queueing functions a connection
+       must be established with a messaging server by creating a SAMConnection
+       object and calling its &quot;connect&quot; method, with a set of connection
+       properties, to connect the PHP script to the messaging server.  Until
+       such time as the SAMConnection object is destroyed the connection
+       will be maintained and available for use. All SAMConnection objects
+       are destroyed when the PHP script exits.
+     </p>
+     <p class="para">
+       A set of default properties may be used in connecting to a messaging
+       server but as a minimum the PHP script must specify a protocol to be
+       used.
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#1 Creating a connection and connecting to a remote WebSphere MQSeries Messaging Server</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;$conn&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">SAMConnection</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">connect</span><span style="color: #007700">(</span><span style="color: #0000BB">SAM_WMQ</span><span style="color: #007700">,&nbsp;array(</span><span style="color: #0000BB">SAM_HOST&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'myhost.mycompany.com'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">SAM_PORT&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1506</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">SAM_BROKER&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'mybroker'</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#2 Creating a connection and connecting to a remote WebSphere Application Server</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;$conn&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">SAMConnection</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">connect</span><span style="color: #007700">(</span><span style="color: #0000BB">SAM_WPM</span><span style="color: #007700">,&nbsp;array(</span><span style="color: #0000BB">SAM_ENDPOINTS&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'localhost:7278:BootstrapBasicMessaging'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">SAM_BUS&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'Bus1'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">SAM_TARGETCHAIN&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'InboundBasicMessaging'</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#3 Creating a connection and connecting to an MQTT server</b></p>
+       <div class="example-contents">
+        <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;$conn&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">SAMConnection</span><span style="color: #007700">();<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">connect</span><span style="color: #007700">(</span><span style="color: #0000BB">SAM_MQTT</span><span style="color: #007700">,&nbsp;array(</span><span style="color: #0000BB">SAM_HOST&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'myhost.mycompany.com'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">SAM_PORT&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">1883</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </div>  
+
+    <div id="sam.messages" class="section">
+     <h2 class="title">Messages</h2>
+     <p class="para">
+      Messages sent to and received from queues are represented by the
+      SAMMessage object. The SAMMessage object encapsulates the body of
+      the message (if one exists) and the header properties associated with
+      the message. A SAMMessage object is either supplied as a parameter to
+      a messaging operation or returned as a result.
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#4 Creating a message with a simple text body</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$msg&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">SAMMessage</span><span style="color: #007700">(</span><span style="color: #DD0000">'This&nbsp;is&nbsp;a&nbsp;simple&nbsp;text&nbsp;message'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+     <p class="para">
+      Messages may have header properties associated with them that provide
+      control over the transport of the message or further information to the
+      receiving application. By default message properties are delivered to
+      the underlying messaging system as strings and in this case they may be
+      set with the following simple syntax:
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#5 Setting a text format property using the default syntax</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;$msg</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">header</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">myPropertyName&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'textData'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+     <p class="para">
+      If it is desired to pass type information an alternative syntax may be
+      used where the value and the type hint are passed in an associative
+      array:
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#6 Setting a property using a type hint</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;$msg</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">header</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">myPropertyName&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #0000BB">3.14159</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">SAM_FLOAT</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+     <p class="para">
+      Properties may also be extracted from the header of a message.
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#7 Retrieving a property from a message header</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;$myProperty&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$msg</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">header</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">myPropertyName</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </div>  
+
+    <div id="sam.operations" class="section">
+     <h2 class="title">Messaging operations</h2>
+     <p class="para">
+      All messaging operations are performed through calls to methods on the
+      connection object.
+      To add a message to a queue the &quot;send&quot; method is used, to obtain a
+      message from a queue the &quot;receive&quot; method is used. Other methods
+      provide publish and subscribe functionality and control of transaction
+      boundaries.
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#8 Adding a message to a queue and receiving a response</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$msg&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">SAMMessage</span><span style="color: #007700">(</span><span style="color: #DD0000">'This&nbsp;is&nbsp;a&nbsp;simple&nbsp;text&nbsp;message'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">$msg</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">header</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">SAM_REPLY_TO&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'queue://receive/test'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$correlid&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">send</span><span style="color: #007700">(</span><span style="color: #DD0000">'queue://send/test'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$msg</span><span style="color: #007700">);<br /><br />if&nbsp;(!</span><span style="color: #0000BB">$correlid</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;The&nbsp;Send&nbsp;failed!<br />&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"Send&nbsp;failed&nbsp;($conn-&gt;errno)&nbsp;$conn-&gt;error"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;</span><span style="color: #0000BB">$resp&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">receive</span><span style="color: #007700">(</span><span style="color: #DD0000">'queue://receive/test'</span><span style="color: #007700">,&nbsp;array(</span><span style="color: #0000BB">SAM_CORRELID&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #0000BB">$correlid</span><span style="color: #007700">));<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </div>  
+    <div id="sam.pubsub" class="section">
+     <h2 class="title">Publish/Subscribe and suscriptions to topics</h2>
+     <p class="para">
+      SAM allows messages to be sent either to queues or, for WebSphere MQ
+      and WPM, to publish/subscribe topics.
+      A topic desintation is specified to SAM in the usual way, i.e. in the
+      form &#039;topic://fred&#039;, rather than the form &#039;queue://AQUEUE&#039; used for
+      point to point operation. To use publish/subscribe it is simply
+      necessary to specify the correct broker name on the SAMConnect
+      &quot;connect&quot; call and the desired topic in the destination argument to
+      the SAMConnect &quot;send&quot; and &quot;receive&quot; calls. The PHP interface is
+      otherwise identical to the point to point model.
+     </p>
+     <p class="para">
+      By default, SAM creates non-durable subscriptions when using
+      publish/subscribe. This means that if a client application is
+      inactive when messages are published to a topic, then it will not
+      receive them when it subsequently restarted. SAM does also allow
+      durable subscriptions to be made to topics when using WPM or WebSphere
+      MQ publish/subscribe. The purpose of these subscriptions is to allow
+      data to be received by a client application even if that client was not
+      active at the time the data was published.
+     </p>
+     <p class="para">
+      Durable subscriptions are specified by using the SAMConnect &quot;subscribe&quot;
+      call. This method takes the destination topic as an input parameter and
+      returns a subscription identifier that may be used on subsequent
+      &quot;receive&quot; calls. When the subscription is no longer required the
+      SAMConnection &quot;unsubscribe&quot; method should be used to delete the
+      subscription.
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#9 Creating a durable subscription to a topic</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$subName&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">subscribe</span><span style="color: #007700">(</span><span style="color: #DD0000">'topic://A'</span><span style="color: #007700">);<br /><br />if&nbsp;(!</span><span style="color: #0000BB">$subName</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Subscribe&nbsp;failed"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">#&nbsp;Subscribe&nbsp;was&nbsp;OK<br />&nbsp;&nbsp;&nbsp;//&nbsp;...<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#10 Subscribing to a topic using a WebSphere Platform Messaging (WPM) server</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$conn&nbsp;</span><span style="color: #007700">=&nbsp;new&nbsp;</span><span style="color: #0000BB">SAMConnection</span><span style="color: #007700">();<br /></span><span style="color: #FF8000">//&nbsp;Note:&nbsp;For&nbsp;pub/sub&nbsp;on&nbsp;WPM,&nbsp;when&nbsp;connecting&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;messaging&nbsp;engine<br />//&nbsp;&nbsp;&nbsp;to&nbsp;hold&nbsp;the&nbsp;durable&nbsp;subscription&nbsp;(SAM_WPM_DUR_SUB_HOME)&nbsp;must&nbsp;be&nbsp;specified.<br /></span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">connect</span><span style="color: #007700">(</span><span style="color: #0000BB">SAM_WMQ</span><span style="color: #007700">,&nbsp;array(</span><span style="color: #0000BB">SAM_ENDPOINTS&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'localhost:7278:BootstrapBasicMessaging'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">SAM_BUS&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'Bus1'</span><span style="color: #007700">,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">SAM_TARGETCHAIN&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'InboundBasicMessaging'<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">SAM_WPM_DUR_SUB_HOME&nbsp;</span><span style="color: #007700">=&gt;&nbsp;</span><span style="color: #DD0000">'MyMachineNode01.server1-Bus1'</span><span style="color: #007700">));<br /><br /></span><span style="color: #0000BB">$subName&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">subscribe</span><span style="color: #007700">(</span><span style="color: #DD0000">'topic://A'</span><span style="color: #007700">);<br /><br />if&nbsp;(!</span><span style="color: #0000BB">$subName</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Subscribe&nbsp;failed"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">#&nbsp;Subscribe&nbsp;was&nbsp;OK<br />&nbsp;&nbsp;&nbsp;//&nbsp;...<br /></span><span style="color: #007700">}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#11 Receiving published data using a durable subscription</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br />$msg&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">receive</span><span style="color: #007700">(</span><span style="color: #0000BB">$subName</span><span style="color: #007700">);<br />if&nbsp;(</span><span style="color: #0000BB">$msg</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Received&nbsp;a&nbsp;message&nbsp;OK"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"The&nbsp;receive&nbsp;failed"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#12 Deleting a durable subscription to a topic</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #007700">if&nbsp;(!</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">unsubscribe</span><span style="color: #007700">(</span><span style="color: #0000BB">$subName</span><span style="color: #007700">))&nbsp;{<br />&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Unsubscribe&nbsp;failed"</span><span style="color: #007700">;<br />}<br /><br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </div>  
+    <div id="sam.errors" class="section">
+     <h2 class="title">Error handling</h2>
+     <p class="para">
+      All SAMConnection methods that provide access to messaging operations
+      return <b><tt>FALSE</tt></b> if an error occurred in processing the request.
+      In addition the SAMConnection object has two properties, &quot;errno&quot;
+      and &quot;error&quot;, that provide respectively the error number and
+      text description of the last error to occur on the connection.
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#13 Handling an error from a method that returns no result</b></p>
+       <div class="example-contents">
+        <div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">if&nbsp;(!</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">commit</span><span style="color: #007700">())&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;The&nbsp;commit&nbsp;failed!<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"Commit&nbsp;failed&nbsp;($conn-&gt;errno)&nbsp;$conn-&gt;error"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+     <p class="para">
+      <div class="example">
+       <p><b>Example#14 Handling an error from a method that returns a result</b></p>
+       <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$correlid&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">$conn</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">send</span><span style="color: #007700">(</span><span style="color: #DD0000">'queue://send/test'</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$msg</span><span style="color: #007700">);<br /><br />if&nbsp;(!</span><span style="color: #0000BB">$correlid</span><span style="color: #007700">)&nbsp;{<br />&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;The&nbsp;Send&nbsp;failed!<br />&nbsp;&nbsp;</span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">"Send&nbsp;failed&nbsp;($conn-&gt;errno)&nbsp;$conn-&gt;error"</span><span style="color: #007700">;<br />}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;...<br />}<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+       </div>
+
+      </div>
+     </p>
+    </div>  
+   </div>  
+
+   
+   <div id="sam.classes" class="section">
+    <h2 class="title">Predefined Classes</h2>
+
+
+    <div id="sam.class.Connection" class="section">
+     <h2 class="title"><span class="classname">SAMConnection</span></h2>
+     <p class="para">
+      Object representing a connection to a Messaging Server
+     </p>
+
+     <div id="sam.class.Connection.constructor" class="section">
+      <h2 class="title">Constructor</h2>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-constructor.html" class="link">new SAMConnection</a> - construct a new connection object to allow connection to a messaging infrastructure.
+        </p>
+       </li>
+      </ul>
+     </div>  
+
+     <div id="sam.class.Connection.methods" class="section">
+      <h2 class="title">Methods</h2>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-commit.html" class="link">commit</a>
+         - a method that commits (successfully completes) an in-flight unit
+         of work.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-connect.html" class="link">connect</a>
+         - a method that connects a PHP script to a messaging server.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-disconnect.html" class="link">disconnect</a>
+         - a method that disconnects a PHP script from a messaging server.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-isconnected.html" class="link">isConnected</a>
+         - a method that checks whether a PHP script is connected to a
+          messaging server.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-peek.html" class="link">peek</a>
+         - a method that receives a message from a queue without removing it
+          from the queue.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-peekall.html" class="link">peekAll</a>
+         - a method that receives one or messages from a queue without
+         removing them from the queue.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-receive.html" class="link">receive</a>
+         - a method that receives a message from a queue or subscription.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-remove.html" class="link">remove</a>
+         - a method that removes a message from a queue.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-rollback.html" class="link">rollback</a>
+         - a method that cancels (rolls back) an in-flight unit of work.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-send.html" class="link">send</a>
+         - a method that sends a message to a queue or posts to a topic
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-setDebug.html" class="link">setDebug</a>
+         - a method that switches additional debugging output on or off
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-subscribe.html" class="link">subscribe</a>
+         - a method that creates a subscription to one or more topics
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-unsubscribe.html" class="link">unsubscribe</a>
+         - a method that destroys a subscription to one or more topics
+        </p>
+       </li>
+      </ul>
+     </div>  
+
+     <div id="sam.class.Connection.properties" class="section">
+      <h2 class="title">Properties</h2>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-errno.html" class="link">errno</a> - the
+         numeric error code for the last encountered error on this
+         connection. This property is set to 0 if the last operation was
+         successful.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.samconnection-error.html" class="link">error</a> - the
+         text description for the last encountered error on this connection
+        </p>
+       </li>
+      </ul>
+     </div>    
+    </div>   
+
+
+    <div id="sam.class.Message" class="section">
+     <h2 class="title"><span class="classname">SAMMessage</span></h2>
+     <p class="para">
+      Object representing a message to be sent or received
+     </p>
+
+     <div id="sam.class.Message.constructor" class="section">
+      <h2 class="title">Constructor</h2>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <p class="para">
+         <a href="function.sammessage-constructor.html" class="link">new SAMMessage</a> - construct a
+         new message.
+        </p>
+       </li>
+      </ul>
+     </div>  
+
+     <div id="sam.class.Message.properties" class="section">
+      <h2 class="title">Properties</h2>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <p class="para">
+         <a href="function.sammessage-body.html" class="link">body</a> - the body of
+         the message.
+        </p>
+       </li>
+       <li class="listitem">
+        <p class="para">
+         <a href="function.sammessage-header.html" class="link">header</a> - the
+         header properties of the message.
+        </p>
+       </li>
+      </ul>
+     </div>  
+    </div>   
+
+   </div>    
+
+
+   
+  
+
+<div id="mq.constants" class="section">
+ <h2 class="title">Predefined Constants</h2>
+ <p class="simpara">
+The constants below are defined by this extension, and
+will only be available when the extension has either
+been compiled into PHP or dynamically loaded at runtime.
+</p>
+ <dl>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_AUTO</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Automatic behaviour
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_BOOLEAN</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Type specifier used when setting properties on SAM_Message objects.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_BUS</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect attribute used to set the name of the enterprise service bus to
+     connect to.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_BYTE</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Type specifier used when setting properties on SAM_Message objects.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_BYTES</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Message body type descriptor.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_CORRELID</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Attribute used on receive, send and remove requests to identify specific
+     messages.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_DELIVERYMODE</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Message header property.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_DOUBLE</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Type specifier used when setting properties on SAM_Message objects.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_ENDPOINTS</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect attribute used to define the possible endpoints to connect to.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_FLOAT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Type specifier used when setting properties on SAM_Message objects.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_HOST</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect attribute used to set the hostname of the required messaging
+     server.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_INT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Type specifier used when setting properties on SAM_Message objects.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_LONG</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Type specifier used when setting properties on SAM_Message objects.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_MANUAL</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Manual (script controlled) behaviour
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_MESSAGEID</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Attribute used on receive and remove requests to identify specific
+     messages.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_MQTT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect protocol definition for selecting the MQTT (MQ Telemetry Transport) protocol.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_MQTT_CLEANSTART</tt></b>
+     (<a href="language.types.boolean.html" class="type bool">bool</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Optional connect option to indicate to an MQTT server that all previous connection data
+     for this client should be removed and that subscriptions should be deleted when the client
+     disconnects explicitly or unexpectedly.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_NON_PERSISTENT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect attribute value used to request messages are not made persistent
+     on the messaging server.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_PASSWORD</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect attribute used to define the password to be used for the user
+     account being used to connect to a messaging server that requires
+     authorisation for connections.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_PERSISTENT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect attribute value used to request messages are made persistent
+     on the messaging server to protect against loss of messages in the
+     event of failure.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_PORT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect attribute used to set the port number on which to communicate
+     with the messaging server.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_PRIORITY</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Option name used on send requests to specify a delivery priority value.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_REPLY_TO</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Message propery used to specify the queue identity on to which the 
+     script expects response or reply messages to be posted.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_RTT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect protocol definition for selecting the IBM Realtime Transport
+     protocol for communication with a business integration messaging server.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_STRING</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Type specifier used when setting properties on SAM_Message objects.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_TARGETCHAIN</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connection attribute used to set the required target chain identifier.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_TEXT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Message body type descriptor.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_TIMETOLIVE</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Message send option name used to specify the length of time a message
+     should be retained in milliseconds.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_TRANSACTIONS</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connection attribute used to set required transactional behaviour. May
+     be set to SAM_AUTO (default) or SAM_MANUAL.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_USERID</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect attribute used to define the account to being used to
+     connect to a messaging server that requires authorisation for connections.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_WAIT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Receive property used to specify the wait timeout to be used when
+     receiving a message from a queue or subscription.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_WMQ</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect protocol definition for selecting the IBM WebSphere MQSeries
+     protocol for communication with the desired messaging server.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_WMQ_BINDINGS</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect protocol definition for selecting the IBM WebSphere MQSeries
+     protocol for communication with a local messaging server.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_WMQ_CLIENT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect protocol definition for selecting the IBM WebSphere MQSeries
+     protocol for communication with a remote messaging server.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_WMQ_TARGET_CLIENT</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Option name used on send requests to specify the target client mode. 
+     This can either be default to &#039;jms&#039; or &#039;mq&#039;. The default is &#039;jms&#039; which
+     means an RFH2 header is sent with the message whereas the &#039;mq&#039; setting
+     means no RFH2 is included.
+    </span>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>SAM_WPM</tt></b>
+     (<a href="language.types.string.html" class="type string">string</a>)
+   </span>
+   <dd>
+
+    <span class="simpara">
+     Connect protocol definition for selecting the IBM WebSphere Platform
+     Messaging protocol for communication with a WebSphere Application Server
+     messaging server.
+    </span>
+   </dd>
+
+  </dt>
+
+ </dl>
+
+</div>
+
+
+
+
+  </div>
+
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.samconnection-commit.html">SAMConnection->commit()</a> — Commits (completes) the current unit of work.</li><li><a href="function.samconnection-connect.html">SAMConnection->connect()</a> — Establishes a connection to a Messaging Server</li><li><a href="function.samconnection-constructor.html">SAMConnection->__construct()</a> — Creates a new connection to a Messaging Server</li><li><a href="function.samconnection-disconnect.html">SAMConnection->disconnect()</a> — Disconnects from a Messaging Server</li><li><a href="function.samconnection-errno.html">SAMConnection->errno</a> — Contains the unique numeric error code of the last executed SAM operation.</li><li><a href="function.samconnection-error.html">SAMConnection->error</a> — Contains the text description of the last failed SAM operation.</li><li><a href="function.samconnection-isconnected.html">SAMConnection->isConnected()</a> — Queries whether a connection is established to a Messaging Server</li><li><a href="function.samconnection-peek.html">SAMConnection->peek()</a> — Read a message from a queue without removing it from the queue.</li><li><a href="function.samconnection-peekall.html">SAMConnection->peekAll()</a> — Read one or more messages from a queue without removing it from the queue.</li><li><a href="function.samconnection-receive.html">SAMConnection->receive()</a> — Receive a message from a queue or subscription.</li><li><a href="function.samconnection-remove.html">SAMConnection->remove()</a> — Remove a message from a queue.</li><li><a href="function.samconnection-rollback.html">SAMConnection->rollback()</a> — Cancels (rolls back) an in-flight unit of work.</li><li><a href="function.samconnection-send.html">SAMConnection->send()</a> — Send a message to a queue or publish an item to a topic.</li><li><a href="function.samconnection-setDebug.html">SAMConnection::setDebug()</a> — Turn on or off additional debugging output.</li><li><a href="function.samconnection-subscribe.html">SAMConnection->subscribe()</a> — Create a subscription to a specified topic.</li><li><a href="function.samconnection-unsubscribe.html">SAMConnection->unsubscribe()</a> — Cancel a subscription to a specified topic.</li><li><a href="function.sammessage-body.html">SAMMessage->body</a> — The body of the message.</li><li><a href="function.sammessage-constructor.html">SAMMessage->__construct()</a> — Creates a new Message object</li><li><a href="function.sammessage-header.html">SAMMessage->header</a> — The header properties of the message.</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.runkit-superglobals.html">runkit_superglobals</a></div>
+ <div class="next" style="float: right;"><a href="function.samconnection-commit.html">SAMConnection->commit()</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

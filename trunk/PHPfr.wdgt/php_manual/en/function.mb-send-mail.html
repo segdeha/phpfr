@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Send encoded mail</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.mb-regex-set-options.html">mb_regex_set_options</a></div>
+ <div class="next" style="float: right;"><a href="function.mb-split.html">mb_split</a></div>
+ <div class="up"><a href="ref.mbstring.html">Multibyte String</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.mb-send-mail" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">mb_send_mail</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.6, PHP 5)</p><p class="refpurpose">mb_send_mail — Send encoded mail</p>
+
+ </div>
+   
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">bool</span> <span class="methodname"><b><b>mb_send_mail</b></b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$to</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$subject</tt></span>
+   , <span class="methodparam"><span class="type">string</span> <tt class="parameter">$message</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$additional_headers</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$additional_parameter</tt></span>
+  ]] )</div>
+
+  <p class="para">
+   <b>mb_send_mail()</b> sends email. Headers and
+   message are converted and encoded according to
+   <a href="function.mb-language.html" class="function">mb_language()</a> setting. 
+   <b>mb_send_mail()</b> is wrapper
+   function of <a href="function.mail.html" class="function">mail()</a>. See
+   <a href="function.mail.html" class="function">mail()</a> for details.
+  </p>
+  <p class="para">
+   <i><tt class="parameter">to</tt></i>
+ is mail addresses send to. Multiple
+   recipients can be specified by putting a comma between each
+   address in to. This parameter is not automatically encoded.
+  </p>
+  <p class="para">
+   <i><tt class="parameter">subject</tt></i>
+ is subject of mail.
+  </p>
+  <p class="para">
+   <i><tt class="parameter">message</tt></i>
+ is mail message.
+  </p>
+  <p class="para">
+   <i><tt class="parameter">additional_headers</tt></i>
+ is inserted at
+   the end of the header. This is typically used to add extra
+   headers.  Multiple extra headers are separated with a
+   newline (&quot;\n&quot;).
+  </p>
+  <blockquote><p><b class="note">Note</b>: 
+   
+    <i class="literal">Content-Type</i> and
+    <i class="literal">Content-Transfer-Encoding</i> headers can be redefined as
+    of PHP 5.0.0. In PHP 4, values defined by
+    <a href="function.mb-language.html" class="function">mb_language()</a> are always used.
+   <br />
+  </p></blockquote>
+  <p class="para">
+   <i><tt class="parameter">additional_parameter</tt></i>
+ is a MTA command line
+   parameter. It is useful when setting the correct Return-Path
+   header when using sendmail.
+  </p>
+  <p class="para">
+   Returns <b><tt>TRUE</tt></b> on success or <b><tt>FALSE</tt></b> on failure.
+  </p>
+  <p class="para">
+   See also <a href="function.mail.html" class="function">mail()</a>,
+   <a href="function.mb-encode-mimeheader.html" class="function">mb_encode_mimeheader()</a>, and
+   <a href="function.mb-language.html" class="function">mb_language()</a>.
+  </p>
+ </div>
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.mb-regex-set-options.html">mb_regex_set_options</a></div>
+ <div class="next" style="float: right;"><a href="function.mb-split.html">mb_split</a></div>
+ <div class="up"><a href="ref.mbstring.html">Multibyte String</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

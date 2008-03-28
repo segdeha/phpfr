@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Missing functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="migration4.empty.html">empty("0")</a></div>
+ <div class="next" style="float: right;"><a href="migration4.extensions.html">PHP 3 extension</a></div>
+ <div class="up"><a href="migration4.html">Migrating from PHP 3 to PHP 4</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="migration4.missing" class="section">
+   <h2 class="title">Missing functions</h2>
+   <p class="para">
+    While PHP 4 comes with a lot of new features, functions and
+    extensions, you may still find some functions from version 3
+    missing. A small number of core functions has vanished because
+    they do not work with the new scheme of splitting parsing and
+    execution as introduced into 4 with the Zend engine.  Other
+    functions and even complete extensions have become obsolete as
+    newer functions and extensions serve the same task better and/or
+    in a more general way. Some functions just simply haven&#039;t been
+    ported yet and finally some functions or extensions may be missing
+    due to license conflicts.
+   </p>
+
+   <div id="migration4.missing.concept" class="section">
+    <h2 class="title">Functions missing due to conceptual changes</h2>
+    <p class="para">
+     As PHP 4 now separates parsing from execution it is no longer
+     possible to change the behavior of the parser (now embedded in
+     the Zend engine) at runtime as parsing already happened by
+     then. So the function <b>short_tags()</b> no longer
+     exists. You can still change the parser&#039;s behavior by setting
+     appropriate values in the <var class="filename">php.ini</var> file.
+    </p>
+    <p class="para">
+     Another feature of PHP 3 that is not a part of PHP 4 is the bundled
+     debugging interface. There are third-party add-ons for the Zend engine
+     which add similar functionality.
+    </p>
+   </div>
+
+   <div id="migration4.deprecate" class="section">
+    <h2 class="title">Deprecate functions and extensions</h2>
+    <p class="para">
+     The Adabas and Solid database extensions are no more. Long live
+     the unified ODBC extension instead.
+    </p>
+   </div>
+
+   <div id="migration4.unset" class="section">
+    <h2 class="title">Changed status for <a href="function.unset.html" class="function">unset()</a></h2>
+    <p class="para">
+     <a href="function.unset.html" class="function">unset()</a>, although still available, is
+     implemented as a language construct rather than a function.
+    </p>
+    <p class="para">
+     This does not have any consequences on the behavior of
+     <a href="function.unset.html" class="function">unset()</a>, but testing for &quot;unset&quot; using
+     <a href="function.function-exists.html" class="function">function_exists()</a> will return <b><tt>FALSE</tt></b> as it would with
+     other language constructs that look like functions such as
+     <a href="function.echo.html" class="function">echo()</a>.
+    </p>
+    <p class="para">
+     Another more practical change is that it is no longer possible to
+     call <a href="function.unset.html" class="function">unset()</a> indirectly, that is
+     <i class="literal">$func=&quot;unset&quot;; $func($somevar)</i> won&#039;t work
+     anymore.
+    </p>
+   </div>
+  </div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="migration4.empty.html">empty("0")</a></div>
+ <div class="next" style="float: right;"><a href="migration4.extensions.html">PHP 3 extension</a></div>
+ <div class="up"><a href="migration4.html">Migrating from PHP 3 to PHP 4</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

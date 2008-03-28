@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Extract a slice of the array</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.array-shift.html">array_shift</a></div>
+ <div class="next" style="float: right;"><a href="function.array-splice.html">array_splice</a></div>
+ <div class="up"><a href="ref.array.html">Arrays</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.array-slice" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">array_slice</h1>
+  <p class="verinfo">(PHP 4, PHP 5)</p><p class="refpurpose">array_slice — Extract a slice of the array</p>
+
+ </div>
+ <div class="refsect1 u">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">array</span> <span class="methodname"><b><b>array_slice</b></b></span>
+    ( <span class="methodparam"><span class="type">array</span> <tt class="parameter">$array</tt></span>
+   , <span class="methodparam"><span class="type">int</span> <tt class="parameter">$offset</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$length</tt></span>
+   [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$preserve_keys</tt></span>
+  ]] )</div>
+
+  <p class="para">
+   <b>array_slice()</b> returns the sequence of elements
+   from the array <i><tt class="parameter">array</tt></i>
+ as specified by the
+   <i><tt class="parameter">offset</tt></i>
+ and <i><tt class="parameter">length</tt></i>
+
+   parameters.
+  </p>
+  <p class="para">
+   If <i><tt class="parameter">offset</tt></i>
+ is non-negative, the sequence will
+   start at that offset in the <i><tt class="parameter">array</tt></i>
+.  If
+   <i><tt class="parameter">offset</tt></i>
+ is negative, the sequence will
+   start that far from the end of the <i><tt class="parameter">array</tt></i>
+.
+  </p>
+  <p class="para">
+   If <i><tt class="parameter">length</tt></i>
+ is given and is positive, then
+   the sequence will have that many elements in it. If
+   <i><tt class="parameter">length</tt></i>
+ is given and is negative then the
+   sequence will stop that many elements from the end of the
+   array. If it is omitted, then the sequence will have everything
+   from <i><tt class="parameter">offset</tt></i>
+ up until the end of the
+   <i><tt class="parameter">array</tt></i>
+.
+  </p>
+  <p class="para">
+   Note that <b>array_slice()</b> will reorder and reset the 
+   array indices by default. Since PHP 5.0.2, you can change this 
+   behaviour by setting <i><tt class="parameter">preserve_keys</tt></i>
+ to <b><tt>TRUE</tt></b>.
+  </p>
+  <p class="para">
+   <div class="example">
+    <p><b>Example#1 <b>array_slice()</b> examples</b></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$input&nbsp;</span><span style="color: #007700">=&nbsp;array(</span><span style="color: #DD0000">"a"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"b"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"c"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"d"</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">"e"</span><span style="color: #007700">);<br /><br /></span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;returns&nbsp;"c",&nbsp;"d",&nbsp;and&nbsp;"e"<br /></span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">);&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;returns&nbsp;"d"<br /></span><span style="color: #0000BB">$output&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">0</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">3</span><span style="color: #007700">);&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;returns&nbsp;"a",&nbsp;"b",&nbsp;and&nbsp;"c"<br /><br />//&nbsp;note&nbsp;the&nbsp;differences&nbsp;in&nbsp;the&nbsp;array&nbsp;keys<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">print_r</span><span style="color: #007700">(</span><span style="color: #0000BB">array_slice</span><span style="color: #007700">(</span><span style="color: #0000BB">$input</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">2</span><span style="color: #007700">,&nbsp;-</span><span style="color: #0000BB">1</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">true</span><span style="color: #007700">));<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>The above example will output:</p></div>
+    <div class="example-contents"><pre>
+<div class="cdata"><pre>
+Array
+(
+    [0] =&gt; c
+    [1] =&gt; d
+)
+Array
+(
+    [2] =&gt; c
+    [3] =&gt; d
+)
+</pre></div>
+    </pre></div>
+   </div>
+  </p>
+  <p class="para">
+   See also <a href="function.array-splice.html" class="function">array_splice()</a> and
+   <a href="function.unset.html" class="function">unset()</a>.
+  </p>
+ </div>
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.array-shift.html">array_shift</a></div>
+ <div class="next" style="float: right;"><a href="function.array-splice.html">array_splice</a></div>
+ <div class="up"><a href="ref.array.html">Arrays</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

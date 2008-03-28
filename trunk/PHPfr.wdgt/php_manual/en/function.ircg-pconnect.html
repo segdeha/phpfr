@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Connect to an IRC server</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ircg-part.html">ircg_part</a></div>
+ <div class="next" style="float: right;"><a href="function.ircg-register-format-messages.html">ircg_register_format_messages</a></div>
+ <div class="up"><a href="ref.ircg.html">IRC Gateway</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.ircg-pconnect" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">ircg_pconnect</h1>
+  <p class="verinfo">(PHP 4 &gt;= 4.0.4, PHP 5 &lt;= 5.0.5)</p><p class="refpurpose">ircg_pconnect — Connect to an IRC server</p>
+
+ </div>
+ 
+ <div class="refsect1 description">
+  <h3 class="title">Description</h3>
+  <div class="methodsynopsis">
+   <span class="type">resource</span> <span class="methodname"><b><b>ircg_pconnect</b></b></span>
+    ( <span class="methodparam"><span class="type">string</span> <tt class="parameter">$username</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$server_ip</tt></span>
+   [, <span class="methodparam"><span class="type">int</span> <tt class="parameter">$server_port</tt></span>
+   [, <span class="methodparam"><span class="type">string</span> <tt class="parameter">$msg_format</tt></span>
+   [, <span class="methodparam"><span class="type">array</span> <tt class="parameter">$ctcp_messages</tt></span>
+   [, <span class="methodparam"><span class="type">array</span> <tt class="parameter">$user_settings</tt></span>
+   [, <span class="methodparam"><span class="type">bool</span> <tt class="parameter">$bailout_on_trivial</tt></span>
+  ]]]]]] )</div>
+
+  <p class="para">
+   <b>ircg_pconnect()</b> will try to establish a connection to
+   an IRC server.
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters">
+  <h3 class="title">Parameters</h3>
+  <p class="para">
+   <dl>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">username</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       The initial nickname on the server.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">server_ip</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       The IRC server address.
+      </p>
+      <p class="para">
+       <i><tt class="parameter">server_ip</tt></i>
+ must be an IP address in numerical
+       form. DNS lookups are expensive and should be done in the context of
+       IRCG. Default to <i class="literal">127.0.0.1</i>.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">server_port</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       The server port number. Default to 6667.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">msg_format</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       You can customize the output of IRC messages and events by selecting a
+       format message set previously created with
+       <a href="function.ircg-register-format-messages.html" class="function">ircg_register_format_messages()</a> by specifying
+       the set&#039;s name in <i><tt class="parameter">msg_format</tt></i>
+.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">ctcp_messages</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       If you want to handle CTCP messages such as ACTION (/me), you need to
+       define a mapping from CTCP type (e.g. ACTION) to a custom format
+       string. Do this by passing an associative array as
+       <i><tt class="parameter">ctcp_messages</tt></i>
+. The keys of the array
+       are the CTCP type and the respective value is the format message.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">user_settings</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+       You can define &quot;ident&quot;, &quot;password&quot;, and &quot;realname&quot; tokens which
+       are sent to the IRC server by setting these in this associative
+       array.
+      </p>
+     </dd>
+
+    </dt>
+
+    <dt>
+
+     <span class="term"><i><tt class="parameter">bailout_on_trivial</tt></i>
+</span>
+     <dd>
+
+      <p class="para">
+      </p>
+     </dd>
+
+    </dt>
+
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues">
+  <h3 class="title">Return Values</h3>
+  <p class="para">
+   Returns a connection resource handle for further use, or <b><tt>FALSE</tt></b> on error.
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso">
+  <h3 class="title">See Also</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><a href="function.ircg-disconnect.html" class="function">ircg_disconnect()</a></li>
+    <li class="member"><a href="function.ircg-is-conn-alive.html" class="function">ircg_is_conn_alive()</a></li>
+    <li class="member"><a href="function.ircg-register-format-messages.html" class="function">ircg_register_format_messages()</a></li>
+   </ul>
+  </p>
+ </div>
+
+
+</div><hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ircg-part.html">ircg_part</a></div>
+ <div class="next" style="float: right;"><a href="function.ircg-register-format-messages.html">ircg_register_format_messages</a></div>
+ <div class="up"><a href="ref.ircg.html">IRC Gateway</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

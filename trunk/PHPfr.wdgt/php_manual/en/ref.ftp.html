@@ -1,0 +1,467 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>FTP Functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.fbsql-warnings.html">fbsql_warnings</a></div>
+ <div class="next" style="float: right;"><a href="function.ftp-alloc.html">ftp_alloc</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+ <h1 class="title">FTP Functions</h1>
+ 
+
+ <div class="partintro">
+  <div id="ftp.intro" class="section">
+   <h2 class="title">Introduction</h2>
+   <p class="para">
+    The functions in this extension implement client access to file
+    servers speaking the File Transfer Protocol (FTP) as defined in 
+    <a href="http://www.faqs.org/rfcs/rfc959" class="link external">&raquo; http://www.faqs.org/rfcs/rfc959</a>.  This extension is
+    meant for detailed access to an FTP server providing a wide range
+    of control to the executing script. If you only wish to
+    read from or write to a file on an FTP server, consider using
+    the <a href="wrappers.ftp.html" class="link"><i class="literal">ftp://</i> wrapper</a>
+    with the <a href="ref.filesystem.html" class="link">filesystem functions</a>
+    which provide a simpler and more intuitive interface.
+   </p>
+  </div>
+   
+  <div id="ftp.requirements" class="section">
+   <h2 class="title">Requirements</h2>
+   <p class="para">No external libraries are needed to build this extension.</p>
+  </div>
+
+  
+
+<div id="ftp.installation" class="section">
+ <h2 class="title">Installation</h2>
+ <p class="para">
+  In order to use FTP functions with your PHP configuration, you should
+  add the <span class="option">--enable-ftp</span> option when
+  installing PHP 4 or greater or <span class="option">--with-ftp</span>
+  when using PHP 3.
+ </p>
+ <p class="simpara"> The windows version of PHP has built in
+support for this extension. You do not need to load any additional
+extension in order to use these functions.</p>
+</div>
+
+
+
+
+  <div id="ftp.configuration" class="section">
+   <h2 class="title">Runtime Configuration</h2>
+   <p class="para">This extension has no configuration directives defined in <var class="filename">php.ini</var>.</p>
+  </div>
+
+  <div id="ftp.resources" class="section">
+   <h2 class="title">Resource Types</h2>
+   <p class="para">
+    This extension uses one resource type, which is the link identifier
+    of the FTP connection, returned by <a href="function.ftp-connect.html" class="function">ftp_connect()</a>
+    or <a href="function.ftp-ssl-connect.html" class="function">ftp_ssl_connect()</a>.
+   </p>
+  </div>
+
+  
+
+<div id="ftp.constants" class="section">
+ <h2 class="title">Predefined Constants</h2>
+ <p class="simpara">
+The constants below are defined by this extension, and
+will only be available when the extension has either
+been compiled into PHP or dynamically loaded at runtime.
+</p>
+ <dl>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_ASCII</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para"/>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_TEXT</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para"/>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_BINARY</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para"/>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_IMAGE</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para"/>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_TIMEOUT_SEC</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para">
+     See <a href="function.ftp-set-option.html" class="function">ftp_set_option()</a> for information.
+    </p>
+   </dd>
+
+  </dt>
+
+ </dl>
+
+ <p class="para">
+  The following constants were introduced in PHP 4.3.0.
+ </p>
+ <dl>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_AUTOSEEK</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para">
+     See <a href="function.ftp-set-option.html" class="function">ftp_set_option()</a> for information.
+    </p>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_AUTORESUME</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para">
+     Automatically determine resume position and start position for GET and PUT requests
+     (only works if FTP_AUTOSEEK is enabled)
+    </p>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_FAILED</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para">
+     Asynchronous transfer has failed
+    </p>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_FINISHED</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para">
+     Asynchronous transfer has finished
+    </p>
+   </dd>
+
+  </dt>
+
+  <dt>
+
+   <span class="term">
+    <b><tt>FTP_MOREDATA</tt></b> 
+    (<a href="language.types.integer.html" class="type integer">integer</a>)
+   </span>
+   <dd>
+
+    <p class="para">
+     Asynchronous transfer is still active
+    </p>
+   </dd>
+
+  </dt>
+
+ </dl>
+
+</div>
+
+
+
+   
+  <div id="ftp.examples" class="section">
+   <h2 class="title">Examples</h2>
+   <p class="para">
+    <div class="example">
+     <p><b>Example#1 FTP example</b></p>
+     <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #FF8000">//&nbsp;set&nbsp;up&nbsp;basic&nbsp;connection<br /></span><span style="color: #0000BB">$conn_id&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ftp_connect</span><span style="color: #007700">(</span><span style="color: #0000BB">$ftp_server</span><span style="color: #007700">);&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;login&nbsp;with&nbsp;username&nbsp;and&nbsp;password<br /></span><span style="color: #0000BB">$login_result&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ftp_login</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn_id</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$ftp_user_name</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$ftp_user_pass</span><span style="color: #007700">);&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;check&nbsp;connection<br /></span><span style="color: #007700">if&nbsp;((!</span><span style="color: #0000BB">$conn_id</span><span style="color: #007700">)&nbsp;||&nbsp;(!</span><span style="color: #0000BB">$login_result</span><span style="color: #007700">))&nbsp;{&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"FTP&nbsp;connection&nbsp;has&nbsp;failed!"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Attempted&nbsp;to&nbsp;connect&nbsp;to&nbsp;$ftp_server&nbsp;for&nbsp;user&nbsp;$ftp_user_name"</span><span style="color: #007700">;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exit;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Connected&nbsp;to&nbsp;$ftp_server,&nbsp;for&nbsp;user&nbsp;$ftp_user_name"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br /></span><span style="color: #FF8000">//&nbsp;upload&nbsp;the&nbsp;file<br /></span><span style="color: #0000BB">$upload&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">ftp_put</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn_id</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$destination_file</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">$source_file</span><span style="color: #007700">,&nbsp;</span><span style="color: #0000BB">FTP_BINARY</span><span style="color: #007700">);&nbsp;<br /><br /></span><span style="color: #FF8000">//&nbsp;check&nbsp;upload&nbsp;status<br /></span><span style="color: #007700">if&nbsp;(!</span><span style="color: #0000BB">$upload</span><span style="color: #007700">)&nbsp;{&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"FTP&nbsp;upload&nbsp;has&nbsp;failed!"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;</span><span style="color: #DD0000">"Uploaded&nbsp;$source_file&nbsp;to&nbsp;$ftp_server&nbsp;as&nbsp;$destination_file"</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br /></span><span style="color: #FF8000">//&nbsp;close&nbsp;the&nbsp;FTP&nbsp;stream&nbsp;<br /></span><span style="color: #0000BB">ftp_close</span><span style="color: #007700">(</span><span style="color: #0000BB">$conn_id</span><span style="color: #007700">);&nbsp;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+     </div>
+
+    </div>
+   </p>
+  </div>
+ </div>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.ftp-alloc.html">ftp_alloc</a> — Allocates space for a file to be uploaded</li><li><a href="function.ftp-cdup.html">ftp_cdup</a> — Changes to the parent directory</li><li><a href="function.ftp-chdir.html">ftp_chdir</a> — Changes the current directory on a FTP server</li><li><a href="function.ftp-chmod.html">ftp_chmod</a> — Set permissions on a file via FTP</li><li><a href="function.ftp-close.html">ftp_close</a> — Closes an FTP connection</li><li><a href="function.ftp-connect.html">ftp_connect</a> — Opens an FTP connection</li><li><a href="function.ftp-delete.html">ftp_delete</a> — Deletes a file on the FTP server</li><li><a href="function.ftp-exec.html">ftp_exec</a> — Requests execution of a command on the FTP server</li><li><a href="function.ftp-fget.html">ftp_fget</a> — Downloads a file from the FTP server and saves to an open file</li><li><a href="function.ftp-fput.html">ftp_fput</a> — Uploads from an open file to the FTP server</li><li><a href="function.ftp-get-option.html">ftp_get_option</a> — Retrieves various runtime behaviours of the current FTP stream</li><li><a href="function.ftp-get.html">ftp_get</a> — Downloads a file from the FTP server</li><li><a href="function.ftp-login.html">ftp_login</a> — Logs in to an FTP connection</li><li><a href="function.ftp-mdtm.html">ftp_mdtm</a> — Returns the last modified time of the given file</li><li><a href="function.ftp-mkdir.html">ftp_mkdir</a> — Creates a directory</li><li><a href="function.ftp-nb-continue.html">ftp_nb_continue</a> — Continues retrieving/sending a file (non-blocking)</li><li><a href="function.ftp-nb-fget.html">ftp_nb_fget</a> — Retrieves a file from the FTP server and writes it to an open file (non-blocking)</li><li><a href="function.ftp-nb-fput.html">ftp_nb_fput</a> — Stores a file from an open file to the FTP server (non-blocking)</li><li><a href="function.ftp-nb-get.html">ftp_nb_get</a> — Retrieves a file from the FTP server and writes it to a local file (non-blocking)</li><li><a href="function.ftp-nb-put.html">ftp_nb_put</a> — Stores a file on the FTP server (non-blocking)</li><li><a href="function.ftp-nlist.html">ftp_nlist</a> — Returns a list of files in the given directory</li><li><a href="function.ftp-pasv.html">ftp_pasv</a> — Turns passive mode on or off</li><li><a href="function.ftp-put.html">ftp_put</a> — Uploads a file to the FTP server</li><li><a href="function.ftp-pwd.html">ftp_pwd</a> — Returns the current directory name</li><li><a href="function.ftp-quit.html">ftp_quit</a> — Alias of ftp_close</li><li><a href="function.ftp-raw.html">ftp_raw</a> — Sends an arbitrary command to an FTP server</li><li><a href="function.ftp-rawlist.html">ftp_rawlist</a> — Returns a detailed list of files in the given directory</li><li><a href="function.ftp-rename.html">ftp_rename</a> — Renames a file or a directory on the FTP server</li><li><a href="function.ftp-rmdir.html">ftp_rmdir</a> — Removes a directory</li><li><a href="function.ftp-set-option.html">ftp_set_option</a> — Set miscellaneous runtime FTP options</li><li><a href="function.ftp-site.html">ftp_site</a> — Sends a SITE command to the server</li><li><a href="function.ftp-size.html">ftp_size</a> — Returns the size of the given file</li><li><a href="function.ftp-ssl-connect.html">ftp_ssl_connect</a> — Opens an Secure SSL-FTP connection</li><li><a href="function.ftp-systype.html">ftp_systype</a> — Returns the system type identifier of the remote FTP server</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.fbsql-warnings.html">fbsql_warnings</a></div>
+ <div class="next" style="float: right;"><a href="function.ftp-alloc.html">ftp_alloc</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

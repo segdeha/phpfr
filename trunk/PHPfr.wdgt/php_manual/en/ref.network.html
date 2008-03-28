@@ -1,0 +1,613 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title>Network Functions</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ </head>
+ <body><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ncurses-wvline.html">ncurses_wvline</a></div>
+ <div class="next" style="float: right;"><a href="function.checkdnsrr.html">checkdnsrr</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div>
+  <h1 class="title">Network Functions</h1>
+  
+  <div class="partintro">
+
+   <div id="network.intro" class="section">
+    <h2 class="title">Introduction</h2>
+    <p class="para">
+    
+    </p>
+   </div>
+   
+   <div id="network.requirements" class="section">
+    <h2 class="title">Requirements</h2>
+    <p class="para">No external libraries are needed to build this extension.</p>
+   </div>
+   
+   <div id="network.installation" class="section">
+    <h2 class="title">Installation</h2>
+    <p class="para">There is no installation needed to use these
+functions; they are part of the PHP core.</p>
+   </div>
+
+   
+
+<div id="network.configuration" class="section">
+ <h2 class="title">Runtime Configuration</h2>
+ <p class="simpara">
+The behaviour of these functions is affected by settings in <var class="filename">php.ini</var>.
+</p>
+ <p class="para">
+  <table border="5">
+   <caption><b>Network Configuration Options</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Name</th>
+      <th colspan="1">Default</th>
+      <th colspan="1">Changeable</th>
+      <th colspan="1">Changelog</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+    <tr valign="middle">
+     <td colspan="1" rowspan="1" align="left">define_syslog_variables</td>
+     <td colspan="1" rowspan="1" align="left">&quot;0&quot;</td>
+     <td colspan="1" rowspan="1" align="left">PHP_INI_ALL</td>
+     <td class="empty">&nbsp;</td>
+    </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+ For further details and definitions of the 
+PHP_INI_* constants, see the <a href="ini.html" class="xref">php.ini directives</a>.
+ </p>
+ 
+ <p class="para">Here&#039;s a short explanation of
+the configuration directives.</p>
+ 
+ <p class="para">
+ <dl>
+
+ <dt id="ini.define-syslog-variables">
+  <span class="term">
+   <i><tt class="parameter">define_syslog_variables</tt></i>
+
+   <a href="language.types.boolean.html" class="type boolean">boolean</a>
+   </span>
+   <dd>
+
+    <p class="para">
+     Whether or not to define the various syslog variables (e.g. $LOG_PID,
+     $LOG_CRON, etc.). Turning it off is a good idea performance-wise. At
+     runtime, you can define these variables by calling
+     <a href="function.define-syslog-variables.html" class="function">define_syslog_variables()</a>.
+    </p>
+   </dd>
+
+  </dt>
+
+ </dl>
+
+ </p>
+</div>
+
+
+
+
+
+
+   <div id="network.resources" class="section">
+    <h2 class="title">Resource Types</h2>
+    <p class="para">
+     This extension defines a file pointer resource returned by
+     <a href="function.fsockopen.html" class="function">fsockopen()</a> and <a href="function.pfsockopen.html" class="function">pfsockopen()</a>.
+    </p>
+   </div>
+
+   
+
+<div id="network.constants" class="section">
+ <h2 class="title">Predefined Constants</h2>
+ <p class="simpara">
+The constants below are always available as part of the PHP core.
+</p>
+  <table border="5">
+   <caption><b><a href="function.openlog.html" class="function">openlog()</a> Options</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Constant</th>
+      <th colspan="1">Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_CONS</td>
+      <td colspan="1" rowspan="1" align="left">
+       if there is an error while sending data to the system logger,
+       write directly to the system console
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_NDELAY</td>
+      <td colspan="1" rowspan="1" align="left">
+       open the connection to the logger immediately 
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_ODELAY</td>
+      <td colspan="1" rowspan="1" align="left">
+       (default) delay opening the connection until the first
+       message is logged
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_NOWAIT</td>
+      <td colspan="1" rowspan="1" align="left">
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_PERROR</td>
+      <td colspan="1" rowspan="1" align="left">print log message also to standard error</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_PID</td>
+      <td colspan="1" rowspan="1" align="left">include PID with each message</td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+
+  <table border="5">
+   <caption><b><a href="function.openlog.html" class="function">openlog()</a> Facilities</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Constant</th>
+      <th colspan="1">Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_AUTH</td>
+      <td colspan="1" rowspan="1" align="left">
+       security/authorization messages (use LOG_AUTHPRIV instead
+       in systems where that constant is defined)
+      </td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_AUTHPRIV</td>
+      <td colspan="1" rowspan="1" align="left">security/authorization messages (private)</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_CRON</td>
+      <td colspan="1" rowspan="1" align="left">clock daemon (cron and at)</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_DAEMON</td>
+      <td colspan="1" rowspan="1" align="left">other system daemons</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_KERN</td>
+      <td colspan="1" rowspan="1" align="left">kernel messages</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_LOCAL0 ... LOG_LOCAL7</td>
+      <td colspan="1" rowspan="1" align="left">reserved for local use, these are not available in Windows</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_LPR</td>
+      <td colspan="1" rowspan="1" align="left">line printer subsystem</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_MAIL</td>
+      <td colspan="1" rowspan="1" align="left">mail subsystem</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_NEWS</td>
+      <td colspan="1" rowspan="1" align="left">USENET news subsystem</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_SYSLOG</td>
+      <td colspan="1" rowspan="1" align="left">messages generated internally by syslogd</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_USER</td>
+      <td colspan="1" rowspan="1" align="left">generic user-level messages</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_UUCP</td>
+      <td colspan="1" rowspan="1" align="left">UUCP subsystem</td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+
+  <table border="5">
+   <caption><b><a href="function.syslog.html" class="function">syslog()</a> Priorities (in descending order)</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Constant</th>
+      <th colspan="1">Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_EMERG</td>
+      <td colspan="1" rowspan="1" align="left">system is unusable</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_ALERT</td>
+      <td colspan="1" rowspan="1" align="left">action must be taken immediately</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_CRIT</td>
+      <td colspan="1" rowspan="1" align="left">critical conditions</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_ERR</td>
+      <td colspan="1" rowspan="1" align="left">error conditions</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_WARNING</td>
+      <td colspan="1" rowspan="1" align="left">warning conditions</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_NOTICE</td>
+      <td colspan="1" rowspan="1" align="left">normal, but significant, condition</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_INFO</td>
+      <td colspan="1" rowspan="1" align="left">informational message</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">LOG_DEBUG</td>
+      <td colspan="1" rowspan="1" align="left">debug-level message</td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+  <table border="5">
+   <caption><b><a href="function.dns-get-record.html" class="function">dns_get_record()</a> Options</b></caption>
+   <colgroup>
+
+    <thead valign="middle">
+     <tr valign="middle">
+      <th colspan="1">Constant</th>
+      <th colspan="1">Description</th>
+     </tr>
+
+    </thead>
+
+    <tbody valign="middle">
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_A</td>
+      <td colspan="1" rowspan="1" align="left">IPv4 Address Resource</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_MX</td>
+      <td colspan="1" rowspan="1" align="left">Mail Exchanger Resource</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_CNAME</td>
+      <td colspan="1" rowspan="1" align="left">Alias (Canonical Name) Resource</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_NS</td>
+      <td colspan="1" rowspan="1" align="left">Authoritative Name Server Resource</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_PTR</td>
+      <td colspan="1" rowspan="1" align="left">Pointer Resource</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_HINFO</td>
+      <td colspan="1" rowspan="1" align="left">Host Info Resource (See IANA&#039;s
+        <a href="http://www.iana.org/assignments/operating-system-names" class="link external">&raquo; Operating System Names</a>
+        for the meaning of these values)</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_SOA</td>
+      <td colspan="1" rowspan="1" align="left">Start of Authority Resource</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_TXT</td>
+      <td colspan="1" rowspan="1" align="left">Text Resource</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_ANY</td>
+      <td colspan="1" rowspan="1" align="left">Any Resource Record.  On most systems
+        this returns all resource records, however
+        it should not be counted upon for critical
+        uses.  Try DNS_ALL instead.</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_AAAA</td>
+      <td colspan="1" rowspan="1" align="left">IPv6 Address Resource</td>
+     </tr>
+
+     <tr valign="middle">
+      <td colspan="1" rowspan="1" align="left">DNS_ALL</td>
+      <td colspan="1" rowspan="1" align="left">Iteratively query the name server for
+        each available record type.</td>
+     </tr>
+
+    </tbody>
+   </colgroup>
+
+  </table>
+
+</div>
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <h2>Table of Contents</h2><ul class="chunklist chunklist_reference"><li><a href="function.checkdnsrr.html">checkdnsrr</a> — Check DNS records corresponding to a given Internet host name or IP address</li><li><a href="function.closelog.html">closelog</a> — Close connection to system logger</li><li><a href="function.debugger-off.html">debugger_off</a> — Disable internal PHP debugger (PHP 3)</li><li><a href="function.debugger-on.html">debugger_on</a> — Enable internal PHP debugger (PHP 3)</li><li><a href="function.define-syslog-variables.html">define_syslog_variables</a> — Initializes all syslog related constants</li><li><a href="function.dns-check-record.html">dns_check_record</a> — Alias of checkdnsrr</li><li><a href="function.dns-get-mx.html">dns_get_mx</a> — Alias of getmxrr</li><li><a href="function.dns-get-record.html">dns_get_record</a> — Fetch DNS Resource Records associated with a hostname</li><li><a href="function.fsockopen.html">fsockopen</a> — Open Internet or Unix domain socket connection</li><li><a href="function.gethostbyaddr.html">gethostbyaddr</a> — Get the Internet host name corresponding to a given IP address</li><li><a href="function.gethostbyname.html">gethostbyname</a> — Get the IP address corresponding to a given Internet host name</li><li><a href="function.gethostbynamel.html">gethostbynamel</a> — Get a list of IP addresses corresponding to a given Internet host
+   name</li><li><a href="function.getmxrr.html">getmxrr</a> — Get MX records corresponding to a given Internet host name</li><li><a href="function.getprotobyname.html">getprotobyname</a> — Get protocol number associated with protocol name</li><li><a href="function.getprotobynumber.html">getprotobynumber</a> — Get protocol name associated with protocol number</li><li><a href="function.getservbyname.html">getservbyname</a> — Get port number associated with an Internet service and protocol</li><li><a href="function.getservbyport.html">getservbyport</a> — Get Internet service which corresponds to port and protocol</li><li><a href="function.header.html">header</a> — Send a raw HTTP header</li><li><a href="function.headers-list.html">headers_list</a> — Returns a list of response headers sent (or ready to send)</li><li><a href="function.headers-sent.html">headers_sent</a> — Checks if or where headers have been sent</li><li><a href="function.inet-ntop.html">inet_ntop</a> — Converts a packed internet address to a human readable representation</li><li><a href="function.inet-pton.html">inet_pton</a> — Converts a human readable IP address to its packed in_addr representation</li><li><a href="function.ip2long.html">ip2long</a> — Converts a string containing an (IPv4) Internet Protocol dotted address into a proper address</li><li><a href="function.long2ip.html">long2ip</a> — Converts an (IPv4) Internet network address into a string in Internet standard dotted format</li><li><a href="function.openlog.html">openlog</a> — Open connection to system logger</li><li><a href="function.pfsockopen.html">pfsockopen</a> — Open persistent Internet or Unix domain socket connection</li><li><a href="function.setcookie.html">setcookie</a> — Send a cookie</li><li><a href="function.setrawcookie.html">setrawcookie</a> — Send a cookie without urlencoding the cookie value</li><li><a href="function.socket-get-status.html">socket_get_status</a> — Alias of stream_get_meta_data</li><li><a href="function.socket-set-blocking.html">socket_set_blocking</a> — Alias of stream_set_blocking</li><li><a href="function.socket-set-timeout.html">socket_set_timeout</a> — Alias of stream_set_timeout</li><li><a href="function.syslog.html">syslog</a> — Generate a system log message</li></ul>
+</div>
+<hr /><div style="text-align: center;">
+ <div class="prev" style="float: left;"><a href="function.ncurses-wvline.html">ncurses_wvline</a></div>
+ <div class="next" style="float: right;"><a href="function.checkdnsrr.html">checkdnsrr</a></div>
+ <div class="up"><a href="funcref.html">Function Reference</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>
