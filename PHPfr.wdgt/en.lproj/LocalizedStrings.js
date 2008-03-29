@@ -32,4 +32,5 @@ LocalizedStrings['Follow links on function pages to view more PHP docs'] = 'Foll
 LocalizedStrings['Click in the empty search box and hit return to see all functions'] = 'Click in the empty search box and hit return to see all functions';
 LocalizedStrings['Make a developer happy by donating a few dollars <span style="font-family: Verdana, Sans-Serif;">:-)</span>'] = 'Make a developer happy by donating a few dollars <span style="font-family: Verdana, Sans-Serif;">:-)</span>';
 LocalizedStrings['Click the language name to install/update. Click the radio button to select your language.']                  = 'Click the language name to install/update. Click the radio button to select your language.';
+LocalizedStrings['Type here to filter list'] = 'Type here to filter list';
 // LocalizedStrings[''] = '';
