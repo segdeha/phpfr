@@ -13,7 +13,7 @@ The following is a list of the remaining (known) work to be done before declarin
  * ~~Display number of functions showing next to Favs control~~
  * ~~Fix bug on filter input where user inputs underscore and PHPfr tries to match a dash~~
  * Change download link to point to Amazon S3
- * Fix visual glitch in view frame scrollbar
+ * ~~Fix visual glitch in view frame scrollbar~~
  * ~~Fix method to select language radio button on back of widget~~
  * Rewrite help to be more helpful
  * Format static HTML pages
