@@ -3,7 +3,7 @@
  */
 PHPFR.util = (function () {
 	var _paypal;
-	_paypal = 'https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=andrew%40hedges%2ename&item_name=PHP%20Function%20Reference&amount=5%2e00&no_shipping=1&cn=Comments&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8';
+	_paypal = 'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=andrew%40hedges%2ename&item_name=PHP%20Function%20Reference&amount=5%2e00&no_shipping=1&cn=Send%20a%20note%20to%20the%20developers&tax=0&currency_code=EUR&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8';
 	return {
 		/**
 		 * Go to an external URL (use PHPFR.ui.followLink for internal links)

@@ -33,4 +33,7 @@ LocalizedStrings['Click in the empty search box and hit return to see all functi
 LocalizedStrings['Make a developer happy by donating a few dollars <span style="font-family: Verdana, Sans-Serif;">:-)</span>'] = 'Make a developer happy by donating a few dollars <span style="font-family: Verdana, Sans-Serif;">:-)</span>';
 LocalizedStrings['Click the language name to install/update. Click the radio button to select your language.']                  = 'Click the language name to install/update. Click the radio button to select your language.';
 LocalizedStrings['Type here to filter list'] = 'Type here to filter list';
+LocalizedStrings['Elapsed time:'] = 'Elapsed time:';
+LocalizedStrings['seconds']       = 'seconds';
+// LocalizedStrings[''] = '';
 // LocalizedStrings[''] = '';
