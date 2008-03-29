@@ -19,7 +19,7 @@ The following is a list of the remaining (known) work to be done before declarin
  * ~~Automate language installation (is this possible? with how much effort?)~~
  * Rewrite help to be more helpful
  * Format static HTML pages
- * Localize strings
+ * ~~Localize strings~~ (strings have been pulled out into a LocalizedStrings.js file, any translations I get will be icing on the cake)
  * Fix bugs on Tiger (is this possible? with how much effort?)
  * Change donation currency to Euros?
  * Change download link to point to Amazon S3
