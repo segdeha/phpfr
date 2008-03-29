@@ -20,6 +20,6 @@ The following is a list of the remaining (known) work to be done before declarin
  * ~~Format manual pages (H1s that wrap)~~
  * Localize strings
  * Fix bugs on Tiger (is this possible? with how much effort?)
- * Fix bug where browsing PHP manual, history may use wrong filename type for path
+ * ~~Fix bug where browsing PHP manual, history may use wrong filename type for path~~
  * Automate language installation (is this possible? with how much effort?)
  * Change donation currency to Euros?
