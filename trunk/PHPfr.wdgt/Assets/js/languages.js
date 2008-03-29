@@ -34,15 +34,15 @@ with ({
 			var cmd;
 			cmd = "/usr/bin/php '" + PHPFR.basePath + "/php_manual/first_run.php'";
 			
-//			DEBUG.writeDebug('_doFirstRun');
-//			DEBUG.writeDebug(cmd);
+			DEBUG.writeDebug('_doFirstRun');
+			DEBUG.writeDebug(cmd);
 			
 			WW.system(cmd, _doneFirstRun);
 		};
 		_doneFirstRun = function (obj) {
 			
-//			DEBUG.writeDebug('_doneFirstRun');
-//			DEBUG.writeDebug(obj.outputString);
+			DEBUG.writeDebug('_doneFirstRun');
+			DEBUG.writeDebug(obj.outputString);
 			
 			_setNotFirstRunPref();
 			PHPFR.languages.getInstalled();
@@ -96,7 +96,7 @@ with ({
 			// public methods
 			init: function () {
 				
-//				DEBUG.writeDebug(_getNotFirstRunPref());
+				DEBUG.writeDebug('_getNotFirstRunPref() = ' + _getNotFirstRunPref());
 				
 				if (false === _getNotFirstRunPref()) {
 					_doFirstRun();

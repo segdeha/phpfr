@@ -2,7 +2,9 @@
  * Manage display frame
  */
 with ({
-		VIEW : 'view'
+		VIEW   : 'view',
+		HEADER : '<div class="phpfr-header">&nbsp;</div>',
+		FOOTER : '<div class="phpfr-footer">&nbsp;</div>'
 	}) {
 	PHPFR.pages = (function () {
 		var _templates, _linkReplace, _elements;
@@ -30,8 +32,12 @@ with ({
 			display: function (page) {
 				var displayPage, hash, path, html, favs;
 				displayPage = function (obj) {
-					html  = obj.outputString.replace(PHPFR.regexs.link, _linkReplace);
-					html += '<div class="phpfr-footer"/>';
+					html  = HEADER;
+					html += obj.outputString.replace(PHPFR.regexs.link, _linkReplace);
+					html += FOOTER;
+					
+//					DEBUG.writeDebug(html);
+					
 					_elements.viewport.update(html);
 					PHPFR.favorites.updateUI(page);
 					PHPFR.ui.viewFrame.open();
