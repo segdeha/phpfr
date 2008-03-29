@@ -16,10 +16,10 @@ The following is a list of the remaining (known) work to be done before declarin
  * ~~Fix method to select language radio button on back of widget~~
  * ~~Format manual pages (H1s that wrap)~~
  * ~~Fix bug where browsing PHP manual, history may use wrong filename type for path~~
- * Change download link to point to Amazon S3
  * Rewrite help to be more helpful
  * Format static HTML pages
  * Localize strings
  * Fix bugs on Tiger (is this possible? with how much effort?)
  * Automate language installation (is this possible? with how much effort?)
  * Change donation currency to Euros?
+ * Change download link to point to Amazon S3
