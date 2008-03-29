@@ -2,14 +2,14 @@
 
 // return string containing array of reference topics (e.g., Arrays, Strings) for given language, language defaults to 'en'
 
-if (!isset($language)) $language = 'en';
+$language = (isset($argv[1]))? $argv[1]: 'en';
 
 $regex_name = '/<title[\s]{0,}>(.+)<\/title/i';
 $regex_file = '/^ref\.([^\.]+)\.html$/i';
 
 $topics = '{[';
 
-$dir = substr(__FILE__, 0, -21) . 'php_manual/' . $language;
+$dir = substr(__FILE__, 0, -21) . 'php_manual/' . $language . '/html';
 
 // read php_manuals directory for directories not named . or ..
 // if the string is an actual directory, proceed

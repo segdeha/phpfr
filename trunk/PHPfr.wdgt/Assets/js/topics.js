@@ -60,7 +60,7 @@ with ({
 				funcs = eval(obj.outputString);
 				PHPFR.functions.display(funcs);
 			};
-			filename = PHPFR.basePath + '/php_manual/' + PHPFR.languages.lang + '/ref.' + topic + '.html';
+			filename = PHPFR.basePath + '/php_manual/' + PHPFR.languages.lang + '/html/ref.' + topic + '.html';
 			WW.system("/usr/bin/php Assets/php/return_functions.php " + filename, callback);
 		};
 		return {

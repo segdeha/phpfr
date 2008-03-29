@@ -13,7 +13,10 @@ with ({
 		// private variables
 		var _templates, _installed;
 		_templates = {
-			downloads: new Template('http://www.php.net/get/php_manual_#{lang}.tar.gz/from/a/mirror')
+			filename    : new Template('php_manual_#{lang}.tar.gz'),
+			downloads   : new Template('http://www.php.net/get/#{fnm}/from/www.php.net/mirror'),
+			destination : new Template(PHPFR.basePath + '/php_manual/#{fnm}'),
+			install     : new Template('/usr/bin/php php_manual/install.php #{url} #{dst}')
 		};
 		// private methods
 		var _getNotFirstRunPref, _setNotFirstRunPref, _updateList, _selectRadio, _setInstalled;
@@ -91,6 +94,17 @@ with ({
 			PHPFR.functions.init();
 			PHPFR.topics.init();
 		};
+		_handleInstall = function (obj) {
+			
+			DEBUG.writeDebug('_handleInstall');
+			DEBUG.writeDebug(obj.outputString);
+			
+			if (obj.outputString.indexOf('SUCCESS') > -1) {
+				
+			} else {
+				
+			}
+		};
 		return {
 			// public variables
 			lang: undefined,
@@ -104,6 +118,23 @@ with ({
 				} else {
 					this.getInstalled();
 				}
+			},
+			download: function (lang) {
+				
+				DEBUG.writeDebug('PHPFR.languages.install');
+				DEBUG.writeDebug('lang = ' + lang);
+				
+				var fnm, url, dst, cmd;
+				fnm = _templates.filename.evaluate({lang: lang});
+				url = _templates.downloads.evaluate({fnm: fnm});
+				dst = _templates.destination.evaluate({fnm: fnm});
+				cmd = _templates.install.evaluate({url: url, dst: dst});
+				
+				DEBUG.writeDebug('cmd = ' + cmd);
+			
+				// show user that the operation is in progress
+				
+				WW.system(cmd, _handleInstall);
 			},
 			getInstalled: function () {
 				
@@ -131,12 +162,6 @@ with ({
 				this.lang = lang;
 				_selectRadio(lang);
 				PHPFR.prefs.set(PREFKEY, lang);
-			},
-			download: function (lang) {
-				var url;
-				url = _templates.download.evaluate({lang: lang});
-				
-				DEBUG.writeDebug('url = ' + url);
 			}
 		};
 	})();

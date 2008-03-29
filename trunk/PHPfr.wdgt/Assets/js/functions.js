@@ -7,7 +7,7 @@ with ({
 	}) {
 	PHPFR.functions = (function () {
 		var _wait, _template, _timer, _widgSysCall, _funcs, _funcsHTML, _functionList, _functionCount, _funcDivs;
-		_wait = 1000;
+		_wait = 2000;
 		_templates = {
 			func   : new Template('<div id="#{func}" title="#{func}" class="function #{className}" onclick="PHPFR.functions.show(\'#{func}\');" ondblclick="PHPFR.functions.gotoOnlineDoc(\'#{func}\');">#{func}<\/div>'),
 			local  : new Template('function.#{func}.html'),
@@ -86,7 +86,7 @@ with ({
 					_widgSysCall.close();
 					PHPFR.functions.init();
 					_wait = _wait * 2;
-					if (_wait > 8000) _wait = 8000;
+					if (_wait > 16000) _wait = 16000;
 				}, _wait);
 			},
 			// wrapper to _buildList
