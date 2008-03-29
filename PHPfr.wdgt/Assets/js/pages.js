@@ -9,7 +9,7 @@ with ({
 	PHPFR.pages = (function () {
 		var _templates, _linkReplace, _elements;
 		_templates = {
-			php  : new Template('php_manual/#{lang}/#{page}'),
+			php  : new Template('php_manual/#{lang}/html/#{page}'),
 			html : new Template('html/#{page}')
 		};
 		_linkReplace = '<a onclick="PHPFR.ui.followLink(this.href);return false;"';

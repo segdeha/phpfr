@@ -48,6 +48,7 @@ __ = function (str) {
  */
 PHPFR = (function () {
 	return {
+		// e.g., /Users/andrew/Library/Widgets/PHPfr.wdgt
 		basePath : document.location.href.substring(7, document.location.href.length - 13),
 		regexs   : {
 			file : /file\:\/\/(.+)/i,
@@ -57,6 +58,9 @@ PHPFR = (function () {
 			link : /<a/ig
 		},
 		init: function () {
+			
+			DEBUG.writeDebug('PHPFR.basePath = ' + PHPFR.basePath);
+			
 			PHPFR.languages.init(); // Calls PHPFR.functions.init(); and PHPFR.topics.init();
 			PHPFR.ui.init();
 			PHPFR.pages.init();
