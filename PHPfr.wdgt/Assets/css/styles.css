@@ -232,6 +232,10 @@ div.loading h1 {
 	color: #333;
 }
 
+p#first-run-label {
+	padding: 0 10px;
+}
+
 img.control {
 	-apple-dashboard-region: dashboard-region(control rectangle);
 }

@@ -5,9 +5,9 @@
 // TODO: automate the installation of new langauges: http://nz.php.net/get/php_manual_cs.tar.gz/from/www.php.net/mirror
 
 with ({
-		DEFAULT     : 'en',
-		PREFKEY     : 'lang',
-		NOTFIRSTRUN : 'notFirstRun'
+		DEFAULT       : 'en',
+		PREFKEY       : 'lang',
+		NOTFIRSTRUN   : 'notFirstRun'
 	}) {
 	PHPFR.languages = (function () {
 		// private variables
@@ -33,6 +33,7 @@ with ({
 		_doFirstRun = function () {
 			var cmd;
 			cmd = "/usr/bin/php '" + PHPFR.basePath + "/php_manual/first_run.php'";
+			$('first-run-label').update(__('Uncompressing PHP manual. Please be patient. This may take a while&#8230;'));
 			
 			DEBUG.writeDebug('_doFirstRun');
 			DEBUG.writeDebug(cmd);
