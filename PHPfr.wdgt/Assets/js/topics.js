@@ -13,6 +13,10 @@ with ({
 		_topics = '';
 		var _readTopics, _buildSelect, _addOption, _updateLabel, _fetchFunctions;
 		_readTopics = function (obj) {
+			
+//			DEBUG.writeDebug('PHPFR.topics._readFunctions');
+//			DEBUG.writeDebug(obj.outputString);
+			
 			if (obj.outputString.indexOf(']}') > -1) {
 				clearTimeout(_timer);
 				_widgSysCall.cancel();
