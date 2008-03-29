@@ -8,6 +8,7 @@ This page is for tracking the progress of development of PHPfr 1.0.
 
 The following is a list of the remaining (known) work to be done before declaring a release candidate for PHPfr 1.0:
 
+ * ~~Add font size preference~~
  * ~~Display number of functions showing next to Favs control~~
  * Fix bug on filter input where user inputs underscore and PHPfr tries to match a dash
  * Change download link to point to Amazon S3
