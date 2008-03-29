@@ -15,7 +15,7 @@ with ({
 		_templates = {
 			filename    : new Template('php_manual_#{lang}.tar.gz'),
 			downloads   : new Template('http://www.php.net/get/#{fnm}/from/www.php.net/mirror'),
-			destination : new Template(PHPFR.basePath + '/php_manual/#{fnm}'),
+			destination : new Template('php_manual/#{fnm}'),
 			install     : new Template('/usr/bin/php php_manual/install.php #{url} #{dst}')
 		};
 		// private methods
@@ -124,11 +124,16 @@ with ({
 				DEBUG.writeDebug('PHPFR.languages.install');
 				DEBUG.writeDebug('lang = ' + lang);
 				
+				/*
 				var fnm, url, dst, cmd;
 				fnm = _templates.filename.evaluate({lang: lang});
 				url = _templates.downloads.evaluate({fnm: fnm});
 				dst = _templates.destination.evaluate({fnm: fnm});
 				cmd = _templates.install.evaluate({url: url, dst: dst});
+				*/
+				
+				var cmd;
+				cmd = '/usr/bin/php php_manual/install.php ' + lang;
 				
 				DEBUG.writeDebug('cmd = ' + cmd);
 			

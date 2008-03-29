@@ -234,6 +234,7 @@ with ({
 				});
 				$('instructions').update(__('Click the language name to install/update. Click the radio button to select your language.'));
 				$('tip-label').update(__('Tip:'));
+				$('filter').setAttribute('placeholder', __($('filter').getAttribute('placeholder')));
 				// generate the size presets select list
 				_generateResizeSelect();
 				// set display size to user's pref
