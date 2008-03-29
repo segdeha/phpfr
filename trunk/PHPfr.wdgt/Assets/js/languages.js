@@ -5,8 +5,9 @@
 // TODO: automate the installation of new langauges: http://nz.php.net/get/php_manual_cs.tar.gz/from/www.php.net/mirror
 
 with ({
-		DEFAULT : 'en',
-		PREFKEY : 'lang'
+		DEFAULT     : 'en',
+		PREFKEY     : 'lang',
+		NOTFIRSTRUN : 'notFirstRun'
 	}) {
 	PHPFR.languages = (function () {
 		// private variables
@@ -15,46 +16,98 @@ with ({
 			downloads: new Template('http://www.php.net/get/php_manual_#{lang}.tar.gz/from/a/mirror')
 		};
 		// private methods
-		var _updateList, _selectRadio, _setInstalled;
+		var _getNotFirstRunPref, _setNotFirstRunPref, _updateList, _selectRadio, _setInstalled;
+		_getNotFirstRunPref = function () {
+			return PHPFR.prefs.get(NOTFIRSTRUN);
+		};
+		_setNotFirstRunPref = function () {
+			
+			DEBUG.writeDebug('_setNotFirstRunPref');
+			DEBUG.writeDebug('PHPFR.prefs.set(NOTFIRSTRUN, 1) = ' + PHPFR.prefs.set(NOTFIRSTRUN, 1));
+			
+			PHPFR.prefs.set(NOTFIRSTRUN, 1);
+			
+			DEBUG.writeDebug('PHPFR.prefs.set(NOTFIRSTRUN, 1) = ' + PHPFR.prefs.set(NOTFIRSTRUN, 1));
+			
+		};
+		_doFirstRun = function () {
+			var cmd;
+			cmd = "/usr/bin/php '" + PHPFR.basePath + "/php_manual/first_run.php'";
+			
+			DEBUG.writeDebug('_doFirstRun');
+			DEBUG.writeDebug(cmd);
+			
+			WW.system(cmd, _doneFirstRun);
+		};
+		_doneFirstRun = function (obj) {
+			
+			DEBUG.writeDebug('_doneFirstRun');
+			DEBUG.writeDebug(obj.outputString);
+			
+			_setNotFirstRunPref();
+			PHPFR.languages.getInstalled();
+		};
 		// update list of languages on back of widget to make those that are installed selectable
 		_updateList = function () {
-			var setState;
-			setState = function (lang) {
+			
+			DEBUG.writeDebug('_updateList');
+			DEBUG.writeDebug($('install-form').lang);
+			
+			$A($('install-form').lang).each(function (lang) {
 				if (_installed.indexOf(lang.value) > -1) {
 					lang.enable();
 				} else {
 					lang.disable();
 				}
-			};
-			$A(document.installForm.lang).invoke('setState');
+			});
 		};
 		// select the radio button corresponding to the language
 		_selectRadio = function (lang) {
-			var setSelected;
-			setSelected = function (lang) {
-				if (lang.indexOf(lang.value) > -1) {
-					lang.checked = true;
-					throw $break;
-				}
-			};
-			$A(document.installForm.lang).invoke('setSelected');
+			$('lang-' + lang).checked = true;
 		};
 		_setInstalled = function (obj) {
+			
+			DEBUG.writeDebug('_setInstalled');
+			DEBUG.writeDebug('obj.outputString = ' + obj.outputString);
+			
 			_installed = $A(eval(obj.outputString)); // yes, eval is evil
+			
+			DEBUG.writeDebug('_installed = ' + _installed);
+			
 			_updateList();
+			
+			DEBUG.writeDebug('_installed.length = ' + _installed.length);
+			
 			if (0 === _installed.length) {
 				PHPFR.ui.showDefaultList();
+			} else {
+				PHPFR.languages.lang = PHPFR.languages.getPref() || PHPFR.languages.setDefault();
 			}
+			_selectRadio(PHPFR.languages.lang);
+			
+			DEBUG.writeDebug('_setInstalled 2');
+			
+			PHPFR.functions.init();
+			PHPFR.topics.init();
 		};
 		return {
 			// public variables
 			lang: undefined,
 			// public methods
 			init: function () {
-				this.getInstalled();
-				this.lang = this.getPref() || this.setDefault();
+				
+				DEBUG.writeDebug(_getNotFirstRunPref());
+				
+				if (false === _getNotFirstRunPref()) {
+					_doFirstRun();
+				} else {
+					this.getInstalled();
+				}
 			},
 			getInstalled: function () {
+				
+				DEBUG.writeDebug('getInstalled');
+				
 				WW.system("/usr/bin/php 'Assets/php/installed.php'", _setInstalled);
 			},
 			getPref: function () {

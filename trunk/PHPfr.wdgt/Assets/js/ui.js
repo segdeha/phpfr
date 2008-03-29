@@ -18,10 +18,15 @@ with ({
 		TOBACK       : 'ToBack',
 		TOFRONT      : 'ToFront',
 		SIZEPRESETS  : '--Select a Size--',
-		SIZEPREF     : 'sizePref'
+		SIZEPREF     : 'sizePref',
+		FONTSIZEPREF : 'fontSizePref',
+		SMALLFONT    : '11px',
+		BIGFONT      : '13px',
+		SMALLFONTSRC : 'url(Assets/imgs/button-fontsmall.png)',
+		BIGFONTSRC   : 'url(Assets/imgs/button-fontbig.png)'
 	}) {
 	PHPFR.ui = (function () {
-		var _templates, _strings, _elements, _buttons, _scrolls, _styles, _resizeValues, _resizeStart;
+		var _templates, _strings, _elements, _buttons, _scrolls, _styles, _resizeValues, _resizeListValues, _resizeStart;
 		_templates = {
 			defaultList : new Template('<div onclick="PHPFR.ui.showBack();" class="default #{cls}">#{str}</div>'),
 			presetsList : new Template('#{width}x#{height}')
@@ -70,6 +75,7 @@ with ({
 			},
 			favorites     : undefined,
 			widgetTitle   : undefined,
+			fontToggle    : undefined,
 			resizer       : undefined,
 			toToggle      : undefined
 		};
@@ -89,8 +95,12 @@ with ({
 			}
 		};
 		_styles = {
-			showing : {backgroundColor: WHITE, borderColor: WHITE},
-			hidden  : {backgroundColor: TRANSPARENT, borderColor: TRANSPARENT}
+			showing      : {backgroundColor: WHITE, borderColor: WHITE},
+			hidden       : {backgroundColor: TRANSPARENT, borderColor: TRANSPARENT},
+			smallFont    : {fontSize: SMALLFONT},
+			bigFont      : {fontSize: BIGFONT},
+			smallFontSrc : {backgroundImage: SMALLFONTSRC},
+			bigFontSrc   : {backgroundImage: BIGFONTSRC}
 		};
 		_resizeValues = [600,400];
 		_resizeListValues = {
@@ -168,6 +178,15 @@ with ({
 		_getSizePref = function () {
 			return eval(PHPFR.prefs.get(SIZEPREF));
 		};
+		_setFontSizePref = function (fontSize) {
+			var key, val;
+			key = FONTSIZEPREF;
+			val = fontSize;
+			PHPFR.prefs.set(key, val);
+		};
+		_getFontSizePref = function () {
+			return PHPFR.prefs.get(FONTSIZEPREF);
+		};
 		// set-up Apple classes
 		_apple = function () {
 			_buttons.info   = new AppleInfoButton($('flipper'), $('front'), WHITE, WHITE, PHPFR.ui.showBack);
@@ -182,7 +201,7 @@ with ({
 		};
 		return {
 			init: function () {
-				var sizePref;
+				var sizePref, fontSizePref;
 				_elements.front               = $('front');
 				_elements.back                = $('back');
 				_elements.funcList.list       = $('function-list');
@@ -196,6 +215,7 @@ with ({
 				_elements.history.forward     = $('history-forward');
 				_elements.favorites           = $('favorites-control');
 				_elements.widgetTitle         = $('phpfr-title');
+				_elements.fontToggle          = $('fontsize-control');
 				_elements.resizer             = $('resizer');
 				_elements.toToggle            = $A([
 					_elements.viewFrame.scrollBar,
@@ -205,11 +225,16 @@ with ({
 					_elements.history.forward,
 					_elements.favorites,
 					_elements.widgetTitle,
+					_elements.fontToggle,
 					_elements.resizer
 				]);
 				_generateResizeSelect();
+				// set display size to user's pref
 				sizePref = _getSizePref();
 				if (sizePref) this.setSize(sizePref);
+				// set font size to user's pref
+				fontSizePref = _getFontSizePref();
+				if (fontSizePref) this.toggleFontSize(fontSizePref);
 				_apple();
 				_localizeControlTitles();
 			},
@@ -265,6 +290,21 @@ with ({
 				label = (0 === $('presets').selectedIndex)? SIZEPRESETS : _templates.presetsList.evaluate({width: dims[0], height: dims[1]});
 				_setLabel(label);
 				_setSize(dims);
+			},
+			// Toggle between small and big font sizes
+			toggleFontSize: function (fontSize) {
+				if ('undefined' === typeof fontSize) {
+					fontSize = (_elements.viewFrame.container.getStyle('font-size') === SMALLFONT)? BIGFONT : SMALLFONT;
+				}
+				if (fontSize === BIGFONT) {
+					_elements.viewFrame.container.setStyle(_styles.bigFont);
+					_elements.fontToggle.setStyle(_styles.bigFontSrc);
+				} else {
+					_elements.viewFrame.container.setStyle(_styles.smallFont);
+					_elements.fontToggle.setStyle(_styles.smallFontSrc);
+				}
+				PHPFR.ui.scrollBars.refresh(VIEW);
+				_setFontSizePref(fontSize);
 			},
 			// Show instructions in several languages if the user has no manual docs installed
 			showDefaultList: function () {

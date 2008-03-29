@@ -30,7 +30,8 @@ select#presets,
 label#presets-label,
 div#phpfr-title,
 div.history-control,
-div#favorites-control
+div#favorites-control,
+div#fontsize-control
 {
 	position: absolute;
 }
@@ -364,6 +365,7 @@ div#viewport-scroll-bar {
 }
 
 div#viewport-container {
+	font-size: 11px;
 	top: 30px;
 	left: 225px;
 	right: 15px;
@@ -468,6 +470,15 @@ div#favorites-control:hover {
 div.phpfr-footer {
 	height: 10px;
 	width: 10px;
+}
+
+div#fontsize-control {
+	bottom: 19px;
+	left: 225px;
+	width: 41px;
+	height: 20px;
+	z-index: 999;
+	background: url(../../Assets/imgs/button-fontsmall.png) no-repeat;
 }
 
 div#resizer {

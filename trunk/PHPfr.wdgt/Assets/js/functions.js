@@ -15,6 +15,10 @@ with ({
 		};
 		var _readFunctions, _buildList, _updateCount, _showAll, _hilite;
 		_readFunctions = function (obj) {
+			
+//			DEBUG.writeDebug('PHPFR.functions._readFunctions');
+//			DEBUG.writeDebug(obj.outputString);
+			
 			if (obj.outputString.indexOf(']}') > -1) {
 				clearTimeout(_timer);
 				_widgSysCall.cancel();
@@ -82,7 +86,7 @@ with ({
 					_widgSysCall.close();
 					PHPFR.functions.init();
 					_wait = _wait * 2;
-					if (_wait > 16000) _wait = 16000;
+					if (_wait > 8000) _wait = 8000;
 				}, _wait);
 			},
 			// wrapper to _buildList

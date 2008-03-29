@@ -57,13 +57,11 @@ PHPFR = (function () {
 			link : /<a/ig
 		},
 		init: function () {
-			PHPFR.functions.init();
-			PHPFR.topics.init();
+			PHPFR.languages.init(); // Calls PHPFR.functions.init(); and PHPFR.topics.init();
 			PHPFR.ui.init();
 			PHPFR.pages.init();
 			PHPFR.favorites.init();
 			PHPFR.history.init();
-			PHPFR.languages.init();
 			PHPFR.tips.init();
 			PHPFR.versions.init();
 		}
