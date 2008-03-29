@@ -31,7 +31,10 @@ label#presets-label,
 div#phpfr-title,
 div.history-control,
 div#favorites-control,
-div#fontsize-control
+div#fontsize-control,
+div#install-warning,
+div#install-progress,
+div#install-error
 {
 	position: absolute;
 }
@@ -312,6 +315,41 @@ fieldset#install label.even {
 	background: white;
 }
 
+div#install-warning,
+div#install-progress,
+div#install-error
+{
+	top: 80px;
+	left: 24px;
+	right: 24px;
+	height: 190px;
+	padding: 0 10px;
+	color: white;
+	font-weight: bold;
+}
+
+div#install-warning,
+div#install-error
+{
+	background: url(../../Assets/imgs/modal-warning.png);
+}
+
+div#install-progress {
+	background: url(../../Assets/imgs/modal-ok.png);
+}
+
+div#ok-button,
+div#cancel-button,
+div#ok-error-button
+{
+	float: left;
+	margin-right: 10px;
+}
+
+div#cancel-download-button {
+	margin: 0 auto;
+}
+
 div#tip {
 	bottom: 85px;
 	padding: 4px 8px;
@@ -325,12 +363,12 @@ div#version {
 }
 
 div#donate-button {
-	left: 116px;
+	right: 25px;
 	bottom: 25px;
 }
 
 div#done-button {
-	left: 60px;
+	left: 25px;
 	bottom: 25px;
 }
 

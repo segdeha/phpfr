@@ -2,8 +2,6 @@
  * Language-related functions
  */
 
-// TODO: automate the installation of new langauges: http://nz.php.net/get/php_manual_cs.tar.gz/from/www.php.net/mirror
-
 with ({
 		DEFAULT       : 'en',
 		PREFKEY       : 'lang',
@@ -11,12 +9,15 @@ with ({
 	}) {
 	PHPFR.languages = (function () {
 		// private variables
-		var _templates, _installed;
+		var _elements, _templates, _installed, _installCommand, _widgSysCall;
+		_elements = {
+			warning     : undefined,
+			inprogress  : undefined,
+			error       : undefined,
+			elapsedTime : undefined
+		};
 		_templates = {
-			filename    : new Template('php_manual_#{lang}.tar.gz'),
-			downloads   : new Template('http://www.php.net/get/#{fnm}/from/www.php.net/mirror'),
-			destination : new Template('php_manual/#{fnm}'),
-			install     : new Template('/usr/bin/php php_manual/install.php #{url} #{dst}')
+			elapsedTime: new Template(__('Elapsed time:') + ' #{time} ' + __('seconds'))
 		};
 		// private methods
 		var _getNotFirstRunPref, _setNotFirstRunPref, _updateList, _selectRadio, _setInstalled;
@@ -53,10 +54,6 @@ with ({
 		};
 		// update list of languages on back of widget to make those that are installed selectable
 		_updateList = function () {
-			
-//			DEBUG.writeDebug('_updateList');
-//			DEBUG.writeDebug($('install-form').lang);
-			
 			$A($('install-form').lang).each(function (lang) {
 				if (_installed.indexOf(lang.value) > -1) {
 					lang.enable();
@@ -72,37 +69,37 @@ with ({
 		_setInstalled = function (obj) {
 			
 //			DEBUG.writeDebug('_setInstalled');
-//			DEBUG.writeDebug('obj.outputString = ' + obj.outputString);
 			
 			_installed = $A(eval(obj.outputString)); // yes, eval is evil
 			
 //			DEBUG.writeDebug('_installed = ' + _installed);
 			
 			_updateList();
-			
-//			DEBUG.writeDebug('_installed.length = ' + _installed.length);
-			
 			if (0 === _installed.length) {
 				PHPFR.ui.showDefaultList();
 			} else {
-				PHPFR.languages.lang = PHPFR.languages.getPref() || PHPFR.languages.setDefault();
+				PHPFR.languages.lang = PHPFR.languages.getPref();
+				if (false === PHPFR.languages.lang || _installed.indexOf(PHPFR.languages.lang) < 0) {
+					PHPFR.languages.lang = PHPFR.languages.setDefault();
+				}
 			}
+			
+//			DEBUG.writeDebug('PHPFR.languages.lang = ' + PHPFR.languages.lang);
+			
 			_selectRadio(PHPFR.languages.lang);
-			
-//			DEBUG.writeDebug('_setInstalled 2');
-			
 			PHPFR.functions.init();
 			PHPFR.topics.init();
 		};
 		_handleInstall = function (obj) {
 			
-			DEBUG.writeDebug('_handleInstall');
-			DEBUG.writeDebug(obj.outputString);
+//			DEBUG.writeDebug('_handleInstall');
+//			DEBUG.writeDebug(obj.outputString);
 			
+			_elements.inprogress.hide();
 			if (obj.outputString.indexOf('SUCCESS') > -1) {
-				
+				PHPFR.languages.getInstalled();
 			} else {
-				
+				_elements.error.show();
 			}
 		};
 		return {
@@ -110,6 +107,10 @@ with ({
 			lang: undefined,
 			// public methods
 			init: function () {
+				_elements.warning     = $('install-warning');
+				_elements.inprogress  = $('install-progress');
+				_elements.error       = $('install-error');
+				_elements.elapsedTime = $('elapsed-time');
 				
 				DEBUG.writeDebug('_getNotFirstRunPref() = ' + _getNotFirstRunPref());
 				
@@ -121,25 +122,39 @@ with ({
 			},
 			download: function (lang) {
 				
-				DEBUG.writeDebug('PHPFR.languages.install');
-				DEBUG.writeDebug('lang = ' + lang);
+//				DEBUG.writeDebug('PHPFR.languages.install');
+//				DEBUG.writeDebug('lang = ' + lang);
 				
-				/*
-				var fnm, url, dst, cmd;
-				fnm = _templates.filename.evaluate({lang: lang});
-				url = _templates.downloads.evaluate({fnm: fnm});
-				dst = _templates.destination.evaluate({fnm: fnm});
-				cmd = _templates.install.evaluate({url: url, dst: dst});
-				*/
+				_installCommand = '/usr/bin/php php_manual/install.php ' + lang;
 				
-				var cmd;
-				cmd = '/usr/bin/php php_manual/install.php ' + lang;
+//				DEBUG.writeDebug('_installCommand = ' + _installCommand);
 				
-				DEBUG.writeDebug('cmd = ' + cmd);
-			
+				// show user confirm screen
+				_elements.warning.show();
+			},
+			confirmDownload: function () {
+				var startTime, currentTime, elapsedTime;
 				// show user that the operation is in progress
-				
-				WW.system(cmd, _handleInstall);
+				_elements.warning.hide();
+				_elements.inprogress.show();
+				_widgSysCall = WW.system(_installCommand, _handleInstall);
+				startTime = (new Date()).getTime();
+				setInterval(function () {
+					currentTime = (new Date()).getTime();
+					elapsedTime = Math.floor((currentTime - startTime) / 1000);
+					_elements.elapsedTime.update(
+						_templates.elapsedTime.evaluate({time: elapsedTime})
+					);
+				}, 1000);
+			},
+			cancelDownload: function () {
+				if ('undefined' !== typeof _widgSysCall) {
+					_widgSysCall.cancel();
+					_widgSysCall.close();
+				}
+				_elements.warning.hide();
+				_elements.inprogress.hide();
+				_elements.error.hide();
 			},
 			getInstalled: function () {
 				
