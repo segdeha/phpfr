@@ -142,6 +142,25 @@
 			<label class="even"><input type="radio" name="lang" id="lang-sv"    onclick="PHPFR.languages.setPref(this.value);" value="sv">    <span class="link" onclick="PHPFR.languages.download('sv');">Swedish</span></label>
 		</fieldset>
 	</form>
+	<div id="install-warning" style="display: none;">
+		<h3>Warning!</h3>
+		<p>Clicking OK below will start a 3.3MB download of the PHP documentation from PHP.net. Expect to wait between 2 and 10 minutes for this operation to complete. Do you wish to continue?</p>
+		<div id="ok-button"></div>
+		<div id="cancel-button"></div>
+	</div>
+	<div id="install-progress" style="display: none;">
+		<h3>Download In-progress</h3>
+		<p id="elapsed-time">Elapsed time: 0 seconds</p>
+		<p>You can cancel this download at any time by clicking Cancel below.</p>
+		<p style="text-align: center;"><img src="Assets/imgs/ajax-loader-green.gif" alt=""></p>
+		<div id="cancel-download-button"></div>
+	</div>
+	<div id="install-error" style="display: none;">
+		<h3>Error!</h3>
+		<p>There was a problem downloading your new documentation.</p>
+		<p>Please try again later. If the problem persists, please contact Andrew Hedges, the developer of PHPfr.</p>
+		<div id="ok-error-button"></div>
+	</div>
 	<div id="tip">
 		<strong id="tip-label"></strong> <span id="tip-text"></span>
 	</div>

@@ -80,9 +80,13 @@ with ({
 			toToggle      : undefined
 		};
 		_buttons = {
-			info   : undefined,
-			done   : undefined,
-			donate : undefined
+			info    : undefined,
+			done    : undefined,
+			donate  : undefined,
+			ok      : undefined,
+			cancel  : undefined,
+			cancelDownload : undefined,
+			okError : undefined
 		};
 		_scrolls = {
 			func : {
@@ -192,6 +196,10 @@ with ({
 			_buttons.info   = new AppleInfoButton($('flipper'), $('front'), WHITE, WHITE, PHPFR.ui.showBack);
 			_buttons.done   = new AppleGlassButton($('done-button'), __('Done'), PHPFR.ui.showFront);
 			_buttons.donate = new AppleGlassButton($('donate-button'), __('Donate'), PHPFR.util.gotoPayPal);
+			_buttons.ok     = new AppleGlassButton($('ok-button'), __('OK'), PHPFR.languages.confirmDownload);
+			_buttons.cancel = new AppleGlassButton($('cancel-button'), __('Cancel'), PHPFR.languages.cancelDownload);
+			_buttons.cancelDownload = new AppleGlassButton($('cancel-download-button'), __('Cancel'), PHPFR.languages.cancelDownload);
+			_buttons.okError   = new AppleGlassButton($('ok-error-button'), __('OK'), PHPFR.languages.cancelDownload);
 			_scrolls.func.bar  = new AppleVerticalScrollbar(_elements.funcList.scrollBar);
 			_scrolls.view.bar  = new AppleVerticalScrollbar(_elements.viewFrame.scrollBar);
 			_scrolls.func.area = new AppleScrollArea(_elements.funcList.container);
