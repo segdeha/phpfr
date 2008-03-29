@@ -106,7 +106,7 @@ with ({
 					_showAll();
 				} else {
 					funcs = $A([]);
-					regxp = new RegExp(pattern, 'i');
+					regxp = new RegExp(pattern.dashed(), 'i');
 					_funcs.each(function (func) {
 						if (regxp.test(func)) funcs[funcs.length] = func;
 					});

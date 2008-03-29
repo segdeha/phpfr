@@ -22,27 +22,27 @@ with ({
 		};
 		_setNotFirstRunPref = function () {
 			
-			DEBUG.writeDebug('_setNotFirstRunPref');
-			DEBUG.writeDebug('PHPFR.prefs.set(NOTFIRSTRUN, 1) = ' + PHPFR.prefs.set(NOTFIRSTRUN, 1));
+//			DEBUG.writeDebug('_setNotFirstRunPref');
+//			DEBUG.writeDebug('PHPFR.prefs.set(NOTFIRSTRUN, 1) = ' + PHPFR.prefs.set(NOTFIRSTRUN, 1));
 			
 			PHPFR.prefs.set(NOTFIRSTRUN, 1);
 			
-			DEBUG.writeDebug('PHPFR.prefs.set(NOTFIRSTRUN, 1) = ' + PHPFR.prefs.set(NOTFIRSTRUN, 1));
+//			DEBUG.writeDebug('PHPFR.prefs.set(NOTFIRSTRUN, 1) = ' + PHPFR.prefs.set(NOTFIRSTRUN, 1));
 			
 		};
 		_doFirstRun = function () {
 			var cmd;
 			cmd = "/usr/bin/php '" + PHPFR.basePath + "/php_manual/first_run.php'";
 			
-			DEBUG.writeDebug('_doFirstRun');
-			DEBUG.writeDebug(cmd);
+//			DEBUG.writeDebug('_doFirstRun');
+//			DEBUG.writeDebug(cmd);
 			
 			WW.system(cmd, _doneFirstRun);
 		};
 		_doneFirstRun = function (obj) {
 			
-			DEBUG.writeDebug('_doneFirstRun');
-			DEBUG.writeDebug(obj.outputString);
+//			DEBUG.writeDebug('_doneFirstRun');
+//			DEBUG.writeDebug(obj.outputString);
 			
 			_setNotFirstRunPref();
 			PHPFR.languages.getInstalled();
@@ -50,8 +50,8 @@ with ({
 		// update list of languages on back of widget to make those that are installed selectable
 		_updateList = function () {
 			
-			DEBUG.writeDebug('_updateList');
-			DEBUG.writeDebug($('install-form').lang);
+//			DEBUG.writeDebug('_updateList');
+//			DEBUG.writeDebug($('install-form').lang);
 			
 			$A($('install-form').lang).each(function (lang) {
 				if (_installed.indexOf(lang.value) > -1) {
@@ -67,16 +67,16 @@ with ({
 		};
 		_setInstalled = function (obj) {
 			
-			DEBUG.writeDebug('_setInstalled');
-			DEBUG.writeDebug('obj.outputString = ' + obj.outputString);
+//			DEBUG.writeDebug('_setInstalled');
+//			DEBUG.writeDebug('obj.outputString = ' + obj.outputString);
 			
 			_installed = $A(eval(obj.outputString)); // yes, eval is evil
 			
-			DEBUG.writeDebug('_installed = ' + _installed);
+//			DEBUG.writeDebug('_installed = ' + _installed);
 			
 			_updateList();
 			
-			DEBUG.writeDebug('_installed.length = ' + _installed.length);
+//			DEBUG.writeDebug('_installed.length = ' + _installed.length);
 			
 			if (0 === _installed.length) {
 				PHPFR.ui.showDefaultList();
@@ -85,7 +85,7 @@ with ({
 			}
 			_selectRadio(PHPFR.languages.lang);
 			
-			DEBUG.writeDebug('_setInstalled 2');
+//			DEBUG.writeDebug('_setInstalled 2');
 			
 			PHPFR.functions.init();
 			PHPFR.topics.init();
@@ -96,7 +96,7 @@ with ({
 			// public methods
 			init: function () {
 				
-				DEBUG.writeDebug(_getNotFirstRunPref());
+//				DEBUG.writeDebug(_getNotFirstRunPref());
 				
 				if (false === _getNotFirstRunPref()) {
 					_doFirstRun();
@@ -106,7 +106,7 @@ with ({
 			},
 			getInstalled: function () {
 				
-				DEBUG.writeDebug('getInstalled');
+//				DEBUG.writeDebug('getInstalled');
 				
 				WW.system("/usr/bin/php 'Assets/php/installed.php'", _setInstalled);
 			},
