@@ -75,7 +75,7 @@
 		<!-- search input field -->
 		<div id="search">
 			<form onsubmit="PHPFR.functions.filter($F('filter'));return false;">
-				<input type="search" id="filter" oninput="PHPFR.functions.filter(this.value);" placeholder="Type here to filter list">
+				<input type="search" id="filter" incremental="true" onsearch="PHPFR.functions.filter(this.value);" placeholder="Type here to filter list">
 			</form>
 		</div>
 		<!-- topics select list -->
