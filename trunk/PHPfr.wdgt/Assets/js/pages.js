@@ -23,7 +23,7 @@ with ({
 				_elements.viewport  = $('viewport-container');
 				_elements.favorites = $('favorites-control');
 				// set default page
-				PHPFR.ui.followLink('help.html#welcome');
+				PHPFR.ui.followLink('phpfr-help.html#welcome');
 			},
 			/**
 			 * Display a local HTML page, either from php_manual or html directories
@@ -53,13 +53,13 @@ with ({
 				};
 				hash = page.split('#')[1];
 				page = page.split('#')[0].dashed();
-				if (PHPFR.regexs.file.test(page)) {
+				if (PHPFR.regexs.html.test(page)) {
+					path = _templates.html.evaluate({page: page});
+				} else if (PHPFR.regexs.file.test(page)) {
 					page = (page.split('/'))[(page.split('/')).length - 1];
 					path = _templates.php.evaluate({lang: PHPFR.languages.lang, page: page});
-				} else if ((page.split('.')).length > 2) { // e.g., ('function.strstr.html'.split('.')).length === 3
+				} else { // e.g., ('function.strstr.html'.split('.')).length === 3
 					path = _templates.php.evaluate({lang: PHPFR.languages.lang, page: page});
-				} else { // e.g., ('dates.html'.split('.')).length === 2
-					path = _templates.html.evaluate({page: page});
 				}
 				// fetch HTML
 				if ('tw' === PHPFR.languages.lang || 'hk' === PHPFR.languages.lang) {

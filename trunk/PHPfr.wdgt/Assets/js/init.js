@@ -53,7 +53,7 @@ PHPFR = (function () {
 			file : /file\:\/\/(.+)/i,
 			http : /http\:/i,
 			func : /function\.(.+)\.html$/i,
-			html : /html\/.+/i,
+			html : /phpfr-.+/i,
 			link : /<a/ig
 		},
 		init: function () {
