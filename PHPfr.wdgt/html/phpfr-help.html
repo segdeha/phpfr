@@ -21,15 +21,13 @@
 	<!-- BEGIN: WELCOME -->
 	<div class="phpfr-section" id="welcome">
 		<h2>Welcome to PHPfr!</h2>
-		<p>PHP Function Reference (PHPfr) lets you quickly look up function definitions using a downloaded copy of the documentation from <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/');">PHP.net</span></p>
-		<p>PHPfr also includes an extensive &#8220;cheat sheet&#8221; of common PHP syntax as well as an interactive date formatter.</p>
-		<p>PHPfr is free software, but <span class="link" onclick="PHPFR.util.gotoPayPal();">donations</span> are welcome.</p>
+		<p>PHP Function Reference (PHPfr) lets you quickly look up function definitions using a downloaded copy of the documentation from <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/');">PHP.net</span>.</p>
+		<p>PHPfr also includes an extensive <span class="link" onclick="PHPFR.ui.followLink('phpfr-cheats.html#regular-expressions');">cheat sheet</span> of common PHP syntax as well as an interactive <span class="link" onclick="PHPFR.ui.followLink('phpfr-dates.html#day');">date formatter</span>.</p>
 		<p><strong>If you are new to PHPfr,</strong> I encourage you to <span class="link" onclick="PHPFR.ui.showTab('overview');">read the overview</span> section for a rundown of the widget&#8217;s features.</p>
+		<p>PHPfr is free software, but <span class="link" onclick="PHPFR.util.gotoPayPal();">donations</span> are welcome.</p>
 		<p>Please file bug reports at the project home on <span class="link" onclick="PHPFR.ui.followLink('http://code.google.com/p/phpfr/');">Google Code</span>.</p>
-		<p>
-			I hope you enjoy PHPfr as much as I&#8217;ve enjoyed building it!<br>
-			&#8211;<span class="link" onclick="PHPFR.ui.followLink('http://andrew.hedges.name/');">Andrew Hedges</span>, developer of PHPfr
-		</p>
+		<p>I hope you enjoy PHPfr as much as I&#8217;ve enjoyed building it!</p>
+		<p>&#8211;<span class="link" onclick="PHPFR.ui.followLink('http://andrew.hedges.name/');">Andrew Hedges</span>, developer of PHPfr</p>
 	</div>
 	<!-- END: WELCOME -->
 	
@@ -43,17 +41,17 @@
 		<!-- docs in your language -->
 		<h3>Documentation in Your Language</h3>
 		<p>PHPfr ships with English language documentation installed by default. Other translations of the docs are just a click away! <span class="link" onclick="PHPFR.ui.showBack();">Flip the widget over</span> and click on the language of your choice to download (3.3MB) and install it.</p>
-		<p>Additionally, most of the PHPfr interface is localized as well. Currently, English and German are included, but more languages should be coming soon.</p>
+		<p>Additionally, most of the PHPfr interface is localized as well. Currently, English, German and Romanian are included, but more languages should be coming soon.</p>
 		<!-- fast function lookup -->
 		<h3>Fast Function Lookup</h3>
 		<p>PHPfr&#8217;s reason for being is to help you, the busy PHP developer, lookup function definitions <em>fast.</em></p>
 		<h4>Live filtering</h4>
 		<p>Type a few letters from any part of a function name to narrow the list of functions to ones that match. You can even use regular expressions!</p>
-		<p>For example, entering <code>[0-9]$</code> will match only functions ending in a number. Learn the basics of regular expressions in the <span class="link" onclick="PHPFR.util.followLink('phpfr-cheats.html#regular-expressions');">cheat sheet</span>.</p>
+		<p>For example, entering <code>[0-9]$</code> will match only functions ending in a number. Learn the basics of regular expressions in the <span class="link" onclick="PHPFR.ui.followLink('phpfr-cheats.html#regular-expressions');">cheat sheet</span>.</p>
 		<h4>Group by Topic</h4>
-		<p>A new feature of PHPfr 1.0 (suggested by my good friend Morgan Pyne) is the topic select list. Choose a topic from the drop-down list and only functions related to that topic (e.g., Arrays) will display in the list.</p>
+		<p>A new feature of PHPfr 1.0 (suggested by my friend and colleague, Morgan Pyne) is the topic select list. Choose a topic from the drop-down list at the top of the function list and only functions related to that topic (e.g., Arrays) will display in the list.</p>
 		<h4>Don&#8217;t lose your place</h4>
-		<p></p>
+		<p>If you need to temporarily reclaim space on your Dashboard, you can close the page drawer using the <img src="Assets/imgs/famfamfam/application_side_contract.png" align="absmiddle" alt="close drawer"> icon. Click it again to open the drawer.</p>
 		<h4>Favorites</h4>
 		<p>PHPfr allows you to save your favorite (or least favorite?) functions for quick reference. Just click the <img src="Assets/imgs/famfamfam/heart_add.png" align="absmiddle" alt="Add to favorites"> icon at the top of the window on any function page to add it to your favorites list. Click the <img src="Assets/imgs/famfamfam/heart.png" align="absmiddle" alt="Show favorites"> icon at the bottom of the function list to view your favorites list.</p>
 		<!-- history -->
@@ -67,23 +65,18 @@
 		<h3>Cheat Sheet</h3>
 		<p>It&#8217;s not cheating if the test is open book, right? PHPfr&#8217;s &#8220;cheat sheet&#8221; gives you quick access to information about some common PHP knowledge you shouldn&#8217;t have to store in your head. The <img src="Assets/imgs/famfamfam/key.png" align="absmiddle" alt="cheat sheet"> icon is the <em>key</em> to your success&#8230;</p>
 		<h4>Regular expressions</h4>
-		<p><span class="link" onclick="PHPFR.util.followLink('phpfr-cheats.html#regular-expressions');">The regular expressions section</span> of the cheat sheet includes examples of simple regular expressions, basic syntax, information about the PCRE (Perl-Compatible Regular Expressions) modifiers and a list of PREG constants and their meanings..</p>
+		<p><span class="link" onclick="PHPFR.ui.followLink('phpfr-cheats.html#regular-expressions');">The regular expressions section</span> of the cheat sheet includes examples of simple regular expressions, basic syntax, information about the PCRE (Perl-Compatible Regular Expressions) modifiers and a list of PREG constants and their meanings.</p>
 		<h4>$_SERVER</h4>
-		<p>Quick, what <code>$_SERVER</code> array key returns the IP address of the server under which the current script is executing? If you answered <code>SERVER_ADDR</code> you may not need this feature!</p>
-		<p>For the rest of us, a list of array keys and their meanings are just a click away.</p>
+		<p>Quick, what <code>$_SERVER</code> array key returns the IP address of the server under which the current script is executing? If you answered <code>SERVER_ADDR</code> you may not need this feature! For the rest of us, a list of array keys and their meanings are waiting in <span class="link" onclick="PHPFR.ui.followLink('phpfr-cheats.html#server');">the $_SERVER section</span>.</p>
 		<h4>Constants</h4>
-		<p>PHP creates a number of &#8220;magic&#8221; constants you can access anywhere in your scripts. <span class="link" onclick="PHPFR.util.followLink('phpfr-cheats.html#constants');">The constants section</span> lists many of the most common ones.</p>
+		<p>PHP creates a number of &#8220;magic&#8221; constants you can access anywhere in your scripts. <span class="link" onclick="PHPFR.ui.followLink('phpfr-cheats.html#constants');">The constants section</span> lists many of the most common ones.</p>
 		<h4>fopen() modes</h4>
-		<p>Is it <code>r+</code> or <code>w+</code> that opens a file for writing and truncates the file to zero length? No need to guess, just click through to this section for the answer.</p>
+		<p>Is it <code>r+</code> or <code>w+</code> that opens a file for writing and truncates the file to zero length? No need to guess, just click through to <span class="link" onclick="PHPFR.ui.followLink('phpfr-cheats.html#fopen-modes');">the fopen() modes section</span> for the answer.</p>
 		<h4>Comparisons</h4>
-		<p>Did you know that if you compare an array to anything else, the array will always be considered greater?</p>
-		<p><span class="link" onclick="PHPFR.util.followLink('phpfr-cheats.html#comparisons');">The comparisons section</span> offers a list of comparison operators, comparisons with different typs of operands (like the above example), comparisons using PHP functions such as <code>is_null()</code>, and logic tables for both loose and strict comparisons.</p>
+		<p>Did you know that if you compare an array to anything else, the array will always be considered greater? <span class="link" onclick="PHPFR.ui.followLink('phpfr-cheats.html#comparisons');">The comparisons section</span> offers a list of comparison operators, comparisons with different typs of operands (like the above example), comparisons using PHP functions such as <code>is_null()</code>, and logic tables for both loose and strict comparisons.</p>
 		<!-- date formatter -->
 		<h3>Interactive Date Formatter</h3>
-		<p>If you&#8217;re like me, you don&#8217;t want to have to remember that the date format string for &#8220;Tuesday, April 1st&#8221; is <code>l, F jS</code>. Luckily, you don&#8217;t have to because PHPfr has a nifty, interactive <span class="link" onclick="PHPFR.util.followLink('phpfr-dates.html#day');">date formatter</span> feature.</p>
-		<!--  -->
-		<h3></h3>
-		<p></p>
+		<p>If you&#8217;re like me, you don&#8217;t want to have to remember that the date format string for &#8220;Tuesday, April 1st&#8221; is <code>l, F jS</code>. Luckily, you don&#8217;t have to because PHPfr has a nifty, interactive <span class="link" onclick="PHPFR.ui.followLink('phpfr-dates.html#day');">date formatter</span> feature.</p>
 	</div>
 	<!-- END: OVERVIEW -->
 	
@@ -94,7 +87,7 @@
 		<h2>Version History</h2>
 		<dl>
 			<dt>1.0 &#8211; ???</dt>
-				<dd>First full release. Hooray! Has it really been 2 years???</dd>
+				<dd>First full release. Hooray! Has it really been 2 years?!</dd>
 			<dt>0.9.6.2b &#8211; February 24, 2007</dt>
 				<dd>Updated default (English) documentation to the most recent version on PHP.net (20 Feb, 2007).</dd>
 			<dt>0.9.6.1b &#8211; July 2, 2006</dt>
@@ -121,32 +114,12 @@
 	<!-- BEGIN: LICENSE -->
 	<div class="phpfr-section" id="license">
 		<h2>License &amp; Terms of Use</h2>
+		<p>PHPfr is released under the <span class="link" onclick="PHPFR.ui.followLink('http://www.opensource.org/licenses/bsd-license.php');">New BSD License</span>.</p>
 		<p>PHPfr is free software, but <span class="link" onclick="PHPFR.ui.followLink('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=andrew%40hedges%2ename&item_name=PHP%20Function%20Reference&amount=5%2e00&no_shipping=1&cn=Comments&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8');">donations</span> are welcome.</p>
 		<h3>PHP Documentation Copyright Notice</h3>
 		<p>Copyright &copy; 1997 - 2007 by the PHP Documentation Group. This material may be distributed only subject to the terms and conditions set forth in the Open Publication License, v1.0 or later. A copy of the <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/manual/opl.license.php');">Open Publication License</span> is distributed with this manual, the latest version is presently available at <span class="link" onclick="PHPFR.ui.followLink('http://www.opencontent.org/openpub/');">http://www.opencontent.org/openpub/</span>.</p>
 	</div>
 	<!-- END: LICENSE -->
-
-
-<div id="codes_container">
-	
-	<!-- FAQ -->
-	<div class="codes" id="faq_codes">
-		<h2>
-			How do I use PHPfr?
-		</h2>
-		
-		<p>
-			Just enter part of a function name to narrow the list and click on the function whose definition you wish to view. The widget will automatically expand and display the defniition page. You can also double-click on a function name to visit the online version of the documentation.
-		</p>
-		
-		<p>
-			Two great features of PHPfr are the cheat sheet and interactive date formatter. Click on &#8220;cheat sheet&#8221; below the function list to view the extensive list of commonly used syntax and variables. Click on &#8220;dates&#8221; to enter the interactive date formatter. Enter a format string to view a preview of how the date will appear when processed by the PHP <span class="link" onclick="showFunction('date');">date()</span> function.
-		</p>
-
-	</div>
-	
-	
 </div>
 
 </body>
