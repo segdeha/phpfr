@@ -364,6 +364,7 @@ with ({
 					section.hide();
 				});
 				$(id).show();
+				this.scrollBars.refresh(VIEW);
 			},
 			scrollBars: {
 				// Convenience method to refresh all scrollbars

@@ -603,12 +603,12 @@ div.phpfr-content table tr.even td {
 	background: white;
 }
 
-div.phpfr-content {
-	
+div.phpfr-content dt {
+	font-weight: bold;
 }
 
-div.phpfr-content {
-	
+div.phpfr-content dd {
+	margin-bottom: 0.5em;
 }
 
 div.phpfr-content {
