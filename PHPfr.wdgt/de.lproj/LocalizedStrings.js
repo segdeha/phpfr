@@ -29,8 +29,8 @@ LocalizedStrings['Scroll the function list using up- and down-arrows']   = 'Scro
 LocalizedStrings['Add functions to your favorites using the heart icon'] = 'Hinzuf&uuml;gen von Funktionen zu den eigenen Favoriten mit dem Herz-Icon';
 LocalizedStrings['Open the drawer to resize the view frame']             = 'Schublade &ouml;ffnen um die Gr&ouml;&szlig;e des  Ansichtsrahmen zu ver&auml;ndern';
 LocalizedStrings['Follow links on function pages to view more PHP docs'] = 'Links auf den Funktionsseiten f&uuml;hren zu weiteren PHP Dokumenten';
+LocalizedStrings['Make a developer happy by donating a few dollars :-)'] = 'Mach einen Entwickler gl&uuml;cklich durch Spenden von einigen Dollar :-)';
 LocalizedStrings['Click in the empty search box and hit return to see all functions'] = 'Klick in die leere Suchbox und Return dr&uuml;cken um alle Funktionen zu sehen';
-LocalizedStrings['Make a developer happy by donating a few dollars <span style="font-family: Verdana, Sans-Serif;">:-)</span>'] = 'Mach einen Entwickler gl&uuml;cklich durch Spenden von einigen Dollar <span style="font-family: Verdana, Sans-Serif;">:-)</span>';
 LocalizedStrings['Click the language name to install/update. Click the radio button to select your language.']                  = 'Klick auf Sprachenname f&uuml;r Installation/Update. Klick des Radio Button zur Sprachauswahl.';
 LocalizedStrings['Type here to filter list'] = 'Hier eingeben zum Filtern';
 LocalizedStrings['Elapsed time:'] = 'Verstrichene Zeit:';

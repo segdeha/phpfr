@@ -13,7 +13,7 @@ PHPFR.tips = (function () {
 		__('Open the drawer to resize the view frame'),
 		__('Follow links on function pages to view more PHP docs'),
 		__('Click in the empty search box and hit return to see all functions'),
-		__('Make a developer happy by donating a few dollars <span style="font-family: Verdana, Sans-Serif;">:-)</span>')
+		__('Make a developer happy by donating a few dollars :-)')
 	];
 	// private methods
 	var _setTip;
