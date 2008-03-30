@@ -32,5 +32,5 @@ LocalizedStrings['Follow links on function pages to view more PHP docs'] = 'Urme
 LocalizedStrings['Click in the empty search box and hit return to see all functions'] = 'Click în căsuţa de căutare goală şi enter pentru a vedea toate funcţiile';
 LocalizedStrings['Make a developer happy by donating a few dollars :-)'] = 'Fă un programator fericit cu o mică donaţie :-)';
 LocalizedStrings['Click the language name to install/update. Click the radio button to select your language.'] = 'Click pe numele limbii pentru a instala/actualiza. Click pe butonul radio pentru a selecta limba.';
-LocalizedStrings['Elapsed time:'] = 'Elapsed time:';
-LocalizedStrings['seconds']       = 'seconds';
+LocalizedStrings['Elapsed time:'] = 'Timpul scurs:';
+LocalizedStrings['seconds']       = 'secunde';

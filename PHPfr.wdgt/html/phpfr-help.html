@@ -42,7 +42,7 @@
 		<p>PHPfr uses a downloaded copy of <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/');">PHP.net</span>&#8217;s online documentation to enable faster access than is possible over a network connection. Also, by using downloaded documentation, you can access it when you are not online.</p>
 		<!-- docs in your language -->
 		<h3>Documentation in Your Language</h3>
-		<p>PHPfr ships with English language documentation installed by default. Other translations of the docs are just a click away! Flip the widget over and click on the language of your choice to download (3.3MB) and install it.</p>
+		<p>PHPfr ships with English language documentation installed by default. Other translations of the docs are just a click away! <span class="link" onclick="PHPFR.ui.showBack();">Flip the widget over</span> and click on the language of your choice to download (3.3MB) and install it.</p>
 		<p>Additionally, most of the PHPfr interface is localized as well. Currently, English and German are included, but more languages should be coming soon.</p>
 		<!-- fast function lookup -->
 		<h3>Fast Function Lookup</h3>
@@ -52,6 +52,8 @@
 		<p>For example, entering <code>[0-9]$</code> will match only functions ending in a number. Learn the basics of regular expressions in the <span class="link" onclick="PHPFR.util.followLink('phpfr-cheats.html#regular-expressions');">cheat sheet</span>.</p>
 		<h4>Group by Topic</h4>
 		<p>A new feature of PHPfr 1.0 (suggested by my good friend Morgan Pyne) is the topic select list. Choose a topic from the drop-down list and only functions related to that topic (e.g., Arrays) will display in the list.</p>
+		<h4>Don&#8217;t lose your place</h4>
+		<p></p>
 		<h4>Favorites</h4>
 		<p>PHPfr allows you to save your favorite (or least favorite?) functions for quick reference. Just click the <img src="Assets/imgs/famfamfam/heart_add.png" align="absmiddle" alt="Add to favorites"> icon at the top of the window on any function page to add it to your favorites list. Click the <img src="Assets/imgs/famfamfam/heart.png" align="absmiddle" alt="Show favorites"> icon at the bottom of the function list to view your favorites list.</p>
 		<!-- history -->
@@ -65,19 +67,20 @@
 		<h3>Cheat Sheet</h3>
 		<p>It&#8217;s not cheating if the test is open book, right? PHPfr&#8217;s &#8220;cheat sheet&#8221; gives you quick access to information about some common PHP knowledge you shouldn&#8217;t have to store in your head. The <img src="Assets/imgs/famfamfam/key.png" align="absmiddle" alt="cheat sheet"> icon is the <em>key</em> to your success&#8230;</p>
 		<h4>Regular expressions</h4>
-		<p>This section of the cheat sheet includes examples of simple regular expressions, basic syntax, information about the PCRE (Perl-Compatible Regular Expressions) modifiers and a list of PREG constants and their meanings..</p>
+		<p><span class="link" onclick="PHPFR.util.followLink('phpfr-cheats.html#regular-expressions');">The regular expressions section</span> of the cheat sheet includes examples of simple regular expressions, basic syntax, information about the PCRE (Perl-Compatible Regular Expressions) modifiers and a list of PREG constants and their meanings..</p>
 		<h4>$_SERVER</h4>
 		<p>Quick, what <code>$_SERVER</code> array key returns the IP address of the server under which the current script is executing? If you answered <code>SERVER_ADDR</code> you may not need this feature!</p>
 		<p>For the rest of us, a list of array keys and their meanings are just a click away.</p>
 		<h4>Constants</h4>
-		<p>PHP creates a number of &#8220;magic&#8221; constants you can access anywhere in your scripts. This section lists many of the most common ones.</p>
+		<p>PHP creates a number of &#8220;magic&#8221; constants you can access anywhere in your scripts. <span class="link" onclick="PHPFR.util.followLink('phpfr-cheats.html#constants');">The constants section</span> lists many of the most common ones.</p>
 		<h4>fopen() modes</h4>
 		<p>Is it <code>r+</code> or <code>w+</code> that opens a file for writing and truncates the file to zero length? No need to guess, just click through to this section for the answer.</p>
 		<h4>Comparisons</h4>
-		<p></p>
-		<!--  -->
-		<h3></h3>
-		<p></p>
+		<p>Did you know that if you compare an array to anything else, the array will always be considered greater?</p>
+		<p><span class="link" onclick="PHPFR.util.followLink('phpfr-cheats.html#comparisons');">The comparisons section</span> offers a list of comparison operators, comparisons with different typs of operands (like the above example), comparisons using PHP functions such as <code>is_null()</code>, and logic tables for both loose and strict comparisons.</p>
+		<!-- date formatter -->
+		<h3>Interactive Date Formatter</h3>
+		<p>If you&#8217;re like me, you don&#8217;t want to have to remember that the date format string for &#8220;Tuesday, April 1st&#8221; is <code>l, F jS</code>. Luckily, you don&#8217;t have to because PHPfr has a nifty, interactive <span class="link" onclick="PHPFR.util.followLink('phpfr-dates.html#day');">date formatter</span> feature.</p>
 		<!--  -->
 		<h3></h3>
 		<p></p>
