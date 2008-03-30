@@ -547,6 +547,10 @@ div.phpfr-content h1 {
 	line-height: 1em;
 }
 
+div.phpfr-content h4 {
+	font-style: italic;
+}
+
 div.phpfr-content caption,
 div.phpfr-content table th,
 div.phpfr-content table td

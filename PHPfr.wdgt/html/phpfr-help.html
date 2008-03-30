@@ -10,7 +10,7 @@
 	<h1>
 		PHP Function Reference
 	</h1>
-
+	
 	<ul class="phpfr-nav">
 		<li><span class="link" onclick="PHPFR.ui.showTab('welcome');">Welcome</span></li>
 		<li><span class="link" onclick="PHPFR.ui.showTab('overview');">Overview</span></li>
@@ -21,10 +21,10 @@
 	<!-- BEGIN: WELCOME -->
 	<div class="phpfr-section" id="welcome">
 		<h2>Welcome to PHPfr!</h2>
-		<p>PHP Function Reference (PHPfr) lets you quickly look up function definitions using a downloaded copy of the documentation from <span onclick="PHPFR.ui.followLink('http://www.php.net/');" class="link">PHP.net</span></p>
+		<p>PHP Function Reference (PHPfr) lets you quickly look up function definitions using a downloaded copy of the documentation from <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/');">PHP.net</span></p>
 		<p>PHPfr also includes an extensive &#8220;cheat sheet&#8221; of common PHP syntax as well as an interactive date formatter.</p>
-		<p>PHPfr is free software, but <span class="link" onclick="PHPFR.ui.followLink('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=andrew%40hedges%2ename&item_name=PHP%20Function%20Reference&amount=5%2e00&no_shipping=1&cn=Comments&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8');">donations</span> are welcome.</p>
-		<p><strong>If you are new to PHPfr,</strong> I encourage you to <span class="link" onclick="PHPFR.ui.showTab('faqs');">read the FAQs</span> section for an overview of how to use the widget&#8217;s features.</p>
+		<p>PHPfr is free software, but <span class="link" onclick="PHPFR.util.gotoPayPal();">donations</span> are welcome.</p>
+		<p><strong>If you are new to PHPfr,</strong> I encourage you to <span class="link" onclick="PHPFR.ui.showTab('overview');">read the overview</span> section for a rundown of the widget&#8217;s features.</p>
 		<p>Please file bug reports at the project home on <span class="link" onclick="PHPFR.ui.followLink('http://code.google.com/p/phpfr/');">Google Code</span>.</p>
 		<p>
 			I hope you enjoy PHPfr as much as I&#8217;ve enjoyed building it!<br>
@@ -37,14 +37,48 @@
 	<div class="phpfr-section" id="overview">
 		<h2>Overview</h2>
 		<p>PHPfr has dozens of features to help you, the busy PHP developer, find the information you need <em>fast.</em></p>
+		<!-- offline docs -->
 		<h3>Offline Documentation</h3>
 		<p>PHPfr uses a downloaded copy of <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/');">PHP.net</span>&#8217;s online documentation to enable faster access than is possible over a network connection. Also, by using downloaded documentation, you can access it when you are not online.</p>
+		<!-- docs in your language -->
+		<h3>Documentation in Your Language</h3>
+		<p>PHPfr ships with English language documentation installed by default. Other translations of the docs are just a click away! Flip the widget over and click on the language of your choice to download (3.3MB) and install it.</p>
+		<p>Additionally, most of the PHPfr interface is localized as well. Currently, English and German are included, but more languages should be coming soon.</p>
+		<!-- fast function lookup -->
+		<h3>Fast Function Lookup</h3>
+		<p>PHPfr&#8217;s reason for being is to help you, the busy PHP developer, lookup function definitions <em>fast.</em></p>
+		<h4>Live filtering</h4>
+		<p>Type a few letters from any part of a function name to narrow the list of functions to ones that match. You can even use regular expressions!</p>
+		<p>For example, entering <code>[0-9]$</code> will match only functions ending in a number. Learn the basics of regular expressions in the <span class="link" onclick="PHPFR.util.followLink('phpfr-cheats.html#regular-expressions');">cheat sheet</span>.</p>
+		<h4>Group by Topic</h4>
+		<p>A new feature of PHPfr 1.0 (suggested by my good friend Morgan Pyne) is the topic select list. Choose a topic from the drop-down list and only functions related to that topic (e.g., Arrays) will display in the list.</p>
+		<h4>Favorites</h4>
+		<p>PHPfr allows you to save your favorite (or least favorite?) functions for quick reference. Just click the <img src="Assets/imgs/famfamfam/heart_add.png" align="absmiddle" alt="Add to favorites"> icon at the top of the window on any function page to add it to your favorites list. Click the <img src="Assets/imgs/famfamfam/heart.png" align="absmiddle" alt="Show favorites"> icon at the bottom of the function list to view your favorites list.</p>
+		<!-- history -->
+		<h3>History</h3>
+		<p>PHPfr tracks your path through its pages, allowing you to quickly go back to a previous screen. The <img src="Assets/imgs/button-back-enabled.png" align="absmiddle" alt=""> and <img src="Assets/imgs/button-forward-enabled.png" align="absmiddle" alt=""> buttons let you go back and forward, respectively, through your history.</p>
+		<!-- resizable interface -->
+		<h3>Resizable Interface</h3>
+		<p>New in version 1.0 is the ability to resize the PHPfr interface to best fit your monitor. Use the presets in the <code>--Select a Size--</code> drop-down (at the bottom right of the widget) or just drag the resize handle to the desired size. PHPfr will scale from 450x290 up to 1200x900 pixels.</p>
+		<p>Additionally (and also new in version 1.0), you can toggle between 2 font sizes, normal and slightly bigger. Click the <img src="Assets/imgs/button-fontsmall.png" align="absmiddle" alt="font size toggle"> button at the bottom of the widget to toggle between the 2 sizes.</p>
+		<!-- cheat sheet -->
+		<h3>Cheat Sheet</h3>
+		<p>It&#8217;s not cheating if the test is open book, right? PHPfr&#8217;s &#8220;cheat sheet&#8221; gives you quick access to information about some common PHP knowledge you shouldn&#8217;t have to store in your head. The <img src="Assets/imgs/famfamfam/key.png" align="absmiddle" alt="cheat sheet"> icon is the <em>key</em> to your success&#8230;</p>
+		<h4>Regular expressions</h4>
+		<p>This section of the cheat sheet includes examples of simple regular expressions, basic syntax, information about the PCRE (Perl-Compatible Regular Expressions) modifiers and a list of PREG constants and their meanings..</p>
+		<h4>$_SERVER</h4>
+		<p>Quick, what <code>$_SERVER</code> array key returns the IP address of the server under which the current script is executing? If you answered <code>SERVER_ADDR</code> you may not need this feature!</p>
+		<p>For the rest of us, a list of array keys and their meanings are just a click away.</p>
+		<h4>Constants</h4>
+		<p>PHP creates a number of &#8220;magic&#8221; constants you can access anywhere in your scripts. This section lists many of the most common ones.</p>
+		<h4>fopen() modes</h4>
+		<p>Is it <code>r+</code> or <code>w+</code> that opens a file for writing and truncates the file to zero length? No need to guess, just click through to this section for the answer.</p>
+		<h4>Comparisons</h4>
+		<p></p>
+		<!--  -->
 		<h3></h3>
 		<p></p>
-		<h3></h3>
-		<p></p>
-		<h3></h3>
-		<p></p>
+		<!--  -->
 		<h3></h3>
 		<p></p>
 	</div>
@@ -103,99 +137,13 @@
 			Just enter part of a function name to narrow the list and click on the function whose definition you wish to view. The widget will automatically expand and display the defniition page. You can also double-click on a function name to visit the online version of the documentation.
 		</p>
 		
-		<p class="tip">
-			<strong>Tip:</strong> The search field accepts regular expressions as input, allowing you to home in on groups of functions not otherwise easily searchable. For example, entering the expression <code>^.*[0-9]$</code> into the search field will return all functions that end with a number.
-		</p>
-		
-		<p>
-			Click on the plus sign in the upper left of any function page to add it to your favorites. View your favorites by clicking the &#8220;favorites&#8221; link below the function list.
-		</p>
-		
 		<p>
 			Two great features of PHPfr are the cheat sheet and interactive date formatter. Click on &#8220;cheat sheet&#8221; below the function list to view the extensive list of commonly used syntax and variables. Click on &#8220;dates&#8221; to enter the interactive date formatter. Enter a format string to view a preview of how the date will appear when processed by the PHP <span class="link" onclick="showFunction('date');">date()</span> function.
 		</p>
-		
-		<h2 id="how_do_i_install">
-			How do I install new languages?
-		</h2>
-		
-		<p>
-			PHPfr ships with the English version of the PHP documentation, which is enabled by default. To install other languages, follow the steps below:
-		</p>
-		
-		<ol>
-			<li>Flip to the back the widget</li>
-			<li>Click the name of the language you wish to install</li>
-			<li>You will be sent to the PHP.net site to choose a mirror from which to download the documentation</li>
-			<li>When it is finished downloading, uncompress the documentation by double-clicking on the file</li>
-			<li>The manual will uncompress into a folder with a name like &#8220;php_manual_en&#8221; or &#8220;html&#8221;</li>
-			<li>Rename the folder to the country code of the language (Note: the country code for Brazilian Portuguese is &#8220;pt_BR&#8221;)</li>
-			<li>Control-click (or right-click) on the PHP Function Reference.wdgt bundle located in either ~/Library/Widgets or /Library/Widgets and choose &#8220;Show Package Contents&#8221;</li>
-			<li>Open the &#8220;php_manual&#8221; folder and drag the folder for the new language into it</li>
-			<li>Enter Dashboard</li>
-			<li>The new language should be available for selection on the backside in the language list</li>
-			<li>Select the language you would like to use by clicking its radio button in the language list on the back of the widget</li>
-		</ol>
-		
-		<h2>
-			Why doesn&#8217;t my new language preference work perfectly?
-		</h2>
-		
-		<p>
-			If you notice the function pages not displaying exactly right after you select a new language, you may have to reload the widget (cmd-r).
-		</p>
-		
-		<h2>
-			Why can&#8217;t I use Arabic or Hebrew?
-		</h2>
-		
-		<p>
-			Full documentation is not available for Arabic and Hebrew (despite being listed in the documentation list at <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/download-docs.php');">PHP.net</span>).
-		</p>
-		
-		<p>
-			As compatible versions of the documentation becomes available, I will update PHPfr to work with them.
-		</p>
-		
-		<h2>
-			Why download the documentation?
-		</h2>
-		
-		<p>
-			In a word: <em>speed.</em> PHPfr uses a downloaded copy of PHP.net&#8217;s online documentation to enable faster access than is possible over a network connection. Also, by using downloaded documentation, you can access it when you are not online.
-		</p>
+
 	</div>
 	
-	<!-- LICENSE -->
-	<div class="codes" id="license_codes">
-		<p style="padding-top: 10px;">
-			The following are the terms under which PHPfr is released.
-		</p>
-		
-		<h2>
-			Wow, this is great? How much does it cost?
-		</h2>
-		
-		<p>
-			I decided not to charge for PHPfr. But you&#8217;re right, it is great, so I am asking that if you find it useful that you head on over to PayPal and deposit $5 US (or whatever you think PHPfr is worth) in my account. To make this as painless as possible, <span class="link" onclick="PHPFR.ui.followLink('https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=andrew%40hedges%2ename&item_name=PHP%20Function%20Reference&amount=5%2e00&no_shipping=1&cn=Comments&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8')">here&#8217;s a link</span>.
-		</p>
-		
-		<h2 id="legal">
-			This is so great, are you sure it&#8217;s legal?
-		</h2>
-		
-		<p>
-			Gosh, I hope so. I know the part about redistributing the PHP documentation is kosher, because the copyright notice says so. It&#8217;s very possible that it&#8217;s more fun than the government wants you to have. I am in no way liable if you suffer any losses due to having too much fun. Actually, I am in no way liable for any losses you may suffer for any reason, related to this widget or not.
-		</p>
-		
-		<h2 id="php_copyright">
-			PHP Documentation Copyright Notice
-		</h2>
-		
-		<p>
-			Copyright &copy; 1997 &#8211; 2006 by the PHP Documentation Group. This material may be distributed only subject to the terms and conditions set forth in the Open Publication License, v1.0 or later (the latest version is presently available at <span class="link" onclick="PHPFR.ui.followLink('http://www.opencontent.org/openpub/')">http://www.opencontent.org/openpub/</span>).
-		</p>
-	</div>
+	
 </div>
 
 </body>
