@@ -56,9 +56,9 @@ with ({
 		_updateList = function () {
 			$A($('install-form').lang).each(function (lang) {
 				if (_installed.indexOf(lang.value) > -1) {
-					lang.enable();
+					$(lang).enable();
 				} else {
-					lang.disable();
+					$(lang).disable();
 				}
 			});
 		};
