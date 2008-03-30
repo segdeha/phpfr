@@ -49,7 +49,22 @@ __ = function (str) {
 PHPFR = (function () {
 	return {
 		// e.g., /Users/andrew/Library/Widgets/PHPfr.wdgt
-		basePath : document.location.href.substring(7, document.location.href.length - 13),
+		basePath : (function () {
+			var basePath;
+			basePath = document.location.href.substring(7, document.location.href.length - 13);
+			// work around differences in Tiger versus Leopard
+			if (/^sers/.test(basePath)) {
+				basePath = '/U' + basePath;
+			} else if (/^ibrary/.test(basePath)) {
+				basePath = '/L' + basePath;
+			}
+			if (/^\/Users/.test(basePath) || /^\/Library/.test(basePath)) {
+				return basePath;
+			} else {
+				DEBUG.writeDebug('basePath = ' + basePath);
+				return '';
+			}
+		})(),
 		regexs   : {
 			file : /file\:\/\/(.+)/i,
 			http : /http\:/i,
