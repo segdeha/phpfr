@@ -24,5 +24,7 @@
 		<integer>400</integer>
 		<key>AllowSystem</key>
 		<true/>
+		<key>BackwardsCompatibleClassLookup</key>
+		<true/>
 	</dict>
 </plist>
