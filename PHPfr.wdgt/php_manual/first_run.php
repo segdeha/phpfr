@@ -41,7 +41,7 @@ $tar   = 'tar --directory %s -xzf ';
 if ($dh = opendir($dir)) {
 	while (($file = readdir($dh)) !== false) {
 		// if the file is tarred and gzipped, add it to the list
-		if (stripos($file, '.tar.gz')) {
+		if (strpos($file, '.tar.gz')) {
 			$langs[] = $file;
 		}
 	}

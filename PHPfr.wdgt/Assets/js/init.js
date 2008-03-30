@@ -58,6 +58,9 @@ PHPFR = (function () {
 			} else if (/^ibrary/.test(basePath)) {
 				basePath = '/L' + basePath;
 			}
+			
+			DEBUG.writeDebug('basePath = ' + basePath);
+			
 			if (/^\/Users/.test(basePath) || /^\/Library/.test(basePath)) {
 				return basePath;
 			} else {
@@ -73,9 +76,6 @@ PHPFR = (function () {
 			link : /<a/ig
 		},
 		init: function () {
-			
-			DEBUG.writeDebug('PHPFR.basePath = ' + PHPFR.basePath);
-			
 			PHPFR.languages.init(); // Calls PHPFR.functions.init(); and PHPFR.topics.init();
 			PHPFR.ui.init();
 			PHPFR.pages.init();

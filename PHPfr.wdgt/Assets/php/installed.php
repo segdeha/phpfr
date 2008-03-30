@@ -15,7 +15,7 @@ $dir = substr(__FILE__, 0, -24) . 'php_manual';
 if ($dh = opendir($dir)) {
 	while (($directory = readdir($dh)) !== false) {
 		// if this isn't a directory, add it to the list
-		if (substr($directory, 0, 1) !== '.' && !stripos($directory, '.php') && !stripos($directory, '.tar.gz')) {
+		if (substr($directory, 0, 1) !== '.' && !strpos($directory, '.php') && !strpos($directory, '.tar.gz')) {
 			$languages[] = $directory;
 		}
 	}
