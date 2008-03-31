@@ -21,5 +21,5 @@ The following is a list of the remaining (known) work to be done before declarin
  * ~~Change donation currency to Euros?~~
  * ~~Rewrite help to be more helpful~~
  * Format static HTML pages
- * Fix bugs on Tiger (is this possible? with how much effort? is backwards compatible class lookup sufficient?)
+ * ~~Fix bugs on Tiger (is this possible? with how much effort? is backwards compatible class lookup sufficient?)~~
  * Change download link to point to Amazon S3
