@@ -8,12 +8,12 @@ WW = window.widget;
 
 // replace all underscores with dashes
 String.prototype.dashed = function () {
-	return this.replace(/_/g, '-');
+	return this.split('_').join('-');
 };
 
 // replace all dashes with underscores
 String.prototype.underscored = function () {
-	return this.replace(/-/g, '_');
+	return this.split('-').join('_');
 };
 
 // Copy the data to the pasteboard
