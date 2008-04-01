@@ -26,4 +26,4 @@ $installed .= implode('","', $languages);
 $installed .= '"]';
 
 // return installed languages string
-echo $installed;
+fwrite(STDOUT, $installed);

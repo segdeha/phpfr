@@ -23,7 +23,6 @@ if (isset($argv[1])) {
 	curl_setopt($ch, CURLOPT_HEADER,         0);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 	curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-//	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_USERAGENT,      'PHP Function Reference Widget 1.0 (andrew.hedges.name/widgets)');
 	$result = curl_exec($ch);
 	curl_close($ch);
@@ -35,12 +34,12 @@ if (isset($argv[1])) {
 	$cmd = sprintf($tar, $dir . $cc) . $dir . $cc . '/' . $fnm;
 	exec($cmd);
 	if ($result) {
-		echo 'SUCCESS: Language downloaded and uncompressed successfully';
+		$return = 'SUCCESS: Language downloaded and uncompressed successfully';
 	} else {
-		echo 'ERROR: There was a problem downloading the file.';
+		$return = 'ERROR: There was a problem downloading the file.';
 	}
-	exit;
 } else {
-	echo 'ERROR: No language specified';
-	exit;
+	$return = 'ERROR: No language specified';
 }
+
+fwrite(STDOUT, $return);
