@@ -31,4 +31,4 @@ if ($dh = opendir($dir)) {
 }
 
 $functions .= ']}';
-echo $functions;
+fwrite(STDOUT, $functions);

@@ -34,6 +34,9 @@ with ({
 			stripe: function () {
 				var tbods;
 				tbods = $$('tbody');
+				
+				DEBUG.writeDebug('tbods = ' + tbods);
+				
 				tbods.each(function (tbod) {
 					var trs, idx;
 					trs = tbod.getElementsByTagName('tr');
@@ -60,6 +63,12 @@ with ({
 				};
 				val = Math.ceil(rnd() * num) - 1;
 				return val;
+			},
+			/**
+			 * Copy a string to the pasteboard
+			 */
+			copy: function (str) {
+				WW.system("/bin/echo -n '" + str + "' | /usr/bin/pbcopy", function () {});
 			}
 		};
 	})();

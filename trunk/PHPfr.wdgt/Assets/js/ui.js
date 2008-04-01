@@ -472,6 +472,9 @@ with ({
 			 * @param string page Name of the page to access within the php_manual or html directory
 			 */
 			followLink: function (page) {
+				
+//				DEBUG.writeDebug('followLink: page = ' + page);
+				
 				if (PHPFR.regexs.http.test(page)) {
 					PHPFR.util.gotoURL(page);
 				} else {

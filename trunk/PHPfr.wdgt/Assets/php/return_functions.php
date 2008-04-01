@@ -21,4 +21,4 @@ array_shift($matches);
 $functions = '{["' . str_replace(array(',', '-'), array('","', '_'), implode(',', $matches[0])) . '"]}';
 
 // return the HTML
-echo $functions;
+fwrite(STDOUT, $functions);

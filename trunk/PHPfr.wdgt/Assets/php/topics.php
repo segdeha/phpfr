@@ -34,4 +34,4 @@ if ($dh = opendir($dir)) {
 }
 
 $topics .= ']}';
-echo $topics;
+fwrite(STDOUT, $topics);

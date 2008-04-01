@@ -30,7 +30,7 @@ with ({
 			 * @param string page 
 			 */
 			display: function (page) {
-				var displayPage, hash, path, html, favs;
+				var displayPage, hash, path, html, spans, favs;
 				displayPage = function (obj) {
 					html  = HEADER;
 					html += obj.outputString.replace(PHPFR.regexs.link, _linkReplace);
@@ -43,13 +43,19 @@ with ({
 					PHPFR.ui.viewFrame.open();
 					if ('undefined' !== typeof hash) {
 						PHPFR.ui.showTab(hash);
+					} else {
+						// if there is nav on the page, show the first tab
+						spans = $$('ul.phpfr-nav span');
+						if (spans.length > 0) {
+							spans[0].onclick();
+						}
 					}
 					PHPFR.ui.scrollBars.refresh(VIEW);
 					PHPFR.ui.scrollBars.scrollToTop(VIEW);
 					PHPFR.history.addItem(page);
 					PHPFR.pages.nowShowing = page;
-					PHPFR.functions.hilite();
 					PHPFR.util.stripe();
+					PHPFR.functions.hilite();
 				};
 				hash = page.split('#')[1];
 				page = page.split('#')[0].dashed();

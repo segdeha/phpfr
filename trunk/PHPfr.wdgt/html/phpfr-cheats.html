@@ -18,6 +18,8 @@
 		<li><span onclick="PHPFR.ui.showTab('fopen-modes');" class="link">fopen() Modes</span></li>
 		<li><span onclick="PHPFR.ui.showTab('comparisons');" class="link">Comparisons</span></li>
 	</ul>
+	
+	<hr>
 
 	<!-- BEGIN: REGULAR EXPRESSIONS -->
 	<div class="phpfr-section" id="regular-expressions">
@@ -453,514 +455,865 @@
 				</tr>
 				<tr>
 					<td>'SERVER_SOFTWARE'</td>
-					<td></td>
+					<td>Server identification string, given in the headers when responding to requests.</td>
 				</tr>
 				<tr>
 					<td>'SERVER_PROTOCOL'</td>
-					<td></td>
+					<td>Name and revision of the information protocol via which the page was requested; i.e. 'HTTP/1.0';</td>
 				</tr>
 				<tr>
 					<td>'REQUEST_METHOD'</td>
-					<td></td>
+					<td>Which request method was used to access the page; i.e. 'GET', 'HEAD', 'POST', 'PUT'.</td>
 				</tr>
 				<tr>
 					<td>'REQUEST_TIME'</td>
-					<td></td>
+					<td>The timestamp of the start of the request. Available since PHP 5.1.0.</td>
 				</tr>
 				<tr>
 					<td>'QUERY_STRING'</td>
-					<td></td>
+					<td>The query string, if any, via which the page was accessed.</td>
 				</tr>
 				<tr>
 					<td>'DOCUMENT_ROOT'</td>
-					<td></td>
+					<td>The document root directory under which the current script is executing, as defined in the server's configuration file.</td>
 				</tr>
 				<tr>
 					<td>'HTTP_ACCEPT'</td>
-					<td></td>
+					<td>Contents of the Accept: header from the current request, if there is one.</td>
 				</tr>
 				<tr>
 					<td>'HTTP_ACCEPT_CHARSET'</td>
-					<td></td>
+					<td>Contents of the Accept-Charset: header from the current request, if there is one. Example: 'iso-8859-1,*,utf-8'.</td>
 				</tr>
 				<tr>
 					<td>'HTTP_ACCEPT_ENCODING'</td>
-					<td></td>
+					<td>Contents of the Accept-Encoding: header from the current request, if there is one. Example: 'gzip'.</td>
 				</tr>
 				<tr>
 					<td>'HTTP_ACCEPT_LANGUAGE'</td>
-					<td></td>
+					<td>Contents of the Accept-Language: header from the current request, if there is one. Example: 'en'.</td>
 				</tr>
 				<tr>
 					<td>'HTTP_CONNECTION'</td>
-					<td></td>
+					<td>Contents of the Connection: header from the current request, if there is one. Example: 'Keep-Alive'.</td>
 				</tr>
 				<tr>
 					<td>'HTTP_HOST'</td>
-					<td></td>
+					<td>Contents of the Host: header from the current request, if there is one.</td>
 				</tr>
 				<tr>
 					<td>'HTTP_REFERER'</td>
-					<td></td>
+					<td>The address of the page (if any) which referred the user agent to the current page. This is set by the user agent. Not all user agents will set this, and some provide the ability to modify HTTP_REFERER as a feature. In short, it cannot really be trusted.</td>
 				</tr>
 				<tr>
 					<td>'HTTP_USER_AGENT'</td>
-					<td></td>
+					<td>Contents of the User-Agent: header from the current request, if there is one. This is a string denoting the user agent being which is accessing the page. A typical example is: Mozilla/4.5 [en] (X11; U; Linux 2.2.9 i586). Among other things, you can use this value with <span class="link" onclick="PHPFR.functions.show('get_browser');">get_browser()</span> to tailor your page's output to the capabilities of the user agent.</td>
 				</tr>
 				<tr>
 					<td>'HTTPS'</td>
-					<td></td>
+					<td>Set to a non-empty value if the script was queried through the HTTPS protocol.   Note that when using ISAPI with IIS, the value will be off if the request was not made through the HTTPS protocol.</td>
 				</tr>
 				<tr>
 					<td>'REMOTE_ADDR'</td>
-					<td></td>
+					<td>The IP address from which the user is viewing the current page.</td>
 				</tr>
 				<tr>
 					<td>'REMOTE_HOST'</td>
-					<td></td>
+					<td>The Host name from which the user is viewing the current page. The reverse dns lookup is based off the REMOTE_ADDR of the user.</td>
 				</tr>
 				<tr>
 					<td>'REMOTE_PORT'</td>
-					<td></td>
+					<td>The port being used on the user's machine to communicate with the web server.</td>
 				</tr>
 				<tr>
 					<td>'SCRIPT_FILENAME'</td>
-					<td></td>
+					<td>The absolute pathname of the currently executing script.</td>
 				</tr>
 				<tr>
 					<td>'SERVER_ADMIN'</td>
-					<td></td>
+					<td>The value given to the SERVER_ADMIN (for Apache) directive in the web server configuration file. If the script is running on a virtual host, this will be the value defined for that virtual host.</td>
 				</tr>
 				<tr>
 					<td>'SERVER_PORT'</td>
-					<td></td>
+					<td>The port on the server machine being used by the web server for communication. For default setups, this will be '80'; using SSL, for instance, will change this to whatever your defined secure HTTP port is.</td>
 				</tr>
 				<tr>
 					<td>'SERVER_SIGNATURE'</td>
-					<td></td>
+					<td>String containing the server version and virtual host name which are added to server-generated pages, if enabled.</td>
 				</tr>
 				<tr>
 					<td>'PATH_TRANSLATED'</td>
-					<td></td>
+					<td>Filesystem- (not document root-) based path to the current script, after the server has done any virtual-to-real mapping.</td>
 				</tr>
 				<tr>
 					<td>'SCRIPT_NAME'</td>
-					<td></td>
+					<td>Contains the current script's path. This is useful for pages which need to point to themselves. The <span class="link" onclick="PHPFR.ui.showTab('constants');">__FILE__</span> constant contains the full path and filename of the current (i.e. included) file.</td>
 				</tr>
 				<tr>
 					<td>'REQUEST_URI'</td>
-					<td></td>
+					<td>The URI which was given in order to access this page; for instance, '/index.html'.</td>
 				</tr>
 				<tr>
 					<td>'PHP_AUTH_DIGEST'</td>
-					<td></td>
+					<td>When running under Apache as module doing Digest HTTP authentication this variable is set to the 'Authorization' header sent by the client (which you should then use to make the appropriate validation).</td>
 				</tr>
 				<tr>
 					<td>'PHP_AUTH_USER'</td>
-					<td></td>
+					<td>When running under Apache or IIS (ISAPI on PHP 5) as module doing HTTP authentication this variable is set to the username provided by the user.</td>
 				</tr>
 				<tr>
 					<td>'PHP_AUTH_PW'</td>
-					<td></td>
+					<td>When running under Apache or IIS (ISAPI on PHP 5) as module doing HTTP authentication this variable is set to the password provided by the user.</td>
 				</tr>
 				<tr>
 					<td>'AUTH_TYPE'</td>
-					<td></td>
+					<td>When running under Apache as module doing HTTP authenticated this variable is set to the authentication type.</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<!-- END: $_SERVER VARIABLES -->
-		
-		<!-- FOPEN() MODES -->
-		<div class="codes" id="fopen_codes">
-			<table cellpadding="3" cellspacing="0" border="0" class="dataTable">
+	
+	<!-- BEGIN: FOPEN MODES -->
+	<div class="phpfr-section" id="fopen-modes">
+		<table>
+			<caption>fopen() Modes</caption>
+			<thead>
 				<tr>
 					<th>Mode</th>
 					<th>Description</th>
 				</tr>
-				<tr class="odd">
+			</thead>
+			<tbody>
+				<tr>
 					<td>r</td>
 					<td>Open for reading only; place the file pointer at the beginning of the file.</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<td>r+</td>
 					<td>Open for reading and writing; place the file pointer at the beginning of the file.</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<td>w</td>
 					<td>Open for writing only; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it.</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<td>w+</td>
 					<td>Open for reading and writing; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it.</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<td>a</td>
 					<td>Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to create it.</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<td>a+</td>
 					<td>Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, attempt to create it.</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<td>x</td>
-					<td>Create and open for writing only; place the file pointer at the beginning of the file. If the file already exists, the <span class="link" onclick="showFunction('fopen');">fopen()</span> call will fail by returning FALSE and generating an error of level E_WARNING. If the file does not exist, attempt to create it. This is equivalent to specifying O_EXCL|O_CREAT flags for the underlying open(2) system call. This option is supported in PHP 4.3.2 and later, and only works for local files.</td>
+					<td>Create and open for writing only; place the file pointer at the beginning of the file. If the file already exists, the <span class="link" onclick="PHPFR.functions.show('fopen');">fopen()</span> call will fail by returning FALSE and generating an error of level E_WARNING. If the file does not exist, attempt to create it. This is equivalent to specifying O_EXCL|O_CREAT flags for the underlying open(2) system call. This option is supported in PHP 4.3.2 and later, and only works for local files.</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<td>x+</td>
-					<td>Create and open for reading and writing; place the file pointer at the beginning of the file. If the file already exists, the <span class="link" onclick="showFunction('fopen');">fopen()</span> call will fail by returning FALSE and generating an error of level E_WARNING. If the file does not exist, attempt to create it. This is equivalent to specifying O_EXCL|O_CREAT flags for the underlying open(2) system call. This option is supported in PHP 4.3.2 and later, and only works for local files.</td>
+					<td>Create and open for reading and writing; place the file pointer at the beginning of the file. If the file already exists, the <span class="link" onclick="PHPFR.functions.show('fopen');">fopen()</span> call will fail by returning FALSE and generating an error of level E_WARNING. If the file does not exist, attempt to create it. This is equivalent to specifying O_EXCL|O_CREAT flags for the underlying open(2) system call. This option is supported in PHP 4.3.2 and later, and only works for local files.</td>
 				</tr>
-			</table>
-		</div>
-		
-		<!-- MAGIC CONSTANTS -->
-		<div class="codes" id="constants_codes">
-			<table cellpadding="3" cellspacing="0" border="0" class="dataTable">
+			</tbody>
+		</table>
+	</div>
+	<!-- END: FOPEN MODES -->
+	
+	<!-- BEGIN: CONSTANTS -->
+	<div class="phpfr-section" id="constants">
+		<table>
+			<caption>Magic Constants</caption>
+			<thead>
 				<tr>
 					<th>Constant</th>
 					<th>Description</th>
 				</tr>
-				<tr class="odd">
+			</thead>
+			<tbody>
+				<tr>
 					<td>__LINE__</td>
 					<td>The current line number of the file.</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<td>__FILE__</td>
 					<td>The full path and filename of the file. If used inside an include, the name of the included file is returned. Since PHP 4.0.2, __FILE__ always contains an absolute path whereas in older versions it contained relative path under some circumstances.</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<td>__FUNCTION__</td>
 					<td>The function name. (Added in PHP 4.3.0) As of PHP 5 this constant returns the function name as it was declared (case-sensitive). In PHP 4 its value is always lowercased.</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<td>__CLASS__</td>
 					<td>The class name. (Added in PHP 4.3.0) As of PHP 5 this constant returns the class name as it was declared (case-sensitive). In PHP 4 its value is always lowercased.</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<td>__METHOD__</td>
 					<td>The class method name. (Added in PHP 5.0.0) The method name is returned as it was declared (case-sensitive).</td>
 				</tr>
-			</table>
-		</div>
-		
-		<!-- TYPE COMPARISONS -->
-		<div class="codes" id="comparisons_codes">
-			<table cellpadding="3" cellspacing="0" border="0" class="dataTable" style="border-bottom: none;">
-				<!-- Comparison Operators -->
-				<tr class="section_head">
-					<th colspan="3">Comparison Operators</th>
+			</tbody>
+		</table>
+		<table>
+			<caption>Core Predefined Constants</caption>
+			<thead>
+				<tr>
+					<th>Constant</th>
+					<th>Description</th>
 				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>PHP_VERSION (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_OS (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_SAPI (string)</td>
+					<td>Available since PHP 4.2.0. See also php_sapi_name().</td>
+				</tr>
+				<tr>
+					<td>PHP_EOL (string)</td>
+					<td>Available since PHP 4.3.10 and PHP 5.0.2</td>
+				</tr>
+				<tr>
+					<td>PHP_INT_MAX (integer)</td>
+					<td>Available since PHP 4.4.0 and PHP 5.0.5</td>
+				</tr>
+				<tr>
+					<td>PHP_INT_SIZE (integer)</td>
+					<td>Available since PHP 4.4.0 and PHP 5.0.5</td>
+				</tr>
+				<tr>
+					<td>DEFAULT_INCLUDE_PATH (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PEAR_INSTALL_DIR (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PEAR_EXTENSION_DIR (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_EXTENSION_DIR (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_PREFIX (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_BINDIR (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_LIBDIR (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_DATADIR (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_SYSCONFDIR (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_LOCALSTATEDIR (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_CONFIG_FILE_PATH (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_CONFIG_FILE_SCAN_DIR (string)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_SHLIB_SUFFIX (string)</td>
+					<td>Available since PHP 4.3.0</td>
+				</tr>
+				<tr>
+					<td>PHP_OUTPUT_HANDLER_START (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_OUTPUT_HANDLER_CONT (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>PHP_OUTPUT_HANDLER_END (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_ERROR (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_WARNING (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_PARSE (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_NOTICE (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_CORE_ERROR (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_CORE_WARNING (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_COMPILE_ERROR (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_COMPILE_WARNING (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_USER_ERROR (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_USER_WARNING (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_USER_NOTICE (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_ALL (integer)</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>E_STRICT  (integer)</td>
+					<td>Available since PHP 5.0.0</td>
+				</tr>
+				<tr>
+					<td>__COMPILER_HALT_OFFSET__  (integer)</td>
+					<td>Available since PHP 5.1.0</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<caption>Standard Predefined Constants</caption>
+			<thead>
+				<tr>
+					<th>Constant</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>EXTR_OVERWRITE (integer)</td></tr>
+				<tr><td>EXTR_SKIP (integer)</td></tr>
+				<tr><td>EXTR_PREFIX_SAME (integer)</td></tr>
+				<tr><td>EXTR_PREFIX_ALL (integer)</td></tr>
+				<tr><td>EXTR_PREFIX_INVALID (integer)</td></tr>
+				<tr><td>EXTR_PREFIX_IF_EXISTS (integer)</td></tr>
+				<tr><td>EXTR_IF_EXISTS (integer)</td></tr>
+				<tr><td>SORT_ASC (integer)</td></tr>
+				<tr><td>SORT_DESC (integer)</td></tr>
+				<tr><td>SORT_REGULAR (integer)</td></tr>
+				<tr><td>SORT_NUMERIC (integer)</td></tr>
+				<tr><td>SORT_STRING (integer)</td></tr>
+				<tr><td>CASE_LOWER (integer)</td></tr>
+				<tr><td>CASE_UPPER (integer)</td></tr>
+				<tr><td>COUNT_NORMAL (integer)</td></tr>
+				<tr><td>COUNT_RECURSIVE (integer)</td></tr>
+				<tr><td>ASSERT_ACTIVE (integer)</td></tr>
+				<tr><td>ASSERT_CALLBACK (integer)</td></tr>
+				<tr><td>ASSERT_BAIL (integer)</td></tr>
+				<tr><td>ASSERT_WARNING (integer)</td></tr>
+				<tr><td>ASSERT_QUIET_EVAL (integer)</td></tr>
+				<tr><td>CONNECTION_ABORTED (integer)</td></tr>
+				<tr><td>CONNECTION_NORMAL (integer)</td></tr>
+				<tr><td>CONNECTION_TIMEOUT (integer)</td></tr>
+				<tr><td>INI_USER (integer)</td></tr>
+				<tr><td>INI_PERDIR (integer)</td></tr>
+				<tr><td>INI_SYSTEM (integer)</td></tr>
+				<tr><td>INI_ALL (integer)</td></tr>
+				<tr><td>M_E (float)</td></tr>
+				<tr><td>M_LOG2E (float)</td></tr>
+				<tr><td>M_LOG10E (float)</td></tr>
+				<tr><td>M_LN2 (float)</td></tr>
+				<tr><td>M_LN10 (float)</td></tr>
+				<tr><td>M_PI (float)</td></tr>
+				<tr><td>M_PI_2 (float)</td></tr>
+				<tr><td>M_PI_4 (float)</td></tr>
+				<tr><td>M_1_PI (float)</td></tr>
+				<tr><td>M_2_PI (float)</td></tr>
+				<tr><td>M_2_SQRTPI (float)</td></tr>
+				<tr><td>M_SQRT2 (float)</td></tr>
+				<tr><td>M_SQRT1_2 (float)</td></tr>
+				<tr><td>CRYPT_SALT_LENGTH (integer)</td></tr>
+				<tr><td>CRYPT_STD_DES (integer)</td></tr>
+				<tr><td>CRYPT_EXT_DES (integer)</td></tr>
+				<tr><td>CRYPT_MD5 (integer)</td></tr>
+				<tr><td>CRYPT_BLOWFISH (integer)</td></tr>
+				<tr><td>DIRECTORY_SEPARATOR (string)</td></tr>
+				<tr><td>SEEK_SET (integer)</td></tr>
+				<tr><td>SEEK_CUR (integer)</td></tr>
+				<tr><td>SEEK_END (integer)</td></tr>
+				<tr><td>LOCK_SH (integer)</td></tr>
+				<tr><td>LOCK_EX (integer)</td></tr>
+				<tr><td>LOCK_UN (integer)</td></tr>
+				<tr><td>LOCK_NB (integer)</td></tr>
+				<tr><td>HTML_SPECIALCHARS (integer)</td></tr>
+				<tr><td>HTML_ENTITIES (integer)</td></tr>
+				<tr><td>ENT_COMPAT (integer)</td></tr>
+				<tr><td>ENT_QUOTES (integer)</td></tr>
+				<tr><td>ENT_NOQUOTES (integer)</td></tr>
+				<tr><td>INFO_GENERAL (integer)</td></tr>
+				<tr><td>INFO_CREDITS (integer)</td></tr>
+				<tr><td>INFO_CONFIGURATION (integer)</td></tr>
+				<tr><td>INFO_MODULES (integer)</td></tr>
+				<tr><td>INFO_ENVIRONMENT (integer)</td></tr>
+				<tr><td>INFO_VARIABLES (integer)</td></tr>
+				<tr><td>INFO_LICENSE (integer)</td></tr>
+				<tr><td>INFO_ALL (integer)</td></tr>
+				<tr><td>CREDITS_GROUP (integer)</td></tr>
+				<tr><td>CREDITS_GENERAL (integer)</td></tr>
+				<tr><td>CREDITS_SAPI (integer)</td></tr>
+				<tr><td>CREDITS_MODULES (integer)</td></tr>
+				<tr><td>CREDITS_DOCS (integer)</td></tr>
+				<tr><td>CREDITS_FULLPAGE (integer)</td></tr>
+				<tr><td>CREDITS_QA (integer)</td></tr>
+				<tr><td>CREDITS_ALL (integer)</td></tr>
+				<tr><td>STR_PAD_LEFT (integer)</td></tr>
+				<tr><td>STR_PAD_RIGHT (integer)</td></tr>
+				<tr><td>STR_PAD_BOTH (integer)</td></tr>
+				<tr><td>PATHINFO_DIRNAME (integer)</td></tr>
+				<tr><td>PATHINFO_BASENAME (integer)</td></tr>
+				<tr><td>PATHINFO_EXTENSION (integer)</td></tr>
+				<tr><td>PATH_SEPARATOR (string)</td></tr>
+				<tr><td>CHAR_MAX (integer)</td></tr>
+				<tr><td>LC_CTYPE (integer)</td></tr>
+				<tr><td>LC_NUMERIC (integer)</td></tr>
+				<tr><td>LC_TIME (integer)</td></tr>
+				<tr><td>LC_COLLATE (integer)</td></tr>
+				<tr><td>LC_MONETARY (integer)</td></tr>
+				<tr><td>LC_ALL (integer)</td></tr>
+				<tr><td>LC_MESSAGES (integer)</td></tr>
+				<tr><td>ABDAY_1 (integer)</td></tr>
+				<tr><td>ABDAY_2 (integer)</td></tr>
+				<tr><td>ABDAY_3 (integer)</td></tr>
+				<tr><td>ABDAY_4 (integer)</td></tr>
+				<tr><td>ABDAY_5 (integer)</td></tr>
+				<tr><td>ABDAY_6 (integer)</td></tr>
+				<tr><td>ABDAY_7 (integer)</td></tr>
+				<tr><td>DAY_1 (integer)</td></tr>
+				<tr><td>DAY_2 (integer)</td></tr>
+				<tr><td>DAY_3 (integer)</td></tr>
+				<tr><td>DAY_4 (integer)</td></tr>
+				<tr><td>DAY_5 (integer)</td></tr>
+				<tr><td>DAY_6 (integer)</td></tr>
+				<tr><td>DAY_7 (integer)</td></tr>
+				<tr><td>ABMON_1 (integer)</td></tr>
+				<tr><td>ABMON_2 (integer)</td></tr>
+				<tr><td>ABMON_3 (integer)</td></tr>
+				<tr><td>ABMON_4 (integer)</td></tr>
+				<tr><td>ABMON_5 (integer)</td></tr>
+				<tr><td>ABMON_6 (integer)</td></tr>
+				<tr><td>ABMON_7 (integer)</td></tr>
+				<tr><td>ABMON_8 (integer)</td></tr>
+				<tr><td>ABMON_9 (integer)</td></tr>
+				<tr><td>ABMON_10 (integer)</td></tr>
+				<tr><td>ABMON_11 (integer)</td></tr>
+				<tr><td>ABMON_12 (integer)</td></tr>
+				<tr><td>MON_1 (integer)</td></tr>
+				<tr><td>MON_2 (integer)</td></tr>
+				<tr><td>MON_3 (integer)</td></tr>
+				<tr><td>MON_4 (integer)</td></tr>
+				<tr><td>MON_5 (integer)</td></tr>
+				<tr><td>MON_6 (integer)</td></tr>
+				<tr><td>MON_7 (integer)</td></tr>
+				<tr><td>MON_8 (integer)</td></tr>
+				<tr><td>MON_9 (integer)</td></tr>
+				<tr><td>MON_10 (integer)</td></tr>
+				<tr><td>MON_11 (integer)</td></tr>
+				<tr><td>MON_12 (integer)</td></tr>
+				<tr><td>AM_STR (integer)</td></tr>
+				<tr><td>PM_STR (integer)</td></tr>
+				<tr><td>D_T_FMT (integer)</td></tr>
+				<tr><td>D_FMT (integer)</td></tr>
+				<tr><td>T_FMT (integer)</td></tr>
+				<tr><td>T_FMT_AMPM (integer)</td></tr>
+				<tr><td>ERA (integer)</td></tr>
+				<tr><td>ERA_YEAR (integer)</td></tr>
+				<tr><td>ERA_D_T_FMT (integer)</td></tr>
+				<tr><td>ERA_D_FMT (integer)</td></tr>
+				<tr><td>ERA_T_FMT (integer)</td></tr>
+				<tr><td>ALT_DIGITS (integer)</td></tr>
+				<tr><td>INT_CURR_SYMBOL (integer)</td></tr>
+				<tr><td>CURRENCY_SYMBOL (integer)</td></tr>
+				<tr><td>CRNCYSTR (integer)</td></tr>
+				<tr><td>MON_DECIMAL_POINT (integer)</td></tr>
+				<tr><td>MON_THOUSANDS_SEP (integer)</td></tr>
+				<tr><td>MON_GROUPING (integer)</td></tr>
+				<tr><td>POSITIVE_SIGN (integer)</td></tr>
+				<tr><td>NEGATIVE_SIGN (integer)</td></tr>
+				<tr><td>INT_FRAC_DIGITS (integer)</td></tr>
+				<tr><td>FRAC_DIGITS (integer)</td></tr>
+				<tr><td>P_CS_PRECEDES (integer)</td></tr>
+				<tr><td>P_SEP_BY_SPACE (integer)</td></tr>
+				<tr><td>N_CS_PRECEDES (integer)</td></tr>
+				<tr><td>N_SEP_BY_SPACE (integer)</td></tr>
+				<tr><td>P_SIGN_POSN (integer)</td></tr>
+				<tr><td>N_SIGN_POSN (integer)</td></tr>
+				<tr><td>DECIMAL_POINT (integer)</td></tr>
+				<tr><td>RADIXCHAR (integer)</td></tr>
+				<tr><td>THOUSANDS_SEP (integer)</td></tr>
+				<tr><td>THOUSEP (integer)</td></tr>
+				<tr><td>GROUPING (integer)</td></tr>
+				<tr><td>YESEXPR (integer)</td></tr>
+				<tr><td>NOEXPR (integer)</td></tr>
+				<tr><td>YESSTR (integer)</td></tr>
+				<tr><td>NOSTR (integer)</td></tr>
+				<tr><td>CODESET (integer)</td></tr>
+				<tr><td>LOG_EMERG (integer)</td></tr>
+				<tr><td>LOG_ALERT (integer)</td></tr>
+				<tr><td>LOG_CRIT (integer)</td></tr>
+				<tr><td>LOG_ERR (integer)</td></tr>
+				<tr><td>LOG_WARNING (integer)</td></tr>
+				<tr><td>LOG_NOTICE (integer)</td></tr>
+				<tr><td>LOG_INFO (integer)</td></tr>
+				<tr><td>LOG_DEBUG (integer)</td></tr>
+				<tr><td>LOG_KERN (integer)</td></tr>
+				<tr><td>LOG_USER (integer)</td></tr>
+				<tr><td>LOG_MAIL (integer)</td></tr>
+				<tr><td>LOG_DAEMON (integer)</td></tr>
+				<tr><td>LOG_AUTH (integer)</td></tr>
+				<tr><td>LOG_SYSLOG (integer)</td></tr>
+				<tr><td>LOG_LPR (integer)</td></tr>
+				<tr><td>LOG_NEWS (integer)</td></tr>
+				<tr><td>LOG_UUCP (integer)</td></tr>
+				<tr><td>LOG_CRON (integer)</td></tr>
+				<tr><td>LOG_AUTHPRIV (integer)</td></tr>
+				<tr><td>LOG_LOCAL0 (integer)</td></tr>
+				<tr><td>LOG_LOCAL1 (integer)</td></tr>
+				<tr><td>LOG_LOCAL2 (integer)</td></tr>
+				<tr><td>LOG_LOCAL3 (integer)</td></tr>
+				<tr><td>LOG_LOCAL4 (integer)</td></tr>
+				<tr><td>LOG_LOCAL5 (integer)</td></tr>
+				<tr><td>LOG_LOCAL6 (integer)</td></tr>
+				<tr><td>LOG_LOCAL7 (integer)</td></tr>
+				<tr><td>LOG_PID (integer)</td></tr>
+				<tr><td>LOG_CONS (integer)</td></tr>
+				<tr><td>LOG_ODELAY (integer)</td></tr>
+				<tr><td>LOG_NDELAY (integer)</td></tr>
+				<tr><td>LOG_NOWAIT (integer)</td></tr>
+				<tr><td>LOG_PERROR (integer)</td></tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- END: CONSTANTS -->
+	
+	<!-- BEGIN: COMPARISONS -->
+	<div class="phpfr-section" id="comparisons">
+		<table>
+			<caption>Comparison Operators</caption>
+			<thead>
 				<tr>
 					<th>Example</th>
 					<th>Name</th>
 					<th>Result</th>
 				</tr>
-				<tr class="odd">
+			</thead>
+			<tbody>
+				<tr>
 					<th>$a == $b</th>
-					
-					<td class="false">Equal</td>
-					<td class="false">TRUE if $a is equal to $b.</td>
-				</tr>
-				<tr class="even">
-					<th>$a === $b</th>
-					
-					<td class="false">Identical</td>
-					<td class="false">TRUE if $a is equal to $b, and they are of the same type. (introduced in PHP 4)</td>
-				</tr>
-				<tr class="odd">
-					<th>$a != $b</th>
-					
-					<td class="false">Not equal</td>
-					<td class="false">TRUE if $a is not equal to $b.</td>
-				</tr>
-				<tr class="even">
-					<th>$a <> $b</th>
-					
-					<td class="false">Not equal</td>
-					<td class="false">TRUE if $a is not equal to $b.</td>
-				</tr>
-				<tr class="odd">
-					<th>$a !== $b</th>
-					
-					<td class="false">Not identical</td>
-					<td class="false">TRUE if $a is not equal to $b, or they are not of the same type. (introduced in PHP 4)</td>
-				</tr>
-				<tr class="even">
-					<th>$a < $b</th>
-					
-					<td class="false">Less than</td>
-					<td class="false">TRUE if $a is strictly less than $b.</td>
-				</tr>
-				<tr class="odd">
-					<th>$a > $b</th>
-					
-					<td class="false">Greater than</td>
-					<td class="false">TRUE if $a is strictly greater than $b.</td>
-				</tr>
-				<tr class="even">
-					<th>$a <= $b</th>
-					
-					<td class="false">Less than or equal to</td>
-					<td class="false">TRUE if $a is less than or equal to $b.</td>
-				</tr>
-				<tr class="odd">
-					<th>$a >= $b</th>
-					
-					<td class="false">Greater than or equal to</td>
-					<td class="false">TRUE if $a is greater than or equal to $b.</td>
-				</tr>
-			</table>
-			<table cellpadding="3" cellspacing="0" border="0" class="dataTable" style="border-top: none;border-bottom: none;">
-				<!-- Comparison with Various Types -->
-				<tr class="section_head">
-					<th colspan="3">Comparison with Various Types</th>
+					<td>Equal</td>
+					<td><span class="true">TRUE</span> if $a is equal to $b.</td>
 				</tr>
 				<tr>
-					<th>Type of Operand 1</th>
-					<th>Type of Operand 2</th>
-					<th>Result</th>
+					<th>$a === $b</th>
+					<td>Identical</td>
+					<td><span class="true">TRUE</span> if $a is equal to $b, and they are of the same type. (introduced in PHP 4)</td>
 				</tr>
-				<tr class="odd">
-					<td class="false">null or string</td>
-					<td class="false">string</td>
-					<td class="false">Convert NULL to "", numerical or lexical comparison</td>
+				<tr>
+					<th>$a != $b</th>
+					<td>Not equal</td>
+					<td><span class="true">TRUE</span> if $a is not equal to $b.</td>
 				</tr>
-				<tr class="even">
-					<td class="false">bool or null</td>
-					<td class="false">anything</td>
-					<td class="false">Convert to bool, FALSE < TRUE</td>
+				<tr>
+					<th>$a &lt;&gt; $b</th>
+					<td>Not equal</td>
+					<td><span class="true">TRUE</span> if $a is not equal to $b.</td>
 				</tr>
-				<tr class="odd">
-					<td class="false">object</td>
-					<td class="false">object</td>
-					<td class="false">Built-in classes can define its own comparison, different classes are uncomparable, same class - compare properties the same way as arrays (PHP 4), PHP 5 has its own explanation</td>
+				<tr>
+					<th>$a !== $b</th>
+					<td>Not identical</td>
+					<td><span class="true">TRUE</span> if $a is not equal to $b, or they are not of the same type. (introduced in PHP 4)</td>
 				</tr>
-				<tr class="even">
-					<td class="false">string, resource or<br/>number</td>
-					<td class="false">string, resource or<br/>number</td>
-					<td class="false">Translate strings and resources to numbers, usual math</td>
+				<tr>
+					<th>$a &lt; $b</th>
+					<td>Less than</td>
+					<td><span class="true">TRUE</span> if $a is strictly less than $b.</td>
 				</tr>
-				<tr class="odd">
-					<td class="false">array</td>
-					<td class="false">array</td>
-					<td class="false">Array with fewer members is smaller, if key from operand 1 is not found in operand 2 then arrays are uncomparable, otherwise - compare value by value</td>
+				<tr>
+					<th>$a &gt; $b</th>
+					<td>Greater than</td>
+					<td><span class="true">TRUE</span> if $a is strictly greater than $b.</td>
 				</tr>
-				<tr class="even">
-					<td class="false">array</td>
-					<td class="false">anything</td>
-					<td class="false">array is always greater</td>
+				<tr>
+					<th>$a &lt;= $b</th>
+					<td>Less than or equal to</td>
+					<td><span class="true">TRUE</span> if $a is less than or equal to $b.</td>
 				</tr>
-				<tr class="odd">
-					<td class="false">object</td>
-					<td class="false">anything</td>
-					<td class="false">object is always greater</td>
+				<tr>
+					<th>$a &gt;= $b</th>
+					<td>Greater than or equal to</td>
+					<td><span class="true">TRUE</span> if $a is greater than or equal to $b.</td>
 				</tr>
-			</table>
-			<table cellpadding="3" cellspacing="0" border="0" class="dataTable" style="border-top: none;border-bottom: none;">
-				<!-- Comparisons of $x with PHP Functions -->
-				<tr class="section_head">
-					<th colspan="6">Comparisons of $x with PHP Functions</th>
+			</tbody>
+		</table>
+		<table>
+			<caption>Comparisons with Various Types</caption>
+			<thead>
+				<tr>
+					<th style="width: 25%;">Type of Operand 1</th>
+					<th style="width: 25%;">Type of Operand 2</th>
+					<th style="width: 50%;">Result</th>
 				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>null or string</td>
+					<td>string</td>
+					<td>Convert NULL to "", numerical or lexical comparison</td>
+				</tr>
+				<tr>
+					<td>bool or null</td>
+					<td>anything</td>
+					<td>Convert to bool, FALSE < TRUE</td>
+				</tr>
+				<tr>
+					<td>object</td>
+					<td>object</td>
+					<td>Built-in classes can define its own comparison, different classes are uncomparable, same class - compare properties the same way as arrays (PHP 4), PHP 5 has its own explanation</td>
+				</tr>
+				<tr>
+					<td>string, resource or<br>number</td>
+					<td>string, resource or<br>number</td>
+					<td>Translate strings and resources to numbers, usual math</td>
+				</tr>
+				<tr>
+					<td>array</td>
+					<td>array</td>
+					<td>Array with fewer members is smaller, if key from operand 1 is not found in operand 2 then arrays are uncomparable, otherwise - compare value by value</td>
+				</tr>
+				<tr>
+					<td>array</td>
+					<td>anything</td>
+					<td>array is always greater</td>
+				</tr>
+				<tr>
+					<td>object</td>
+					<td>anything</td>
+					<td>object is always greater</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<caption>Comparisons of $x with PHP Functions</caption>
+			<thead>
 				<tr>
 					<th>Expression</th>
-					<th style="text-align: center;"><span class="link" onclick="showFunction('gettype');">gettype()</span></th>
-					<th style="text-align: center;"><span class="link" onclick="showFunction('empty');">empty()</span></th>
-					<th style="text-align: center;"><span class="link" onclick="showFunction('is_null');">is_null()</span></th>
-					<th style="text-align: center;"><span class="link" onclick="showFunction('isset');">isset()</span></th>
-					<th style="text-align: center;">boolean : if($x)</th>
+					<th><span class="link" onclick="PHPFR.functions.show('gettype');">gettype()</span></th>
+					<th><span class="link" onclick="PHPFR.functions.show('empty');">empty()</span></th>
+					<th><span class="link" onclick="PHPFR.functions.show('is_null');">is_null()</span></th>
+					<th><span class="link" onclick="PHPFR.functions.show('isset');">isset()</span></th>
+					<th>boolean : if($x)</th>
 				</tr>
-				<tr class="odd">
+			</thead>
+			<tbody>
+				<tr>
 					<th>$x == "";</th>
-					
-					<td class="false">string</td>
+					<td>string</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>$x == NULL;</th>
-					
-					<td class="false">NULL</td>
+					<td>NULL</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>var $x;</th>
-					
-					<td class="false">NULL</td>
+					<td>NULL</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>$x is undefined</th>
-					
-					<td class="false">NULL</td>
+					<td>NULL</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="odd">
-					<th>$x = <span class="link" onclick="showFunction('array');">array()</span>;</th>
-					
-					<td class="false">array</td>
+				<tr>
+					<th>$x = <span class="link" onclick="PHPFR.functions.show('array');">array()</span>;</th>
+					<td>array</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>$x = false;</th>
-					
-					<td class="false">boolean</td>
+					<td>boolean</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>$x = true;</th>
-					
-					<td class="false">boolean</td>
+					<td>boolean</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>$x = 1;</th>
-					
-					<td class="false">integer</td>
+					<td>integer</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>$x = 42;</th>
-					
-					<td class="false">integer</td>
+					<td>integer</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>$x = 0;</th>
-					
-					<td class="false">integer</td>
+					<td>integer</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>$x = -1;</th>
-					
-					<td class="false">integer</td>
+					<td>integer</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>$x = "1"</th>
-					
-					<td class="false">string</td>
+					<td>string</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>$x = "0"</th>
-					
-					<td class="false">string</td>
+					<td>string</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>$x = "-1"</th>
-					
-					<td class="false">string</td>
+					<td>string</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>$x = "php"</th>
-					
-					<td class="false">string</td>
+					<td>string</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>$x = "true"</th>
-					
-					<td class="false">string</td>
+					<td>string</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>$x = "false"</th>
-					
-					<td class="false">string</td>
+					<td>string</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 				</tr>
-			</table>
-			<table cellpadding="3" cellspacing="0" border="0" class="dataTable" style="border-top: none;">
-				<!-- Loose comparisons with == -->
-				<tr class="section_head">
-					<th colspan="12">Loose comparisons with ==</th>
+			</tbody>
+		</table>
+		<table>
+			<caption>Loose comparisons with ==</caption>
+			<thead>
+				<tr>
+					<th></th>
+					<th>TRUE</th>
+					<th>FALSE</th>
+					<th>1</th>
+					<th>0</th>
+					<th>-1</th>
+					<th>"1"</th>
+					<th>"0"</th>
+					<th>"-1"</th>
+					<th>NULL</th>
+					<th><span class="link" onclick="PHPFR.functions.show('array');">array()</span></th>
+					<th>"PHP"</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>TRUE</th>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 				</tr>
 				<tr>
-					<th style="text-align: center;"><br/></th>
-					<th style="text-align: center;">TRUE</th>
-					<th style="text-align: center;">FALSE</th>
-					<th style="text-align: center;">1</th>
-					<th style="text-align: center;">0</th>
-					<th style="text-align: center;">-1</th>
-					<th style="text-align: center;">"1"</th>
-					<th style="text-align: center;">"0"</th>
-					<th style="text-align: center;">"-1"</th>
-					<th style="text-align: center;">NULL</th>
-					<th style="text-align: center;"><span class="link" onclick="showFunction('array');">array()</span></th>
-					<th style="text-align: center;">"PHP"</th>
-				</tr>
-				<tr class="odd">
-					<th>TRUE</th>
-					
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-				</tr>
-				<tr class="even">
 					<th>FALSE</th>
-					
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
@@ -972,194 +1325,12 @@
 					<td class="true">TRUE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
-				</tr>
-				<tr class="odd">
-					<th>1</th>
-					
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="even">
-					<th>0</th>
-					
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-				</tr>
-				<tr class="odd">
-					<th>-1</th>
-					
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="even">
-					<th>"1"</th>
-					
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="odd">
-					<th>"0"</th>
-					
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="even">
-					<th>"-1"</th>
-					
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="odd">
-					<th>NULL</th>
-					
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="even">
-					<th><span class="link" onclick="showFunction('array');">array()</span></th>
-					
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="odd">
-					<th>"PHP"</th>
-					
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-				</tr>
-				
-				<!-- Strict comparisons with === -->
-				<tr class="section_head">
-					<th colspan="12">Strict comparisons with ===</th>
 				</tr>
 				<tr>
-					<th style="text-align: center;"><br/></th>
-					<th style="text-align: center;">TRUE</th>
-					<th style="text-align: center;">FALSE</th>
-					<th style="text-align: center;">1</th>
-					<th style="text-align: center;">0</th>
-					<th style="text-align: center;">-1</th>
-					<th style="text-align: center;">"1"</th>
-					<th style="text-align: center;">"0"</th>
-					<th style="text-align: center;">"-1"</th>
-					<th style="text-align: center;">NULL</th>
-					<th style="text-align: center;"><span class="link" onclick="showFunction('array');">array()</span></th>
-					<th style="text-align: center;">"PHP"</th>
-				</tr>
-				<tr class="odd">
-					<th>TRUE</th>
-					
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="even">
-					<th>FALSE</th>
-					
-					<td class="false">FALSE</td>
-					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="odd">
 					<th>1</th>
-					
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
@@ -1168,46 +1339,40 @@
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>0</th>
-					
 					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>-1</th>
-					
-					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>"1"</th>
-					
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
@@ -1217,13 +1382,12 @@
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>"0"</th>
-					
 					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
@@ -1232,14 +1396,13 @@
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="even">
+				<tr>
 					<th>"-1"</th>
-					
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
@@ -1247,11 +1410,24 @@
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>NULL</th>
-					
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th><span class="link" onclick="PHPFR.functions.show('array');">array()</span></th>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
@@ -1259,27 +1435,186 @@
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-				</tr>
-				<tr class="even">
-					<th><span class="link" onclick="showFunction('array');">array()</span></th>
-					
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
-					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 					<td class="false">FALSE</td>
 				</tr>
-				<tr class="odd">
+				<tr>
 					<th>"PHP"</th>
-					
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<caption>Strict comparisons with ===</caption>
+			<thead>
+				<tr>
+					<th></th>
+					<th>TRUE</th>
+					<th>FALSE</th>
+					<th>1</th>
+					<th>0</th>
+					<th>-1</th>
+					<th>"1"</th>
+					<th>"0"</th>
+					<th>"-1"</th>
+					<th>NULL</th>
+					<th><span class="link" onclick="PHPFR.functions.show('array');">array()</span></th>
+					<th>"PHP"</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>TRUE</th>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th>FALSE</th>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th>1</th>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th>0</th>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th>-1</th>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th>"1"</th>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th>"0"</th>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th>"-1"</th>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th>NULL</th>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th><span class="link" onclick="PHPFR.functions.show('array');">array()</span></th>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="false">FALSE</td>
+					<td class="true">TRUE</td>
+					<td class="false">FALSE</td>
+				</tr>
+				<tr>
+					<th>"PHP"</th>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
 					<td class="false">FALSE</td>
@@ -1292,9 +1627,10 @@
 					<td class="false">FALSE</td>
 					<td class="true">TRUE</td>
 				</tr>
-			</table>
-		</div>
+			</tbody>
+		</table>
 	</div>
+	<!-- END: COMPARISONS -->
 </div>
 
 </body>
