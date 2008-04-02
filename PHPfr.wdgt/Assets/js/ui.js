@@ -330,7 +330,7 @@ with ({
 				} else {
 					_elements.phpPath.input.disabled = true;
 					_elements.phpPath.lock.setStyle({backgroundImage: 'url(Assets/imgs/famfamfam/lock.png)'});
-					PHPFR.setPHPPath();
+					PHPFR.setPHPPath(_elements.phpPath.input.value);
 				}
 			},
 			// Toggle between small and big font sizes

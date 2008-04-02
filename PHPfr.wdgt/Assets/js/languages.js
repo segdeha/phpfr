@@ -68,11 +68,11 @@ with ({
 		};
 		_setInstalled = function (obj) {
 			
-//			DEBUG.writeDebug('_setInstalled');
+			DEBUG.writeDebug('_setInstalled');
 			
 			_installed = $A(eval(obj.outputString)); // yes, eval is evil
 			
-//			DEBUG.writeDebug('_installed = ' + _installed);
+			DEBUG.writeDebug('_installed = ' + _installed);
 			
 			_updateList();
 			if (0 === _installed.length) {
@@ -84,7 +84,7 @@ with ({
 				}
 			}
 			
-//			DEBUG.writeDebug('PHPFR.languages.lang = ' + PHPFR.languages.lang);
+			DEBUG.writeDebug('PHPFR.languages.lang = ' + PHPFR.languages.lang);
 			
 			_selectRadio(PHPFR.languages.lang);
 			PHPFR.functions.init();
@@ -157,10 +157,12 @@ with ({
 				_elements.error.hide();
 			},
 			getInstalled: function () {
+				var cmd;
+				cmd = PHPFR.phpPath + ' Assets/php/installed.php';
 				
-//				DEBUG.writeDebug('getInstalled');
+				DEBUG.writeDebug('cmd = ' + cmd);
 				
-				WW.system(PHPFR.phpPath + " 'Assets/php/installed.php'", _setInstalled);
+				WW.system(cmd, _setInstalled);
 			},
 			getPref: function () {
 				var lang;

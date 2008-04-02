@@ -53,14 +53,14 @@ PHPFR = (function () {
 	var _setVersion;
 	_setVersion = function (obj) {
 		
-		DEBUG.writeDebug('obj.outputString = ' + obj.outputString);
+//		DEBUG.writeDebug('obj.outputString = ' + obj.outputString);
 		
 		_widgSysCall.cancel();
 		_widgSysCall.close();
 		
-		PHPFR.phpVersion = obj.outputString.split(' ')[1];
+//		PHPFR.phpVersion = obj.outputString.split(' ')[1];
 		
-		DEBUG.writeDebug('PHPFR.phpVersion = ' + PHPFR.phpVersion);
+//		DEBUG.writeDebug('PHPFR.phpVersion = ' + PHPFR.phpVersion);
 		
 		PHPFR.ui.setVersion();
 	};
@@ -76,7 +76,7 @@ PHPFR = (function () {
 				basePath = '/L' + basePath;
 			}
 			
-			DEBUG.writeDebug('basePath = ' + basePath);
+//			DEBUG.writeDebug('basePath = ' + basePath);
 			
 			if (/^\/Users/.test(basePath) || /^\/Library/.test(basePath)) {
 				return basePath;
@@ -92,10 +92,14 @@ PHPFR = (function () {
 			http : /http\:/i,
 			func : /function\.(.+)\.html$/i,
 			html : /phpfr-.+/i,
-			link : /<a/ig
+			link : /<a/ig,
+			php  : /^\/.*php/
 		},
 		init: function () {
 			PHPFR.setPHPVersion();
+			
+			DEBUG.writeDebug('PHPFR.languages.init();');
+			
 			PHPFR.languages.init(); // Calls PHPFR.functions.init(); and PHPFR.topics.init();
 			PHPFR.ui.init();
 			PHPFR.pages.init();
@@ -105,10 +109,19 @@ PHPFR = (function () {
 			PHPFR.versions.init();
 		},
 		setPHPPath: function (path) {
+			
+//			DEBUG.writeDebug('path = ' + path);
+			
 			// Only set the path if we match some basic restrictions
-			if (/^\/.?php/.test(path)) {
+			if (this.regexs.php.test(path)) {
+				
+//				DEBUG.writeDebug('(this.regexs.php.test(path))');
+				
 				this.phpPath = path;
 			} else {
+				
+//				DEBUG.writeDebug('_defaultPath');
+				
 				this.phpPath = _defaultPath;
 			}
 			this.setPHPVersion();
@@ -117,7 +130,7 @@ PHPFR = (function () {
 			var cmd;
 			cmd = this.phpPath + ' --version';
 			
-			DEBUG.writeDebug('cmd = ' + cmd);
+//			DEBUG.writeDebug('cmd = ' + cmd);
 			
 			_widgSysCall = WW.system(cmd, _setVersion);
 		}
