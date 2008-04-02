@@ -134,7 +134,7 @@ with ({
 			hilite: function () {
 				var hilite;
 				// remove the class name from every function div (can take a while)
-				_funcDivs.each(function (div) {
+				$A(_funcDivs).each(function (div) {
 					var page;
 					page = _templates.local.evaluate({func: div.id.dashed()});
 					if (PHPFR.pages.nowShowing === page) {
