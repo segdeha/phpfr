@@ -29,7 +29,8 @@ with ({
 		var _templates, _strings, _elements, _buttons, _scrolls, _styles, _resizeValues, _resizeListValues, _resizeStart;
 		_templates = {
 			defaultList : new Template('<div onclick="PHPFR.ui.showBack();" class="default #{cls}">#{str}</div>'),
-			presetsList : new Template('#{width}x#{height}')
+			presetsList : new Template('#{width}x#{height}'),
+			version     : new Template('Using PHP version #{version}')
 		};
 		_strings  = [
 			// en
@@ -77,6 +78,11 @@ with ({
 			widgetTitle   : undefined,
 			fontToggle    : undefined,
 			resizer       : undefined,
+			phpPath: {
+				form      : undefined,
+				input     : undefined,
+				lock      : undefined
+			},
 			toToggle      : undefined
 		};
 		_buttons = {
@@ -113,7 +119,7 @@ with ({
 			'900x600'  : [900,600],
 			'1200x900' : [1200,900]
 		};
-		var _localizeControlTitles, _fadeInContent, _setSize, _apple;
+		var _localizeControlTitles, _fadeInContent, _setSize, _setLabel, _generateResizeSelect, _setSizePref, _getSizePref, _setFontSizePref, _getFontSizePref, _apple;
 		_localizeControlTitles = function () {
 			$$('img.control').each(function (control) {
 				control.title = __(control.title);
@@ -225,6 +231,9 @@ with ({
 				_elements.widgetTitle         = $('phpfr-title');
 				_elements.fontToggle          = $('fontsize-control');
 				_elements.resizer             = $('resizer');
+				_elements.phpPath.form        = $('php-pref');
+				_elements.phpPath.input       = $('php-binary');
+				_elements.phpPath.lock        = $('php-button');
 				_elements.toToggle            = $A([
 					_elements.viewFrame.scrollBar,
 					_elements.presets,
@@ -240,9 +249,10 @@ with ({
 				$$('.loading-label').each(function (element) {
 					element.update(__('Loading'));
 				});
-				$('instructions').update(__('Click the language name to install/update. Click the radio button to select your language.'));
+//				$('instructions').update(__('Click the language name to install/update. Click the radio button to select your language.'));
 				$('tip-label').update(__('Tip:'));
 				$('filter').setAttribute('placeholder', __($('filter').getAttribute('placeholder')));
+				this.setVersion();
 				// generate the size presets select list
 				_generateResizeSelect();
 				// set display size to user's pref
@@ -306,6 +316,22 @@ with ({
 				label = (0 === $('presets').selectedIndex)? SIZEPRESETS : _templates.presetsList.evaluate({width: dims[0], height: dims[1]});
 				_setLabel(label);
 				_setSize(dims);
+			},
+			// Set the display of the version of PHP being used
+			setVersion: function () {
+				var versionString;
+				versionString = _templates.version.evaluate({version: PHPFR.phpVersion});
+				$('php-version').update(versionString);
+			},
+			togglePathLock: function () {
+				if (_elements.phpPath.input.disabled) {
+					_elements.phpPath.input.disabled = false;
+					_elements.phpPath.lock.setStyle({backgroundImage: 'url(Assets/imgs/famfamfam/lock_open.png)'});
+				} else {
+					_elements.phpPath.input.disabled = true;
+					_elements.phpPath.lock.setStyle({backgroundImage: 'url(Assets/imgs/famfamfam/lock.png)'});
+					PHPFR.setPHPPath();
+				}
 			},
 			// Toggle between small and big font sizes
 			toggleFontSize: function (fontSize) {

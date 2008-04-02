@@ -13,7 +13,8 @@ label#topic-label,
 div#function-list-container,
 div#flipper,
 div#widget-name,
-div#instructions,
+/*div#instructions,*/
+div#php-version,
 div#status,
 fieldset#install,
 div#tip,
@@ -34,7 +35,8 @@ div#favorites-control,
 div#fontsize-control,
 div#install-warning,
 div#install-progress,
-div#install-error
+div#install-error,
+form#php-pref
 {
 	position: absolute;
 }
@@ -57,6 +59,10 @@ div#back {
 	color: #ddd;
 	display: none;
 	background: transparent url(../../Assets/imgs/back.png) no-repeat;
+}
+
+div#back input {
+	font-size: 10px;
 }
 
 div.chrome.background {
@@ -260,7 +266,8 @@ div#flipper {
 }
 
 div#widget-name,
-div#instructions,
+/*div#instructions,*/
+div#php-version,
 div#status,
 fieldset#install,
 div#tip,
@@ -271,7 +278,8 @@ div#version
 }
 
 div#widget-name,
-div#instructions,
+/*div#instructions,*/
+div#php-version,
 div#status,
 div#tip,
 div#version
@@ -286,7 +294,8 @@ div#widget-name {
 	text-align: center;
 }
 
-div#instructions {
+div#php-version {
+/*div#instructions {*/
 	top: 35px;
 }
 
@@ -454,6 +463,38 @@ span#function-list-count {
 	float: left;
 	font-size: 10px;
 	font-weight: bold;
+}
+
+form#php-pref {
+	top: 53px;
+	left: 26px;
+	right: 26px;
+}
+
+form#php-pref input {
+	float: left;
+	width: 156px;
+}
+
+form#php-pref input[disabled=true] {
+	background: #eee;
+}
+
+form#php-pref input[disabled=false] {
+	background: white;
+}
+
+div#php-button {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin: 1px 0 0 4px;
+	opacity: 0.5;
+	background: url(../../Assets/imgs/famfamfam/lock.png) no-repeat;
+}
+
+div#php-button:hover {
+	opacity: 1.0;
 }
 
 /* BEGIN: SCROLLBAR STYLES */
