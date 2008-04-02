@@ -564,6 +564,15 @@ div#viewport-container div.up
 	padding: 0.5em 0;
 }
 
+div#viewport-container div.loading {
+	position: absolute;
+	top: 120px;
+	height: 80px;
+	left: 0;
+	right: 0;
+	padding: 0;
+}
+
 div#viewport-container div.home {
 	float: right;
 }
