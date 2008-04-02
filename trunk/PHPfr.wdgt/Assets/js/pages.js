@@ -2,9 +2,10 @@
  * Manage display frame
  */
 with ({
-		VIEW   : 'view',
-		HEADER : '<div class="phpfr-header">&nbsp;</div>',
-		FOOTER : '<div class="phpfr-footer">&nbsp;</div>'
+		VIEW    : 'view',
+		HEADER  : '<div class="phpfr-header">&nbsp;</div>',
+		FOOTER  : '<div class="phpfr-footer">&nbsp;</div>',
+		PHPINFO : 'phpinfo'
 	}) {
 	PHPFR.pages = (function () {
 		var _templates, _linkReplace, _elements;
@@ -59,22 +60,29 @@ with ({
 				};
 				hash = page.split('#')[1];
 				page = page.split('#')[0].dashed();
-				if (PHPFR.regexs.html.test(page)) {
-					path = _templates.html.evaluate({page: page});
-				} else if (PHPFR.regexs.file.test(page)) {
-					page = (page.split('/'))[(page.split('/')).length - 1];
-					path = _templates.php.evaluate({lang: PHPFR.languages.lang, page: page});
-				} else { // e.g., ('function.strstr.html'.split('.')).length === 3
-					path = _templates.php.evaluate({lang: PHPFR.languages.lang, page: page});
-				}
-				// fetch HTML
-				if ('tw' === PHPFR.languages.lang || 'hk' === PHPFR.languages.lang) {
-					WW.system(PHPFR.phpPath + " Assets/php/return_html.php '" + path + "' | iconv -f BIG5 -t UTF-8", displayPage);
-				} else if ('ro' === PHPFR.languages.lang) {
-					WW.system(PHPFR.phpPath + " Assets/php/return_html.php '" + path + "' | iconv -f ISO-8859-2 -t UTF-8", displayPage);
+				if (PHPINFO === page) {
+					WW.system(PHPFR.phpPath + ' Assets/php/phpinfo.php', displayPage);
 				} else {
-					WW.system(PHPFR.phpPath + " Assets/php/return_html.php '" + path + "'", displayPage);
+					if (PHPFR.regexs.html.test(page)) {
+						path = _templates.html.evaluate({page: page});
+					} else if (PHPFR.regexs.file.test(page)) {
+						page = (page.split('/'))[(page.split('/')).length - 1];
+						path = _templates.php.evaluate({lang: PHPFR.languages.lang, page: page});
+					} else { // e.g., ('function.strstr.html'.split('.')).length === 3
+						path = _templates.php.evaluate({lang: PHPFR.languages.lang, page: page});
+					}
+					// fetch HTML
+					if ('tw' === PHPFR.languages.lang || 'hk' === PHPFR.languages.lang) {
+						WW.system(PHPFR.phpPath + " Assets/php/return_html.php '" + path + "' | iconv -f BIG5 -t UTF-8", displayPage);
+					} else if ('ro' === PHPFR.languages.lang) {
+						WW.system(PHPFR.phpPath + " Assets/php/return_html.php '" + path + "' | iconv -f ISO-8859-2 -t UTF-8", displayPage);
+					} else {
+						WW.system(PHPFR.phpPath + " Assets/php/return_html.php '" + path + "'", displayPage);
+					}
 				}
+			},
+			showPHPInfo: function () {
+				this.display(PHPINFO);
 			}
 		};
 	})();
