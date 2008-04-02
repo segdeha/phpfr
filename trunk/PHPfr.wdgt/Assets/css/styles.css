@@ -484,16 +484,16 @@ form#php-pref input[disabled=false] {
 	background: white;
 }
 
-div#php-button {
-	float: left;
+a#php-button {
+	display: inline-block;
 	width: 16px;
 	height: 16px;
 	margin: 1px 0 0 4px;
-	opacity: 0.5;
 	background: url(../../Assets/imgs/famfamfam/lock.png) no-repeat;
+	opacity: 0.5;
 }
 
-div#php-button:hover {
+a#php-button:hover {
 	opacity: 1.0;
 }
 
