@@ -38,14 +38,14 @@
 	<script type="text/javascript">PHPFR.dates.init();</script>
 	
 	<p>
-		<span class="link" onclick="PHPFR.ui.showTab('day');Form.focusFirstElement($('date-input'));">Day</span> | 
-		<span class="link" onclick="PHPFR.ui.showTab('week');Form.focusFirstElement($('date-input'));">Week</span> | 
-		<span class="link" onclick="PHPFR.ui.showTab('month');Form.focusFirstElement($('date-input'));">Month</span> | 
-		<span class="link" onclick="PHPFR.ui.showTab('year');Form.focusFirstElement($('date-input'));">Year</span> | 
-		<span class="link" onclick="PHPFR.ui.showTab('time');Form.focusFirstElement($('date-input'));">Time</span> | 
-		<span class="link" onclick="PHPFR.ui.showTab('timezone');Form.focusFirstElement($('date-input'));">Time Zone</span> | 
-		<span class="link" onclick="PHPFR.ui.showTab('fulldate');Form.focusFirstElement($('date-input'));">Full Date</span> | 
-		<span class="link" onclick="PHPFR.ui.showTab('examples');Form.focusFirstElement($('date-input'));">Examples</span>
+		<span class="link" id="link-day"      onclick="PHPFR.ui.showTab('day');$('date-string').focus();">Day</span> | 
+		<span class="link" id="link-week"     onclick="PHPFR.ui.showTab('week');$('date-string').focus();">Week</span> | 
+		<span class="link" id="link-month"    onclick="PHPFR.ui.showTab('month');$('date-string').focus();">Month</span> | 
+		<span class="link" id="link-year"     onclick="PHPFR.ui.showTab('year');$('date-string').focus();">Year</span> | 
+		<span class="link" id="link-time"     onclick="PHPFR.ui.showTab('time');$('date-string').focus();">Time</span> | 
+		<span class="link" id="link-timezone" onclick="PHPFR.ui.showTab('timezone');$('date-string').focus();">Time Zone</span> | 
+		<span class="link" id="link-fulldate" onclick="PHPFR.ui.showTab('fulldate');$('date-string').focus();">Full Date</span> | 
+		<span class="link" id="link-examples" onclick="PHPFR.ui.showTab('examples');$('date-string').focus();">Examples</span>
 	</p>
 	
 	<hr>

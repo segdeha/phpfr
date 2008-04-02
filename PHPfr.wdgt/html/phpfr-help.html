@@ -12,10 +12,11 @@
 	</h1>
 	
 	<ul class="phpfr-nav">
-		<li><span class="link" onclick="PHPFR.ui.showTab('welcome');">Welcome</span></li>
-		<li><span class="link" onclick="PHPFR.ui.showTab('overview');">Overview</span></li>
-		<li><span class="link" onclick="PHPFR.ui.showTab('version-history');">Version History</span></li>
-		<li><span class="link" onclick="PHPFR.ui.showTab('license');">License</span></li>
+		<li><span class="link" id="link-welcome"         onclick="PHPFR.ui.showTab('welcome');">Welcome</span></li>
+		<li><span class="link" id="link-overview"        onclick="PHPFR.ui.showTab('overview');">Overview</span></li>
+		<li><span class="link" id="link-version-history" onclick="PHPFR.ui.showTab('version-history');">Version History</span></li>
+		<li><span class="link" id="link-acknowledgments" onclick="PHPFR.ui.showTab('acknowledgments');">Acknowledgments</span></li>
+		<li><span class="link" id="link-license"         onclick="PHPFR.ui.showTab('license');">License</span></li>
 	</ul>
 	
 	<hr>
@@ -24,7 +25,7 @@
 	<div class="phpfr-section" id="welcome">
 		<h2>Welcome to PHPfr!</h2>
 		<p>PHP Function Reference (PHPfr) lets you quickly look up function definitions using a downloaded copy of the documentation from <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/');">PHP.net</span>. PHPfr also includes an extensive <span class="link" onclick="PHPFR.ui.followLink('phpfr-cheats.html#regular-expressions');">cheat sheet</span> of common PHP syntax as well as an interactive <span class="link" onclick="PHPFR.ui.followLink('phpfr-dates.html#day');">date formatter</span>.</p>
-		<p><strong>If you are new to PHPfr,</strong> I encourage you to <span class="link" onclick="PHPFR.ui.showTab('overview');">read the overview</span> section for a rundown of the widget&#8217;s features.</p>
+		<p><strong>If you are new to PHPfr,</strong> I encourage you to <span class="link" onclick="PHPFR.ui.showTab('overview');">read the overview</span> section to get familiar with the widget&#8217;s features.</p>
 		<p>PHPfr is free software, but <span class="link" onclick="PHPFR.util.gotoPayPal();">donations</span> are welcome. Please file bug reports at the project home on <span class="link" onclick="PHPFR.ui.followLink('http://code.google.com/p/phpfr/');">Google Code</span>.</p>
 		<p>I hope you enjoy PHPfr as much as I&#8217;ve enjoyed building it!</p>
 		<p style="margin-bottom: 0;"><em>&#8211;<span class="link" onclick="PHPFR.ui.followLink('http://andrew.hedges.name/');">Andrew Hedges</span>, developer of PHPfr</em></p>
@@ -35,13 +36,6 @@
 	<div class="phpfr-section" id="overview">
 		<h2>Overview</h2>
 		<p>PHPfr has dozens of features to help you, the busy PHP developer, find the information you need <em>fast.</em></p>
-		<!-- offline docs -->
-		<h3>Offline Documentation</h3>
-		<p>PHPfr uses a downloaded copy of <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/');">PHP.net</span>&#8217;s online documentation to enable faster access than is possible over a network connection. Also, by using downloaded documentation, you can access it when you are not online.</p>
-		<!-- docs in your language -->
-		<h3>Documentation in Your Language</h3>
-		<p>PHPfr ships with English language documentation installed by default. Other translations of the docs are just a click away! <span class="link" onclick="PHPFR.ui.showBack();">Flip the widget over</span> and click on the language of your choice to download (3.3MB) and install it.</p>
-		<p>Additionally, most of the PHPfr interface is localized as well. Currently, English, German and Romanian are included, but more languages should be coming soon.</p>
 		<!-- fast function lookup -->
 		<h3>Fast Function Lookup</h3>
 		<p>PHPfr&#8217;s reason for being is to help you, the busy PHP developer, lookup function definitions <em>fast.</em></p>
@@ -49,7 +43,7 @@
 		<p>Type a few letters from any part of a function name to narrow the list of functions to ones that match. You can even use regular expressions!</p>
 		<p>For example, entering <code>[0-9]$</code> will match only functions ending in a number. Learn the basics of regular expressions in the <span class="link" onclick="PHPFR.ui.followLink('phpfr-cheats.html#regular-expressions');">cheat sheet</span>.</p>
 		<h4>Group by Topic</h4>
-		<p>A new feature of PHPfr 1.0 (suggested by my friend and colleague, Morgan Pyne) is the topic select list. Choose a topic from the drop-down list at the top of the function list and only functions related to that topic (e.g., Arrays) will display in the list.</p>
+		<p>A new feature of PHPfr 1.0 is the topic select list. Choose a topic from the drop-down list at the top of the function list and only functions related to that topic (e.g., Arrays) will display in the list.</p>
 		<h4>Don&#8217;t lose your place</h4>
 		<p>If you need to temporarily reclaim space on your Dashboard, you can close the page drawer using the <img src="Assets/imgs/famfamfam/application_side_contract.png" align="absmiddle" alt="close drawer"> icon. Click it again to open the drawer.</p>
 		<h4>Favorites</h4>
@@ -77,14 +71,41 @@
 		<!-- date formatter -->
 		<h3>Interactive Date Formatter</h3>
 		<p>If you&#8217;re like me, you don&#8217;t want to have to remember that the date format string for &#8220;Tuesday, April 1st&#8221; is <code>l, F jS</code>. Luckily, you don&#8217;t have to because PHPfr has a nifty, interactive <span class="link" onclick="PHPFR.ui.followLink('phpfr-dates.html#day');">date formatter</span> feature.</p>
-		<p><em>Note: If you get unexpected results using the date constants, PHPfr is using a pre-5.1 version of the PHP binary.</em></p>
+		<p><em>Note: If you get unexpected results using the date constants, PHPfr is likely using a pre-5.1 version of the PHP binary.</em></p>
+		<!-- phpinfo -->
+		<h3>Output of phpinfo()</h3>
+		<p>It ain&#8217;t pretty, but you can see a plain text dump of the output of the <span class="link" onclick="PHPFR.functions.show('phpinfo');">phpinfo()</span> function by clicking the <img src="Assets/imgs/famfamfam/information.png" align="absmiddle" alt="phpinfo()"> icon.</p>
+		<!-- offline docs -->
+		<h3>Offline Documentation</h3>
+		<p>PHPfr uses a downloaded copy of <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/');">PHP.net</span>&#8217;s online documentation to enable faster access than is possible over a network connection. Also, by using downloaded documentation, you can access it when you are not online.</p>
+		<!-- docs in your language -->
+		<h3>Documentation in Your Language</h3>
+		<p>PHPfr ships with English language documentation installed by default. Other translations of the docs are just a click away! <span class="link" onclick="PHPFR.ui.showBack();">Flip the widget over</span> and click on the language of your choice to download (3.3MB) and install it.</p>
+		<p>Additionally, most of the PHPfr interface is localized as well. Currently, English, German and Romanian are included, but more languages should be coming soon.</p>
+		<!-- choose your binary -->
+		<h3>Pick Your Binary</h3>
+		<p>If you have more than one version of PHP installed, PHPfr gives you the ability to designate which binary to use when generating its output. This can make a difference on some systems (ahem, <em>Tiger</em>) that ship with version 4 of PHP installed by default. Just <span class="link" onclick="PHPFR.ui.showBack();">flip the widget over</span> and click the <img src="Assets/imgs/famfamfam/lock.png" align="absmiddle" alt="lock"> icon and enter the full path to the binary (e.g., /usr/bin/php).</p>
 	</div>
 	<!-- END: OVERVIEW -->
 	
-	<!-- BEGIN: VERSION HISTORY -->
-	<div class="phpfr-section" id="version-history">
+	<!-- BEGIN: ACKNOWLEDGMENTS -->
+	<div class="phpfr-section" id="acknowledgments">
+		<h2>Acknowledgments</h2>
+		<p>There are many people who have helped make PHP Function Reference possible. I want to list some of them here to publicly thank them for their contributions.</p>
+		<ul>
+			<li>My wife, <strong>Stephanie,</strong> for putting up with all of my late nights in front of the computer.</li>
+			<li><strong>Kelly Patrick Robinson</strong> and <strong>Barbara Napholtz,</strong> core members of the PHPfr project</li>
+			<li><span class="link" onclick="PHPFR.ui.followLink('http://blog.tice.de/');"><strong>Tice Klussmeier</strong></span> and <strong>Sebi Tauciuc</strong> for translating the PHPfr interface into their native tongues.</li>
+			<li>Everyone who has written me over the last 2 years with suggestions and/or bug reports. You have helped shape and improve PHPfr! I especially want to recognize my friend and colleague <strong>Morgan Pyne</strong> who personally suggested the following features (without which, PHPfr would be a whole lot less useful!): topics select list, setting the path to the PHP binary, and showing the output of <span class="link" onclick="PHPFR.functions.show('phpinfo');">phpinfo()</span>.</li>
+		</ul>
+		<p>Thaks, everyone, for your help and support!</p>
 		<h2>Inspiration for PHPfr</h2>
 		<p>PHPfr is inspired by the venerable shareware app, <span class="link" onclick="PHPFR.ui.followLink('http://www.artissoftware.com/phpfi/');">PHP Function Index</span>, written by Wolfgang Ante of ARTIS Software. I paid for my copy of PHPfi long ago, but thought it would be even more convenient to have similar functionality in widget form.</p>
+	</div>
+	<!-- END: ACKNOWLEDGMENTS -->
+	
+	<!-- BEGIN: VERSION HISTORY -->
+	<div class="phpfr-section" id="version-history">
 		<h2>Version History</h2>
 		<dl>
 			<dt>1.0 &#8211; ???</dt>
@@ -115,8 +136,9 @@
 	<!-- BEGIN: LICENSE -->
 	<div class="phpfr-section" id="license">
 		<h2>License &amp; Terms of Use</h2>
-		<p>PHPfr is released under the <span class="link" onclick="PHPFR.ui.followLink('http://www.opensource.org/licenses/bsd-license.php');">New BSD License</span>.</p>
-		<p>PHPfr is free software, but <span class="link" onclick="PHPFR.util.gotoPayPal();">donations</span> are welcome.</p>
+		<p>PHPfr is released under the <span class="link" onclick="PHPFR.ui.followLink('http://www.opensource.org/licenses/bsd-license.php');">New BSD License</span>. PHPfr is free software, but <span class="link" onclick="PHPFR.util.gotoPayPal();">donations</span> are welcome.</p>
+		<p>PHPfr is open source. You are encouraged to file bug reports and feature requests at the <span class="link" onclick="PHPFR.ui.followLink('http://code.google.com/p/phpfr/');">project home</span> on Google Code. Additionally, you can download the source code and tweak, fix, or just change how PHPfr works. Accepted patches earn you commit rights on the project, so hack away!</p>
+		<p>PHPfr is localized in several languages, but more are always welcome. Contact <span class="link" onclick="PHPFR.ui.followLink('http://andrew.hedges.name/');">Andrew Hedges</span> to find out about translating the interface into your native language.</p>
 		<h3>PHP Documentation Copyright Notice</h3>
 		<p>Copyright &copy; 1997 - 2007 by the PHP Documentation Group. This material may be distributed only subject to the terms and conditions set forth in the Open Publication License, v1.0 or later. A copy of the <span class="link" onclick="PHPFR.ui.followLink('http://www.php.net/manual/opl.license.php');">Open Publication License</span> is distributed with this manual, the latest version is presently available at <span class="link" onclick="PHPFR.ui.followLink('http://www.opencontent.org/openpub/');">http://www.opencontent.org/openpub/</span>.</p>
 	</div>

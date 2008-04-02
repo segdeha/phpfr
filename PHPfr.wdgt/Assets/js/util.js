@@ -34,9 +34,6 @@ with ({
 			stripe: function () {
 				var tbods;
 				tbods = $$('tbody');
-				
-				DEBUG.writeDebug('tbods = ' + tbods);
-				
 				tbods.each(function (tbod) {
 					var trs, idx;
 					trs = tbod.getElementsByTagName('tr');

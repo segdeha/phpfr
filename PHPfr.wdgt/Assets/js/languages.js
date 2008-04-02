@@ -25,30 +25,15 @@ with ({
 			return PHPFR.prefs.get(NOTFIRSTRUN);
 		};
 		_setNotFirstRunPref = function () {
-			
-//			DEBUG.writeDebug('_setNotFirstRunPref');
-//			DEBUG.writeDebug('PHPFR.prefs.set(NOTFIRSTRUN, 1) = ' + PHPFR.prefs.set(NOTFIRSTRUN, 1));
-			
 			PHPFR.prefs.set(NOTFIRSTRUN, 1);
-			
-//			DEBUG.writeDebug('PHPFR.prefs.set(NOTFIRSTRUN, 1) = ' + PHPFR.prefs.set(NOTFIRSTRUN, 1));
-			
 		};
 		_doFirstRun = function () {
 			var cmd;
 			cmd = PHPFR.phpPath + " '" + PHPFR.basePath + "/php_manual/first_run.php'";
 			$('first-run-label').update(__('Uncompressing PHP manual. Please be patient. This may take a while&#8230;'));
-			
-			DEBUG.writeDebug('_doFirstRun');
-			DEBUG.writeDebug(cmd);
-			
 			WW.system(cmd, _doneFirstRun);
 		};
 		_doneFirstRun = function (obj) {
-			
-			DEBUG.writeDebug('_doneFirstRun');
-			DEBUG.writeDebug(obj.outputString);
-			
 			_setNotFirstRunPref();
 			PHPFR.languages.getInstalled();
 		};
@@ -67,13 +52,7 @@ with ({
 			$('lang-' + lang).checked = true;
 		};
 		_setInstalled = function (obj) {
-			
-			DEBUG.writeDebug('_setInstalled');
-			
 			_installed = $A(eval(obj.outputString)); // yes, eval is evil
-			
-			DEBUG.writeDebug('_installed = ' + _installed);
-			
 			_updateList();
 			if (0 === _installed.length) {
 				PHPFR.ui.showDefaultList();
@@ -83,18 +62,10 @@ with ({
 					PHPFR.languages.lang = PHPFR.languages.setDefault();
 				}
 			}
-			
-			DEBUG.writeDebug('PHPFR.languages.lang = ' + PHPFR.languages.lang);
-			
 			_selectRadio(PHPFR.languages.lang);
-			PHPFR.functions.init();
 			PHPFR.topics.init();
 		};
 		_handleInstall = function (obj) {
-			
-//			DEBUG.writeDebug('_handleInstall');
-//			DEBUG.writeDebug(obj.outputString);
-			
 			_elements.inprogress.hide();
 			if (obj.outputString.indexOf('SUCCESS') > -1) {
 				PHPFR.languages.getInstalled();
@@ -111,9 +82,6 @@ with ({
 				_elements.inprogress  = $('install-progress');
 				_elements.error       = $('install-error');
 				_elements.elapsedTime = $('elapsed-time');
-				
-				DEBUG.writeDebug('_getNotFirstRunPref() = ' + _getNotFirstRunPref());
-				
 				if (false === _getNotFirstRunPref()) {
 					_doFirstRun();
 				} else {
@@ -121,14 +89,7 @@ with ({
 				}
 			},
 			download: function (lang) {
-				
-//				DEBUG.writeDebug('PHPFR.languages.install');
-//				DEBUG.writeDebug('lang = ' + lang);
-				
 				_installCommand = PHPFR.phpPath + ' php_manual/install.php ' + lang;
-				
-//				DEBUG.writeDebug('_installCommand = ' + _installCommand);
-				
 				// show user confirm screen
 				_elements.warning.show();
 			},
@@ -159,9 +120,6 @@ with ({
 			getInstalled: function () {
 				var cmd;
 				cmd = PHPFR.phpPath + ' Assets/php/installed.php';
-				
-				DEBUG.writeDebug('cmd = ' + cmd);
-				
 				WW.system(cmd, _setInstalled);
 			},
 			getPref: function () {

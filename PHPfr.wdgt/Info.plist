@@ -24,6 +24,8 @@
 		<integer>400</integer>
 		<key>AllowSystem</key>
 		<true/>
+		<key>AllowNetworkAccess</key>
+		<true/>
 		<key>BackwardsCompatibleClassLookup</key>
 		<true/>
 	</dict>
