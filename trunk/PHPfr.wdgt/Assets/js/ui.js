@@ -23,7 +23,8 @@ with ({
 		SMALLFONT    : '11px',
 		BIGFONT      : '13px',
 		SMALLFONTSRC : 'url(Assets/imgs/button-fontsmall.png)',
-		BIGFONTSRC   : 'url(Assets/imgs/button-fontbig.png)'
+		BIGFONTSRC   : 'url(Assets/imgs/button-fontbig.png)',
+		SELECTED     : 'selected'
 	}) {
 	PHPFR.ui = (function () {
 		var _templates, _strings, _elements, _buttons, _scrolls, _styles, _resizeValues, _resizeListValues, _resizeStart;
@@ -249,7 +250,6 @@ with ({
 				$$('.loading-label').each(function (element) {
 					element.update(__('Loading'));
 				});
-//				$('instructions').update(__('Click the language name to install/update. Click the radio button to select your language.'));
 				$('tip-label').update(__('Tip:'));
 				$('filter').setAttribute('placeholder', __($('filter').getAttribute('placeholder')));
 				this.setVersion();
@@ -365,6 +365,7 @@ with ({
 			// Flip widget to the back
 			showBack: function () {
 				PHPFR.ui.viewFrame.close();
+				PHPFR.versions.check();
 				setTimeout(function () {
 					window.resizeTo(237, (_resizeValues[1] > 400)? _resizeValues[1] : 400);
 					PHPFR.tips.random();
@@ -392,6 +393,10 @@ with ({
 					section.hide();
 				});
 				$(id).show();
+				$$('span.link').each(function (span) {
+					span.removeClassName(SELECTED);
+				});
+				$('link-' + id).addClassName(SELECTED);
 				this.scrollBars.refresh(VIEW);
 			},
 			scrollBars: {
@@ -502,9 +507,6 @@ with ({
 			 * @param string page Name of the page to access within the php_manual or html directory
 			 */
 			followLink: function (page) {
-				
-//				DEBUG.writeDebug('followLink: page = ' + page);
-				
 				if (PHPFR.regexs.http.test(page)) {
 					PHPFR.util.gotoURL(page);
 				} else {

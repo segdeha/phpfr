@@ -7,21 +7,19 @@ with ({
 		HIDDEN : 'hidden'
 	}) {
 	PHPFR.topics = (function () {
-		var _wait, _option, _widgSysCall, _topics, _filterField, _topicLabel, _topicsSelect;
-		_wait   = 500;
+		var _wait, _option, _widgSysCall, _timer, _topics, _filterField, _topicLabel, _topicsSelect;
+		_wait   = 1000;
 		_option = document.createElement('OPTION');
 		_topics = '';
 		var _readTopics, _buildSelect, _addOption, _updateLabel, _fetchFunctions;
 		_readTopics = function (obj) {
-			
-//			DEBUG.writeDebug('PHPFR.topics._readFunctions');
-//			DEBUG.writeDebug(obj.outputString);
-			
 			if (obj.outputString.indexOf(']}') > -1) {
 				clearTimeout(_timer);
 				_widgSysCall.cancel();
 				_widgSysCall.close();
 				_buildSelect(eval(obj.outputString));
+				// when topics is all done, we have a free thread to fetch the functions
+				PHPFR.functions.init();
 			}
 		};
 		_buildSelect = function (topics) {
@@ -48,14 +46,8 @@ with ({
 			}
 		};
 		_fetchFunctions = function (topic) {
-			
-//			DEBUG.writeDebug('topic = ' + topic);
-			
 			var callback, filename;
 			callback = function (obj) {
-				
-//				DEBUG.writeDebug('obj.outputString = ' + obj.outputString);
-				
 				var funcs;
 				funcs = eval(obj.outputString);
 				PHPFR.functions.display(funcs);
@@ -65,19 +57,17 @@ with ({
 		};
 		return {
 			init: function () {
+				var cmd;
 				_filterField  = $('filter');
 				_topicLabel   = $('topic-label');
 				_topicsSelect = $('topics');
 				// create the topics array file
-				_widgSysCall = WW.system(PHPFR.phpPath + " 'Assets/php/topics.php'", _readTopics);
+				cmd = PHPFR.phpPath + ' Assets/php/topics.php';
+				_widgSysCall = WW.system(cmd, _readTopics);
 				// rinse and repeat every couple of seconds until successful
+				clearTimeout(_timer);
 				_timer = setTimeout(function () {
-					clearTimeout(_timer);
-					_widgSysCall.cancel();
-					_widgSysCall.close();
 					PHPFR.topics.init();
-					_wait = _wait * 2;
-					if (_wait > 8000) _wait = 8000;
 				}, _wait);
 			},
 			showTopic: function () {

@@ -52,16 +52,9 @@ PHPFR = (function () {
 	_defaultVersion = 'Unknown';
 	var _setVersion;
 	_setVersion = function (obj) {
-		
-//		DEBUG.writeDebug('obj.outputString = ' + obj.outputString);
-		
 		_widgSysCall.cancel();
 		_widgSysCall.close();
-		
-//		PHPFR.phpVersion = obj.outputString.split(' ')[1];
-		
-//		DEBUG.writeDebug('PHPFR.phpVersion = ' + PHPFR.phpVersion);
-		
+		PHPFR.phpVersion = obj.outputString.split(' ')[1];
 		PHPFR.ui.setVersion();
 	};
 	return {
@@ -75,9 +68,6 @@ PHPFR = (function () {
 			} else if (/^ibrary/.test(basePath)) {
 				basePath = '/L' + basePath;
 			}
-			
-//			DEBUG.writeDebug('basePath = ' + basePath);
-			
 			if (/^\/Users/.test(basePath) || /^\/Library/.test(basePath)) {
 				return basePath;
 			} else {
@@ -97,31 +87,19 @@ PHPFR = (function () {
 		},
 		init: function () {
 			PHPFR.setPHPVersion();
-			
-			DEBUG.writeDebug('PHPFR.languages.init();');
-			
 			PHPFR.languages.init(); // Calls PHPFR.functions.init(); and PHPFR.topics.init();
-			PHPFR.ui.init();
 			PHPFR.pages.init();
+			PHPFR.ui.init();
 			PHPFR.favorites.init();
 			PHPFR.history.init();
 			PHPFR.tips.init();
 			PHPFR.versions.init();
 		},
 		setPHPPath: function (path) {
-			
-//			DEBUG.writeDebug('path = ' + path);
-			
 			// Only set the path if we match some basic restrictions
 			if (this.regexs.php.test(path)) {
-				
-//				DEBUG.writeDebug('(this.regexs.php.test(path))');
-				
 				this.phpPath = path;
 			} else {
-				
-//				DEBUG.writeDebug('_defaultPath');
-				
 				this.phpPath = _defaultPath;
 			}
 			this.setPHPVersion();
@@ -129,15 +107,10 @@ PHPFR = (function () {
 		setPHPVersion: function () {
 			var cmd;
 			cmd = this.phpPath + ' --version';
-			
-//			DEBUG.writeDebug('cmd = ' + cmd);
-			
 			_widgSysCall = WW.system(cmd, _setVersion);
 		}
 	};
 })();
 
-/**
- * Get this road on the show!
- */
+// Get this road on the show!
 window.onload = PHPFR.init;

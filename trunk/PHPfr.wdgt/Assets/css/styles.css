@@ -385,8 +385,21 @@ span.link {
 	color: blue;
 }
 
+span#vrsn-link span.link {
+	color: white;
+}
+
+span.link.selected {
+	color: black;
+	font-weight: bold;
+}
+
 span.link:hover {
 	text-decoration: underline;
+}
+
+span.link.selected:hover {
+	text-decoration: none;
 }
 
 span.not-available {
@@ -573,21 +586,15 @@ div#viewport-container h1 {
 	line-height: 1.2em;
 }
 
-div#viewport-container {
-	
+div#viewport-container ul {
+	margin: 0.25em 0;
+	padding: 0 0 0 1.25em;
 }
 
 div#viewport-container {
 	
 }
 /* END: VIEWPORT PAGE STYLES */
-
-/* BEGIN: PHPFR CONTENT TAB NAV STYLES */
-ul.phpfr-nav {
-	margin: 0.25em 0;
-	padding: 0 0 0 1.25em;
-}
-/* END: PHPFR CONTENT TAB NAV STYLES */
 
 /* BEGIN: PHPFR CONTENT STYLES */
 div.phpfr-content h1 {
@@ -691,10 +698,6 @@ div.phpfr-content .true {
 
 div.phpfr-content th span.link {
 	color: white;
-}
-
-div.phpfr-content {
-	
 }
 
 div.phpfr-content {

@@ -7,7 +7,7 @@ with ({
 	}) {
 	PHPFR.functions = (function () {
 		var _wait, _template, _timer, _widgSysCall, _funcs, _funcsHTML, _functionList, _functionCount, _funcDivs;
-		_wait = 2000;
+		_wait = 1000;
 		_templates = {
 			func   : new Template('<div id="#{func}" title="#{func}" class="function #{className}" onclick="PHPFR.functions.show(\'#{func}\');" ondblclick="PHPFR.functions.gotoOnlineDoc(\'#{func}\');">#{func}<\/div>'),
 			local  : new Template('function.#{func}.html'),
@@ -15,10 +15,6 @@ with ({
 		};
 		var _readFunctions, _buildList, _updateCount, _showAll, _hilite;
 		_readFunctions = function (obj) {
-			
-//			DEBUG.writeDebug('PHPFR.functions._readFunctions');
-//			DEBUG.writeDebug(obj.outputString);
-			
 			if (obj.outputString.indexOf(']}') > -1) {
 				clearTimeout(_timer);
 				_widgSysCall.cancel();
@@ -79,22 +75,16 @@ with ({
 				_functionList  = $('function-list');
 				_functionCount = $('function-list-count');
 				// fetch full list of function names
-				
-				DEBUG.writeDebug('PHPFR.phpPath = ' + PHPFR.phpPath);
-				
 				cmd = PHPFR.phpPath + " 'Assets/php/functions.php'";
-				
-				DEBUG.writeDebug('cmd = ' + cmd);
-				
 				_widgSysCall = WW.system(cmd, _readFunctions);
 				// rinse and repeat every few seconds until successful
+				clearTimeout(_timer);
 				_timer = setTimeout(function () {
-					clearTimeout(_timer);
 					_widgSysCall.cancel();
 					_widgSysCall.close();
 					PHPFR.functions.init();
 					_wait = _wait * 2;
-					if (_wait > 16000) _wait = 16000;
+					if (_wait > 8000) _wait = 8000;
 				}, _wait);
 			},
 			// wrapper to _buildList
