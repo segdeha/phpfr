@@ -69,11 +69,11 @@ with ({
 				}
 				// fetch HTML
 				if ('tw' === PHPFR.languages.lang || 'hk' === PHPFR.languages.lang) {
-					WW.system("/usr/bin/php Assets/php/return_html.php '" + path + "' | iconv -f BIG5 -t UTF-8", displayPage);
+					WW.system(PHPFR.phpPath + " Assets/php/return_html.php '" + path + "' | iconv -f BIG5 -t UTF-8", displayPage);
 				} else if ('ro' === PHPFR.languages.lang) {
-					WW.system("/usr/bin/php Assets/php/return_html.php '" + path + "' | iconv -f ISO-8859-2 -t UTF-8", displayPage);
+					WW.system(PHPFR.phpPath + " Assets/php/return_html.php '" + path + "' | iconv -f ISO-8859-2 -t UTF-8", displayPage);
 				} else {
-					WW.system("/usr/bin/php Assets/php/return_html.php '" + path + "'", displayPage);
+					WW.system(PHPFR.phpPath + " Assets/php/return_html.php '" + path + "'", displayPage);
 				}
 			}
 		};

@@ -61,7 +61,7 @@ with ({
 				PHPFR.functions.display(funcs);
 			};
 			filename = PHPFR.basePath + '/php_manual/' + PHPFR.languages.lang + '/html/ref.' + topic + '.html';
-			WW.system("/usr/bin/php Assets/php/return_functions.php " + filename, callback);
+			WW.system(PHPFR.phpPath + " Assets/php/return_functions.php " + filename, callback);
 		};
 		return {
 			init: function () {
@@ -69,7 +69,7 @@ with ({
 				_topicLabel   = $('topic-label');
 				_topicsSelect = $('topics');
 				// create the topics array file
-				_widgSysCall = WW.system("/usr/bin/php 'Assets/php/topics.php'", _readTopics);
+				_widgSysCall = WW.system(PHPFR.phpPath + " 'Assets/php/topics.php'", _readTopics);
 				// rinse and repeat every couple of seconds until successful
 				_timer = setTimeout(function () {
 					clearTimeout(_timer);

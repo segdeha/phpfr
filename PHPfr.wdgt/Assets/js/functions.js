@@ -78,7 +78,7 @@ with ({
 				_functionList  = $('function-list');
 				_functionCount = $('function-list-count');
 				// fetch full list of function names
-				_widgSysCall = WW.system("/usr/bin/php 'Assets/php/functions.php'", _readFunctions);
+				_widgSysCall = WW.system(PHPFR.phpPath + " 'Assets/php/functions.php'", _readFunctions);
 				// rinse and repeat every few seconds until successful
 				_timer = setTimeout(function () {
 					clearTimeout(_timer);

@@ -19,7 +19,7 @@ PHPFR.dates = (function () {
 			this.get(str);
 		},
 		get: function (str) {
-			WW.system('/usr/bin/php Assets/php/date.php "' + str + '"', function (obj) {
+			WW.system(PHPFR.phpPath + ' Assets/php/date.php "' + str + '"', function (obj) {
 				_elements.display.update(obj.outputString);
 			});
 		}

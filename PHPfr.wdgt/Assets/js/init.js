@@ -47,12 +47,29 @@ __ = function (str) {
  * Top-level object definition
  */
 PHPFR = (function () {
+	var _widgSysCall, _defaultPath, _defaultVersion;
+	_defaultPath = '/usr/bin/php';
+	_defaultVersion = 'Unknown';
+	var _setVersion;
+	_setVersion = function (obj) {
+		
+		DEBUG.writeDebug('obj.outputString = ' + obj.outputString);
+		
+		_widgSysCall.cancel();
+		_widgSysCall.close();
+		
+		PHPFR.phpVersion = obj.outputString.split(' ')[1];
+		
+		DEBUG.writeDebug('PHPFR.phpVersion = ' + PHPFR.phpVersion);
+		
+		PHPFR.ui.setVersion();
+	};
 	return {
 		// e.g., /Users/andrew/Library/Widgets/PHPfr.wdgt
 		basePath : (function () {
 			var basePath;
 			basePath = document.location.href.substring(7, document.location.href.length - 13);
-			// work around differences in Tiger versus Leopard
+			// Work around differences in Tiger versus Leopard
 			if (/^sers/.test(basePath)) {
 				basePath = '/U' + basePath;
 			} else if (/^ibrary/.test(basePath)) {
@@ -64,10 +81,12 @@ PHPFR = (function () {
 			if (/^\/Users/.test(basePath) || /^\/Library/.test(basePath)) {
 				return basePath;
 			} else {
-				DEBUG.writeDebug('basePath = ' + basePath);
+				DEBUG.writeDebug('ERROR: basePath = ' + basePath);
 				return '';
 			}
 		})(),
+		phpPath    : _defaultPath,
+		phpVersion : _defaultVersion,
 		regexs   : {
 			file : /file\:\/\/(.+)/i,
 			http : /http\:/i,
@@ -76,6 +95,7 @@ PHPFR = (function () {
 			link : /<a/ig
 		},
 		init: function () {
+			PHPFR.setPHPVersion();
 			PHPFR.languages.init(); // Calls PHPFR.functions.init(); and PHPFR.topics.init();
 			PHPFR.ui.init();
 			PHPFR.pages.init();
@@ -83,6 +103,23 @@ PHPFR = (function () {
 			PHPFR.history.init();
 			PHPFR.tips.init();
 			PHPFR.versions.init();
+		},
+		setPHPPath: function (path) {
+			// Only set the path if we match some basic restrictions
+			if (/^\/.?php/.test(path)) {
+				this.phpPath = path;
+			} else {
+				this.phpPath = _defaultPath;
+			}
+			this.setPHPVersion();
+		},
+		setPHPVersion: function () {
+			var cmd;
+			cmd = this.phpPath + ' --version';
+			
+			DEBUG.writeDebug('cmd = ' + cmd);
+			
+			_widgSysCall = WW.system(cmd, _setVersion);
 		}
 	};
 })();

@@ -36,7 +36,7 @@ with ({
 		};
 		_doFirstRun = function () {
 			var cmd;
-			cmd = "/usr/bin/php '" + PHPFR.basePath + "/php_manual/first_run.php'";
+			cmd = PHPFR.phpPath + " '" + PHPFR.basePath + "/php_manual/first_run.php'";
 			$('first-run-label').update(__('Uncompressing PHP manual. Please be patient. This may take a while&#8230;'));
 			
 			DEBUG.writeDebug('_doFirstRun');
@@ -125,7 +125,7 @@ with ({
 //				DEBUG.writeDebug('PHPFR.languages.install');
 //				DEBUG.writeDebug('lang = ' + lang);
 				
-				_installCommand = '/usr/bin/php php_manual/install.php ' + lang;
+				_installCommand = PHPFR.phpPath + ' php_manual/install.php ' + lang;
 				
 //				DEBUG.writeDebug('_installCommand = ' + _installCommand);
 				
@@ -160,7 +160,7 @@ with ({
 				
 //				DEBUG.writeDebug('getInstalled');
 				
-				WW.system("/usr/bin/php 'Assets/php/installed.php'", _setInstalled);
+				WW.system(PHPFR.phpPath + " 'Assets/php/installed.php'", _setInstalled);
 			},
 			getPref: function () {
 				var lang;

@@ -35,5 +35,6 @@ LocalizedStrings['Click the language name to install/update. Click the radio but
 LocalizedStrings['Type here to filter list'] = 'Type here to filter list';
 LocalizedStrings['Elapsed time:'] = 'Elapsed time:';
 LocalizedStrings['seconds']       = 'seconds';
-// LocalizedStrings[''] = '';
+// revision 
+LocalizedStrings['Click to change the PHP binary path'] = 'Click to change the PHP binary path';
 // LocalizedStrings[''] = '';
