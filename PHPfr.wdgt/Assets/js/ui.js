@@ -437,6 +437,7 @@ with ({
 						control.src     = 'Assets/imgs/famfamfam/application_side_contract.png';
 						control.title   = __('Close Page Drawer');
 						control.onclick = function () {}; // prevent double-clicks
+						_elements.viewFrame.container.show();
 						// animate opening of drawer
 						animation = new Animator({
 							duration   : CLOSEDWIDTH,
@@ -479,6 +480,7 @@ with ({
 							duration   : CLOSEDWIDTH,
 							interval   : INTERVAL,
 							onComplete : function () {
+								_elements.viewFrame.container.hide();
 								control.onclick = function () {
 									PHPFR.ui.viewFrame.open();
 								};
