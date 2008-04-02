@@ -75,10 +75,18 @@ with ({
 		};
 		return {
 			init: function () {
+				var cmd;
 				_functionList  = $('function-list');
 				_functionCount = $('function-list-count');
 				// fetch full list of function names
-				_widgSysCall = WW.system(PHPFR.phpPath + " 'Assets/php/functions.php'", _readFunctions);
+				
+				DEBUG.writeDebug('PHPFR.phpPath = ' + PHPFR.phpPath);
+				
+				cmd = PHPFR.phpPath + " 'Assets/php/functions.php'";
+				
+				DEBUG.writeDebug('cmd = ' + cmd);
+				
+				_widgSysCall = WW.system(cmd, _readFunctions);
 				// rinse and repeat every few seconds until successful
 				_timer = setTimeout(function () {
 					clearTimeout(_timer);
