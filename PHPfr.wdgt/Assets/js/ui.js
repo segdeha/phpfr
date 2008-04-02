@@ -326,9 +326,11 @@ with ({
 			togglePathLock: function () {
 				if (_elements.phpPath.input.disabled) {
 					_elements.phpPath.input.disabled = false;
+					_elements.phpPath.input.focus();
 					_elements.phpPath.lock.setStyle({backgroundImage: 'url(Assets/imgs/famfamfam/lock_open.png)'});
 				} else {
 					_elements.phpPath.input.disabled = true;
+					_elements.phpPath.input.blur();
 					_elements.phpPath.lock.setStyle({backgroundImage: 'url(Assets/imgs/famfamfam/lock.png)'});
 					PHPFR.setPHPPath(_elements.phpPath.input.value);
 				}

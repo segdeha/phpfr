@@ -115,7 +115,7 @@
 <div id="back">
 	<div id="widget-name">PHP Function Reference</div>
 	<div id="php-version"></div>
-	<form id="php-pref">
+	<form id="php-pref" onsubmit="PHPFR.ui.togglePathLock();return false;">
 		<input type="text" id="php-binary" value="/usr/bin/php" disabled="true">
 		<a id="php-button" onclick="PHPFR.ui.togglePathLock();" title="Click to change the PHP binary path"></a>
 	</form>
