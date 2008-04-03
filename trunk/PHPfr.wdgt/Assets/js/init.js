@@ -54,7 +54,7 @@ PHPFR = (function () {
 	_setVersion = function (obj) {
 		_widgSysCall.cancel();
 		_widgSysCall.close();
-		PHPFR.phpVersion = obj.outputString.split(' ')[1];
+		PHPFR.phpVersion = obj.outputString;
 		PHPFR.ui.setVersion();
 	};
 	return {
@@ -106,7 +106,7 @@ PHPFR = (function () {
 		},
 		setPHPVersion: function () {
 			var cmd;
-			cmd = this.phpPath + ' --version';
+			cmd = this.phpPath + ' -r "echo phpversion();"';
 			_widgSysCall = WW.system(cmd, _setVersion);
 		}
 	};
