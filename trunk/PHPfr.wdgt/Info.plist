@@ -4,10 +4,10 @@
 	<dict>
 		<key>CFBundleDisplayName</key>
 		<string>PHP Function Reference</string>
+		<key>CFBundleName</key>
+		<string>PHPfr</string>
 		<key>CFBundleIdentifier</key>
 		<string>name.hedges.andrew.phpfr</string>
-		<key>CFBundleName</key>
-		<string>PHP Function Reference</string>
 		<key>CFBundleShortVersionString</key>
 		<string>0.9.7</string>
 		<key>CFBundleVersion</key>
