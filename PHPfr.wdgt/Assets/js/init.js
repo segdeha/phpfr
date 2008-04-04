@@ -1,4 +1,4 @@
-var WW, PHPFR;
+var WW;
 
 WW = window.widget;
 
@@ -46,71 +46,87 @@ __ = function (str) {
 /**
  * Top-level object definition
  */
-PHPFR = (function () {
-	var _widgSysCall, _defaultPath, _defaultVersion;
-	_defaultPath = '/usr/bin/php';
-	_defaultVersion = 'Unknown';
-	var _setVersion;
-	_setVersion = function (obj) {
-		_widgSysCall.cancel();
-		_widgSysCall.close();
-		PHPFR.phpVersion = obj.outputString;
-		PHPFR.ui.setVersion();
-	};
-	return {
-		// e.g., /Users/andrew/Library/Widgets/PHPfr.wdgt
-		basePath : (function () {
-			var basePath;
-			basePath = document.location.href.substring(7, document.location.href.length - 13);
-			// Work around differences in Tiger versus Leopard
-			if (/^sers/.test(basePath)) {
-				basePath = '/U' + basePath;
-			} else if (/^ibrary/.test(basePath)) {
-				basePath = '/L' + basePath;
+with ({
+		PHPPATH: 'phpPath'
+	}) {
+	PHPFR = (function () {
+		var _widgSysCall, _defaultPath, _defaultVersion;
+		_defaultPath = '/usr/bin/php';
+		_defaultVersion = 'Unknown';
+		var _setVersion;
+		_setVersion = function (obj) {
+			_widgSysCall.cancel();
+			_widgSysCall.close();
+			PHPFR.phpVersion = obj.outputString;
+			PHPFR.ui.setVersion();
+		};
+		return {
+			// e.g., /Users/andrew/Library/Widgets/PHPfr.wdgt
+			basePath : (function () {
+				var basePath;
+				basePath = document.location.href.substring(7, document.location.href.length - 13);
+				// Work around differences in Tiger versus Leopard
+				if (/^sers/.test(basePath)) {
+					basePath = '/U' + basePath;
+				} else if (/^ibrary/.test(basePath)) {
+					basePath = '/L' + basePath;
+				}
+				if (/^\/Users/.test(basePath) || /^\/Library/.test(basePath)) {
+					return basePath;
+				} else {
+					DEBUG.writeDebug('ERROR: basePath = ' + basePath);
+					return '';
+				}
+			})(),
+			phpPath    : _defaultPath,
+			phpVersion : _defaultVersion,
+			regexs   : {
+				file : /file\:\/\/(.+)/i,
+				http : /http\:/i,
+				func : /function\.(.+)\.html$/i,
+				html : /phpfr-.+/i,
+				link : /<a/ig,
+				php  : /^\/.*php/
+			},
+			init: function () {
+				
+				DEBUG.writeDebug('PHPFR.phpPath = ' + PHPFR.phpPath);
+				
+				PHPFR.setPHPPath(PHPFR.prefs.get(PHPPATH));
+				
+				DEBUG.writeDebug('PHPFR.phpPath = ' + PHPFR.phpPath);
+				
+				PHPFR.setPHPVersion();
+				PHPFR.languages.init(); // Calls PHPFR.functions.init(); and PHPFR.topics.init();
+				PHPFR.pages.init();
+				PHPFR.ui.init();
+				PHPFR.favorites.init();
+				PHPFR.history.init();
+				PHPFR.tips.init();
+				PHPFR.versions.init();
+			},
+			setPHPPath: function (path) {
+				
+				DEBUG.writeDebug('setPHPPath: path = ' + path);
+				
+				// Only set the path if we match some basic restrictions
+				if (this.regexs.php.test(path)) {
+					PHPFR.phpPath = path;
+				} else {
+					PHPFR.phpPath = _defaultPath;
+				}
+				PHPFR.prefs.set(PHPPATH, PHPFR.phpPath);
+				$('php-binary').value = PHPFR.phpPath;
+				PHPFR.setPHPVersion();
+			},
+			setPHPVersion: function () {
+				var cmd;
+				cmd = PHPFR.phpPath + ' -r "echo phpversion();"';
+				_widgSysCall = WW.system(cmd, _setVersion);
 			}
-			if (/^\/Users/.test(basePath) || /^\/Library/.test(basePath)) {
-				return basePath;
-			} else {
-				DEBUG.writeDebug('ERROR: basePath = ' + basePath);
-				return '';
-			}
-		})(),
-		phpPath    : _defaultPath,
-		phpVersion : _defaultVersion,
-		regexs   : {
-			file : /file\:\/\/(.+)/i,
-			http : /http\:/i,
-			func : /function\.(.+)\.html$/i,
-			html : /phpfr-.+/i,
-			link : /<a/ig,
-			php  : /^\/.*php/
-		},
-		init: function () {
-			PHPFR.setPHPVersion();
-			PHPFR.languages.init(); // Calls PHPFR.functions.init(); and PHPFR.topics.init();
-			PHPFR.pages.init();
-			PHPFR.ui.init();
-			PHPFR.favorites.init();
-			PHPFR.history.init();
-			PHPFR.tips.init();
-			PHPFR.versions.init();
-		},
-		setPHPPath: function (path) {
-			// Only set the path if we match some basic restrictions
-			if (this.regexs.php.test(path)) {
-				this.phpPath = path;
-			} else {
-				this.phpPath = _defaultPath;
-			}
-			this.setPHPVersion();
-		},
-		setPHPVersion: function () {
-			var cmd;
-			cmd = this.phpPath + ' -r "echo phpversion();"';
-			_widgSysCall = WW.system(cmd, _setVersion);
-		}
-	};
-})();
+		};
+	})();
+};
 
 // Get this road on the show!
 window.onload = PHPFR.init;
