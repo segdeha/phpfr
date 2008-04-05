@@ -105,6 +105,7 @@ with ({
 				} else {
 					funcs = $A([]);
 					regxp = new RegExp(pattern.dashed(), 'i');
+					// EXPENSIVE OPERATION
 					_funcs.each(function (func) {
 						if (regxp.test(func)) funcs[funcs.length] = func;
 					});
@@ -123,7 +124,8 @@ with ({
 			// hilite the currently showing function
 			hilite: function () {
 				var hilite;
-				// remove the class name from every function div (can take a while)
+				// remove the class name from every function div
+				// EXPENSIVE OPERATION
 				$A(_funcDivs).each(function (div) {
 					var page;
 					page = _templates.local.evaluate({func: div.id.dashed()});

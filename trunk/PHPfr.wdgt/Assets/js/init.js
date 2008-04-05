@@ -89,13 +89,7 @@ with ({
 				php  : /^\/.*php/
 			},
 			init: function () {
-				
-				DEBUG.writeDebug('PHPFR.phpPath = ' + PHPFR.phpPath);
-				
 				PHPFR.setPHPPath(PHPFR.prefs.get(PHPPATH));
-				
-				DEBUG.writeDebug('PHPFR.phpPath = ' + PHPFR.phpPath);
-				
 				PHPFR.setPHPVersion();
 				PHPFR.languages.init(); // Calls PHPFR.functions.init(); and PHPFR.topics.init();
 				PHPFR.pages.init();
@@ -106,9 +100,6 @@ with ({
 				PHPFR.versions.init();
 			},
 			setPHPPath: function (path) {
-				
-				DEBUG.writeDebug('setPHPPath: path = ' + path);
-				
 				// Only set the path if we match some basic restrictions
 				if (this.regexs.php.test(path)) {
 					PHPFR.phpPath = path;
