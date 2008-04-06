@@ -13,7 +13,6 @@ label#topic-label,
 div#function-list-container,
 div#flipper,
 div#widget-name,
-/*div#instructions,*/
 div#php-version,
 div#status,
 fieldset#install,
@@ -36,7 +35,8 @@ div#fontsize-control,
 div#install-warning,
 div#install-progress,
 div#install-error,
-form#php-pref
+form#php-pref,
+a#house-button
 {
 	position: absolute;
 }
@@ -507,6 +507,20 @@ a#php-button {
 }
 
 a#php-button:hover {
+	opacity: 1.0;
+}
+
+a#house-button {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	bottom: 29px;
+	left: 109px;
+	background: url(../../Assets/imgs/famfamfam/house.png) no-repeat;
+	opacity: 0.5;
+}
+
+a#house-button:hover {
 	opacity: 1.0;
 }
 
