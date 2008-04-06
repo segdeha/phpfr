@@ -129,7 +129,7 @@ with ({
 					div.removeClassName(SELECTED);
 				});
 				func = ('undefined' === typeof PHPFR.pages.nowShowing)? [] : PHPFR.pages.nowShowing.match(PHPFR.regexs.func);
-				if (func.length > 1) {
+				if (func && func.length > 1) {
 					hilite = $(func[1].underscored());
 					if (null !== hilite) hilite.addClassName(SELECTED);
 				}
