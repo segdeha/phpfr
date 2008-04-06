@@ -123,18 +123,16 @@ with ({
 			},
 			// hilite the currently showing function
 			hilite: function () {
-				var hilite;
-				// remove the class name from every function div
-				// EXPENSIVE OPERATION
-				$A(_funcDivs).each(function (div) {
-					var page;
-					page = _templates.local.evaluate({func: div.id.dashed()});
-					if (PHPFR.pages.nowShowing === page) {
-						hilite = div;
-					}
+				var func, hilite;
+				// remove the class name from every hilited function div
+				$$('div.selected').each(function (div) {
 					div.removeClassName(SELECTED);
 				});
-				if ('undefined' !== typeof hilite) $(hilite).addClassName(SELECTED);
+				func = ('undefined' === typeof PHPFR.pages.nowShowing)? [] : PHPFR.pages.nowShowing.match(PHPFR.regexs.func);
+				if (func.length > 1) {
+					hilite = $(func[1].underscored());
+					if (null !== hilite) hilite.addClassName(SELECTED);
+				}
 			},
 			/**
 			 * Take the user to PHP.net at the specified function
